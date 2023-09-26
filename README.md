@@ -17,8 +17,8 @@ HumanReadable.timeAgo(now + 8.minutes) // "in 8 minutes"
 ### ⏱️ Duration
 
 ```kotlin
-* HumanReadable.duration(23.days) // "23 days"
-* HumanReadable.duration(5.seconds) // "5 seconds"
+HumanReadable.duration(23.days) // "23 days"
+HumanReadable.duration(5.seconds) // "5 seconds"
 ```
 
 ### 📂 File size
@@ -26,7 +26,7 @@ HumanReadable.timeAgo(now + 8.minutes) // "in 8 minutes"
 File size formatting uses base 1024.
 
 ```kotlin
-* HumanReadable.fileSize(333) // "333 B"
-* HumanReadable.fileSize(2_048, decimals = 1) // "2.0 kB"
-* HumanReadable.fileSize(20_411_000_000, decimals = 2) // "20.44 GB"
+HumanReadable.fileSize(333) // "333 B"
+HumanReadable.fileSize(2_048, decimals = 1) // "2.0 kB"
+HumanReadable.fileSize(20_411_000_000, decimals = 2) // "20.44 GB"
 ```
