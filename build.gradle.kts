@@ -24,7 +24,7 @@ kotlin {
             commonWebpackConfig(
                 Action {
                     cssSupport {
-                        enabled = true
+                        enabled = false
                     }
                 }
             )
