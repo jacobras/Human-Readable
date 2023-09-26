@@ -5,6 +5,8 @@
 
 A small set of data formatting utilities for Kotlin Multiplatform (KMP). The library isn't localised yet, but will be.
 
+This library only supports [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime).
+
 ### 🕰️ Relative time
 
 ```kotlin
