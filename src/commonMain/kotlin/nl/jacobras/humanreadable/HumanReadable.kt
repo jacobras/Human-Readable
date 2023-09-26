@@ -3,6 +3,7 @@ package nl.jacobras.humanreadable
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlin.math.roundToInt
+import kotlin.time.Duration
 
 object HumanReadable {
 
@@ -10,47 +11,48 @@ object HumanReadable {
         val now = Clock.System.now()
         val diff = now - instant
         val secondsAgo = diff.inWholeSeconds
-        val daysAgo = diff.inWholeDays
-        val weeksAgo = diff.inWholeDays / 7f
-        val monthsAgo = diff.inWholeDays / 30.5f
-        val yearsAgo = diff.inWholeDays / 365
 
         return when {
             secondsAgo < 0 -> {
-                "in the future"
+                "in ${duration(diff.absoluteValue)}"
             }
-
             secondsAgo <= 1 -> {
                 "now"
             }
+            else -> "${duration(diff)} ago"
+        }
+    }
 
+    fun duration(duration: Duration): String {
+        val secondsAgo = duration.inWholeSeconds
+        val daysAgo = duration.inWholeDays
+        val weeksAgo = duration.inWholeDays / 7f
+        val monthsAgo = duration.inWholeDays / 30.5f
+        val yearsAgo = duration.inWholeDays / 365
+
+        return when {
             secondsAgo < 60 -> {
-                "$secondsAgo seconds ago"
+                "$secondsAgo seconds"
             }
-
             secondsAgo < 3600 -> {
-                "${diff.inWholeMinutes} minutes ago"
+                "${duration.inWholeMinutes} minutes"
             }
-
             daysAgo < 1 -> {
-                "${diff.inWholeHours} hours ago"
+                "${duration.inWholeHours} hours"
             }
-
             daysAgo < 7 -> {
-                "$daysAgo days ago"
+                "$daysAgo days"
             }
-
             daysAgo < 30 -> {
-                "${weeksAgo.roundToInt()} weeks ago"
+                "${weeksAgo.roundToInt()} weeks"
             }
-
             monthsAgo < 12 -> {
-                "${monthsAgo.roundToInt()} months ago"
+                "${monthsAgo.roundToInt()} months"
             }
-
             else -> {
-                "$yearsAgo years ago"
+                "$yearsAgo years"
             }
         }
+
     }
 }
