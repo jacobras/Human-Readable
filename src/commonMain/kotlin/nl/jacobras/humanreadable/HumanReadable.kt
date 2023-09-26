@@ -2,7 +2,9 @@ package nl.jacobras.humanreadable
 
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
+import kotlin.math.pow
 import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 import kotlin.time.Duration
 
 object HumanReadable {
@@ -67,5 +69,43 @@ object HumanReadable {
                 "$yearsAgo years"
             }
         }
+    }
+
+    /**
+     * Returns the given [bytes] size in human-readable format. For example:
+     * a size of 3_500_000 bytes returns "3.5 MB". Assumes base 1024.
+     *
+     * @param bytes The size in bytes to format.
+     * @param decimals The number of decimals to use in formatting.
+     * @return a formatted string
+     */
+    fun fileSize(bytes: Long, decimals: Int = 1): String {
+        return when {
+            bytes < 1024 -> {
+                "$bytes B"
+            }
+            bytes < 1_048_576 -> {
+                "${(bytes / 1_024f).formatWithDecimals(decimals)} kB"
+            }
+            bytes < 1_073_741_824 -> {
+                "${(bytes / 1_048_576f).formatWithDecimals(decimals)} MB"
+            }
+            else -> {
+                "${(bytes / 1.09951163E12f).formatWithDecimals(decimals)} GB"
+            }
+        }
+    }
+}
+
+private fun Float.formatWithDecimals(decimals: Int): String {
+    val multiplier = 10.0.pow(decimals)
+    val numberAsString = (this * multiplier).roundToLong().toString()
+    val decimalIndex = numberAsString.length - decimals - 1
+    val mainRes = numberAsString.substring(0..decimalIndex)
+    val fractionRes = numberAsString.substring(decimalIndex + 1)
+    return if (fractionRes.isEmpty()) {
+        mainRes
+    } else {
+        "$mainRes.$fractionRes"
     }
 }
