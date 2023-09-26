@@ -1,5 +1,8 @@
 # HumanReadable
 
+![Android](http://img.shields.io/badge/-android-6EDB8D.svg?style=flat)
+![JS](http://img.shields.io/badge/-js-F8DB5D.svg?style=flat)
+
 A small set of data formatting utilities for Kotlin Multiplatform (KMP). The library isn't localised yet, but will be.
 
 ### 🕰️ Relative time
