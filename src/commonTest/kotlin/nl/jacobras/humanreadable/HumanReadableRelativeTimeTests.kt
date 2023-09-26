@@ -14,16 +14,16 @@ class HumanReadableRelativeTimeTests {
 
     @Test
     fun inFuture() {
-        assertEquals("in 3 minutes", HumanReadable.timeAgo(now + 3.minutes))
+        assertEquals("in 3 minutes", formatTimeAgo(now + 3.minutes))
     }
 
     @Test
     fun now() {
-        assertEquals("now", HumanReadable.timeAgo(now))
+        assertEquals("now", formatTimeAgo(now))
     }
 
     @Test
     fun inPast() {
-        assertEquals("3 days ago", HumanReadable.timeAgo(now - 3.days))
+        assertEquals("3 days ago", formatTimeAgo(now - 3.days))
     }
 }

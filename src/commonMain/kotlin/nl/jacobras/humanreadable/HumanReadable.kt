@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package nl.jacobras.humanreadable
 
 import kotlinx.datetime.Instant

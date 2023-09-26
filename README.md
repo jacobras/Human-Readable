@@ -10,14 +10,15 @@ This library only supports [kotlinx-datetime](https://github.com/Kotlin/kotlinx-
 ### 🕰️ Relative time
 
 ```kotlin
-HumanReadable.timeAgo(now - 4.hours) // "4 hours ago"
+HumanReadable.timeAgo(now - 134.minutes) // "2 hours ago"
 HumanReadable.timeAgo(now + 8.minutes) // "in 8 minutes"
 ```
 
 ### ⏱️ Duration
 
 ```kotlin
-HumanReadable.duration(23.days) // "23 days"
+HumanReadable.duration(7.days) // "1 week"
+HumanReadable.duration(544.hours) // "23 days"
 HumanReadable.duration(5.seconds) // "5 seconds"
 ```
 
