@@ -1,6 +1,6 @@
 # HumanReadable
 
-A small set of time utilities for Kotlin Multiplatform (KMP). The library isn't localised yet, but will be.
+A small set of data formatting utilities for Kotlin Multiplatform (KMP). The library isn't localised yet, but will be.
 
 ### 🕰️ Relative time
 
