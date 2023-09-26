@@ -28,8 +28,15 @@ class HumanReadableFileSizeTests {
 
     @Test
     fun gigabytes() {
-        assertEquals("20 GB", HumanReadable.fileSize(20_411_000_000, decimals = 0))
-        assertEquals("20.4 GB", HumanReadable.fileSize(20_411_000_000, decimals = 1))
-        assertEquals("20.44 GB", HumanReadable.fileSize(20_411_000_000, decimals = 2))
+        assertEquals("20 GB", HumanReadable.fileSize(21_947_282_882, decimals = 0))
+        assertEquals("20.4 GB", HumanReadable.fileSize(21_947_282_882, decimals = 1))
+        assertEquals("20.44 GB", HumanReadable.fileSize(21_947_282_882, decimals = 2))
+    }
+
+    @Test
+    fun terabytes() {
+        assertEquals("56 TB", HumanReadable.fileSize(61_253_792_783_400, decimals = 0))
+        assertEquals("55.7 TB", HumanReadable.fileSize(61_253_792_783_400, decimals = 1))
+        assertEquals("55.71 TB", HumanReadable.fileSize(61_253_792_783_400, decimals = 2))
     }
 }

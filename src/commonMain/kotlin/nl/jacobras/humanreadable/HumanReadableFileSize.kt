@@ -14,11 +14,14 @@ internal fun formatFileSize(bytes: Long, decimals: Int): String {
         bytes < 1_048_576 -> {
             "${(bytes / 1_024f).formatWithDecimals(decimals)} kB"
         }
-        bytes < 1_073_741_824 -> {
+        bytes < 1.07374182E9f -> {
             "${(bytes / 1_048_576f).formatWithDecimals(decimals)} MB"
         }
+        bytes < 1.09951163E12f -> {
+            "${(bytes / 1.07374182E9f).formatWithDecimals(decimals)} GB"
+        }
         else -> {
-            "${(bytes / 1.09951163E12f).formatWithDecimals(decimals)} GB"
+            "${(bytes / 1.09951163E12f).formatWithDecimals(decimals)} TB"
         }
     }
 }
