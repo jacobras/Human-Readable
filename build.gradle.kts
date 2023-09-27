@@ -1,9 +1,10 @@
 plugins {
     kotlin("multiplatform") version "1.9.10"
+    id("maven-publish")
 }
 
 group = "nl.jacobras"
-version = "1.0-SNAPSHOT"
+version = "1.0.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
