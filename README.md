@@ -7,6 +7,18 @@ A small set of data formatting utilities for Kotlin Multiplatform (KMP).
 
 This library only supports [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime).
 
+## Installation
+
+The library is published to Maven Central.
+
+```kotlin
+dependencies {
+    implementation("nl.jacobras:human-readable:1.1.0")
+}
+```
+
+## Features
+
 ### 🕰️ Relative time
 
 ```kotlin
