@@ -1,10 +1,10 @@
 plugins {
     kotlin("multiplatform") version "1.9.10"
-    id("maven-publish")
+    id("convention.publication")
 }
 
 group = "nl.jacobras"
-version = "1.0.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -41,4 +41,10 @@ kotlin {
             }
         }
     }
+}
+
+// From https://github.com/gradle/gradle/issues/26091#issuecomment-1722947958
+tasks.withType<AbstractPublishToMaven>().configureEach {
+    val signingTasks = tasks.withType<Sign>()
+    mustRunAfter(signingTasks)
 }

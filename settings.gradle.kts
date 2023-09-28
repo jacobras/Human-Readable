@@ -10,3 +10,4 @@ plugins {
 }
 
 rootProject.name = "human-readable"
+includeBuild("convention-plugins")
