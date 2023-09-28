@@ -1,12 +1,13 @@
 package nl.jacobras.humanreadable
 
+import nl.jacobras.humanreadable.i18n.HumanLocale
 import kotlin.math.pow
 import kotlin.math.roundToLong
 
 /**
  * Returns the given [bytes] size in human-readable format.
  */
-internal fun formatFileSize(bytes: Long, decimals: Int): String {
+internal fun formatFileSize(locale: HumanLocale, bytes: Long, decimals: Int): String {
     return when {
         bytes < 1024 -> {
             "$bytes B"

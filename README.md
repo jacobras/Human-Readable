@@ -3,7 +3,7 @@
 ![Android](http://img.shields.io/badge/-android-6EDB8D.svg?style=flat)
 ![JS](http://img.shields.io/badge/-js-F8DB5D.svg?style=flat)
 
-A small set of data formatting utilities for Kotlin Multiplatform (KMP). The library isn't localised yet, but will be.
+A small set of data formatting utilities for Kotlin Multiplatform (KMP).
 
 This library only supports [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime).
 
@@ -31,3 +31,34 @@ HumanReadable.fileSize(333) // "333 B"
 HumanReadable.fileSize(2_048, decimals = 1) // "2.0 kB"
 HumanReadable.fileSize(20_411_000_000, decimals = 2) // "20.44 GB"
 ```
+
+## Localisation
+
+The library does a lookup to find the closest match. Unknown language codes will default to English.
+
+```kotlin
+HumanReadable.timeAgo(instant) // "3 days ago"
+
+HumanReadable.setLocale("nl-NL")
+HumanReadable.timeAgo(instant) // "3 dagen geleden"
+
+HumanReadable.setLocale("fr")
+HumanReadable.timeAgo(instant) // "il y a 3 jours"
+```
+
+### Getting the user's locale
+
+* On Android using Context: `context.resources.configuration.locale.toLanguageTag()`
+* On Android in Compose: `LocalConfiguration.current.locale.toLanguageTag`
+* In Javascript: `window.navigator.language`
+
+### Supported languages
+
+* Dutch
+* English (**default**)
+* French
+* German
+* Italian
+* Russian
+* Spanish
+* Turkish
