@@ -1,0 +1,23 @@
+name: Build
+
+on:
+    push:
+        branches: [ develop ]
+    pull_request:
+    workflow_dispatch:
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    build:
+        timeout-minutes: 15
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+              with:
+                  clean: ${{ github.ref == 'refs/heads/develop' }}
+
+            - name: Compile & publish
+              run: ./gradlew publishToMavenLocal
