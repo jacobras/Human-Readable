@@ -1,10 +1,40 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     kotlin("multiplatform") version "1.9.10"
-    id("convention.publication")
+    id("com.vanniktech.maven.publish") version "0.25.3"
 }
 
 group = "nl.jacobras"
-version = "1.1.2"
+version = "1.1.3"
+
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.S01, true)
+    signAllPublications()
+
+    pom {
+        name.set("Human Readable")
+        description.set("A small set of data formatting utilities for Kotlin Multiplatform (KMP)")
+        url.set("https://github.com/jacobras/human-readable")
+
+        licenses {
+            license {
+                name.set("MIT")
+                url.set("https://opensource.org/licenses/MIT")
+            }
+        }
+        developers {
+            developer {
+                id.set("jacobras")
+                name.set("Jacob Ras")
+                email.set("info@jacobras.nl")
+            }
+        }
+        scm {
+            url.set("https://github.com/jacobras/human-readable")
+        }
+    }
+}
 
 repositories {
     mavenCentral()
