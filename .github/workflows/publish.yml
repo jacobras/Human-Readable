@@ -14,12 +14,9 @@ jobs:
               with:
                   java-version: 17
 
-            - name: Grant Permission to Execute
-              run: chmod +x gradlew
-
             - name: Publish Library
               env:
-                  SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+                  SIGNING_SECRET_KEY: ${{ secrets.SIGNING_KEY }}
                   SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
                   SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
                   OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
