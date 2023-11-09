@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "nl.jacobras"
-version = "1.1.1"
+version = "1.1.2"
 
 repositories {
     mavenCentral()
@@ -14,6 +14,7 @@ repositories {
 kotlin {
     targetHierarchy.default()
 
+    iosX64()
     iosArm64()
     iosSimulatorArm64()
     js {
