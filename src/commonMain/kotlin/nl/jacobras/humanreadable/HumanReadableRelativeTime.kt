@@ -15,11 +15,11 @@ internal fun formatTimeAgo(locale: HumanLocale, instant: Instant): String {
 
     return when {
         secondsAgo < 0 -> {
-            locale.timeInFuture.replace("%time%", formatDuration(locale, diff.absoluteValue))
+            locale.timeInFuture.replace("%time%", formatDuration(diff.absoluteValue))
         }
         secondsAgo <= 1 -> {
             locale.now
         }
-        else -> locale.timeAgo.replace("%time%", formatDuration(locale, diff))
+        else -> locale.timeAgo.replace("%time%", formatDuration(diff))
     }
 }

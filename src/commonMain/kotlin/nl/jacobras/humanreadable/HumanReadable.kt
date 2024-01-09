@@ -57,7 +57,7 @@ object HumanReadable {
      * @return a formatted string
      */
     fun duration(duration: Duration): String {
-        return formatDuration(locale, duration)
+        return formatDuration(duration)
     }
 
     /**
