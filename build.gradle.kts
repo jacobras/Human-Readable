@@ -12,6 +12,7 @@ mavenPublishing {
     publishToMavenCentral(SonatypeHost.S01, true)
     signAllPublications()
 
+    @Suppress("UnstableApiUsage")
     pom {
         name.set("Human Readable")
         description.set("A small set of data formatting utilities for Kotlin Multiplatform (KMP)")
