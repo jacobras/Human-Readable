@@ -69,6 +69,6 @@ object HumanReadable {
      * @return a formatted string
      */
     fun fileSize(bytes: Long, decimals: Int = 1): String {
-        return formatFileSize(locale, bytes, decimals)
+        return formatFileSize(bytes, decimals)
     }
 }
