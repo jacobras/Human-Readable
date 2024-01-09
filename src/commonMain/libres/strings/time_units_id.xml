@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="seconds">
+        <item quantity="other">detik</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="other">menit</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="other">jam</item>
+    </plurals>
+    <plurals name="days">
+        <item quantity="other">hari</item>
+    </plurals>
+    <plurals name="weeks">
+        <item quantity="other">minggu</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="other">bulan</item>
+    </plurals>
+    <plurals name="years">
+        <item quantity="other">tahun</item>
+    </plurals>
+
+    <string name="time_ago">${time} yang lalu</string>
+    <string name="time_in_future">dalam ${time}</string>
+    <string name="now">sekarang</string>
+</resources>
