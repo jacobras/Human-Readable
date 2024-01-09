@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="byte_symbol">o</string>
+    <string name="kilobyte_symbol">ko</string>
+    <string name="megabyte_symbol">Mo</string>
+    <string name="gigabyte_symbol">Go</string>
+    <string name="terabyte_symbol">To</string>
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="seconds">
+        <item quantity="one">secondo</item>
+        <item quantity="other">secondi</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="one">minuto</item>
+        <item quantity="other">minuti</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="one">ora</item>
+        <item quantity="other">ore</item>
+    </plurals>
+    <plurals name="days">
+        <item quantity="one">giorno</item>
+        <item quantity="other">giorni</item>
+    </plurals>
+    <plurals name="weeks">
+        <item quantity="one">settimana</item>
+        <item quantity="other">settimane</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="one">mese</item>
+        <item quantity="other">mesi</item>
+    </plurals>
+    <plurals name="years">
+        <item quantity="one">anno</item>
+        <item quantity="other">anni</item>
+    </plurals>
+
+    <string name="time_ago">${time} fa</string>
+    <string name="time_in_future">tra ${time}</string>
+    <string name="now">adesso</string>
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="seconds">
+        <item quantity="one">saniye</item>
+        <item quantity="other">saniye</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="one">dakika</item>
+        <item quantity="other">dakika</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="one">saat</item>
+        <item quantity="other">saat</item>
+    </plurals>
+    <plurals name="days">
+        <item quantity="one">gün</item>
+        <item quantity="other">gün</item>
+    </plurals>
+    <plurals name="weeks">
+        <item quantity="one">hafta</item>
+        <item quantity="other">hafta</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="one">ay</item>
+        <item quantity="other">ay</item>
+    </plurals>
+    <plurals name="years">
+        <item quantity="one">yıl</item>
+        <item quantity="other">yıl</item>
+    </plurals>
+
+    <string name="time_ago">${time} önce</string>
+    <string name="time_in_future">${time} sonra</string>
+    <string name="now">şimdi</string>
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="seconds">
+        <item quantity="one">seconde</item>
+        <item quantity="other">secondes</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="one">minute</item>
+        <item quantity="other">minutes</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="one">heure</item>
+        <item quantity="other">heures</item>
+    </plurals>
+    <plurals name="days">
+        <item quantity="one">jour</item>
+        <item quantity="other">jours</item>
+    </plurals>
+    <plurals name="weeks">
+        <item quantity="one">semaine</item>
+        <item quantity="other">semaines</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="one">mois</item>
+        <item quantity="other">mois</item>
+    </plurals>
+    <plurals name="years">
+        <item quantity="one">an</item>
+        <item quantity="other">ans</item>
+    </plurals>
+
+    <string name="time_ago">il y a ${time}</string>
+    <string name="time_in_future">dans ${time}</string>
+    <string name="now">maintenant</string>
+</resources>
