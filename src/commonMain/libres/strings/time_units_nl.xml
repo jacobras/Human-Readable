@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="seconds">
+        <item quantity="one">seconde</item>
+        <item quantity="other">seconden</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="one">minuut</item>
+        <item quantity="other">minuten</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="one">uur</item>
+        <item quantity="other">uren</item>
+    </plurals>
+    <plurals name="days">
+        <item quantity="one">dag</item>
+        <item quantity="other">dagen</item>
+    </plurals>
+    <plurals name="weeks">
+        <item quantity="one">week</item>
+        <item quantity="other">weken</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="one">maand</item>
+        <item quantity="other">maanden</item>
+    </plurals>
+    <plurals name="years">
+        <item quantity="one">jaar</item>
+        <item quantity="other">jaren</item>
+    </plurals>
+
+    <string name="time_ago">${time} geleden</string>
+    <string name="time_in_future">over ${time}</string>
+    <string name="now">nu</string>
+</resources>
