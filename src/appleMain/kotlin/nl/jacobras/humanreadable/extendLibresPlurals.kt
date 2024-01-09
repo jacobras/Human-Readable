@@ -1,5 +1,7 @@
 package nl.jacobras.humanreadable
 
+import io.github.skeptick.libres.strings.PluralForm
+import io.github.skeptick.libres.strings.PluralRule
 import io.github.skeptick.libres.strings.PluralRules
 
 // See also: jsMain
@@ -11,4 +13,13 @@ actual fun extendLibresPlurals() {
     PluralRules["es"] = PluralRules["en"]
     PluralRules["it"] = PluralRules["en"]
     PluralRules["tr"] = PluralRules["en"]
+
+    // TODO: Remove when https://github.com/Skeptick/libres/pull/56 is merged
+    PluralRules["cs"] = PluralRule { number ->
+        when (number) {
+            1 -> PluralForm.One
+            2-4 -> PluralForm.Few
+            else -> PluralForm.Other
+        }
+    }
 }
