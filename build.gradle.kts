@@ -1,8 +1,8 @@
 import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
-    kotlin("multiplatform") version "1.9.10"
-    id("com.vanniktech.maven.publish") version "0.25.3"
+    kotlin("multiplatform") version "1.9.22"
+    id("com.vanniktech.maven.publish") version "0.27.0"
 }
 
 group = "nl.jacobras"
@@ -12,6 +12,7 @@ mavenPublishing {
     publishToMavenCentral(SonatypeHost.S01, true)
     signAllPublications()
 
+    @Suppress("UnstableApiUsage")
     pom {
         name.set("Human Readable")
         description.set("A small set of data formatting utilities for Kotlin Multiplatform (KMP)")
@@ -40,9 +41,8 @@ repositories {
     mavenCentral()
 }
 
-@Suppress("OPT_IN_USAGE")
 kotlin {
-    targetHierarchy.default()
+    applyDefaultHierarchyTemplate()
 
     iosX64()
     iosArm64()
@@ -63,7 +63,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
             }
         }
         val commonTest by getting {
