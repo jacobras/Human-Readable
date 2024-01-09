@@ -46,7 +46,7 @@ object HumanReadable {
      * @return a formatted string
      */
     fun timeAgo(instant: Instant): String {
-        return formatTimeAgo(locale, instant)
+        return formatTimeAgo(instant)
     }
 
     /**

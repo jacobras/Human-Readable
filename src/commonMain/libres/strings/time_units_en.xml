@@ -28,4 +28,8 @@
         <item quantity="one">year</item>
         <item quantity="other">years</item>
     </plurals>
+
+    <string name="time_ago">${time} ago</string>
+    <string name="time_in_future">in ${time}</string>
+    <string name="now">now</string>
 </resources>
