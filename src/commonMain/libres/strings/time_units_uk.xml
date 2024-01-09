@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="seconds">
+        <item quantity="one">секунда</item>
+        <item quantity="few">секунди</item>
+        <item quantity="many">секунд</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="one">хвилина</item>
+        <item quantity="few">хвилини</item>
+        <item quantity="many">хвилин</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="one">година</item>
+        <item quantity="few">години</item>
+        <item quantity="many">годин</item>
+    </plurals>
+    <plurals name="days">
+        <item quantity="one">день</item>
+        <item quantity="few">дні</item>
+        <item quantity="many">днів</item>
+    </plurals>
+    <plurals name="weeks">
+        <item quantity="one">тиждень</item>
+        <item quantity="few">тижні</item>
+        <item quantity="many">тижнів</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="one">місяць</item>
+        <item quantity="few">місяці</item>
+        <item quantity="many">місяців</item>
+    </plurals>
+    <plurals name="years">
+        <item quantity="one">рік</item>
+        <item quantity="few">роки</item>
+        <item quantity="many">років</item>
+    </plurals>
+
+    <string name="time_ago">${time} тому</string>
+    <string name="time_in_future">через ${time}</string>
+    <string name="now">зараз</string>
+</resources>
