@@ -41,9 +41,8 @@ repositories {
     mavenCentral()
 }
 
-@Suppress("OPT_IN_USAGE")
 kotlin {
-    targetHierarchy.default()
+    applyDefaultHierarchyTemplate()
 
     iosX64()
     iosArm64()
