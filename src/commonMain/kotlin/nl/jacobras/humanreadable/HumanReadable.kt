@@ -10,6 +10,10 @@ import kotlin.time.Duration
  */
 object HumanReadable {
 
+    init {
+        extendLibresPlurals()
+    }
+
     /**
      * Returns the difference between now and [instant], in human-readable format. Also supports
      * instants in the future. For example: an instant that's 5 hours ago will return "5 hours ago".
