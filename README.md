@@ -98,6 +98,6 @@ HumanReadable.timeAgo(instant) // "il y a 3 jours"
 Missing a language? Feel free to open an issue about it. Or, add it yourself:
 
 1. Fork the code and navigate to [src/commonMain/libres/strings/](https://github.com/jacobras/Human-Readable/tree/main/src/commonMain/libres/strings)
-2. Add a file named `time_units[LANGUAGE CODE]` (see [Unicode: CLDR chart](https://www.unicode.org/cldr/charts/42/supplemental/language_plural_rules.html) for the code & plural categories).
-3. If the language deviates from English data units (like French does), also add `data_units_[LANGUAGE CODE]`.
+2. Add a file named `time_units_[LANGUAGE CODE].xml` (see [Unicode: CLDR chart](https://www.unicode.org/cldr/charts/42/supplemental/language_plural_rules.html) for the code & plural categories).
+3. If the language deviates from English data units (like French does), also add `data_units_[LANGUAGE CODE].xml`.
 4. Open a PR.
