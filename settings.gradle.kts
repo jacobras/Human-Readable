@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "human-readable"
+rootProject.name = "Human-Readable"
