@@ -37,6 +37,8 @@ class HumanReadableDurationTests {
     @Test
     fun weeks() {
         assertEquals("1 week", HumanReadable.duration(7.days))
+        assertEquals("1 week", HumanReadable.duration(10.days))
+        assertEquals("2 weeks", HumanReadable.duration(11.days))
         assertEquals("3 weeks", HumanReadable.duration(21.days))
     }
 

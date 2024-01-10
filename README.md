@@ -30,10 +30,12 @@ HumanReadable.timeAgo(now + 8.minutes) // "in 8 minutes"
 ### ⏱️ Duration
 
 ```kotlin
-HumanReadable.duration(7.days) // "1 week"
-HumanReadable.duration(544.hours) // "23 days"
 HumanReadable.duration(5.seconds) // "5 seconds"
+HumanReadable.duration(7.days) // "1 week"
+HumanReadable.duration(544.hours) // "3 weeks"
 ```
+
+**Note**: The formatter switches to a bigger unit (minute, hour, day, ...) as soon as it can. See [Precision](#datetime-precision).
 
 ### 📂 File size
 
@@ -44,6 +46,20 @@ HumanReadable.fileSize(333) // "333 B"
 HumanReadable.fileSize(2_048, decimals = 1) // "2.0 kB"
 HumanReadable.fileSize(20_411_000_000, decimals = 2) // "20.44 GB"
 ```
+
+## Date/time precision
+The formatter switches to a bigger unit (minute, hour, day, ...) as soon as it can.
+For example:
+
+* `59.seconds` is "59 seconds" but `60.seconds` becomes "1 minute"
+* `6.days` is "6 days" but `7.days` becomes "1 week"
+* `29.days` is "29 days" but `30.days` becomes "1 month"
+
+There's also some rounding involved:
+
+* `8.days` and `10.days` are "1 week", but `11.days` already becomes "2 weeks"
+
+This behaviour may become configurable in future releases.
 
 ## Localisation
 
