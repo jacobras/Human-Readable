@@ -44,7 +44,7 @@ File size formatting uses base 1024.
 ```kotlin
 HumanReadable.fileSize(333) // "333 B"
 HumanReadable.fileSize(2_048, decimals = 1) // "2.0 kB"
-HumanReadable.fileSize(20_411_000_000, decimals = 2) // "20.44 GB"
+HumanReadable.fileSize(21_947_282_882, decimals = 2) // "20.44 GB"
 ```
 
 ## Date/time precision
