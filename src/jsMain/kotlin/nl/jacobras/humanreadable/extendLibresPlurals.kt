@@ -22,4 +22,7 @@ actual fun extendLibresPlurals() {
             else -> PluralForm.Other
         }
     }
+
+    // TODO: Remove when https://github.com/Skeptick/libres/pull/56 is merged
+    PluralRules["id"] = PluralRule { PluralForm.Other }
 }
