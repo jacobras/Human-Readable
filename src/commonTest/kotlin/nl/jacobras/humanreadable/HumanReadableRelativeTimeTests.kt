@@ -1,29 +1,35 @@
 package nl.jacobras.humanreadable
 
+import assertk.assertThat
+import assertk.assertions.isEqualTo
+import io.github.skeptick.libres.LibresSettings
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.minutes
 
 class HumanReadableRelativeTimeTests {
+
+    init {
+        LibresSettings.languageCode = "en"
+    }
 
     private val now: Instant
         get() = Clock.System.now()
 
     @Test
     fun inFuture() {
-        assertEquals("in 3 minutes", HumanReadable.timeAgo(now + 3.minutes))
+        assertThat(HumanReadable.timeAgo(now + 3.minutes)).isEqualTo("in 3 minutes")
     }
 
     @Test
     fun now() {
-        assertEquals("now", HumanReadable.timeAgo(now))
+        assertThat(HumanReadable.timeAgo(now)).isEqualTo("now")
     }
 
     @Test
     fun inPast() {
-        assertEquals("3 days ago", HumanReadable.timeAgo(now - 3.days))
+        assertThat(HumanReadable.timeAgo(now - 3.days)).isEqualTo("3 days ago")
     }
 }

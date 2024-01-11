@@ -1,7 +1,9 @@
 package nl.jacobras.humanreadable
 
+import assertk.assertThat
+import assertk.assertions.isEqualTo
+import io.github.skeptick.libres.LibresSettings
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
@@ -9,48 +11,52 @@ import kotlin.time.Duration.Companion.seconds
 
 class HumanReadableDurationTests {
 
+    init {
+        LibresSettings.languageCode = "en"
+    }
+
     @Test
     fun seconds() {
-        assertEquals("1 second", HumanReadable.duration(1.seconds))
-        assertEquals("3 seconds", HumanReadable.duration(3.seconds))
+        assertThat(HumanReadable.duration(1.seconds)).isEqualTo("1 second")
+        assertThat(HumanReadable.duration(3.seconds)).isEqualTo("3 seconds")
     }
 
     @Test
     fun minutes() {
-        assertEquals("1 minute", HumanReadable.duration(1.minutes))
-        assertEquals("3 minutes", HumanReadable.duration(3.minutes))
+        assertThat(HumanReadable.duration(1.minutes)).isEqualTo("1 minute")
+        assertThat(HumanReadable.duration(3.minutes)).isEqualTo("3 minutes")
     }
 
     @Test
     fun hours() {
-        assertEquals("1 hour", HumanReadable.duration(1.hours))
-        assertEquals("3 hours", HumanReadable.duration(3.hours))
-        assertEquals("23 hours", HumanReadable.duration(23.hours))
+        assertThat(HumanReadable.duration(1.hours)).isEqualTo("1 hour")
+        assertThat(HumanReadable.duration(3.hours)).isEqualTo("3 hours")
+        assertThat(HumanReadable.duration(23.hours)).isEqualTo("23 hours")
     }
 
     @Test
     fun days() {
-        assertEquals("1 day", HumanReadable.duration(1.days))
-        assertEquals("3 days", HumanReadable.duration(3.days))
+        assertThat(HumanReadable.duration(1.days)).isEqualTo("1 day")
+        assertThat(HumanReadable.duration(3.days)).isEqualTo("3 days")
     }
 
     @Test
     fun weeks() {
-        assertEquals("1 week", HumanReadable.duration(7.days))
-        assertEquals("1 week", HumanReadable.duration(10.days))
-        assertEquals("2 weeks", HumanReadable.duration(11.days))
-        assertEquals("3 weeks", HumanReadable.duration(21.days))
+        assertThat(HumanReadable.duration(7.days)).isEqualTo("1 week")
+        assertThat(HumanReadable.duration(10.days)).isEqualTo("1 week")
+        assertThat(HumanReadable.duration(11.days)).isEqualTo("2 weeks")
+        assertThat(HumanReadable.duration(21.days)).isEqualTo("3 weeks")
     }
 
     @Test
     fun months() {
-        assertEquals("1 month", HumanReadable.duration(30.days))
-        assertEquals("3 months", HumanReadable.duration(90.days))
+        assertThat(HumanReadable.duration(30.days)).isEqualTo("1 month")
+        assertThat(HumanReadable.duration(90.days)).isEqualTo("3 months")
     }
 
     @Test
     fun years() {
-        assertEquals("1 year", HumanReadable.duration(365.days))
-        assertEquals("3 years", HumanReadable.duration(1095.days))
+        assertThat(HumanReadable.duration(365.days)).isEqualTo("1 year")
+        assertThat(HumanReadable.duration(1095.days)).isEqualTo("3 years")
     }
 }

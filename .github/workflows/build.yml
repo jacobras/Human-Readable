@@ -20,4 +20,11 @@ jobs:
                   clean: ${{ github.ref == 'refs/heads/develop' }}
 
             - name: Compile & run tests
-              run: ./gradlew check -x jsBrowserTest
+              run: ./gradlew kotlinUpgradeYarnLock check
+
+            - name: Publish unit test report
+              if: always()
+              uses: mikepenz/action-junit-report@v3
+              with:
+                  check_name: Unit test report
+                  report_paths: "**/build/test-results/test*/TEST-*.xml"
