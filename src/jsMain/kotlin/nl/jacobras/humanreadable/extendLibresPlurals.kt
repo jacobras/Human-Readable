@@ -25,4 +25,16 @@ actual fun extendLibresPlurals() {
 
     // TODO: Remove when https://github.com/Skeptick/libres/pull/56 is merged
     PluralRules["id"] = PluralRule { PluralForm.Other }
+
+    // TODO: Remove when https://github.com/Skeptick/libres/pull/56 is merged
+    PluralRules["pl"] = PluralRule { number ->
+        when {
+            number == 1 -> PluralForm.One
+            (number % 10) in 2..4 && (number % 100) !in 12..14 -> PluralForm.Few
+            else -> PluralForm.Many
+        }
+    }
+
+    // TODO: Remove when https://github.com/Skeptick/libres/pull/56 is merged
+    PluralRules["zh"] = PluralRule { PluralForm.Other }
 }
