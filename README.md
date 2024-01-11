@@ -14,7 +14,7 @@ The library is published to Maven Central.
 
 ```kotlin
 dependencies {
-    implementation("nl.jacobras:human-readable:1.2.0")
+    implementation("nl.jacobras:human-readable:1.3.0")
 }
 ```
 
@@ -82,14 +82,14 @@ HumanReadable.timeAgo(instant) // "il y a 3 jours"
 ### Supported languages
 
 * Czech
-* Chinese (from version 1.3.0)
+* Chinese (since 1.3.0)
 * Dutch
 * English (**default**)
 * French
 * German
 * Italian
 * Indonesian
-* Polish (from version 1.3.0)
+* Polish (since 1.3.0)
 * Russian
 * Spanish
 * Turkish
