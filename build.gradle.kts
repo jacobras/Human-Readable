@@ -49,7 +49,13 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
     js {
-        browser()
+        browser {
+            testTask {
+                useKarma {
+                    useChromeHeadless()
+                }
+            }
+        }
     }
     jvm {
         jvmToolchain(8)
@@ -70,6 +76,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(libs.assertK)
             }
         }
     }
