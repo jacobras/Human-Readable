@@ -20,7 +20,7 @@ jobs:
                   clean: ${{ github.ref == 'refs/heads/develop' }}
 
             - name: Compile & run tests
-              run: ./gradlew check
+              run: ./gradlew kotlinUpgradeYarnLock check
 
             - name: Publish unit test report
               if: always()
