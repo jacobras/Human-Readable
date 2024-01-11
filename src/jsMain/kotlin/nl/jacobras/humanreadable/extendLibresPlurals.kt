@@ -18,7 +18,7 @@ actual fun extendLibresPlurals() {
     PluralRules["cs"] = PluralRule { number ->
         when (number) {
             1 -> PluralForm.One
-            2-4 -> PluralForm.Few
+            in (2..4) -> PluralForm.Few
             else -> PluralForm.Other
         }
     }
