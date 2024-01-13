@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="seconds">
+        <item quantity="one">soniya</item>
+        <item quantity="other">soniya</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="one">daqiqa</item>
+        <item quantity="other">daqiqa</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="one">soat</item>
+        <item quantity="other">soat</item>
+    </plurals>
+    <plurals name="days">
+        <item quantity="one">kun</item>
+        <item quantity="other">kun</item>
+    </plurals>
+    <plurals name="weeks">
+        <item quantity="one">hafta</item>
+        <item quantity="other">hafta</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="one">oy</item>
+        <item quantity="other">oy</item>
+    </plurals>
+    <plurals name="years">
+        <item quantity="one">yil</item>
+        <item quantity="other">yil</item>
+    </plurals>
+
+    <string name="time_ago">${time} oldin</string>
+    <string name="time_in_future">${time} keyin</string>
+    <string name="now">hozir</string>
+</resources>
