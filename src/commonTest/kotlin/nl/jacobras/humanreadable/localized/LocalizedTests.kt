@@ -85,6 +85,12 @@ class LocalizedTests {
     }
 
     @Test
+    fun uz() {
+        LibresSettings.languageCode = "uz"
+        assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 soniya")
+    }
+
+    @Test
     fun zh() {
         LibresSettings.languageCode = "zh"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 秒")
