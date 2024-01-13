@@ -8,6 +8,7 @@ import kotlinx.datetime.Instant
 import kotlin.test.Test
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.minutes
+import kotlin.time.Duration.Companion.seconds
 
 class HumanReadableRelativeTimeTests {
 
@@ -20,7 +21,7 @@ class HumanReadableRelativeTimeTests {
 
     @Test
     fun inFuture() {
-        assertThat(HumanReadable.timeAgo(now + 3.minutes)).isEqualTo("in 3 minutes")
+        assertThat(HumanReadable.timeAgo(now + 200.seconds)).isEqualTo("in 3 minutes")
     }
 
     @Test
