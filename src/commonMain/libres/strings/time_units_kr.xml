@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="seconds">
+        <item quantity="other">초</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="other">분</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="other">시</item>
+    </plurals>
+    <plurals name="days">
+        <item quantity="other">일</item>
+    </plurals>
+    <plurals name="weeks">
+        <item quantity="other">주</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="other">월</item>
+    </plurals>
+    <plurals name="years">
+        <item quantity="other">년</item>
+    </plurals>
+
+    <string name="time_ago">${time} 전</string>
+    <string name="time_in_future">${time} 후</string>
+    <string name="now">지금</string>
+</resources>
