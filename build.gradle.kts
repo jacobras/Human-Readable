@@ -79,6 +79,11 @@ kotlin {
                 implementation(libs.assertK)
             }
         }
+        val appleAndJsMain by creating {
+            dependsOn(commonMain)
+            appleMain.get().dependsOn(this)
+            jsMain.get().dependsOn(this)
+        }
     }
 }
 
