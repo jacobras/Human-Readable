@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="seconds">
+        <item quantity="other">秒</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="other">分</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="other">時間</item>
+    </plurals>
+    <plurals name="days">
+        <item quantity="other">日</item>
+    </plurals>
+    <plurals name="weeks">
+        <item quantity="other">週</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="other">ヶ月</item>
+    </plurals>
+    <plurals name="years">
+        <item quantity="other">年</item>
+    </plurals>
+
+    <string name="time_ago">${time}前</string>
+    <string name="time_in_future">${time}後</string>
+    <string name="now">今</string>
+</resources>

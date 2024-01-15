@@ -89,6 +89,7 @@ HumanReadable.timeAgo(instant) // "il y a 3 jours"
 * German
 * Italian
 * Indonesian
+* Japanese (since 1.5.0)
 * Polish (since 1.3.0)
 * Russian
 * Spanish
