@@ -4,7 +4,9 @@ import io.github.skeptick.libres.strings.PluralForm
 import io.github.skeptick.libres.strings.PluralRule
 import io.github.skeptick.libres.strings.PluralRules
 
-// See also: jsMain
+/**
+ * Only used by Apple & JS.
+ */
 actual fun extendLibresPlurals() {
     // Make all Libres plurals default to the English implementation
     // Workaround until https://github.com/Skeptick/libres/issues/53 is fixed
