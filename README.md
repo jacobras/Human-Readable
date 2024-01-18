@@ -97,6 +97,7 @@ HumanReadable.timeAgo(instant) // "il y a 3 jours"
 * Turkish
 * Ukrainian
 * Uzbek (since 1.4.0)
+* Vietnamese (since 1.6.0)
 
 #### Adding a language
 
