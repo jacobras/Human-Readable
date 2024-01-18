@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="seconds">
+        <item quantity="other">giây</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="other">phút</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="other">giờ</item>
+    </plurals>
+    <plurals name="days">
+        <item quantity="other">ngày</item>
+    </plurals>
+    <plurals name="weeks">
+        <item quantity="other">tuần</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="other">tháng</item>
+    </plurals>
+    <plurals name="years">
+        <item quantity="other">năm</item>
+    </plurals>
+
+    <string name="time_ago">${time} trước</string>
+    <string name="time_in_future">vào ${time}</string>
+    <string name="now">bây giờ</string>
+</resources>
