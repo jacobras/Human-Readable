@@ -103,6 +103,12 @@ class LocalizedTests {
     }
 
     @Test
+    fun vi() {
+        LibresSettings.languageCode = "vi"
+        assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 giây")
+    }
+
+    @Test
     fun zh() {
         LibresSettings.languageCode = "zh"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 秒")
