@@ -30,6 +30,6 @@
     </plurals>
 
     <string name="time_ago">${time} sitten</string>
-    <string name="time_in_future">${time}</string>
+    <string name="time_in_future">${time} tulevaisuudessa</string>
     <string name="now">nyt</string>
 </resources>
