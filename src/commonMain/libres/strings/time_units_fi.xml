@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="seconds">
+        <item quantity="one">sekunti</item>
+        <item quantity="other">sekuntia</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="one">minuutti</item>
+        <item quantity="other">minuuttia</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="one">tunti</item>
+        <item quantity="other">tuntia</item>
+    </plurals>
+    <plurals name="days">
+        <item quantity="one">päivä</item>
+        <item quantity="other">päivää</item>
+    </plurals>
+    <plurals name="weeks">
+        <item quantity="one">viikko</item>
+        <item quantity="other">viikkoa</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="one">kuukausi</item>
+        <item quantity="other">kuukautta</item>
+    </plurals>
+    <plurals name="years">
+        <item quantity="one">vuosi</item>
+        <item quantity="other">vuotta</item>
+    </plurals>
+
+    <string name="time_ago">${time} sitten</string>
+    <string name="time_in_future">${time}</string>
+    <string name="now">nyt</string>
+</resources>
