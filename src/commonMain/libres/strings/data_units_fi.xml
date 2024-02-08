@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="byte_symbol">t</string>
+    <string name="kilobyte_symbol">kt</string>
+    <string name="megabyte_symbol">Mt</string>
+    <string name="gigabyte_symbol">Gt</string>
+    <string name="terabyte_symbol">Tt</string>
+</resources>
