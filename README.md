@@ -14,7 +14,7 @@ The library is published to Maven Central.
 
 ```kotlin
 dependencies {
-    implementation("nl.jacobras:human-readable:1.6.0")
+    implementation("nl.jacobras:human-readable:1.7.0")
 }
 ```
 
