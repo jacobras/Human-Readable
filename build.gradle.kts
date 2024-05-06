@@ -1,9 +1,10 @@
 import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     id("com.vanniktech.maven.publish") version "0.28.0"
-    id("io.github.skeptick.libres") version "1.2.2"
+    id("io.github.skeptick.libres") version "1.2.3-beta02"
 }
 
 group = "nl.jacobras"
@@ -57,6 +58,15 @@ kotlin {
             }
         }
     }
+    wasmJs {
+        browser {
+            testTask {
+                useKarma {
+                    useChromeHeadless()
+                }
+            }
+        }
+    }
     jvm {
         jvmToolchain(8)
         withJava()
@@ -79,10 +89,12 @@ kotlin {
                 implementation(libs.assertK)
             }
         }
+        val wasmJsMain by getting
         val appleAndJsMain by creating {
             dependsOn(commonMain)
             appleMain.get().dependsOn(this)
             jsMain.get().dependsOn(this)
+            wasmJsMain.dependsOn(this)
         }
     }
 }
@@ -91,4 +103,13 @@ kotlin {
 tasks.withType<AbstractPublishToMaven>().configureEach {
     val signingTasks = tasks.withType<Sign>()
     mustRunAfter(signingTasks)
+}
+
+// TODO: remove it after 1.9.24
+rootProject.the<NodeJsRootExtension>().apply {
+    nodeVersion = "22.0.0"
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask>().configureEach {
+    args.add("--ignore-engines")
 }
