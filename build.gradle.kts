@@ -104,12 +104,3 @@ tasks.withType<AbstractPublishToMaven>().configureEach {
     val signingTasks = tasks.withType<Sign>()
     mustRunAfter(signingTasks)
 }
-
-// TODO: remove it after 1.9.24
-rootProject.the<NodeJsRootExtension>().apply {
-    nodeVersion = "22.0.0"
-}
-
-tasks.withType<org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask>().configureEach {
-    args.add("--ignore-engines")
-}

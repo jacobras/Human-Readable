@@ -1,4 +1,4 @@
-// TODO: remove the file it after 1.9.24
+// TODO: remove the file it after 2.0.20
 // https://youtrack.jetbrains.com/issue/KT-67468
 
 function KarmaWebpackOutputFramework(config) {
