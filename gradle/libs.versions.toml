@@ -1,6 +1,6 @@
 [versions]
 
 [libraries]
-assertK = { module = "com.willowtreeapps.assertk:assertk", version = "0.28.0" }
+assertK = { module = "com.willowtreeapps.assertk:assertk", version = "0.28.1" }
 
 [plugins]
