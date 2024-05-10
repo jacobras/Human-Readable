@@ -47,4 +47,15 @@ object HumanReadable {
     fun fileSize(bytes: Long, decimals: Int = 1): String {
         return formatFileSize(bytes, decimals)
     }
+
+    /**
+     * Returns the given [number] in a short human-readable format.
+     *
+     * Supported abbreviations: K (1,000), M (1,000,000), B (1,000,000,000) and T (1,000,000,000,000).
+     *
+     * For example: 10394 returns "10K" and "4234321" returns "4M".
+     */
+    fun abbreviation(number: Number, decimals: Int = 0): String {
+        return formatAbbreviation(number, decimals)
+    }
 }
