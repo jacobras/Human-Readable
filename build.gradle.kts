@@ -1,5 +1,5 @@
 import com.vanniktech.maven.publish.SonatypeHost
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -14,7 +14,6 @@ mavenPublishing {
     publishToMavenCentral(SonatypeHost.S01, true)
     signAllPublications()
 
-    @Suppress("UnstableApiUsage")
     pom {
         name.set("Human Readable")
         description.set("A small set of data formatting utilities for Kotlin Multiplatform (KMP)")
@@ -43,6 +42,7 @@ repositories {
     mavenCentral()
 }
 
+@OptIn(ExperimentalWasmDsl::class)
 kotlin {
     applyDefaultHierarchyTemplate()
 
