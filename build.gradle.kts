@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     id("com.vanniktech.maven.publish") version "0.28.0"
-    id("io.github.skeptick.libres") version "1.2.3-beta02"
+    id("io.github.skeptick.libres") version "1.2.3-beta02" // Beta includes WASM support
 }
 
 group = "nl.jacobras"
