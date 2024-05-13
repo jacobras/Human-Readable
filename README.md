@@ -20,6 +20,8 @@ dependencies {
 
 ## Features
 
+An interactive demo is available at https://jacobras.github.io/Human-Readable/.
+
 ### 🕰️ Relative time
 
 ```kotlin
