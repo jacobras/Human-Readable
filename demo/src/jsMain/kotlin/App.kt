@@ -1,4 +1,5 @@
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -39,6 +41,8 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import nl.jacobras.humanreadable.HumanReadable
+import kotlin.time.Duration.Companion.days
+import kotlin.time.Duration.Companion.hours
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -71,10 +75,10 @@ internal fun App() {
                         onSelectLanguage = ::onSelectLanguage
                     )
                 }
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(32.dp))
 
                 val now = remember { Clock.System.now() }
-                val instant1 = remember { mutableStateOf(now.minus(133, DateTimeUnit.HOUR)) }
+                val instant1 = remember { mutableStateOf(now.minus(1337, DateTimeUnit.HOUR)) }
                 val instant2 = remember { mutableStateOf(now.plus(2, DateTimeUnit.HOUR)) }
 
                 val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
@@ -94,26 +98,36 @@ internal fun App() {
                 )
                 Text("Change the dates below to see the values update live.")
                 Spacer(Modifier.height(16.dp))
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
                     Text(
                         text = buildAnnotatedString {
                             withStyle(monoBodyOrange) { append("val ") }
-                            append("instant1 = ")
+                            append("instant1 =")
                         },
                         style = monoBody
                     )
                     DateTimeField(instant1)
                 }
                 Spacer(Modifier.height(8.dp))
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
                     Text(
                         text = buildAnnotatedString {
                             withStyle(monoBodyOrange) { append("val ") }
-                            append("instant2 = ")
+                            append("instant2 =")
                         },
                         style = monoBody
                     )
                     DateTimeField(instant2)
+                    Button(onClick = { instant2.value = instant2.value.plus(1.hours) }) { Text("+ hour") }
+                    Button(onClick = { instant2.value = instant2.value.plus(1.days) }) { Text("+ day") }
+                    Button(onClick = { instant2.value = instant2.value.plus(30.days) }) { Text("+ ~month") }
+                    Button(onClick = { instant2.value = instant2.value.plus(365.days) }) { Text("+ ~year") }
                 }
                 Spacer(Modifier.height(16.dp))
 
@@ -228,7 +242,7 @@ private fun LanguagePicker(
 @Composable
 private fun DateTimeField(instant: MutableState<Instant>) {
     var error by remember { mutableStateOf(false) }
-    var value by remember { mutableStateOf(instant.value.toString()) }
+    var value by remember(instant.value) { mutableStateOf(instant.value.toString()) }
 
     TextField(
         modifier = Modifier.widthIn(min = 0.dp),
