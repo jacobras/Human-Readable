@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -174,13 +175,64 @@ internal fun App() {
                     text = "File size",
                     style = MaterialTheme.typography.headlineLarge
                 )
-                val f1 = HumanReadable.fileSize(21_947_282_882, decimals = 2)
+                Text("File size formatting uses base 1024.")
+                Spacer(Modifier.height(16.dp))
+                var myFile by remember { mutableStateOf("21947") }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = buildAnnotatedString {
+                            withStyle(monoBodyOrange) { append("val ") }
+                            append("myFile = ")
+                        },
+                        style = monoBody
+                    )
+                    TextField(
+                        modifier = Modifier.sizeIn(minWidth = 20.dp),
+                        value = myFile,
+                        onValueChange = {
+                            if (it.length < 16) {
+                                myFile = it
+                            }
+                        }
+                    )
+                    Text(
+                        text = " bytes",
+                        style = monoBody
+                    )
+                }
+                Spacer(Modifier.height(8.dp))
+                var decimals by remember { mutableStateOf("2") }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = buildAnnotatedString {
+                            withStyle(monoBodyOrange) { append("val ") }
+                            append("decimals = ")
+                        },
+                        style = monoBody
+                    )
+                    TextField(
+                        modifier = Modifier.sizeIn(minWidth = 20.dp),
+                        value = decimals,
+                        onValueChange = {
+                            val updatedDecimals = it.toIntOrNull()
+                            if (updatedDecimals != null && updatedDecimals < 10) {
+                                decimals = it
+                            }
+                        }
+                    )
+                }
+                Spacer(Modifier.height(8.dp))
                 Text(
                     text = buildAnnotatedString {
-                        append("HumanReadable.fileSize(21_947_282_882, decimals = 2): ")
+                        append("HumanReadable.fileSize(myFile, decimals) = ")
                         withStyle(monoBodyString) {
                             append("\"")
-                            append(f1)
+                            append(
+                                HumanReadable.fileSize(
+                                    bytes = myFile.toLongOrNull() ?: 0L,
+                                    decimals = decimals.toIntOrNull() ?: 0
+                                )
+                            )
                             append("\"")
                         }
                     },
@@ -207,11 +259,15 @@ private fun LanguagePicker(
         TextField(
             modifier = Modifier.menuAnchor(),
             readOnly = true,
-            value = availableLanguages.first { it.code == selectedLanguageCode }.name,
+            value = "\"" + availableLanguages.first { it.code == selectedLanguageCode }.code + "\"",
             onValueChange = { },
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
             },
+            textStyle = TextStyle(
+                fontFamily = FontFamily.Monospace,
+                color = Color(0xFF6aab73)
+            )
         )
 
         ExposedDropdownMenu(
