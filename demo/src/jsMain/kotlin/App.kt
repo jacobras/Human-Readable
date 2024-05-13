@@ -1,8 +1,10 @@
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -23,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
@@ -56,10 +59,13 @@ internal fun App() {
             }
         ) { padding ->
             Column(
-                modifier = Modifier.padding(padding).padding(32.dp).verticalScroll(rememberScrollState())
+                modifier = Modifier.padding(padding)
+                    .padding(horizontal = 32.dp)
+                    .verticalScroll(rememberScrollState())
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text("Language:")
+                    Spacer(Modifier.width(8.dp))
                     LanguagePicker(
                         selectedLanguageCode = selectedLanguageCode,
                         onSelectLanguage = ::onSelectLanguage
@@ -71,57 +77,82 @@ internal fun App() {
                 val instant1 = remember { mutableStateOf(now.minus(133, DateTimeUnit.HOUR)) }
                 val instant2 = remember { mutableStateOf(now.plus(2, DateTimeUnit.HOUR)) }
 
+                val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
+                val monoBodyOrange = SpanStyle(
+                    fontFamily = FontFamily.Monospace,
+                    color = Color(0xFFca5c22),
+                    fontWeight = FontWeight.Medium
+                )
+                val monoBodyString = SpanStyle(
+                    fontFamily = FontFamily.Monospace,
+                    color = Color(0xFF6aab73)
+                )
+
                 Text(
                     text = "Date/Time",
                     style = MaterialTheme.typography.headlineLarge
                 )
                 Text("Change the dates below to see the values update live.")
+                Spacer(Modifier.height(16.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text("val instant1 = ")
+                    Text(
+                        text = buildAnnotatedString {
+                            withStyle(monoBodyOrange) { append("val ") }
+                            append("instant1 = ")
+                        },
+                        style = monoBody
+                    )
                     DateTimeField(instant1)
                 }
                 Spacer(Modifier.height(8.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text("val instant2 = ") // TODO kotlin formatting
+                    Text(
+                        text = buildAnnotatedString {
+                            withStyle(monoBodyOrange) { append("val ") }
+                            append("instant2 = ")
+                        },
+                        style = monoBody
+                    )
                     DateTimeField(instant2)
                 }
                 Spacer(Modifier.height(16.dp))
 
-                val monoBodyStyle = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily.Monospace)
-
-                Text(
-                    text = "Relative time",
-                    style = MaterialTheme.typography.headlineMedium
-                )
                 Text(
                     text = buildAnnotatedString {
-                        append("HumanReadable.timeAgo(instant1): ")
-                        withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+                        append("HumanReadable.timeAgo(instant1) = ")
+                        withStyle(monoBodyString) {
+                            append("\"")
                             append(HumanReadable.timeAgo(instant1.value))
+                            append("\"")
                         }
                     },
-                    style = monoBodyStyle
+                    style = monoBody
                 )
                 Text(
                     text = buildAnnotatedString {
-                        append("HumanReadable.timeAgo(instant2): ")
-                        withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+                        append("HumanReadable.timeAgo(instant2) = ")
+                        withStyle(monoBodyString) {
+                            append("\"")
                             append(HumanReadable.timeAgo(instant2.value))
+                            append("\"")
                         }
                     },
-                    style = monoBodyStyle
+                    style = monoBody
                 )
                 Spacer(Modifier.height(16.dp))
 
                 Text(
-                    text = "Duration",
-                    style = MaterialTheme.typography.headlineMedium
+                    text = buildAnnotatedString {
+                        append("HumanReadable.duration(instant2 - instant1) = ")
+                        withStyle(monoBodyString) {
+                            append("\"")
+                            append(HumanReadable.duration(instant2.value - instant1.value))
+                            append("\"")
+                        }
+                    },
+                    style = monoBody
                 )
-                Text(
-                    text = "HumanReadable.duration(instant2 - instant1): ${HumanReadable.duration(instant2.value - instant1.value)}",
-                    style = monoBodyStyle.copy(fontWeight = FontWeight.Bold)
-                )
-                Spacer(Modifier.height(16.dp))
+                Spacer(Modifier.height(32.dp))
 
                 Text(
                     text = "File size",
@@ -129,10 +160,16 @@ internal fun App() {
                 )
                 val f1 = HumanReadable.fileSize(21_947_282_882, decimals = 2)
                 Text(
-                    text = "HumanReadable.fileSize(21_947_282_882, decimals = 2): $f1",
-                    style = monoBodyStyle
+                    text = buildAnnotatedString {
+                        append("HumanReadable.fileSize(21_947_282_882, decimals = 2): ")
+                        withStyle(monoBodyString) {
+                            append("\"")
+                            append(f1)
+                            append("\"")
+                        }
+                    },
+                    style = monoBody
                 )
-                Spacer(Modifier.height(16.dp))
             }
         }
     }
@@ -145,15 +182,17 @@ private fun LanguagePicker(
     onSelectLanguage: (String) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
+    val availableLanguages = remember { Languages.entries }
     ExposedDropdownMenuBox(
+        modifier = Modifier.clickable { expanded = true },
         expanded = expanded,
-        onExpandedChange = { expanded = false }
+        onExpandedChange = { expanded = it }
     ) {
         TextField(
             modifier = Modifier.menuAnchor(),
             readOnly = true,
-            value = selectedLanguageCode,
-            onValueChange = { onSelectLanguage(it) },
+            value = availableLanguages.first { it.code == selectedLanguageCode }.name,
+            onValueChange = { },
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
             },
@@ -163,7 +202,7 @@ private fun LanguagePicker(
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
-            for (language in Languages.entries) {
+            for (language in availableLanguages) {
                 DropdownMenuItem(
                     text = {
                         Text(
