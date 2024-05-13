@@ -54,6 +54,17 @@ internal fun App() {
         LibresSettings.languageCode = code
     }
 
+    val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
+    val monoBodyOrange = SpanStyle(
+        fontFamily = FontFamily.Monospace,
+        color = Color(0xFFca5c22),
+        fontWeight = FontWeight.Medium
+    )
+    val monoBodyString = SpanStyle(
+        fontFamily = FontFamily.Monospace,
+        color = Color(0xFF6aab73)
+    )
+
     MaterialTheme {
         Scaffold(
             topBar = {
@@ -68,8 +79,10 @@ internal fun App() {
                     .verticalScroll(rememberScrollState())
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text("Language:")
-                    Spacer(Modifier.width(8.dp))
+                    Text(
+                        text = "LibresSettings.languageCode = ",
+                        style = monoBody
+                    )
                     LanguagePicker(
                         selectedLanguageCode = selectedLanguageCode,
                         onSelectLanguage = ::onSelectLanguage
@@ -80,17 +93,6 @@ internal fun App() {
                 val now = remember { Clock.System.now() }
                 val instant1 = remember { mutableStateOf(now.minus(1337, DateTimeUnit.HOUR)) }
                 val instant2 = remember { mutableStateOf(now.plus(2, DateTimeUnit.HOUR)) }
-
-                val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
-                val monoBodyOrange = SpanStyle(
-                    fontFamily = FontFamily.Monospace,
-                    color = Color(0xFFca5c22),
-                    fontWeight = FontWeight.Medium
-                )
-                val monoBodyString = SpanStyle(
-                    fontFamily = FontFamily.Monospace,
-                    color = Color(0xFF6aab73)
-                )
 
                 Text(
                     text = "Date/Time",
