@@ -1,7 +1,7 @@
 import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
-    kotlin("multiplatform") version "1.9.22"
+    alias(libs.plugins.kotlinMultiplatform)
     id("com.vanniktech.maven.publish") version "0.28.0"
     id("io.github.skeptick.libres") version "1.2.2"
 }
@@ -70,7 +70,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
+                implementation(libs.kotlinX.datetime)
             }
         }
         val commonTest by getting {
