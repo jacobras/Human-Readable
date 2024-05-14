@@ -22,7 +22,7 @@ object HumanReadable {
      * @return a formatted string
      */
     fun timeAgo(instant: Instant): String {
-        return formatTimeAgo(instant)
+        return safelyTranslate { formatTimeAgo(instant) }
     }
 
     /**
@@ -33,7 +33,7 @@ object HumanReadable {
      * @return a formatted string
      */
     fun duration(duration: Duration): String {
-        return formatDuration(duration)
+        return safelyTranslate { formatDuration(duration) }
     }
 
     /**
@@ -45,7 +45,7 @@ object HumanReadable {
      * @return a formatted string
      */
     fun fileSize(bytes: Long, decimals: Int = 1): String {
-        return formatFileSize(bytes, decimals)
+        return safelyTranslate { formatFileSize(bytes, decimals) }
     }
 
     /**
@@ -56,6 +56,6 @@ object HumanReadable {
      * For example: 10394 returns "10K" and "4234321" returns "4M".
      */
     fun abbreviation(number: Number, decimals: Int = 0): String {
-        return formatAbbreviation(number, decimals)
+        return safelyTranslate { formatAbbreviation(number, decimals) }
     }
 }
