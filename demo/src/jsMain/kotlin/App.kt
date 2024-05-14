@@ -3,6 +3,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
@@ -65,9 +66,11 @@ internal fun App() {
             }
         ) { padding ->
             Column(
-                modifier = Modifier.padding(padding)
-                    .padding(horizontal = 32.dp).padding(bottom = 32.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
                     .verticalScroll(rememberScrollState())
+                    .padding(padding)
+                    .padding(horizontal = 32.dp).padding(bottom = 32.dp)
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
