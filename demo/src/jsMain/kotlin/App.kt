@@ -207,6 +207,12 @@ private fun FileSizeDemo(selectedLanguageCode: String) {
                 if (it.length < 16) {
                     myFile = it
                 }
+            },
+            isError = myFile.toLongOrNull() == null,
+            supportingText = if (myFile.toLongOrNull() == null) {
+                { Text("Invalid number") }
+            } else {
+                null
             }
         )
         Text(
@@ -227,11 +233,12 @@ private fun FileSizeDemo(selectedLanguageCode: String) {
         TextField(
             modifier = Modifier.sizeIn(minWidth = 20.dp),
             value = decimals,
-            onValueChange = {
-                val updatedDecimals = it.toIntOrNull()
-                if (updatedDecimals != null && updatedDecimals < 10) {
-                    decimals = it
-                }
+            onValueChange = { decimals = it },
+            isError = decimals.toIntOrNull() == null,
+            supportingText = if (decimals.toIntOrNull() == null) {
+                { Text("Invalid number") }
+            } else {
+                null
             }
         )
     }
@@ -280,6 +287,12 @@ private fun AbbreviationDemo(selectedLanguageCode: String) {
                 if (it.length < 16) {
                     myNumber = it
                 }
+            },
+            isError = myNumber.toLongOrNull() == null,
+            supportingText = if (myNumber.toLongOrNull() == null) {
+                { Text("Invalid number") }
+            } else {
+                null
             }
         )
     }
@@ -296,11 +309,12 @@ private fun AbbreviationDemo(selectedLanguageCode: String) {
         TextField(
             modifier = Modifier.sizeIn(minWidth = 20.dp),
             value = decimals,
-            onValueChange = {
-                val updatedDecimals = it.toIntOrNull()
-                if (updatedDecimals != null && updatedDecimals < 10) {
-                    decimals = it
-                }
+            onValueChange = { decimals = it },
+            isError = decimals.toIntOrNull() == null,
+            supportingText = if (decimals.toIntOrNull() == null) {
+                { Text("Invalid number") }
+            } else {
+                null
             }
         )
     }
