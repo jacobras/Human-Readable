@@ -1,9 +1,10 @@
 import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     id("com.vanniktech.maven.publish") version "0.28.0"
-    id("io.github.skeptick.libres") version "1.2.2"
+    id("io.github.skeptick.libres") version "1.2.3-beta02" // Beta includes WASM support
 }
 
 group = "nl.jacobras"
@@ -13,7 +14,6 @@ mavenPublishing {
     publishToMavenCentral(SonatypeHost.S01, true)
     signAllPublications()
 
-    @Suppress("UnstableApiUsage")
     pom {
         name.set("Human Readable")
         description.set("A small set of data formatting utilities for Kotlin Multiplatform (KMP)")
@@ -42,6 +42,7 @@ repositories {
     mavenCentral()
 }
 
+@OptIn(ExperimentalWasmDsl::class)
 kotlin {
     applyDefaultHierarchyTemplate()
 
@@ -57,8 +58,16 @@ kotlin {
             }
         }
     }
+    wasmJs {
+        browser {
+            testTask {
+                useKarma {
+                    useChromeHeadless()
+                }
+            }
+        }
+    }
     jvm {
-        jvmToolchain(8)
         withJava()
         testRuns.named("test") {
             executionTask.configure {
@@ -79,10 +88,12 @@ kotlin {
                 implementation(libs.assertK)
             }
         }
+        val wasmJsMain by getting
         val appleAndJsMain by creating {
             dependsOn(commonMain)
             appleMain.get().dependsOn(this)
             jsMain.get().dependsOn(this)
+            wasmJsMain.dependsOn(this)
         }
     }
 }

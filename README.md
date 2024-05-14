@@ -3,6 +3,7 @@
 ![Android](http://img.shields.io/badge/-android-6EDB8D.svg?style=flat)
 ![iOS](http://img.shields.io/badge/-ios-CDCDCD.svg?style=flat)
 ![JS](http://img.shields.io/badge/-js-F8DB5D.svg?style=flat)
+![wasm](https://img.shields.io/badge/-wasm-624DE9.svg?style=flat)
 
 A small set of data formatting utilities for Kotlin Multiplatform (KMP).
 
