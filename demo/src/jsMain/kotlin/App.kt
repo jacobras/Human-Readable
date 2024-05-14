@@ -392,7 +392,10 @@ private fun DateTimeField(instant: Instant, onUpdate: (Instant) -> Unit) {
                 error = true
             }
         },
-        isError = error
+        isError = error,
+        supportingText = if (error) {
+            { Text("Invalid date format. Please use ISO-8601 ;-)") }
+        } else null
     )
 }
 
