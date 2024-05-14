@@ -20,7 +20,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -82,24 +81,24 @@ internal fun App() {
                 }
                 Spacer(modifier = Modifier.height(32.dp))
 
-                TimeDemo()
+                TimeDemo(selectedLanguageCode)
                 Spacer(Modifier.height(32.dp))
 
-                FileSizeDemo()
+                FileSizeDemo(selectedLanguageCode)
                 Spacer(Modifier.height(32.dp))
 
-                AbbreviationDemo()
+                AbbreviationDemo(selectedLanguageCode)
             }
         }
     }
 }
 
 @Composable
-private fun TimeDemo() {
+private fun TimeDemo(selectedLanguageCode: String) {
     val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
     val now = remember { Clock.System.now() }
-    val instant1 = remember { mutableStateOf(now.minus(1337, DateTimeUnit.HOUR)) }
-    val instant2 = remember { mutableStateOf(now.plus(2, DateTimeUnit.HOUR)) }
+    var instant1 by remember { mutableStateOf(now.minus(1337, DateTimeUnit.HOUR)) }
+    var instant2 by remember { mutableStateOf(now.plus(2, DateTimeUnit.HOUR)) }
 
     Text(
         text = "Date/Time",
@@ -118,7 +117,7 @@ private fun TimeDemo() {
             },
             style = monoBody
         )
-        DateTimeField(instant1)
+        DateTimeField(instant1) { instant1 = it }
     }
     Spacer(Modifier.height(8.dp))
     Row(
@@ -132,11 +131,11 @@ private fun TimeDemo() {
             },
             style = monoBody
         )
-        DateTimeField(instant2)
-        Button(onClick = { instant2.value = instant2.value.plus(1.hours) }) { Text("+ hour") }
-        Button(onClick = { instant2.value = instant2.value.plus(1.days) }) { Text("+ day") }
-        Button(onClick = { instant2.value = instant2.value.plus(30.days) }) { Text("+ ~month") }
-        Button(onClick = { instant2.value = instant2.value.plus(365.days) }) { Text("+ ~year") }
+        DateTimeField(instant2) { instant2 = it }
+        Button(onClick = { instant2 = instant2.plus(1.hours) }) { Text("+ hour") }
+        Button(onClick = { instant2 = instant2.plus(1.days) }) { Text("+ day") }
+        Button(onClick = { instant2 = instant2.plus(30.days) }) { Text("+ ~month") }
+        Button(onClick = { instant2 = instant2.plus(365.days) }) { Text("+ ~year") }
     }
     Spacer(Modifier.height(16.dp))
 
@@ -145,7 +144,7 @@ private fun TimeDemo() {
             append("HumanReadable.timeAgo(instant1) = ")
             withStyle(monoBodyString) {
                 append("\"")
-                append(HumanReadable.timeAgo(instant1.value))
+                append(remember(selectedLanguageCode, instant1) { HumanReadable.timeAgo(instant1) })
                 append("\"")
             }
         },
@@ -156,7 +155,7 @@ private fun TimeDemo() {
             append("HumanReadable.timeAgo(instant2) = ")
             withStyle(monoBodyString) {
                 append("\"")
-                append(HumanReadable.timeAgo(instant2.value))
+                append(remember(selectedLanguageCode, instant2) { HumanReadable.timeAgo(instant2) })
                 append("\"")
             }
         },
@@ -169,7 +168,9 @@ private fun TimeDemo() {
             append("HumanReadable.duration(instant2 - instant1) = ")
             withStyle(monoBodyString) {
                 append("\"")
-                append(HumanReadable.duration(instant2.value - instant1.value))
+                append(remember(selectedLanguageCode, instant1, instant2) {
+                    HumanReadable.duration(instant2 - instant1)
+                })
                 append("\"")
             }
         },
@@ -178,7 +179,7 @@ private fun TimeDemo() {
 }
 
 @Composable
-private fun FileSizeDemo() {
+private fun FileSizeDemo(selectedLanguageCode: String) {
     val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
 
     Text(
@@ -238,11 +239,12 @@ private fun FileSizeDemo() {
             withStyle(monoBodyString) {
                 append("\"")
                 append(
-                    HumanReadable.fileSize(
-                        bytes = myFile.toLongOrNull() ?: 0L,
-                        decimals = decimals.toIntOrNull() ?: 0
-                    )
-                )
+                    remember(selectedLanguageCode, myFile, decimals) {
+                        HumanReadable.fileSize(
+                            bytes = myFile.toLongOrNull() ?: 0L,
+                            decimals = decimals.toIntOrNull() ?: 0
+                        )
+                    })
                 append("\"")
             }
         },
@@ -251,7 +253,7 @@ private fun FileSizeDemo() {
 }
 
 @Composable
-private fun AbbreviationDemo() {
+private fun AbbreviationDemo(selectedLanguageCode: String) {
     val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
 
     Text(
@@ -306,11 +308,12 @@ private fun AbbreviationDemo() {
             withStyle(monoBodyString) {
                 append("\"")
                 append(
-                    HumanReadable.abbreviation(
-                        number = myNumber.toLongOrNull() ?: 0L,
-                        decimals = decimals.toIntOrNull() ?: 0
-                    )
-                )
+                    remember(selectedLanguageCode, myNumber, decimals) {
+                        HumanReadable.abbreviation(
+                            number = myNumber.toLongOrNull() ?: 0L,
+                            decimals = decimals.toIntOrNull() ?: 0
+                        )
+                    })
                 append("\"")
             }
         },
@@ -373,9 +376,9 @@ private fun LanguagePicker(
 }
 
 @Composable
-private fun DateTimeField(instant: MutableState<Instant>) {
+private fun DateTimeField(instant: Instant, onUpdate: (Instant) -> Unit) {
     var error by remember { mutableStateOf(false) }
-    var value by remember(instant.value) { mutableStateOf(instant.value.toString()) }
+    var value by remember(instant) { mutableStateOf(instant.toString()) }
 
     TextField(
         modifier = Modifier.widthIn(min = 0.dp),
@@ -383,7 +386,7 @@ private fun DateTimeField(instant: MutableState<Instant>) {
         onValueChange = {
             value = it
             try {
-                instant.value = Instant.parse(it)
+                onUpdate(Instant.parse(it))
                 error = false
             } catch (e: IllegalArgumentException) {
                 error = true
