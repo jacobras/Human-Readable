@@ -67,7 +67,7 @@ internal fun App() {
         ) { padding ->
             Column(
                 modifier = Modifier.padding(padding)
-                    .padding(horizontal = 32.dp)
+                    .padding(horizontal = 32.dp).padding(bottom = 32.dp)
                     .verticalScroll(rememberScrollState())
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -86,6 +86,9 @@ internal fun App() {
                 Spacer(Modifier.height(32.dp))
 
                 FileSizeDemo()
+                Spacer(Modifier.height(32.dp))
+
+                AbbreviationDemo()
             }
         }
     }
@@ -237,6 +240,74 @@ private fun FileSizeDemo() {
                 append(
                     HumanReadable.fileSize(
                         bytes = myFile.toLongOrNull() ?: 0L,
+                        decimals = decimals.toIntOrNull() ?: 0
+                    )
+                )
+                append("\"")
+            }
+        },
+        style = monoBody
+    )
+}
+
+@Composable
+private fun AbbreviationDemo() {
+    val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
+
+    Text(
+        text = "Abbreviation",
+        style = MaterialTheme.typography.headlineLarge
+    )
+    Spacer(Modifier.height(16.dp))
+    var myNumber by remember { mutableStateOf("3000") }
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text(
+            text = buildAnnotatedString {
+                withStyle(monoBodyOrange) { append("val ") }
+                append("myNumber = ")
+            },
+            style = monoBody
+        )
+        TextField(
+            modifier = Modifier.sizeIn(minWidth = 20.dp),
+            value = myNumber,
+            onValueChange = {
+                if (it.length < 16) {
+                    myNumber = it
+                }
+            }
+        )
+    }
+    Spacer(Modifier.height(8.dp))
+    var decimals by remember { mutableStateOf("2") }
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text(
+            text = buildAnnotatedString {
+                withStyle(monoBodyOrange) { append("val ") }
+                append("decimals = ")
+            },
+            style = monoBody
+        )
+        TextField(
+            modifier = Modifier.sizeIn(minWidth = 20.dp),
+            value = decimals,
+            onValueChange = {
+                val updatedDecimals = it.toIntOrNull()
+                if (updatedDecimals != null && updatedDecimals < 10) {
+                    decimals = it
+                }
+            }
+        )
+    }
+    Spacer(Modifier.height(8.dp))
+    Text(
+        text = buildAnnotatedString {
+            append("HumanReadable.abbreviation(myNumber, decimals) = ")
+            withStyle(monoBodyString) {
+                append("\"")
+                append(
+                    HumanReadable.abbreviation(
+                        number = myNumber.toLongOrNull() ?: 0L,
                         decimals = decimals.toIntOrNull() ?: 0
                     )
                 )

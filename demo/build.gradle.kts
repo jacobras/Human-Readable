@@ -35,7 +35,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.kotlinX.datetime)
-            implementation("nl.jacobras:Human-Readable:1.7.0")
+            implementation("nl.jacobras:Human-Readable:1.8.0")
         }
     }
 }
