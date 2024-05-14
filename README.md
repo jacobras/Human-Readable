@@ -50,6 +50,16 @@ HumanReadable.fileSize(2_048, decimals = 1) // "2.0 kB"
 HumanReadable.fileSize(21_947_282_882, decimals = 2) // "20.44 GB"
 ```
 
+### 🔢 Number abbreviation
+
+Available since version 1.8.
+
+```kotlin
+HumanReadable.abbreviation(3_000) // "3K"
+HumanReadable.abbreviation(500_000) // "500K"
+HumanReadable.abbreviation(2_500_000, decimals = 1) // "2.5M"
+```
+
 ## Date/time precision
 The formatter switches to a bigger unit (minute, hour, day, ...) as soon as it can.
 For example:
