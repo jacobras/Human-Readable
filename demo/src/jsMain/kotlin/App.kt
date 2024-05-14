@@ -56,15 +56,6 @@ internal fun App() {
     }
 
     val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
-    val monoBodyOrange = SpanStyle(
-        fontFamily = FontFamily.Monospace,
-        color = Color(0xFFca5c22),
-        fontWeight = FontWeight.Medium
-    )
-    val monoBodyString = SpanStyle(
-        fontFamily = FontFamily.Monospace,
-        color = Color(0xFF6aab73)
-    )
 
     MaterialTheme {
         Scaffold(
@@ -91,156 +82,169 @@ internal fun App() {
                 }
                 Spacer(modifier = Modifier.height(32.dp))
 
-                val now = remember { Clock.System.now() }
-                val instant1 = remember { mutableStateOf(now.minus(1337, DateTimeUnit.HOUR)) }
-                val instant2 = remember { mutableStateOf(now.plus(2, DateTimeUnit.HOUR)) }
-
-                Text(
-                    text = "Date/Time",
-                    style = MaterialTheme.typography.headlineLarge
-                )
-                Text("Change the dates below to see the values update live.")
-                Spacer(Modifier.height(16.dp))
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(
-                        text = buildAnnotatedString {
-                            withStyle(monoBodyOrange) { append("val ") }
-                            append("instant1 =")
-                        },
-                        style = monoBody
-                    )
-                    DateTimeField(instant1)
-                }
-                Spacer(Modifier.height(8.dp))
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(
-                        text = buildAnnotatedString {
-                            withStyle(monoBodyOrange) { append("val ") }
-                            append("instant2 =")
-                        },
-                        style = monoBody
-                    )
-                    DateTimeField(instant2)
-                    Button(onClick = { instant2.value = instant2.value.plus(1.hours) }) { Text("+ hour") }
-                    Button(onClick = { instant2.value = instant2.value.plus(1.days) }) { Text("+ day") }
-                    Button(onClick = { instant2.value = instant2.value.plus(30.days) }) { Text("+ ~month") }
-                    Button(onClick = { instant2.value = instant2.value.plus(365.days) }) { Text("+ ~year") }
-                }
-                Spacer(Modifier.height(16.dp))
-
-                Text(
-                    text = buildAnnotatedString {
-                        append("HumanReadable.timeAgo(instant1) = ")
-                        withStyle(monoBodyString) {
-                            append("\"")
-                            append(HumanReadable.timeAgo(instant1.value))
-                            append("\"")
-                        }
-                    },
-                    style = monoBody
-                )
-                Text(
-                    text = buildAnnotatedString {
-                        append("HumanReadable.timeAgo(instant2) = ")
-                        withStyle(monoBodyString) {
-                            append("\"")
-                            append(HumanReadable.timeAgo(instant2.value))
-                            append("\"")
-                        }
-                    },
-                    style = monoBody
-                )
-                Spacer(Modifier.height(16.dp))
-
-                Text(
-                    text = buildAnnotatedString {
-                        append("HumanReadable.duration(instant2 - instant1) = ")
-                        withStyle(monoBodyString) {
-                            append("\"")
-                            append(HumanReadable.duration(instant2.value - instant1.value))
-                            append("\"")
-                        }
-                    },
-                    style = monoBody
-                )
+                TimeDemo()
                 Spacer(Modifier.height(32.dp))
 
-                Text(
-                    text = "File size",
-                    style = MaterialTheme.typography.headlineLarge
-                )
-                Text("File size formatting uses base 1024.")
-                Spacer(Modifier.height(16.dp))
-                var myFile by remember { mutableStateOf("21947") }
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(
-                        text = buildAnnotatedString {
-                            withStyle(monoBodyOrange) { append("val ") }
-                            append("myFile = ")
-                        },
-                        style = monoBody
-                    )
-                    TextField(
-                        modifier = Modifier.sizeIn(minWidth = 20.dp),
-                        value = myFile,
-                        onValueChange = {
-                            if (it.length < 16) {
-                                myFile = it
-                            }
-                        }
-                    )
-                    Text(
-                        text = " bytes",
-                        style = monoBody
-                    )
-                }
-                Spacer(Modifier.height(8.dp))
-                var decimals by remember { mutableStateOf("2") }
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(
-                        text = buildAnnotatedString {
-                            withStyle(monoBodyOrange) { append("val ") }
-                            append("decimals = ")
-                        },
-                        style = monoBody
-                    )
-                    TextField(
-                        modifier = Modifier.sizeIn(minWidth = 20.dp),
-                        value = decimals,
-                        onValueChange = {
-                            val updatedDecimals = it.toIntOrNull()
-                            if (updatedDecimals != null && updatedDecimals < 10) {
-                                decimals = it
-                            }
-                        }
-                    )
-                }
-                Spacer(Modifier.height(8.dp))
-                Text(
-                    text = buildAnnotatedString {
-                        append("HumanReadable.fileSize(myFile, decimals) = ")
-                        withStyle(monoBodyString) {
-                            append("\"")
-                            append(
-                                HumanReadable.fileSize(
-                                    bytes = myFile.toLongOrNull() ?: 0L,
-                                    decimals = decimals.toIntOrNull() ?: 0
-                                )
-                            )
-                            append("\"")
-                        }
-                    },
-                    style = monoBody
-                )
+                FileSizeDemo()
             }
         }
     }
+}
+
+@Composable
+private fun TimeDemo() {
+    val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
+    val now = remember { Clock.System.now() }
+    val instant1 = remember { mutableStateOf(now.minus(1337, DateTimeUnit.HOUR)) }
+    val instant2 = remember { mutableStateOf(now.plus(2, DateTimeUnit.HOUR)) }
+
+    Text(
+        text = "Date/Time",
+        style = MaterialTheme.typography.headlineLarge
+    )
+    Text("Change the dates below to see the values update live.")
+    Spacer(Modifier.height(16.dp))
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Text(
+            text = buildAnnotatedString {
+                withStyle(monoBodyOrange) { append("val ") }
+                append("instant1 =")
+            },
+            style = monoBody
+        )
+        DateTimeField(instant1)
+    }
+    Spacer(Modifier.height(8.dp))
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Text(
+            text = buildAnnotatedString {
+                withStyle(monoBodyOrange) { append("val ") }
+                append("instant2 =")
+            },
+            style = monoBody
+        )
+        DateTimeField(instant2)
+        Button(onClick = { instant2.value = instant2.value.plus(1.hours) }) { Text("+ hour") }
+        Button(onClick = { instant2.value = instant2.value.plus(1.days) }) { Text("+ day") }
+        Button(onClick = { instant2.value = instant2.value.plus(30.days) }) { Text("+ ~month") }
+        Button(onClick = { instant2.value = instant2.value.plus(365.days) }) { Text("+ ~year") }
+    }
+    Spacer(Modifier.height(16.dp))
+
+    Text(
+        text = buildAnnotatedString {
+            append("HumanReadable.timeAgo(instant1) = ")
+            withStyle(monoBodyString) {
+                append("\"")
+                append(HumanReadable.timeAgo(instant1.value))
+                append("\"")
+            }
+        },
+        style = monoBody
+    )
+    Text(
+        text = buildAnnotatedString {
+            append("HumanReadable.timeAgo(instant2) = ")
+            withStyle(monoBodyString) {
+                append("\"")
+                append(HumanReadable.timeAgo(instant2.value))
+                append("\"")
+            }
+        },
+        style = monoBody
+    )
+    Spacer(Modifier.height(16.dp))
+
+    Text(
+        text = buildAnnotatedString {
+            append("HumanReadable.duration(instant2 - instant1) = ")
+            withStyle(monoBodyString) {
+                append("\"")
+                append(HumanReadable.duration(instant2.value - instant1.value))
+                append("\"")
+            }
+        },
+        style = monoBody
+    )
+}
+
+@Composable
+private fun FileSizeDemo() {
+    val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
+
+    Text(
+        text = "File size",
+        style = MaterialTheme.typography.headlineLarge
+    )
+    Text("File size formatting uses base 1024.")
+    Spacer(Modifier.height(16.dp))
+    var myFile by remember { mutableStateOf("21947") }
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text(
+            text = buildAnnotatedString {
+                withStyle(monoBodyOrange) { append("val ") }
+                append("myFile = ")
+            },
+            style = monoBody
+        )
+        TextField(
+            modifier = Modifier.sizeIn(minWidth = 20.dp),
+            value = myFile,
+            onValueChange = {
+                if (it.length < 16) {
+                    myFile = it
+                }
+            }
+        )
+        Text(
+            text = " bytes",
+            style = monoBody
+        )
+    }
+    Spacer(Modifier.height(8.dp))
+    var decimals by remember { mutableStateOf("2") }
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text(
+            text = buildAnnotatedString {
+                withStyle(monoBodyOrange) { append("val ") }
+                append("decimals = ")
+            },
+            style = monoBody
+        )
+        TextField(
+            modifier = Modifier.sizeIn(minWidth = 20.dp),
+            value = decimals,
+            onValueChange = {
+                val updatedDecimals = it.toIntOrNull()
+                if (updatedDecimals != null && updatedDecimals < 10) {
+                    decimals = it
+                }
+            }
+        )
+    }
+    Spacer(Modifier.height(8.dp))
+    Text(
+        text = buildAnnotatedString {
+            append("HumanReadable.fileSize(myFile, decimals) = ")
+            withStyle(monoBodyString) {
+                append("\"")
+                append(
+                    HumanReadable.fileSize(
+                        bytes = myFile.toLongOrNull() ?: 0L,
+                        decimals = decimals.toIntOrNull() ?: 0
+                    )
+                )
+                append("\"")
+            }
+        },
+        style = monoBody
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -317,3 +321,13 @@ private fun DateTimeField(instant: MutableState<Instant>) {
         isError = error
     )
 }
+
+private val monoBodyOrange = SpanStyle(
+    fontFamily = FontFamily.Monospace,
+    color = Color(0xFFca5c22),
+    fontWeight = FontWeight.Medium
+)
+private val monoBodyString = SpanStyle(
+    fontFamily = FontFamily.Monospace,
+    color = Color(0xFF6aab73)
+)
