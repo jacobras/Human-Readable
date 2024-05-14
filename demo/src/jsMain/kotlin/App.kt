@@ -81,20 +81,20 @@ internal fun App() {
                 }
                 Spacer(modifier = Modifier.height(32.dp))
 
-                TimeDemo()
+                TimeDemo(selectedLanguageCode)
                 Spacer(Modifier.height(32.dp))
 
-                FileSizeDemo()
+                FileSizeDemo(selectedLanguageCode)
                 Spacer(Modifier.height(32.dp))
 
-                AbbreviationDemo()
+                AbbreviationDemo(selectedLanguageCode)
             }
         }
     }
 }
 
 @Composable
-private fun TimeDemo() {
+private fun TimeDemo(selectedLanguageCode: String) {
     val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
     val now = remember { Clock.System.now() }
     var instant1 by remember { mutableStateOf(now.minus(1337, DateTimeUnit.HOUR)) }
@@ -144,7 +144,7 @@ private fun TimeDemo() {
             append("HumanReadable.timeAgo(instant1) = ")
             withStyle(monoBodyString) {
                 append("\"")
-                append(HumanReadable.timeAgo(instant1))
+                append(remember(selectedLanguageCode, instant1) { HumanReadable.timeAgo(instant1) })
                 append("\"")
             }
         },
@@ -155,7 +155,7 @@ private fun TimeDemo() {
             append("HumanReadable.timeAgo(instant2) = ")
             withStyle(monoBodyString) {
                 append("\"")
-                append(HumanReadable.timeAgo(instant2))
+                append(remember(selectedLanguageCode, instant2) { HumanReadable.timeAgo(instant2) })
                 append("\"")
             }
         },
@@ -168,7 +168,9 @@ private fun TimeDemo() {
             append("HumanReadable.duration(instant2 - instant1) = ")
             withStyle(monoBodyString) {
                 append("\"")
-                append(HumanReadable.duration(instant2 - instant1))
+                append(remember(selectedLanguageCode, instant1, instant2) {
+                    HumanReadable.duration(instant2 - instant1)
+                })
                 append("\"")
             }
         },
@@ -177,7 +179,7 @@ private fun TimeDemo() {
 }
 
 @Composable
-private fun FileSizeDemo() {
+private fun FileSizeDemo(selectedLanguageCode: String) {
     val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
 
     Text(
@@ -237,11 +239,12 @@ private fun FileSizeDemo() {
             withStyle(monoBodyString) {
                 append("\"")
                 append(
-                    HumanReadable.fileSize(
-                        bytes = myFile.toLongOrNull() ?: 0L,
-                        decimals = decimals.toIntOrNull() ?: 0
-                    )
-                )
+                    remember(selectedLanguageCode, myFile, decimals) {
+                        HumanReadable.fileSize(
+                            bytes = myFile.toLongOrNull() ?: 0L,
+                            decimals = decimals.toIntOrNull() ?: 0
+                        )
+                    })
                 append("\"")
             }
         },
@@ -250,7 +253,7 @@ private fun FileSizeDemo() {
 }
 
 @Composable
-private fun AbbreviationDemo() {
+private fun AbbreviationDemo(selectedLanguageCode: String) {
     val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
 
     Text(
@@ -305,11 +308,12 @@ private fun AbbreviationDemo() {
             withStyle(monoBodyString) {
                 append("\"")
                 append(
-                    HumanReadable.abbreviation(
-                        number = myNumber.toLongOrNull() ?: 0L,
-                        decimals = decimals.toIntOrNull() ?: 0
-                    )
-                )
+                    remember(selectedLanguageCode, myNumber, decimals) {
+                        HumanReadable.abbreviation(
+                            number = myNumber.toLongOrNull() ?: 0L,
+                            decimals = decimals.toIntOrNull() ?: 0
+                        )
+                    })
                 append("\"")
             }
         },
