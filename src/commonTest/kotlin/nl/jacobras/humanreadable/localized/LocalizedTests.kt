@@ -3,14 +3,34 @@ package nl.jacobras.humanreadable.localized
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import io.github.skeptick.libres.LibresSettings
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import nl.jacobras.humanreadable.HumanReadable
 import kotlin.test.Test
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.days
+import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 
 /**
  * Smoke test that verifies all supported languages have working plural formatting.
  */
 class LocalizedTests {
+
+    private val now: Instant
+        get() = Clock.System.now()
+    private val oneMinute: Duration
+        get() = 1.minutes
+    private val oneMinuteAgo: Instant
+        get() = now - oneMinute
+    private val oneMinuteFromNow: Instant
+        get() = now + oneMinute
+    private val twoMonths: Duration
+        get() = 60.days
+    private val twoMonthsAgo: Instant
+        get() = now - twoMonths
+    private val twoMonthsFromNow: Instant
+        get() = now + twoMonths
 
     @Test
     fun cs() {

@@ -33,7 +33,7 @@ object HumanReadable {
      * @return a formatted string
      */
     fun duration(duration: Duration): String {
-        return safelyTranslate { formatDuration(duration) }
+        return safelyTranslate { formatDuration(duration, RelativeTime.Present) }
     }
 
     /**
