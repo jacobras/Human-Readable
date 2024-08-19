@@ -5,31 +5,55 @@
         <item quantity="few">sekundy</item>
         <item quantity="many">sekund</item>
     </plurals>
+    <plurals name="seconds_future">
+        <item quantity="one">sekundę</item>
+    </plurals>
+    <plurals name="seconds_past">
+        <item quantity="one">sekundę</item>
+    </plurals>
+
     <plurals name="minutes">
         <item quantity="one">minuta</item>
         <item quantity="few">minuty</item>
         <item quantity="many">minut</item>
     </plurals>
+    <plurals name="minutes_future">
+        <item quantity="one">minutę</item>
+    </plurals>
+    <plurals name="minutes_past">
+        <item quantity="one">minutę</item>
+    </plurals>
+
     <plurals name="hours">
         <item quantity="one">godzina</item>
         <item quantity="few">godziny</item>
         <item quantity="many">godzin</item>
     </plurals>
+    <plurals name="hours_future">
+        <item quantity="one">godzinę</item>
+    </plurals>
+    <plurals name="hours_past">
+        <item quantity="one">godzinę</item>
+    </plurals>
+
     <plurals name="days">
         <item quantity="one">dzień</item>
         <item quantity="few">dni</item>
         <item quantity="many">dni</item>
     </plurals>
+
     <plurals name="weeks">
         <item quantity="one">tydzień</item>
         <item quantity="few">tygodnie</item>
         <item quantity="many">tygodni</item>
     </plurals>
+
     <plurals name="months">
         <item quantity="one">miesiąc</item>
         <item quantity="few">miesiące</item>
         <item quantity="many">miesięcy</item>
     </plurals>
+
     <plurals name="years">
         <item quantity="one">rok</item>
         <item quantity="few">lata</item>
