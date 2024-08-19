@@ -124,6 +124,10 @@ class LocalizedTests {
     fun ru() {
         LibresSettings.languageCode = "ru"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 секунды")
+
+        assertThat(HumanReadable.duration(oneMinute)).isEqualTo("1 минута")
+        assertThat(HumanReadable.timeAgo(oneMinuteAgo)).isEqualTo("1 минуту назад")
+        assertThat(HumanReadable.timeAgo(oneMinuteFromNow)).isEqualTo("через 1 минуту")
     }
 
     @Test
