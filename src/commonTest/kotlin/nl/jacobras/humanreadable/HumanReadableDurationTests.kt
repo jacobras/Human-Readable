@@ -52,6 +52,7 @@ class HumanReadableDurationTests {
     fun months() {
         assertThat(HumanReadable.duration(30.days)).isEqualTo("1 month")
         assertThat(HumanReadable.duration(90.days)).isEqualTo("3 months")
+        assertThat(HumanReadable.duration(364.days)).isEqualTo("12 months")
     }
 
     @Test
