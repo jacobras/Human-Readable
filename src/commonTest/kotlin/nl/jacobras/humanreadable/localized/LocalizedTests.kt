@@ -85,6 +85,14 @@ class LocalizedTests {
     }
 
     @Test
+    fun pt() {
+        LibresSettings.languageCode = "pt"
+        assertThat(HumanReadable.duration(0.seconds)).isEqualTo("0 segundo")
+        assertThat(HumanReadable.duration(1.seconds)).isEqualTo("1 segundo")
+        assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 segundos")
+    }
+
+    @Test
     fun ru() {
         LibresSettings.languageCode = "ru"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 секунды")

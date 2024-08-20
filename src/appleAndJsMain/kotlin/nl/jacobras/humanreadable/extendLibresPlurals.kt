@@ -64,4 +64,12 @@ actual fun extendLibresPlurals() {
             else -> PluralForm.Other
         }
     }
+
+    PluralRules["pt"] = PluralRule { number ->
+        when {
+            number == 0 || number == 1 -> PluralForm.One
+            number % 1_000_000 == 0 -> PluralForm.Many
+            else -> PluralForm.Other
+        }
+    }
 }
