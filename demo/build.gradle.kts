@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -35,7 +36,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.kotlinX.datetime)
-            implementation("nl.jacobras:Human-Readable:1.8.0")
+            implementation("nl.jacobras:Human-Readable:1.8.1")
         }
     }
 }

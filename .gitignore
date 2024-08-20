@@ -5,3 +5,4 @@ build/
 !**/src/test/**/build/
 .idea/
 local.properties
+.kotlin/
