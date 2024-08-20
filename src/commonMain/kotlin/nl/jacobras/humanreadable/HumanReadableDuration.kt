@@ -32,7 +32,7 @@ internal fun formatDuration(duration: Duration): String {
         daysAgo < 30 -> {
             "$weeksAgo ${Res.string.weeks.format(weeksAgo)}"
         }
-        monthsAgo < 12 -> {
+        monthsAgo < 12 || yearsAgo == 0L -> {
             "$monthsAgo ${Res.string.months.format(monthsAgo)}"
         }
         else -> {
