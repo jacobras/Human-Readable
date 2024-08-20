@@ -41,10 +41,6 @@ kotlin {
     }
 }
 
-compose.experimental {
-    web.application {}
-}
-
 rootProject.plugins.withType<YarnPlugin> {
     rootProject.the<YarnRootExtension>().yarnLockMismatchReport = YarnLockMismatchReport.NONE
 }
