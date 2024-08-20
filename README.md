@@ -15,7 +15,7 @@ The library is published to Maven Central.
 
 ```kotlin
 dependencies {
-    implementation("nl.jacobras:Human-Readable:1.8.1")
+    implementation("nl.jacobras:Human-Readable:1.9.0")
 }
 ```
 
@@ -42,7 +42,7 @@ HumanReadable.duration(544.hours) // "3 weeks"
 
 ### 📂 File size
 
-File size formatting uses base 1024.
+File size formatting uses base 1024. Note that these are [not yet localised (#86)](https://github.com/jacobras/Human-Readable/issues/86).
 
 ```kotlin
 HumanReadable.fileSize(333) // "333 B"
@@ -52,7 +52,7 @@ HumanReadable.fileSize(21_947_282_882, decimals = 2) // "20.44 GB"
 
 ### 🔢 Number abbreviation
 
-Available since version 1.8.
+Available since version 1.8. Note that these are [not yet localised (#86)](https://github.com/jacobras/Human-Readable/issues/86).
 
 ```kotlin
 HumanReadable.abbreviation(3_000) // "3K"
@@ -106,6 +106,7 @@ HumanReadable.timeAgo(instant) // "il y a 3 jours"
 * Japanese (since 1.5.0)
 * Korean (since 1.5.0)
 * Polish (since 1.3.0)
+* Portuguese (since 1.9.0)
 * Russian
 * Spanish
 * Turkish
