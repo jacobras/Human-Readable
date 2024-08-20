@@ -7,7 +7,6 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import nl.jacobras.humanreadable.HumanReadable
 import kotlin.test.Test
-import kotlin.time.Duration
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
@@ -17,20 +16,13 @@ import kotlin.time.Duration.Companion.seconds
  */
 class LocalizedTests {
 
-    private val now: Instant
-        get() = Clock.System.now()
-    private val oneMinute: Duration
-        get() = 1.minutes
-    private val oneMinuteAgo: Instant
-        get() = now - oneMinute
-    private val oneMinuteFromNow: Instant
-        get() = now + oneMinute
-    private val twoMonths: Duration
-        get() = 60.days
-    private val twoMonthsAgo: Instant
-        get() = now - twoMonths
-    private val twoMonthsFromNow: Instant
-        get() = now + twoMonths
+    private val now: Instant = Clock.System.now()
+    private val oneMinute = 1.minutes
+    private val oneMinuteAgo = now - oneMinute
+    private val oneMinuteFromNow = now + oneMinute
+    private val twoMonths = 60.days
+    private val twoMonthsAgo = now - twoMonths
+    private val twoMonthsFromNow = now + twoMonths
 
     @Test
     fun cs() {
@@ -44,8 +36,8 @@ class LocalizedTests {
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 Sekunden")
 
         assertThat(HumanReadable.duration(twoMonths)).isEqualTo("2 Monate")
-        assertThat(HumanReadable.timeAgo(twoMonthsAgo)).isEqualTo("vor 2 Monaten")
-        assertThat(HumanReadable.timeAgo(twoMonthsFromNow)).isEqualTo("in 2 Monaten")
+        assertThat(HumanReadable.timeAgo(twoMonthsAgo, baseInstant = now)).isEqualTo("vor 2 Monaten")
+        assertThat(HumanReadable.timeAgo(twoMonthsFromNow, baseInstant = now)).isEqualTo("in 2 Monaten")
     }
 
     @Test
@@ -108,8 +100,8 @@ class LocalizedTests {
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 sekundy")
 
         assertThat(HumanReadable.duration(oneMinute)).isEqualTo("1 minuta")
-        assertThat(HumanReadable.timeAgo(oneMinuteAgo)).isEqualTo("1 minutę temu")
-        assertThat(HumanReadable.timeAgo(oneMinuteFromNow)).isEqualTo("za 1 minutę")
+        assertThat(HumanReadable.timeAgo(oneMinuteAgo, baseInstant = now)).isEqualTo("1 minutę temu")
+        assertThat(HumanReadable.timeAgo(oneMinuteFromNow, baseInstant = now)).isEqualTo("za 1 minutę")
     }
 
     @Test
@@ -126,8 +118,8 @@ class LocalizedTests {
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 секунды")
 
         assertThat(HumanReadable.duration(oneMinute)).isEqualTo("1 минута")
-        assertThat(HumanReadable.timeAgo(oneMinuteAgo)).isEqualTo("1 минуту назад")
-        assertThat(HumanReadable.timeAgo(oneMinuteFromNow)).isEqualTo("через 1 минуту")
+        assertThat(HumanReadable.timeAgo(oneMinuteAgo, baseInstant = now)).isEqualTo("1 минуту назад")
+        assertThat(HumanReadable.timeAgo(oneMinuteFromNow, baseInstant = now)).isEqualTo("через 1 минуту")
     }
 
     @Test

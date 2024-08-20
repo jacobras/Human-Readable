@@ -2,6 +2,7 @@
 
 package nl.jacobras.humanreadable
 
+import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlin.time.Duration
 
@@ -21,8 +22,11 @@ object HumanReadable {
      * @param instant The [Instant] to format.
      * @return a formatted string
      */
-    fun timeAgo(instant: Instant): String {
-        return safelyTranslate { formatTimeAgo(instant) }
+    fun timeAgo(
+        instant: Instant,
+        baseInstant: Instant = Clock.System.now()
+    ): String {
+        return safelyTranslate { formatTimeAgo(instant, baseInstant) }
     }
 
     /**
