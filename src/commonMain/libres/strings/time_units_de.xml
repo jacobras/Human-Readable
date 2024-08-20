@@ -4,29 +4,53 @@
         <item quantity="one">Sekunde</item>
         <item quantity="other">Sekunden</item>
     </plurals>
+
     <plurals name="minutes">
         <item quantity="one">Minute</item>
         <item quantity="other">Minuten</item>
     </plurals>
+
     <plurals name="hours">
         <item quantity="one">Stunde</item>
         <item quantity="other">Stunden</item>
     </plurals>
+
     <plurals name="days">
         <item quantity="one">Tag</item>
         <item quantity="other">Tage</item>
     </plurals>
+    <plurals name="days_past">
+        <item quantity="other">Tagen</item>
+    </plurals>
+    <plurals name="days_future">
+        <item quantity="other">Tagen</item>
+    </plurals>
+
     <plurals name="weeks">
         <item quantity="one">Woche</item>
         <item quantity="other">Wochen</item>
     </plurals>
+
     <plurals name="months">
         <item quantity="one">Monat</item>
         <item quantity="other">Monate</item>
     </plurals>
+    <plurals name="months_past">
+        <item quantity="other">Monaten</item>
+    </plurals>
+    <plurals name="months_future">
+        <item quantity="other">Monaten</item>
+    </plurals>
+
     <plurals name="years">
         <item quantity="one">Jahr</item>
         <item quantity="other">Jahre</item>
+    </plurals>
+    <plurals name="years_past">
+        <item quantity="other">Jahren</item>
+    </plurals>
+    <plurals name="years_future">
+        <item quantity="other">Jahren</item>
     </plurals>
 
     <string name="time_ago">vor ${time}</string>

@@ -3,14 +3,26 @@ package nl.jacobras.humanreadable.localized
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import io.github.skeptick.libres.LibresSettings
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import nl.jacobras.humanreadable.HumanReadable
 import kotlin.test.Test
+import kotlin.time.Duration.Companion.days
+import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 
 /**
  * Smoke test that verifies all supported languages have working plural formatting.
  */
 class LocalizedTests {
+
+    private val now: Instant = Clock.System.now()
+    private val oneMinute = 1.minutes
+    private val oneMinuteAgo = now - oneMinute
+    private val oneMinuteFromNow = now + oneMinute
+    private val twoMonths = 60.days
+    private val twoMonthsAgo = now - twoMonths
+    private val twoMonthsFromNow = now + twoMonths
 
     @Test
     fun cs() {
@@ -22,6 +34,10 @@ class LocalizedTests {
     fun de() {
         LibresSettings.languageCode = "de"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 Sekunden")
+
+        assertThat(HumanReadable.duration(twoMonths)).isEqualTo("2 Monate")
+        assertThat(HumanReadable.timeAgo(twoMonthsAgo, baseInstant = now)).isEqualTo("vor 2 Monaten")
+        assertThat(HumanReadable.timeAgo(twoMonthsFromNow, baseInstant = now)).isEqualTo("in 2 Monaten")
     }
 
     @Test
@@ -82,6 +98,10 @@ class LocalizedTests {
     fun pl() {
         LibresSettings.languageCode = "pl"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 sekundy")
+
+        assertThat(HumanReadable.duration(oneMinute)).isEqualTo("1 minuta")
+        assertThat(HumanReadable.timeAgo(oneMinuteAgo, baseInstant = now)).isEqualTo("1 minutę temu")
+        assertThat(HumanReadable.timeAgo(oneMinuteFromNow, baseInstant = now)).isEqualTo("za 1 minutę")
     }
 
     @Test
@@ -96,6 +116,10 @@ class LocalizedTests {
     fun ru() {
         LibresSettings.languageCode = "ru"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 секунды")
+
+        assertThat(HumanReadable.duration(oneMinute)).isEqualTo("1 минута")
+        assertThat(HumanReadable.timeAgo(oneMinuteAgo, baseInstant = now)).isEqualTo("1 минуту назад")
+        assertThat(HumanReadable.timeAgo(oneMinuteFromNow, baseInstant = now)).isEqualTo("через 1 минуту")
     }
 
     @Test
