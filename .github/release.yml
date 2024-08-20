@@ -4,13 +4,13 @@ changelog:
           labels:
               - feature
 
-        - title: Improvements 📈
+        - title: Enhancements 📈
           labels:
-              - improvement
+              - enhancement
 
         - title: Bug Fixes 🪄
           labels:
-              - bugfix
+              - bug
 
         - title: Dependency Updates 🛠
           labels:
