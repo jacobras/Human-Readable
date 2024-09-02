@@ -6,6 +6,7 @@ internal enum class Languages(val code: String) {
     Finnish("fi"),
     French("fr"),
     German("de"),
+    Kazakh("kk"),
     Italian("it"),
     Indonesian("id"),
     Japanese("ja"),
