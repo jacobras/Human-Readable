@@ -7,8 +7,8 @@ package nl.jacobras.humanreadable
  *
  * For example: 10394 returns "10K" and "4234321" returns "4M".
  */
-internal fun formatAbbreviation(number: Number, decimals: Int): String {
-    var current = number.toFloat()
+internal fun formatAbbreviation(number: Double, decimals: Int): String {
+    var current = number
     var index = 0
 
     while (current >= 1000 && index < prefixes.size - 1) {
@@ -16,7 +16,7 @@ internal fun formatAbbreviation(number: Number, decimals: Int): String {
         index++
     }
 
-    return "${current.formatWithDecimals(decimals)}${prefixes[index]}"
+    return "${current.formatNumber(decimals)}${prefixes[index]}"
 }
 
 private val prefixes = arrayOf("", "K", "M", "B", "T")

@@ -44,6 +44,8 @@ object HumanReadable {
      * Returns the given [bytes] size in human-readable format. For example:
      * a size of 3_500_000 bytes returns "3.5 MB". Assumes base 1024.
      *
+     * For example, 3_5000_000 bytes returns: "3.5 MB" for EN or "3.5 Mo" for FR.
+     *
      * @param bytes The size in bytes to format.
      * @param decimals The number of decimals to use in formatting.
      * @return a formatted string
@@ -60,6 +62,18 @@ object HumanReadable {
      * For example: 10394 returns "10K" and "4234321" returns "4M".
      */
     fun abbreviation(number: Number, decimals: Int = 0): String {
-        return safelyTranslate { formatAbbreviation(number, decimals) }
+        return safelyTranslate { formatAbbreviation(number.toDouble(), decimals) }
+    }
+
+    /**
+     * Formats the given [number].
+     *
+     * For example: 1_000_000.34 returns:
+     * - "1,000,000.34" for EN
+     * - "1 000 000.34" for FR
+     * - "1.000.000,34" for NL
+     */
+    fun number(number: Number, decimals: Int = 0): String {
+        return safelyTranslate { number.toDouble().formatNumber(decimals) }
     }
 }
