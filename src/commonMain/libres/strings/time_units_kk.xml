@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="seconds">
+        <item quantity="one">секунд</item>
+        <item quantity="other">секунд</item>
+    </plurals>
+    <plurals name="seconds_future">
+        <item quantity="one">секундтан</item>
+        <item quantity="other">секундтан</item>
+    </plurals>
+
+    <plurals name="minutes">
+        <item quantity="one">минут</item>
+        <item quantity="other">минут</item>
+    </plurals>
+    <plurals name="minutes_future">
+        <item quantity="one">минуттан</item>
+        <item quantity="other">минуттан</item>
+    </plurals>
+
+    <plurals name="hours">
+        <item quantity="one">сағат</item>
+        <item quantity="other">сағат</item>
+    </plurals>
+    <plurals name="hours_future">
+        <item quantity="one">сағаттан</item>
+        <item quantity="other">сағаттан</item>
+    </plurals>
+
+    <plurals name="days">
+        <item quantity="one">күн</item>
+        <item quantity="other">күн</item>
+    </plurals>
+    <plurals name="days_future">
+        <item quantity="one">күннен</item>
+        <item quantity="other">күннен</item>
+    </plurals>
+
+    <plurals name="weeks">
+        <item quantity="one">апта</item>
+        <item quantity="other">апта</item>
+    </plurals>
+    <plurals name="weeks_future">
+        <item quantity="one">аптадан</item>
+        <item quantity="other">аптадан</item>
+    </plurals>
+
+    <plurals name="months">
+        <item quantity="one">ай</item>
+        <item quantity="other">ай</item>
+    </plurals>
+    <plurals name="months_future">
+        <item quantity="one">айдан</item>
+        <item quantity="other">айдан</item>
+    </plurals>
+
+    <plurals name="years">
+        <item quantity="one">жыл</item>
+        <item quantity="other">жыл</item>
+    </plurals>
+    <plurals name="years_future">
+        <item quantity="one">жылдан</item>
+        <item quantity="other">жылдан</item>
+    </plurals>
+
+    <string name="time_ago">${time} бұрын</string>
+    <string name="time_in_future">${time} кейін</string>
+    <string name="now">қазір</string>
+</resources>
