@@ -16,7 +16,7 @@ import monoBodyString
 import nl.jacobras.humanreadable.HumanReadable
 
 @Composable
-internal fun AbbreviationDemo(
+internal fun NumberFormatDemo(
     selectedLanguageCode: String,
     modifier: Modifier = Modifier
 ) {
@@ -24,11 +24,11 @@ internal fun AbbreviationDemo(
 
     Column(modifier.fillMaxWidth()) {
         Text(
-            text = "Abbreviation",
+            text = "Number formatting",
             style = MaterialTheme.typography.headlineLarge
         )
         Spacer(Modifier.height(16.dp))
-        var myNumber by remember { mutableStateOf("3000") }
+        var myNumber by remember { mutableStateOf("1000000.34") }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = buildAnnotatedString {
@@ -45,8 +45,8 @@ internal fun AbbreviationDemo(
                         myNumber = it
                     }
                 },
-                isError = myNumber.toLongOrNull() == null,
-                supportingText = if (myNumber.toLongOrNull() == null) {
+                isError = myNumber.toDoubleOrNull() == null,
+                supportingText = if (myNumber.toDoubleOrNull() == null) {
                     { Text("Invalid number") }
                 } else {
                     null
@@ -78,13 +78,14 @@ internal fun AbbreviationDemo(
         Spacer(Modifier.height(8.dp))
         Text(
             text = buildAnnotatedString {
-                append("HumanReadable.abbreviation(myNumber, decimals) = ")
+                append("HumanReadable.number(myNumber, decimals)")
+                appendLine()
                 withStyle(monoBodyString) {
-                    append("\"")
+                    append("// Returns \"")
                     append(
                         remember(selectedLanguageCode, myNumber, decimals) {
-                            HumanReadable.abbreviation(
-                                number = myNumber.toLongOrNull() ?: 0L,
+                            HumanReadable.number(
+                                number = myNumber.toDoubleOrNull() ?: 0L,
                                 decimals = decimals.toIntOrNull() ?: 0
                             )
                         })

@@ -22,7 +22,7 @@ internal fun FileSizeDemo(
 ) {
     val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
 
-    Column(modifier) {
+    Column(modifier.fillMaxWidth()) {
         Text(
             text = "File size",
             style = MaterialTheme.typography.headlineLarge

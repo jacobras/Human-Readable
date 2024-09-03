@@ -59,7 +59,8 @@ internal fun App() {
                         .verticalScroll(rememberScrollState()),
                     timeDemo = { TimeDemo(selectedLanguageCode, it) },
                     fileSizeDemo = { FileSizeDemo(selectedLanguageCode, it) },
-                    abbreviationDemo = { AbbreviationDemo(selectedLanguageCode, it) }
+                    abbreviationDemo = { AbbreviationDemo(selectedLanguageCode, it) },
+                    numberFormatDemo = { NumberFormatDemo(selectedLanguageCode, it) }
                 )
             }
         }

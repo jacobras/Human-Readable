@@ -30,7 +30,7 @@ internal fun TimeDemo(
     var instant1 by remember { mutableStateOf(now.minus(1337, DateTimeUnit.HOUR)) }
     var instant2 by remember { mutableStateOf(now.plus(2, DateTimeUnit.HOUR)) }
 
-    Column(modifier) {
+    Column(modifier.fillMaxWidth()) {
         Text(
             text = "Date/Time",
             style = MaterialTheme.typography.headlineLarge
