@@ -3,7 +3,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
@@ -12,12 +11,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import io.github.skeptick.libres.LibresSettings
 import ui.*
-import ui.FileSizeDemo
-import ui.FlexibleLayout
-import ui.LanguagePicker
-import ui.TimeDemo
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 internal fun App() {
     var selectedLanguageCode by remember { mutableStateOf(LibresSettings.languageCode ?: "en") }
@@ -35,33 +30,44 @@ internal fun App() {
                 TopAppBar(title = { Text("Human-Readable web demo") })
             }
         ) { paddingValues ->
-            Column(
+            BoxWithConstraints(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(paddingValues)
                     .padding(horizontal = 32.dp).padding(bottom = 32.dp)
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                val smallDisplay = maxWidth < 600.dp
+                Column(
+                ) {
                     Text(
-                        text = "LibresSettings.languageCode = ",
+                        text = "LibresSettings.languageCode = \"$selectedLanguageCode\"",
                         style = monoBody
                     )
-                    LanguagePicker(
-                        selectedLanguageCode = selectedLanguageCode,
-                        onSelectLanguage = ::onSelectLanguage
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                        val sortedLanguages = Language.entries
+                            .sortedBy { it.code }
+                            .sortedByDescending { it == Language.English }
+                        for (language in sortedLanguages) {
+                            LanguageChip(
+                                language = language,
+                                selected = language.code == selectedLanguageCode,
+                                onClick = { onSelectLanguage(language.code) },
+                                smallDisplay = smallDisplay
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(32.dp))
+
+                    FlexibleLayout(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .verticalScroll(rememberScrollState()),
+                        timeDemo = { TimeDemo(selectedLanguageCode, it) },
+                        fileSizeDemo = { FileSizeDemo(selectedLanguageCode, it) },
+                        abbreviationDemo = { AbbreviationDemo(selectedLanguageCode, it) },
+                        numberFormatDemo = { NumberFormatDemo(selectedLanguageCode, it) }
                     )
                 }
-                Spacer(modifier = Modifier.height(32.dp))
-
-                FlexibleLayout(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .verticalScroll(rememberScrollState()),
-                    timeDemo = { TimeDemo(selectedLanguageCode, it) },
-                    fileSizeDemo = { FileSizeDemo(selectedLanguageCode, it) },
-                    abbreviationDemo = { AbbreviationDemo(selectedLanguageCode, it) },
-                    numberFormatDemo = { NumberFormatDemo(selectedLanguageCode, it) }
-                )
             }
         }
     }

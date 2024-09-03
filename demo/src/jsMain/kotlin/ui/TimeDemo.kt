@@ -65,7 +65,7 @@ internal fun TimeDemo(
             DateTimeField(instant2) { instant2 = it }
         }
 
-        FlowRow {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             Button(onClick = { instant2 = instant2.plus(1.hours) }) { Text("+ hour") }
             Button(onClick = { instant2 = instant2.plus(1.days) }) { Text("+ day") }
             Button(onClick = { instant2 = instant2.plus(30.days) }) { Text("+ ~month") }

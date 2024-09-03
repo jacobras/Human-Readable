@@ -1,4 +1,4 @@
-internal enum class Languages(val code: String) {
+internal enum class Language(val code: String) {
     English("en"),
     Czech("cs"),
     Chinese("zh"),

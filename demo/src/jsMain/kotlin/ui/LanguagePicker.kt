@@ -1,6 +1,6 @@
 package ui
 
-import Languages
+import Language
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -17,7 +17,7 @@ internal fun LanguagePicker(
     onSelectLanguage: (String) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
-    val availableLanguages = remember { Languages.entries }
+    val availableLanguages = remember { Language.entries }
     ExposedDropdownMenuBox(
         modifier = Modifier.clickable { expanded = true },
         expanded = expanded,
