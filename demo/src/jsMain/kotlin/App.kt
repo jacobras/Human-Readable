@@ -11,8 +11,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import io.github.skeptick.libres.LibresSettings
-import ui.AbbreviationDemo
+import ui.*
 import ui.FileSizeDemo
+import ui.FlexibleLayout
 import ui.LanguagePicker
 import ui.TimeDemo
 
@@ -33,12 +34,11 @@ internal fun App() {
             topBar = {
                 TopAppBar(title = { Text("Human-Readable web demo") })
             }
-        ) { padding ->
+        ) { paddingValues ->
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .verticalScroll(rememberScrollState())
-                    .padding(padding)
+                    .padding(paddingValues)
                     .padding(horizontal = 32.dp).padding(bottom = 32.dp)
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -53,13 +53,14 @@ internal fun App() {
                 }
                 Spacer(modifier = Modifier.height(32.dp))
 
-                TimeDemo(selectedLanguageCode)
-                Spacer(Modifier.height(32.dp))
-
-                FileSizeDemo(selectedLanguageCode)
-                Spacer(Modifier.height(32.dp))
-
-                AbbreviationDemo(selectedLanguageCode)
+                FlexibleLayout(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState()),
+                    timeDemo = { TimeDemo(selectedLanguageCode, it) },
+                    fileSizeDemo = { FileSizeDemo(selectedLanguageCode, it) },
+                    abbreviationDemo = { AbbreviationDemo(selectedLanguageCode, it) }
+                )
             }
         }
     }

@@ -19,89 +19,98 @@ import nl.jacobras.humanreadable.HumanReadable
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
-internal fun TimeDemo(selectedLanguageCode: String) {
+internal fun TimeDemo(
+    selectedLanguageCode: String,
+    modifier: Modifier = Modifier
+) {
     val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
     val now = remember { Clock.System.now() }
     var instant1 by remember { mutableStateOf(now.minus(1337, DateTimeUnit.HOUR)) }
     var instant2 by remember { mutableStateOf(now.plus(2, DateTimeUnit.HOUR)) }
 
-    Text(
-        text = "Date/Time",
-        style = MaterialTheme.typography.headlineLarge
-    )
-    Text("Change the dates below to see the values update live.")
-    Spacer(Modifier.height(16.dp))
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
+    Column(modifier) {
+        Text(
+            text = "Date/Time",
+            style = MaterialTheme.typography.headlineLarge
+        )
+        Text("Change the dates below to see the values update live.")
+        Spacer(Modifier.height(16.dp))
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                text = buildAnnotatedString {
+                    withStyle(monoBodyOrange) { append("val ") }
+                    append("instant1 =")
+                },
+                style = monoBody
+            )
+            DateTimeField(instant1) { instant1 = it }
+        }
+        Spacer(Modifier.height(8.dp))
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                text = buildAnnotatedString {
+                    withStyle(monoBodyOrange) { append("val ") }
+                    append("instant2 =")
+                },
+                style = monoBody
+            )
+            DateTimeField(instant2) { instant2 = it }
+        }
+
+        FlowRow {
+            Button(onClick = { instant2 = instant2.plus(1.hours) }) { Text("+ hour") }
+            Button(onClick = { instant2 = instant2.plus(1.days) }) { Text("+ day") }
+            Button(onClick = { instant2 = instant2.plus(30.days) }) { Text("+ ~month") }
+            Button(onClick = { instant2 = instant2.plus(365.days) }) { Text("+ ~year") }
+        }
+        Spacer(Modifier.height(16.dp))
+
         Text(
             text = buildAnnotatedString {
-                withStyle(monoBodyOrange) { append("val ") }
-                append("instant1 =")
+                append("HumanReadable.timeAgo(instant1) = ")
+                withStyle(monoBodyString) {
+                    append("\"")
+                    append(remember(selectedLanguageCode, instant1) { HumanReadable.timeAgo(instant1) })
+                    append("\"")
+                }
             },
             style = monoBody
         )
-        DateTimeField(instant1) { instant1 = it }
-    }
-    Spacer(Modifier.height(8.dp))
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
         Text(
             text = buildAnnotatedString {
-                withStyle(monoBodyOrange) { append("val ") }
-                append("instant2 =")
+                append("HumanReadable.timeAgo(instant2) = ")
+                withStyle(monoBodyString) {
+                    append("\"")
+                    append(remember(selectedLanguageCode, instant2) { HumanReadable.timeAgo(instant2) })
+                    append("\"")
+                }
             },
             style = monoBody
         )
-        DateTimeField(instant2) { instant2 = it }
-        Button(onClick = { instant2 = instant2.plus(1.hours) }) { Text("+ hour") }
-        Button(onClick = { instant2 = instant2.plus(1.days) }) { Text("+ day") }
-        Button(onClick = { instant2 = instant2.plus(30.days) }) { Text("+ ~month") }
-        Button(onClick = { instant2 = instant2.plus(365.days) }) { Text("+ ~year") }
+        Spacer(Modifier.height(16.dp))
+
+        Text(
+            text = buildAnnotatedString {
+                append("HumanReadable.duration(instant2 - instant1) = ")
+                withStyle(monoBodyString) {
+                    append("\"")
+                    append(remember(selectedLanguageCode, instant1, instant2) {
+                        HumanReadable.duration(instant2 - instant1)
+                    })
+                    append("\"")
+                }
+            },
+            style = monoBody
+        )
     }
-    Spacer(Modifier.height(16.dp))
-
-    Text(
-        text = buildAnnotatedString {
-            append("HumanReadable.timeAgo(instant1) = ")
-            withStyle(monoBodyString) {
-                append("\"")
-                append(remember(selectedLanguageCode, instant1) { HumanReadable.timeAgo(instant1) })
-                append("\"")
-            }
-        },
-        style = monoBody
-    )
-    Text(
-        text = buildAnnotatedString {
-            append("HumanReadable.timeAgo(instant2) = ")
-            withStyle(monoBodyString) {
-                append("\"")
-                append(remember(selectedLanguageCode, instant2) { HumanReadable.timeAgo(instant2) })
-                append("\"")
-            }
-        },
-        style = monoBody
-    )
-    Spacer(Modifier.height(16.dp))
-
-    Text(
-        text = buildAnnotatedString {
-            append("HumanReadable.duration(instant2 - instant1) = ")
-            withStyle(monoBodyString) {
-                append("\"")
-                append(remember(selectedLanguageCode, instant1, instant2) {
-                    HumanReadable.duration(instant2 - instant1)
-                })
-                append("\"")
-            }
-        },
-        style = monoBody
-    )
 }
 
 @Composable
