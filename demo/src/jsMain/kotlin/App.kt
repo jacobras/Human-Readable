@@ -1,51 +1,20 @@
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.sizeIn
-import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TopAppBar
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import io.github.skeptick.libres.LibresSettings
-import kotlinx.datetime.Clock
-import kotlinx.datetime.DateTimeUnit
-import kotlinx.datetime.Instant
-import kotlinx.datetime.minus
-import kotlinx.datetime.plus
-import nl.jacobras.humanreadable.HumanReadable
-import kotlin.time.Duration.Companion.days
-import kotlin.time.Duration.Companion.hours
+import ui.*
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 internal fun App() {
     var selectedLanguageCode by remember { mutableStateOf(LibresSettings.languageCode ?: "en") }
@@ -60,368 +29,68 @@ internal fun App() {
     MaterialTheme {
         Scaffold(
             topBar = {
-                TopAppBar(
-                    title = { Text("Human-Readable web demo") }
-                )
+                TopAppBar(title = { Text("Human-Readable web demo") })
             }
-        ) { padding ->
-            Column(
+        ) { paddingValues ->
+            BoxWithConstraints(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .verticalScroll(rememberScrollState())
-                    .padding(padding)
-                    .padding(horizontal = 32.dp).padding(bottom = 32.dp)
+                    .padding(paddingValues)
+                    .padding(horizontal = 32.dp)
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                val smallDisplay = maxWidth < 800.dp
+                Column(
+                ) {
                     Text(
-                        text = "LibresSettings.languageCode = ",
+                        text = buildAnnotatedString {
+                            append("LibresSettings.languageCode = \"")
+                            withStyle(monoBodyStringBold) {
+                                append(selectedLanguageCode)
+                            }
+                            append("\"")
+                        },
                         style = monoBody
                     )
-                    LanguagePicker(
-                        selectedLanguageCode = selectedLanguageCode,
-                        onSelectLanguage = ::onSelectLanguage
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                        val sortedLanguages = Language.entries
+                            .sortedBy { it.code }
+                            .sortedByDescending { it == Language.English }
+                        for (language in sortedLanguages) {
+                            LanguageChip(
+                                language = language,
+                                selected = language.code == selectedLanguageCode,
+                                onClick = { onSelectLanguage(language.code) },
+                                smallDisplay = smallDisplay
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(32.dp))
+
+                    FlexibleLayout(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .verticalScroll(rememberScrollState())
+                            .padding(bottom = 32.dp),
+                        timeDemo = { TimeDemo(selectedLanguageCode, it) },
+                        fileSizeDemo = { FileSizeDemo(selectedLanguageCode, it) },
+                        abbreviationDemo = { AbbreviationDemo(selectedLanguageCode, it) },
+                        numberFormatDemo = { NumberFormatDemo(selectedLanguageCode, it) }
                     )
                 }
-                Spacer(modifier = Modifier.height(32.dp))
-
-                TimeDemo(selectedLanguageCode)
-                Spacer(Modifier.height(32.dp))
-
-                FileSizeDemo(selectedLanguageCode)
-                Spacer(Modifier.height(32.dp))
-
-                AbbreviationDemo(selectedLanguageCode)
             }
         }
     }
 }
 
-@Composable
-private fun TimeDemo(selectedLanguageCode: String) {
-    val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
-    val now = remember { Clock.System.now() }
-    var instant1 by remember { mutableStateOf(now.minus(1337, DateTimeUnit.HOUR)) }
-    var instant2 by remember { mutableStateOf(now.plus(2, DateTimeUnit.HOUR)) }
-
-    Text(
-        text = "Date/Time",
-        style = MaterialTheme.typography.headlineLarge
-    )
-    Text("Change the dates below to see the values update live.")
-    Spacer(Modifier.height(16.dp))
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Text(
-            text = buildAnnotatedString {
-                withStyle(monoBodyOrange) { append("val ") }
-                append("instant1 =")
-            },
-            style = monoBody
-        )
-        DateTimeField(instant1) { instant1 = it }
-    }
-    Spacer(Modifier.height(8.dp))
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Text(
-            text = buildAnnotatedString {
-                withStyle(monoBodyOrange) { append("val ") }
-                append("instant2 =")
-            },
-            style = monoBody
-        )
-        DateTimeField(instant2) { instant2 = it }
-        Button(onClick = { instant2 = instant2.plus(1.hours) }) { Text("+ hour") }
-        Button(onClick = { instant2 = instant2.plus(1.days) }) { Text("+ day") }
-        Button(onClick = { instant2 = instant2.plus(30.days) }) { Text("+ ~month") }
-        Button(onClick = { instant2 = instant2.plus(365.days) }) { Text("+ ~year") }
-    }
-    Spacer(Modifier.height(16.dp))
-
-    Text(
-        text = buildAnnotatedString {
-            append("HumanReadable.timeAgo(instant1) = ")
-            withStyle(monoBodyString) {
-                append("\"")
-                append(remember(selectedLanguageCode, instant1) { HumanReadable.timeAgo(instant1) })
-                append("\"")
-            }
-        },
-        style = monoBody
-    )
-    Text(
-        text = buildAnnotatedString {
-            append("HumanReadable.timeAgo(instant2) = ")
-            withStyle(monoBodyString) {
-                append("\"")
-                append(remember(selectedLanguageCode, instant2) { HumanReadable.timeAgo(instant2) })
-                append("\"")
-            }
-        },
-        style = monoBody
-    )
-    Spacer(Modifier.height(16.dp))
-
-    Text(
-        text = buildAnnotatedString {
-            append("HumanReadable.duration(instant2 - instant1) = ")
-            withStyle(monoBodyString) {
-                append("\"")
-                append(remember(selectedLanguageCode, instant1, instant2) {
-                    HumanReadable.duration(instant2 - instant1)
-                })
-                append("\"")
-            }
-        },
-        style = monoBody
-    )
-}
-
-@Composable
-private fun FileSizeDemo(selectedLanguageCode: String) {
-    val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
-
-    Text(
-        text = "File size",
-        style = MaterialTheme.typography.headlineLarge
-    )
-    Text("File size formatting uses base 1024.")
-    Spacer(Modifier.height(16.dp))
-    var myFile by remember { mutableStateOf("21947") }
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Text(
-            text = buildAnnotatedString {
-                withStyle(monoBodyOrange) { append("val ") }
-                append("myFile = ")
-            },
-            style = monoBody
-        )
-        TextField(
-            modifier = Modifier.sizeIn(minWidth = 20.dp),
-            value = myFile,
-            onValueChange = {
-                if (it.length < 16) {
-                    myFile = it
-                }
-            },
-            isError = myFile.toLongOrNull() == null,
-            supportingText = if (myFile.toLongOrNull() == null) {
-                { Text("Invalid number") }
-            } else {
-                null
-            }
-        )
-        Text(
-            text = " bytes",
-            style = monoBody
-        )
-    }
-    Spacer(Modifier.height(8.dp))
-    var decimals by remember { mutableStateOf("2") }
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Text(
-            text = buildAnnotatedString {
-                withStyle(monoBodyOrange) { append("val ") }
-                append("decimals = ")
-            },
-            style = monoBody
-        )
-        TextField(
-            modifier = Modifier.sizeIn(minWidth = 20.dp),
-            value = decimals,
-            onValueChange = { decimals = it },
-            isError = decimals.toIntOrNull() == null,
-            supportingText = if (decimals.toIntOrNull() == null) {
-                { Text("Invalid number") }
-            } else {
-                null
-            }
-        )
-    }
-    Spacer(Modifier.height(8.dp))
-    Text(
-        text = buildAnnotatedString {
-            append("HumanReadable.fileSize(myFile, decimals) = ")
-            withStyle(monoBodyString) {
-                append("\"")
-                append(
-                    remember(selectedLanguageCode, myFile, decimals) {
-                        HumanReadable.fileSize(
-                            bytes = myFile.toLongOrNull() ?: 0L,
-                            decimals = decimals.toIntOrNull() ?: 0
-                        )
-                    })
-                append("\"")
-            }
-        },
-        style = monoBody
-    )
-}
-
-@Composable
-private fun AbbreviationDemo(selectedLanguageCode: String) {
-    val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
-
-    Text(
-        text = "Abbreviation",
-        style = MaterialTheme.typography.headlineLarge
-    )
-    Spacer(Modifier.height(16.dp))
-    var myNumber by remember { mutableStateOf("3000") }
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Text(
-            text = buildAnnotatedString {
-                withStyle(monoBodyOrange) { append("val ") }
-                append("myNumber = ")
-            },
-            style = monoBody
-        )
-        TextField(
-            modifier = Modifier.sizeIn(minWidth = 20.dp),
-            value = myNumber,
-            onValueChange = {
-                if (it.length < 16) {
-                    myNumber = it
-                }
-            },
-            isError = myNumber.toLongOrNull() == null,
-            supportingText = if (myNumber.toLongOrNull() == null) {
-                { Text("Invalid number") }
-            } else {
-                null
-            }
-        )
-    }
-    Spacer(Modifier.height(8.dp))
-    var decimals by remember { mutableStateOf("2") }
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Text(
-            text = buildAnnotatedString {
-                withStyle(monoBodyOrange) { append("val ") }
-                append("decimals = ")
-            },
-            style = monoBody
-        )
-        TextField(
-            modifier = Modifier.sizeIn(minWidth = 20.dp),
-            value = decimals,
-            onValueChange = { decimals = it },
-            isError = decimals.toIntOrNull() == null,
-            supportingText = if (decimals.toIntOrNull() == null) {
-                { Text("Invalid number") }
-            } else {
-                null
-            }
-        )
-    }
-    Spacer(Modifier.height(8.dp))
-    Text(
-        text = buildAnnotatedString {
-            append("HumanReadable.abbreviation(myNumber, decimals) = ")
-            withStyle(monoBodyString) {
-                append("\"")
-                append(
-                    remember(selectedLanguageCode, myNumber, decimals) {
-                        HumanReadable.abbreviation(
-                            number = myNumber.toLongOrNull() ?: 0L,
-                            decimals = decimals.toIntOrNull() ?: 0
-                        )
-                    })
-                append("\"")
-            }
-        },
-        style = monoBody
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun LanguagePicker(
-    selectedLanguageCode: String,
-    onSelectLanguage: (String) -> Unit
-) {
-    var expanded by remember { mutableStateOf(false) }
-    val availableLanguages = remember { Languages.entries }
-    ExposedDropdownMenuBox(
-        modifier = Modifier.clickable { expanded = true },
-        expanded = expanded,
-        onExpandedChange = { expanded = it }
-    ) {
-        TextField(
-            modifier = Modifier.menuAnchor(),
-            readOnly = true,
-            value = "\"" + availableLanguages.first { it.code == selectedLanguageCode }.code + "\"",
-            onValueChange = { },
-            trailingIcon = {
-                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-            },
-            textStyle = TextStyle(
-                fontFamily = FontFamily.Monospace,
-                color = Color(0xFF6aab73)
-            )
-        )
-
-        ExposedDropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false }
-        ) {
-            for (language in availableLanguages) {
-                DropdownMenuItem(
-                    text = {
-                        Text(
-                            text = language.name,
-                            fontWeight = if (selectedLanguageCode == language.code) {
-                                FontWeight.Bold
-                            } else {
-                                FontWeight.Normal
-                            }
-                        )
-
-                    },
-                    onClick = {
-                        onSelectLanguage(language.code)
-                        expanded = false
-                    }
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun DateTimeField(instant: Instant, onUpdate: (Instant) -> Unit) {
-    var error by remember { mutableStateOf(false) }
-    var value by remember(instant) { mutableStateOf(instant.toString()) }
-
-    TextField(
-        modifier = Modifier.widthIn(min = 0.dp),
-        value = value,
-        onValueChange = {
-            value = it
-            try {
-                onUpdate(Instant.parse(it))
-                error = false
-            } catch (e: IllegalArgumentException) {
-                error = true
-            }
-        },
-        isError = error,
-        supportingText = if (error) {
-            { Text("Invalid date format. Please use ISO-8601 ;-)") }
-        } else null
-    )
-}
-
-private val monoBodyOrange = SpanStyle(
+internal val monoBodyOrange = SpanStyle(
     fontFamily = FontFamily.Monospace,
     color = Color(0xFFca5c22),
     fontWeight = FontWeight.Medium
 )
-private val monoBodyString = SpanStyle(
+internal val monoBodyString = SpanStyle(
     fontFamily = FontFamily.Monospace,
     color = Color(0xFF6aab73)
+)
+internal val monoBodyStringBold = monoBodyString.copy(
+    fontWeight = FontWeight.Bold
 )

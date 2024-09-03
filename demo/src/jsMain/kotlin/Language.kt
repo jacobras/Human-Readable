@@ -1,4 +1,4 @@
-internal enum class Languages(val code: String) {
+internal enum class Language(val code: String) {
     English("en"),
     Czech("cs"),
     Chinese("zh"),
@@ -6,6 +6,7 @@ internal enum class Languages(val code: String) {
     Finnish("fi"),
     French("fr"),
     German("de"),
+    Kazakh("kk"),
     Italian("it"),
     Indonesian("id"),
     Japanese("ja"),
