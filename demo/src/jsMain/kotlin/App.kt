@@ -6,8 +6,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import io.github.skeptick.libres.LibresSettings
 import ui.*
@@ -40,7 +42,13 @@ internal fun App() {
                 Column(
                 ) {
                     Text(
-                        text = "LibresSettings.languageCode = \"$selectedLanguageCode\"",
+                        text = buildAnnotatedString {
+                            append("LibresSettings.languageCode = \"")
+                            withStyle(monoBodyStringBold) {
+                                append(selectedLanguageCode)
+                            }
+                            append("\"")
+                        },
                         style = monoBody
                     )
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -82,4 +90,7 @@ internal val monoBodyOrange = SpanStyle(
 internal val monoBodyString = SpanStyle(
     fontFamily = FontFamily.Monospace,
     color = Color(0xFF6aab73)
+)
+internal val monoBodyStringBold = monoBodyString.copy(
+    fontWeight = FontWeight.Bold
 )

@@ -13,6 +13,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import monoBodyOrange
 import monoBodyString
+import monoBodyStringBold
 import nl.jacobras.humanreadable.HumanReadable
 
 @Composable
@@ -83,9 +84,9 @@ internal fun FileSizeDemo(
         Spacer(Modifier.height(8.dp))
         Text(
             text = buildAnnotatedString {
-                append("HumanReadable.fileSize(myFile, decimals) = ")
-                withStyle(monoBodyString) {
-                    append("\"")
+                appendLine("HumanReadable.fileSize(myFile, decimals)")
+                withStyle(monoBodyStringBold) {
+                    append("// \"")
                     append(
                         remember(selectedLanguageCode, myFile, decimals) {
                             HumanReadable.fileSize(

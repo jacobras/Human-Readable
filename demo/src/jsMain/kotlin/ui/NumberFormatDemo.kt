@@ -13,6 +13,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import monoBodyOrange
 import monoBodyString
+import monoBodyStringBold
 import nl.jacobras.humanreadable.HumanReadable
 
 @Composable
@@ -78,10 +79,9 @@ internal fun NumberFormatDemo(
         Spacer(Modifier.height(8.dp))
         Text(
             text = buildAnnotatedString {
-                append("HumanReadable.number(myNumber, decimals)")
-                appendLine()
-                withStyle(monoBodyString) {
-                    append("// Returns \"")
+                appendLine("HumanReadable.number(myNumber, decimals)")
+                withStyle(monoBodyStringBold) {
+                    append("// \"")
                     append(
                         remember(selectedLanguageCode, myNumber, decimals) {
                             HumanReadable.number(

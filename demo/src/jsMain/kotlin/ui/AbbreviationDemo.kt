@@ -12,7 +12,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import monoBodyOrange
-import monoBodyString
+import monoBodyStringBold
 import nl.jacobras.humanreadable.HumanReadable
 
 @Composable
@@ -78,9 +78,9 @@ internal fun AbbreviationDemo(
         Spacer(Modifier.height(8.dp))
         Text(
             text = buildAnnotatedString {
-                append("HumanReadable.abbreviation(myNumber, decimals) = ")
-                withStyle(monoBodyString) {
-                    append("\"")
+                appendLine("HumanReadable.abbreviation(myNumber, decimals)")
+                withStyle(monoBodyStringBold) {
+                    append("// \"")
                     append(
                         remember(selectedLanguageCode, myNumber, decimals) {
                             HumanReadable.abbreviation(

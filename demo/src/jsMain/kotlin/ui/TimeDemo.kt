@@ -14,7 +14,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import kotlinx.datetime.*
 import monoBodyOrange
-import monoBodyString
+import monoBodyStringBold
 import nl.jacobras.humanreadable.HumanReadable
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
@@ -35,7 +35,6 @@ internal fun TimeDemo(
             text = "Date/Time",
             style = MaterialTheme.typography.headlineLarge
         )
-        Text("Change the dates below to see the values update live.")
         Spacer(Modifier.height(16.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -64,6 +63,7 @@ internal fun TimeDemo(
             )
             DateTimeField(instant2) { instant2 = it }
         }
+        Spacer(Modifier.height(4.dp))
 
         FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
             Button(onClick = { instant2 = instant2.plus(1.hours) }) { Text("+ hour") }
@@ -75,20 +75,20 @@ internal fun TimeDemo(
 
         Text(
             text = buildAnnotatedString {
-                append("HumanReadable.timeAgo(instant1) = ")
-                withStyle(monoBodyString) {
-                    append("\"")
+                appendLine("HumanReadable.timeAgo(instant1)")
+                withStyle(monoBodyStringBold) {
+                    append("// \"")
                     append(remember(selectedLanguageCode, instant1) { HumanReadable.timeAgo(instant1) })
-                    append("\"")
+                    appendLine("\"")
                 }
             },
             style = monoBody
         )
         Text(
             text = buildAnnotatedString {
-                append("HumanReadable.timeAgo(instant2) = ")
-                withStyle(monoBodyString) {
-                    append("\"")
+                appendLine("HumanReadable.timeAgo(instant2)")
+                withStyle(monoBodyStringBold) {
+                    append("// \"")
                     append(remember(selectedLanguageCode, instant2) { HumanReadable.timeAgo(instant2) })
                     append("\"")
                 }
@@ -99,9 +99,9 @@ internal fun TimeDemo(
 
         Text(
             text = buildAnnotatedString {
-                append("HumanReadable.duration(instant2 - instant1) = ")
-                withStyle(monoBodyString) {
-                    append("\"")
+                appendLine("HumanReadable.duration(instant2 - instant1)")
+                withStyle(monoBodyStringBold) {
+                    append("// \"")
                     append(remember(selectedLanguageCode, instant1, instant2) {
                         HumanReadable.duration(instant2 - instant1)
                     })
