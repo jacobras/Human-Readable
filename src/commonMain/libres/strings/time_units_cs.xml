@@ -5,35 +5,70 @@
         <item quantity="few">sekundy</item>
         <item quantity="other">sekund</item>
     </plurals>
+    <plurals name="seconds_past">
+        <item quantity="one">sekundou</item>
+        <item quantity="few">sekundami</item>
+        <item quantity="other">sekundami</item>
+    </plurals>
     <plurals name="minutes">
         <item quantity="one">minuta</item>
         <item quantity="few">minuty</item>
         <item quantity="other">minut</item>
+    </plurals>
+    <plurals name="minutes_past">
+        <item quantity="one">minutou</item>
+        <item quantity="few">minutami</item>
+        <item quantity="other">minutami</item>
     </plurals>
     <plurals name="hours">
         <item quantity="one">hodina</item>
         <item quantity="few">hodiny</item>
         <item quantity="other">hodin</item>
     </plurals>
+    <plurals name="hours_past">
+        <item quantity="one">hodinou</item>
+        <item quantity="few">hodinami</item>
+        <item quantity="other">hodinami</item>
+    </plurals>
     <plurals name="days">
         <item quantity="one">den</item>
         <item quantity="few">dny</item>
         <item quantity="other">dní</item>
+    </plurals>
+    <plurals name="days_past">
+        <item quantity="one">dnem</item>
+        <item quantity="few">dny</item>
+        <item quantity="other">dny</item>
     </plurals>
     <plurals name="weeks">
         <item quantity="one">týden</item>
         <item quantity="few">týdny</item>
         <item quantity="other">týdnů</item>
     </plurals>
+    <plurals name="weeks_past">
+        <item quantity="one">týdnem</item>
+        <item quantity="few">týdny</item>
+        <item quantity="other">týdny</item>
+    </plurals>
     <plurals name="months">
         <item quantity="one">měsíc</item>
         <item quantity="few">měsíce</item>
         <item quantity="other">měsíců</item>
     </plurals>
+    <plurals name="months_past">
+        <item quantity="one">měsícem</item>
+        <item quantity="few">měsíci</item>
+        <item quantity="other">měsíci</item>
+    </plurals>
     <plurals name="years">
         <item quantity="one">rok</item>
         <item quantity="few">roky</item>
         <item quantity="other">let</item>
+    </plurals>
+    <plurals name="years_past">
+        <item quantity="one">rokem</item>
+        <item quantity="few">roky</item>
+        <item quantity="other">lety</item>
     </plurals>
 
     <string name="time_ago">před ${time}</string>

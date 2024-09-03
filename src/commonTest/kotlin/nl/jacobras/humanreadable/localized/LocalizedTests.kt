@@ -23,12 +23,16 @@ class LocalizedTests {
     private val oneMinute = 1.minutes
     private val oneMinuteAgo = now - oneMinute
     private val oneMinuteFromNow = now + oneMinute
+    private val twoMinutes = 2.minutes
+    private val twoMinutesAgo = now - twoMinutes
     private val oneHour = 60.minutes
     private val oneHourAgo = now - oneHour
     private val oneHourFromNow = now + oneHour
     private val oneDay = 1.days
     private val oneDayAgo = now - oneDay
     private val oneDayFromNow = now + oneDay
+    private val twoDays = 2.days
+    private val twoDaysAgo = now - twoDays
     private val oneWeek = 7.days
     private val oneWeekAgo = now - oneWeek
     private val oneWeekFromNow = now + oneWeek
@@ -46,6 +50,21 @@ class LocalizedTests {
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1 000 000,34")
         assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
+
+        assertThat(HumanReadable.timeAgo(twoSecondsAgo, baseInstant = now)).isEqualTo("před 2 sekundami")
+        assertThat(HumanReadable.timeAgo(oneMinuteAgo, baseInstant = now)).isEqualTo("před 1 minutou")
+        assertThat(HumanReadable.timeAgo(twoMinutesAgo, baseInstant = now)).isEqualTo("před 2 minutami")
+        assertThat(HumanReadable.timeAgo(now - 20.minutes, baseInstant = now)).isEqualTo("před 20 minutami")
+        assertThat(HumanReadable.timeAgo(oneHourAgo, baseInstant = now)).isEqualTo("před 1 hodinou")
+        assertThat(HumanReadable.duration(oneDay)).isEqualTo("1 den")
+        assertThat(HumanReadable.duration(twoDays)).isEqualTo("2 dny")
+        assertThat(HumanReadable.timeAgo(oneDayAgo, baseInstant = now)).isEqualTo("před 1 dnem")
+        assertThat(HumanReadable.timeAgo(twoDaysAgo, baseInstant = now)).isEqualTo("před 2 dny")
+        assertThat(HumanReadable.duration(5.days)).isEqualTo("5 dní")
+        assertThat(HumanReadable.timeAgo(now - 5.days, baseInstant = now)).isEqualTo("před 5 dny")
+        assertThat(HumanReadable.timeAgo(oneWeekAgo, baseInstant = now)).isEqualTo("před 1 týdnem")
+        assertThat(HumanReadable.timeAgo(twoMonthsAgo, baseInstant = now)).isEqualTo("před 2 měsíci")
+        assertThat(HumanReadable.timeAgo(oneYearAgo, baseInstant = now)).isEqualTo("před 1 rokem")
     }
 
     @Test
