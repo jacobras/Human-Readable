@@ -42,7 +42,7 @@ HumanReadable.duration(544.hours) // "3 weeks"
 
 ### 📂 File size
 
-File size formatting uses base 1024. Note that these are [not yet localised (#86)](https://github.com/jacobras/Human-Readable/issues/86).
+File size formatting uses base 1024.
 
 ```kotlin
 HumanReadable.fileSize(333) // "333 B"
