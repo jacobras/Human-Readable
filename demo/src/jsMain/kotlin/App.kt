@@ -34,9 +34,9 @@ internal fun App() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(paddingValues)
-                    .padding(horizontal = 32.dp).padding(bottom = 32.dp)
+                    .padding(horizontal = 32.dp)
             ) {
-                val smallDisplay = maxWidth < 600.dp
+                val smallDisplay = maxWidth < 800.dp
                 Column(
                 ) {
                     Text(
@@ -61,7 +61,8 @@ internal fun App() {
                     FlexibleLayout(
                         modifier = Modifier
                             .fillMaxSize()
-                            .verticalScroll(rememberScrollState()),
+                            .verticalScroll(rememberScrollState())
+                            .padding(bottom = 32.dp),
                         timeDemo = { TimeDemo(selectedLanguageCode, it) },
                         fileSizeDemo = { FileSizeDemo(selectedLanguageCode, it) },
                         abbreviationDemo = { AbbreviationDemo(selectedLanguageCode, it) },
