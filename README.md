@@ -47,17 +47,32 @@ File size formatting uses base 1024. Note that these are [not yet localised (#86
 ```kotlin
 HumanReadable.fileSize(333) // "333 B"
 HumanReadable.fileSize(2_048, decimals = 1) // "2.0 kB"
-HumanReadable.fileSize(21_947_282_882, decimals = 2) // "20.44 GB"
+HumanReadable.fileSize(21_947_282_882, decimals = 2) // "20.44 GB" in English / "20.44 Go" in French
 ```
 
 ### 🔢 Number abbreviation
 
-Available since version 1.8. Note that these are [not yet localised (#86)](https://github.com/jacobras/Human-Readable/issues/86).
+Available since version 1.8, localized since 1.10.
 
 ```kotlin
 HumanReadable.abbreviation(3_000) // "3K"
 HumanReadable.abbreviation(500_000) // "500K"
 HumanReadable.abbreviation(2_500_000, decimals = 1) // "2.5M"
+```
+
+### 🔢 Number formatting
+
+Available since version 1.10.
+
+```kotlin
+// English/default
+HumanReadable.number(1_000_000.34) // "1,000,000.34"
+
+// French
+HumanReadable.number(1_000_000.34) // "1 000 000.34"
+
+// Dutch
+HumanReadable.number(1_000_000.34) // "1.000.000,34"
 ```
 
 ## Date/time precision

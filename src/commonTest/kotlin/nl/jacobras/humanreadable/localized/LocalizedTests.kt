@@ -43,6 +43,9 @@ class LocalizedTests {
     fun cs() {
         LibresSettings.languageCode = "cs"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 sekundy")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1 000 000,34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
     }
 
     @Test
@@ -53,48 +56,78 @@ class LocalizedTests {
         assertThat(HumanReadable.duration(twoMonths)).isEqualTo("2 Monate")
         assertThat(HumanReadable.timeAgo(twoMonthsAgo, baseInstant = now)).isEqualTo("vor 2 Monaten")
         assertThat(HumanReadable.timeAgo(twoMonthsFromNow, baseInstant = now)).isEqualTo("in 2 Monaten")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
     }
 
     @Test
     fun en() {
         LibresSettings.languageCode = "en"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 seconds")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1,000,000.34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4.34")
+
+        assertThat(HumanReadable.fileSize(2_000_000, decimals = 1)).isEqualTo("1.9 MB")
+
+        assertThat(HumanReadable.abbreviation(5_100_000, decimals = 1)).isEqualTo("5.1M")
     }
 
     @Test
     fun es() {
         LibresSettings.languageCode = "es"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 segundos")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
     }
 
     @Test
     fun fi() {
         LibresSettings.languageCode = "fi"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 sekuntia")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1 000 000,34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
     }
 
     @Test
     fun fr() {
         LibresSettings.languageCode = "fr"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 secondes")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1 000 000.34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4.34")
+
+        assertThat(HumanReadable.fileSize(2_000_000, decimals = 1)).isEqualTo("1.9 Mo")
     }
 
     @Test
     fun id() {
         LibresSettings.languageCode = "id"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 detik")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
     }
 
     @Test
     fun it() {
         LibresSettings.languageCode = "it"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 secondi")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
     }
 
     @Test
     fun ja() {
         LibresSettings.languageCode = "ja"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 秒")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1,000,000.34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4.34")
     }
 
     @Test
@@ -128,12 +161,22 @@ class LocalizedTests {
     fun ko() {
         LibresSettings.languageCode = "ko"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 초")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1,000,000.34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4.34")
     }
 
     @Test
     fun nl() {
         LibresSettings.languageCode = "nl"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 seconden")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
+
+        assertThat(HumanReadable.fileSize(2_000_000, decimals = 1)).isEqualTo("1,9 MB")
+
+        assertThat(HumanReadable.abbreviation(5_100_000, decimals = 1)).isEqualTo("5,1M")
     }
 
     @Test
@@ -144,6 +187,9 @@ class LocalizedTests {
         assertThat(HumanReadable.duration(oneMinute)).isEqualTo("1 minuta")
         assertThat(HumanReadable.timeAgo(oneMinuteAgo, baseInstant = now)).isEqualTo("1 minutę temu")
         assertThat(HumanReadable.timeAgo(oneMinuteFromNow, baseInstant = now)).isEqualTo("za 1 minutę")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1 000 000,34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
     }
 
     @Test
@@ -152,6 +198,9 @@ class LocalizedTests {
         assertThat(HumanReadable.duration(0.seconds)).isEqualTo("0 segundo")
         assertThat(HumanReadable.duration(1.seconds)).isEqualTo("1 segundo")
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 segundos")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1 000 000,34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
     }
 
     @Test
@@ -162,35 +211,53 @@ class LocalizedTests {
         assertThat(HumanReadable.duration(oneMinute)).isEqualTo("1 минута")
         assertThat(HumanReadable.timeAgo(oneMinuteAgo, baseInstant = now)).isEqualTo("1 минуту назад")
         assertThat(HumanReadable.timeAgo(oneMinuteFromNow, baseInstant = now)).isEqualTo("через 1 минуту")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1 000 000,34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
     }
 
     @Test
     fun tr() {
         LibresSettings.languageCode = "tr"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 saniye")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
     }
 
     @Test
     fun uk() {
         LibresSettings.languageCode = "uk"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 секунди")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1 000 000,34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
     }
 
     @Test
     fun uz() {
         LibresSettings.languageCode = "uz"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 soniya")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
     }
 
     @Test
     fun vi() {
         LibresSettings.languageCode = "vi"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 giây")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
     }
 
     @Test
     fun zh() {
         LibresSettings.languageCode = "zh"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 秒")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1,000,000.34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4.34")
     }
 }
