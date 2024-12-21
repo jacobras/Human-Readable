@@ -45,6 +45,7 @@ repositories {
 
 @OptIn(ExperimentalWasmDsl::class)
 kotlin {
+    explicitApi()
     applyDefaultHierarchyTemplate()
 
     iosX64()

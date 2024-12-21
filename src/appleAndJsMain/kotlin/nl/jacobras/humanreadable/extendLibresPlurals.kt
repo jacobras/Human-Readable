@@ -7,7 +7,7 @@ import io.github.skeptick.libres.strings.PluralRules
 /**
  * Only used by Apple & JS.
  */
-actual fun extendLibresPlurals() {
+internal actual fun extendLibresPlurals() {
     // Make all Libres plurals default to the English implementation
     // Workaround until https://github.com/Skeptick/libres/issues/53 is fixed
     PluralRules["nl"] = PluralRules["en"]
