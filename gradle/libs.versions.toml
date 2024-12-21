@@ -1,6 +1,6 @@
 [versions]
-kotlin = "2.0.21"
-compose-plugin = "1.7.1"
+kotlin = "2.1.0"
+compose-plugin = "1.7.3"
 
 [libraries]
 assertK = { module = "com.willowtreeapps.assertk:assertk", version = "0.28.1" }
