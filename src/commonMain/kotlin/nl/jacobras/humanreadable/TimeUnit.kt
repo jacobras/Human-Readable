@@ -3,7 +3,7 @@ package nl.jacobras.humanreadable
 import Res
 import io.github.skeptick.libres.strings.VoidPluralString
 
-enum class TimeUnit(
+internal enum class TimeUnit(
     val past: () -> VoidPluralString,
     val present: () -> VoidPluralString,
     val future: () -> VoidPluralString
