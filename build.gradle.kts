@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.compose.compiler) apply false
     id("com.vanniktech.maven.publish") version "0.30.0"
-    id("io.github.skeptick.libres") version "1.2.3-beta02" // Beta includes WASM support
+    id("io.github.skeptick.libres") version "1.2.3" // Beta includes WASM support
 }
 
 group = "nl.jacobras"
