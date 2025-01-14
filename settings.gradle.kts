@@ -4,7 +4,6 @@ pluginManagement {
     repositories {
         mavenCentral()
         gradlePluginPortal()
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev") // TODO: remove after updating Compose to new RC/stable release
     }
 }
 
@@ -18,7 +17,6 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev") // TODO: remove after updating Compose to new RC/stable release
     }
 }
 

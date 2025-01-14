@@ -26,7 +26,7 @@
     </plurals>
     <plurals name="years">
         <item quantity="one">jaar</item>
-        <item quantity="other">jaren</item>
+        <item quantity="other">jaar</item>
     </plurals>
 
     <string name="time_ago">${time} geleden</string>

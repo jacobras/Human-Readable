@@ -9,7 +9,7 @@ import kotlin.time.Duration
 /**
  * A collection of data formatting utilities.
  */
-object HumanReadable {
+public object HumanReadable {
 
     init {
         extendLibresPlurals()
@@ -22,7 +22,7 @@ object HumanReadable {
      * @param instant The [Instant] to format.
      * @return a formatted string
      */
-    fun timeAgo(
+    public fun timeAgo(
         instant: Instant,
         baseInstant: Instant = Clock.System.now()
     ): String {
@@ -36,7 +36,7 @@ object HumanReadable {
      * @param duration The [Duration] to format.
      * @return a formatted string
      */
-    fun duration(duration: Duration): String {
+    public fun duration(duration: Duration): String {
         return safelyTranslate { formatDuration(duration, RelativeTime.Present) }
     }
 
@@ -50,7 +50,7 @@ object HumanReadable {
      * @param decimals The number of decimals to use in formatting.
      * @return a formatted string
      */
-    fun fileSize(bytes: Long, decimals: Int = 1): String {
+    public fun fileSize(bytes: Long, decimals: Int = 1): String {
         return safelyTranslate { formatFileSize(bytes, decimals) }
     }
 
@@ -61,7 +61,7 @@ object HumanReadable {
      *
      * For example: 10394 returns "10K" and "4234321" returns "4M".
      */
-    fun abbreviation(number: Number, decimals: Int = 0): String {
+    public fun abbreviation(number: Number, decimals: Int = 0): String {
         return safelyTranslate { formatAbbreviation(number.toDouble(), decimals) }
     }
 
@@ -73,7 +73,7 @@ object HumanReadable {
      * - "1 000 000.34" for FR
      * - "1.000.000,34" for NL
      */
-    fun number(number: Number, decimals: Int = 0): String {
+    public fun number(number: Number, decimals: Int = 0): String {
         return safelyTranslate { number.toDouble().formatNumber(decimals) }
     }
 }
