@@ -76,4 +76,30 @@ public object HumanReadable {
     public fun number(number: Number, decimals: Int = 0): String {
         return safelyTranslate { number.toDouble().formatNumber(decimals) }
     }
+
+    /**
+     * Formats the given [meters] to a readable distance
+     *
+     * For example: 800 returns:
+     * - 800 m
+     * 1500 returns:
+     * - 1,5 km
+     */
+    public fun distance(meters: Int): String {
+        return formatDistance(meters, DistanceType.METERS)
+    }
+
+    /**
+     * Formats the given [feet] to a readable distance
+     *
+     * For example: 5279 returns:
+     * - 5279 feet
+     * 5280 returns:
+     * - 1,0 Miles
+     * 5280 returns:
+     * - 1,04 Miles
+     */
+    public fun distanceFt(feet: Int): String {
+        return formatDistance(feet, DistanceType.FEET)
+    }
 }
