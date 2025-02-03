@@ -42,4 +42,22 @@ class HumanReadableDistanceTests {
         println("Expected: $expectedFormatted, actual: $actualFormatted")
         assertTrue { actualFormatted == expectedFormatted }
     }
+
+    @Test
+    fun testMoreThan1km() {
+        val distance = 5400
+        val expectedFormatted = "5.4 km"
+        val actualFormatted = HumanReadable.distance(unit = distance, type = DistanceType.METERS)
+        println("Expected: $expectedFormatted, actual: $actualFormatted")
+        assertTrue { actualFormatted == expectedFormatted }
+    }
+
+    @Test
+    fun testMoreThan1mile() {
+        val distance = 28512
+        val expectedFormatted = "5.4 mi"
+        val actualFormatted = HumanReadable.distance(unit = distance, type = DistanceType.FEET)
+        println("Expected: $expectedFormatted, actual: $actualFormatted")
+        assertTrue { actualFormatted == expectedFormatted }
+    }
 }
