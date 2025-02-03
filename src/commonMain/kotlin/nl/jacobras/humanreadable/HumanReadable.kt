@@ -78,28 +78,15 @@ public object HumanReadable {
     }
 
     /**
-     * Formats the given [meters] to a readable distance
+     * Formats the given [unit] of the given [type] to a readable distance
      *
-     * For example: 800 returns:
-     * - 800 m
-     * 1500 returns:
-     * - 1,5 km
+     * Examples:
+     * - 956 with DistanceType METERS returns "956 m"
+     * - 1534 with DistanceType METERS returns: "1,5 km"
+     * - 5200 with DistanceType FEET returns: "5200 ft"
+     * - 5350 returns with DistanceType FEET returns: "1.0 mi"
      */
-    public fun distance(meters: Int): String {
-        return formatDistance(meters, DistanceType.METERS)
-    }
-
-    /**
-     * Formats the given [feet] to a readable distance
-     *
-     * For example: 5279 returns:
-     * - 5279 feet
-     * 5280 returns:
-     * - 1,0 Miles
-     * 5280 returns:
-     * - 1,04 Miles
-     */
-    public fun distanceFt(feet: Int): String {
-        return formatDistance(feet, DistanceType.FEET)
+    public fun distance(unit: Int, type: DistanceType): String {
+        return formatDistance(unit, type)
     }
 }
