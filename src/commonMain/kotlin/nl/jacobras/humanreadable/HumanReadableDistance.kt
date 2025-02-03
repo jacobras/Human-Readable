@@ -9,7 +9,7 @@ import kotlin.math.roundToInt
 internal fun formatDistance(
     distance: Int,
     type: DistanceType = DistanceType.METERS
-): String{
+): String {
     return when (type) {
         DistanceType.METERS -> toMetric(distance.toFloat())
         DistanceType.FEET -> toImperial(distance.toFloat())
@@ -31,10 +31,24 @@ private fun toImperial(feet: Float): String {
 }
 
 private fun formatNumber(value: Float, decimalPlaces: Int): String {
-    val factor = 10.0.pow(decimalPlaces)
-    val result =
-        if (decimalPlaces == 0) ((value * factor).roundToInt() / factor).toInt() else ((value * factor).roundToInt() / factor)
-    return result.toString()
+    val result = when (decimalPlaces) {
+        0 -> value.roundToInt()
+        else -> {
+            val factor = 10.0.pow(decimalPlaces)
+            (value * factor) / factor
+        }
+    }
+    val separatorIndex = result.toString().indexOf(".")
+    val isSeparatorFound = separatorIndex > 0
+    if (isSeparatorFound) {
+        val substringAccordingToDecimalPlaces = when (decimalPlaces) {
+            0 -> result.toString().substring(0, separatorIndex)
+            else -> result.toString().substring(0, separatorIndex + 1 + decimalPlaces)
+        }
+        return substringAccordingToDecimalPlaces
+    } else {
+        return result.toString()
+    }
 }
 
 public enum class DistanceType {
