@@ -36,7 +36,6 @@ class HumanReadableDistanceTests {
         val distance = 5350
         val expectedFormatted = "1.0 mi"
         val actualFormatted = HumanReadable.distance(unit = distance, type = DistanceType.FEET)
-        println("Actual formatted: $actualFormatted")
         assertTrue { actualFormatted == expectedFormatted }
     }
 }
