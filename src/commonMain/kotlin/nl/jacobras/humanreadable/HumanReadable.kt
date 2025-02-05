@@ -78,15 +78,15 @@ public object HumanReadable {
     }
 
     /**
-     * Formats the given [unit] of the given [type] to a readable distance
+     * Formats the given [value] of the given [unit] to a readable distance
      *
      * Examples:
-     * - 956 with DistanceType METERS returns "956 m"
-     * - 1534 with DistanceType METERS returns: "1,5 km"
-     * - 5200 with DistanceType FEET returns: "5200 ft"
-     * - 5350 returns with DistanceType FEET returns: "1.0 mi"
+     * - 956 with DistanceUnit METERS returns "956 m"
+     * - 1534 with DistanceUnit METERS returns: "1,5 km"
+     * - 5200 with DistanceUnit FEET returns: "5200 ft"
+     * - 5350 returns with DistanceUnit FEET returns: "1.0 mi"
      */
-    public fun distance(unit: Int, type: DistanceType): String {
-        return formatDistance(unit, type)
+    public fun distance(value: Int, unit: DistanceUnit): String {
+        return formatDistance(value, unit)
     }
 }

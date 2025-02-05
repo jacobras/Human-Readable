@@ -94,12 +94,12 @@ This behaviour may become configurable in future releases.
 Available since version 1.11
 
 ```kotlin
-HumanReadable.distance(unit = 956, type = DistanceType.METERS) // "956 m"
-HumanReadable.distance(unit = 1534, type = DistanceType.METERS) // "1.5 km"
-HumanReadable.distance(unit = 5200, type = DistanceType.FEET) // "5200 ft"
-HumanReadable.distance(unit = 5350, type = DistanceType.FEET) // "1.0 mi"
-HumanReadable.distance(unit = 5400, type = DistanceType.METERS) // "5.4 km"
-HumanReadable.distance(unit = 28512, type = DistanceType.FEET) // "5.4 mi"
+HumanReadable.distance(unit = 956, type = DistanceUnit.METERS) // "956 m"
+HumanReadable.distance(unit = 1534, type = DistanceUnit.METERS) // "1.5 km"
+HumanReadable.distance(unit = 5200, type = DistanceUnit.FEET) // "5200 ft"
+HumanReadable.distance(unit = 5350, type = DistanceUnit.FEET) // "1.0 mi"
+HumanReadable.distance(unit = 5400, type = DistanceUnit.METERS) // "5.4 km"
+HumanReadable.distance(unit = 28512, type = DistanceUnit.FEET) // "5.4 mi"
 ```
 
 ## Localisation

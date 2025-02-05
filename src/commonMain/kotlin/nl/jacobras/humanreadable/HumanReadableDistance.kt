@@ -4,15 +4,15 @@ import kotlin.math.pow
 import kotlin.math.roundToInt
 
 /**
- * Returns the given distance [distance] in human-readable format.
+ * Returns the given distance [value] in human-readable format.
  */
 internal fun formatDistance(
-    distance: Int,
-    type: DistanceType = DistanceType.METERS
+    value: Int,
+    unit: DistanceUnit = DistanceUnit.METERS
 ): String {
-    return when (type) {
-        DistanceType.METERS -> toMetric(distance.toFloat())
-        DistanceType.FEET -> toImperial(distance.toFloat())
+    return when (unit) {
+        DistanceUnit.METERS -> toMetric(value.toFloat())
+        DistanceUnit.FEET -> toImperial(value.toFloat())
     }
 }
 
@@ -51,6 +51,6 @@ private fun formatNumber(value: Float, decimalPlaces: Int): String {
     }
 }
 
-public enum class DistanceType {
+public enum class DistanceUnit {
     METERS, FEET
 }
