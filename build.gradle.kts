@@ -5,11 +5,11 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.compose.compiler) apply false
     id("com.vanniktech.maven.publish") version "0.30.0"
-    id("io.github.skeptick.libres") version "1.2.3-beta02" // Beta includes WASM support
+    id("io.github.skeptick.libres") version "1.2.3"
 }
 
 group = "nl.jacobras"
-version = "1.10.0"
+version = "1.10.1"
 
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.S01, true)
@@ -104,4 +104,8 @@ kotlin {
 tasks.withType<AbstractPublishToMaven>().configureEach {
     val signingTasks = tasks.withType<Sign>()
     mustRunAfter(signingTasks)
+}
+
+libres {
+    generatedClassName = "HumanReadableRes"
 }

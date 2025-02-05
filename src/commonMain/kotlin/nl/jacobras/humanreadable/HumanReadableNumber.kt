@@ -1,6 +1,6 @@
 package nl.jacobras.humanreadable
 
-import Res
+import HumanReadableRes as Res
 import kotlin.math.pow
 import kotlin.math.roundToLong
 

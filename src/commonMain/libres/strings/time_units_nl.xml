@@ -10,7 +10,7 @@
     </plurals>
     <plurals name="hours">
         <item quantity="one">uur</item>
-        <item quantity="other">uren</item>
+        <item quantity="other">uur</item>
     </plurals>
     <plurals name="days">
         <item quantity="one">dag</item>

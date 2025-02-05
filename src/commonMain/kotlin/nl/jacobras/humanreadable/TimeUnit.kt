@@ -1,7 +1,7 @@
 package nl.jacobras.humanreadable
 
-import Res
 import io.github.skeptick.libres.strings.VoidPluralString
+import HumanReadableRes as Res
 
 internal enum class TimeUnit(
     val past: () -> VoidPluralString,
