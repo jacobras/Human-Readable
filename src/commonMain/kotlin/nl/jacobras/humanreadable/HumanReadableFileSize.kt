@@ -1,6 +1,6 @@
 package nl.jacobras.humanreadable
 
-import Res
+import HumanReadableRes as Res
 
 /**
  * Returns the given [bytes] size in human-readable format.
