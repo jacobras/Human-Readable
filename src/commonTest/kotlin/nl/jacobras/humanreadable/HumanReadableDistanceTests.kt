@@ -1,8 +1,9 @@
 package nl.jacobras.humanreadable
 
 
+import assertk.assertThat
+import assertk.assertions.isEqualTo
 import kotlin.test.Test
-import kotlin.test.assertTrue
 
 class HumanReadableDistanceTests {
     @Test
@@ -11,7 +12,7 @@ class HumanReadableDistanceTests {
         val expectedFormatted = "956 m"
         val actualFormatted = HumanReadable.distance(value = distance, unit = DistanceUnit.METERS)
         println("Expected: $expectedFormatted, actual: $actualFormatted")
-        assertTrue { actualFormatted == expectedFormatted }
+        assertThat(actualFormatted).isEqualTo(expectedFormatted)
     }
 
     @Test
@@ -20,9 +21,7 @@ class HumanReadableDistanceTests {
         val expectedFormatted = "1.5 km"
         val actualFormatted = HumanReadable.distance(value = distance, unit = DistanceUnit.METERS)
         println("Expected: $expectedFormatted, actual: $actualFormatted")
-        assertTrue {
-            actualFormatted == expectedFormatted
-        }
+        assertThat(actualFormatted).isEqualTo(expectedFormatted)
     }
 
     @Test
@@ -31,7 +30,7 @@ class HumanReadableDistanceTests {
         val expectedFormatted = "5200 ft"
         val actualFormatted = HumanReadable.distance(value = distance, unit = DistanceUnit.FEET)
         println("Expected: $expectedFormatted, actual: $actualFormatted")
-        assertTrue { actualFormatted == expectedFormatted }
+        assertThat(actualFormatted).isEqualTo(expectedFormatted)
     }
 
     @Test
@@ -40,7 +39,7 @@ class HumanReadableDistanceTests {
         val expectedFormatted = "1.0 mi"
         val actualFormatted = HumanReadable.distance(value = distance, unit = DistanceUnit.FEET)
         println("Expected: $expectedFormatted, actual: $actualFormatted")
-        assertTrue { actualFormatted == expectedFormatted }
+        assertThat(actualFormatted).isEqualTo(expectedFormatted)
     }
 
     @Test
@@ -49,7 +48,7 @@ class HumanReadableDistanceTests {
         val expectedFormatted = "5.4 km"
         val actualFormatted = HumanReadable.distance(value = distance, unit = DistanceUnit.METERS)
         println("Expected: $expectedFormatted, actual: $actualFormatted")
-        assertTrue { actualFormatted == expectedFormatted }
+        assertThat(actualFormatted).isEqualTo(expectedFormatted)
     }
 
     @Test
@@ -58,6 +57,6 @@ class HumanReadableDistanceTests {
         val expectedFormatted = "5.4 mi"
         val actualFormatted = HumanReadable.distance(value = distance, unit = DistanceUnit.FEET)
         println("Expected: $expectedFormatted, actual: $actualFormatted")
-        assertTrue { actualFormatted == expectedFormatted }
+        assertThat(actualFormatted).isEqualTo(expectedFormatted)
     }
 }
