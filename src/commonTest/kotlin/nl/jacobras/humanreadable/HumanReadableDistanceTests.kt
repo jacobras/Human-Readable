@@ -27,7 +27,7 @@ class HumanReadableDistanceTests {
     @Test
     fun testLessThanAMile() {
         val distance = 5200
-        val expectedFormatted = "5200 ft"
+        val expectedFormatted = "5,200 ft"
         val actualFormatted = HumanReadable.distance(value = distance, unit = DistanceUnit.FEET)
         println("Expected: $expectedFormatted, actual: $actualFormatted")
         assertThat(actualFormatted).isEqualTo(expectedFormatted)
