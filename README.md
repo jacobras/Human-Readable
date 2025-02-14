@@ -75,6 +75,22 @@ HumanReadable.number(1_000_000.34) // "1 000 000.34"
 HumanReadable.number(1_000_000.34) // "1.000.000,34"
 ```
 
+### ↔️ Distance
+
+Available since version 1.11
+
+```kotlin
+// Metric examples
+HumanReadable.distance(value = 956, unit = DistanceUnit.METERS) // "956 m"
+HumanReadable.distance(value = 1534, unit = DistanceUnit.METERS) // "1.5 km"
+HumanReadable.distance(value = 5400, unit = DistanceUnit.METERS) // "5.4 km"
+
+// Imperial examples
+HumanReadable.distance(value = 5200, unit = DistanceUnit.FEET) // "5,200 ft"
+HumanReadable.distance(value = 5350, unit = DistanceUnit.FEET) // "1.0 mi"
+HumanReadable.distance(value = 28512, unit = DistanceUnit.FEET) // "5.4 mi"
+```
+
 ## Date/time precision
 The formatter switches to a bigger unit (minute, hour, day, ...) as soon as it can.
 For example:
@@ -88,19 +104,6 @@ There's also some rounding involved:
 * `8.days` and `10.days` are "1 week", but `11.days` already becomes "2 weeks"
 
 This behaviour may become configurable in future releases.
-
-### ↔️ Distance
-
-Available since version 1.11
-
-```kotlin
-HumanReadable.distance(value = 956, unit = DistanceUnit.METERS) // "956 m"
-HumanReadable.distance(value = 1534, unit = DistanceUnit.METERS) // "1.5 km"
-HumanReadable.distance(value = 5200, unit = DistanceUnit.FEET) // "5,200 ft"
-HumanReadable.distance(value = 5350, unit = DistanceUnit.FEET) // "1.0 mi"
-HumanReadable.distance(value = 5400, unit = DistanceUnit.METERS) // "5.4 km"
-HumanReadable.distance(value = 28512, unit = DistanceUnit.FEET) // "5.4 mi"
-```
 
 ## Localisation
 
