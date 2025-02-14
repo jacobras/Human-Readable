@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="meter_abbreviation">m</string>
+    <string name="kilometer_abbreviation">km</string>
+    <string name="feet_abbreviation">ft</string>
+    <string name="mile_abbreviation">mi</string>
+</resources>

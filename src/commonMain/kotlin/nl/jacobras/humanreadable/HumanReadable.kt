@@ -4,6 +4,8 @@ package nl.jacobras.humanreadable
 
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
+import nl.jacobras.humanreadable.HumanReadable.duration
+import nl.jacobras.humanreadable.HumanReadable.number
 import kotlin.time.Duration
 
 /**
@@ -78,15 +80,19 @@ public object HumanReadable {
     }
 
     /**
-     * Formats the given [value] of the given [unit] to a readable distance
+     * Formats the given [value] of the given [unit] to a readable distance.
      *
-     * Examples:
-     * - 956 with DistanceUnit METERS returns "956 m"
-     * - 1534 with DistanceUnit METERS returns: "1,5 km"
-     * - 5200 with DistanceUnit FEET returns: "5200 ft"
-     * - 5350 returns with DistanceUnit FEET returns: "1.0 mi"
+     * Metric examples:
+     * - 956 with DistanceUnit METERS returns "956 m" for EN.
+     * - 1534 with DistanceUnit METERS returns "1,5 km" for EN.
+     *
+     * Imperial examples:
+     * - 5200 with DistanceUnit FEET returns "5,200 ft" for EN.
+     * - 5350 returns with DistanceUnit FEET returns "1.0 mi" for EN.
+     *
+     * In other languages, the numbers are formatted accordingly, see [number].
      */
     public fun distance(value: Int, unit: DistanceUnit): String {
-        return formatDistance(value, unit)
+        return safelyTranslate { formatDistance(value, unit) }
     }
 }
