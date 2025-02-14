@@ -24,15 +24,17 @@ private fun toMetric(meters: Double): String {
 }
 
 private fun toImperial(feet: Double): String {
-    return if (feet < 5280) {
+    return if (feet < MILE_IN_FEET) {
         // Less than a mile, use feet
         feet.formatNumber(decimals = 0) + " ft"
     } else {
         // Convert to miles
-        (feet / 5280).formatNumber(decimals = 1) + " mi"
+        (feet / MILE_IN_FEET).formatNumber(decimals = 1) + " mi"
     }
 }
 
 public enum class DistanceUnit {
     METERS, FEET
 }
+
+private const val MILE_IN_FEET = 5280
