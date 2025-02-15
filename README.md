@@ -81,14 +81,14 @@ Available since version 1.11.
 
 ```kotlin
 // Metric examples
-HumanReadable.distance(value = 956, unit = DistanceUnit.METERS) // "956 m"
-HumanReadable.distance(value = 1534, unit = DistanceUnit.METERS) // "1.5 km"
-HumanReadable.distance(value = 5400, unit = DistanceUnit.METERS, decimals = 2) // "5.40 km"
+HumanReadable.distance(value = 956, unit = DistanceUnit.Meters) // "956 m"
+HumanReadable.distance(value = 1534, unit = DistanceUnit.Meters) // "1.5 km"
+HumanReadable.distance(value = 5400, unit = DistanceUnit.Meters, decimals = 2) // "5.40 km"
 
 // Imperial examples
-HumanReadable.distance(value = 5200, unit = DistanceUnit.FEET) // "5,200 ft"
-HumanReadable.distance(value = 5350, unit = DistanceUnit.FEET) // "1.0 mi"
-HumanReadable.distance(value = 28512, unit = DistanceUnit.FEET, decimals = 2) // "5.40 mi"
+HumanReadable.distance(value = 5200, unit = DistanceUnit.Feet) // "5,200 ft"
+HumanReadable.distance(value = 5350, unit = DistanceUnit.Feet) // "1.0 mi"
+HumanReadable.distance(value = 28512, unit = DistanceUnit.Feet, decimals = 2) // "5.40 mi"
 ```
 
 **Note:** numbers in meters and feet are always formatted with 0 decimals. The passed in

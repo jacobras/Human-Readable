@@ -12,12 +12,12 @@ import HumanReadableRes as Res
  */
 internal fun formatDistance(
     value: Int,
-    unit: DistanceUnit = DistanceUnit.METERS,
+    unit: DistanceUnit = DistanceUnit.Meters,
     decimalsForLargeUnits: Int
 ): String {
     return when (unit) {
-        DistanceUnit.METERS -> toMetric(value.toDouble(), decimalsForLargeUnits = decimalsForLargeUnits)
-        DistanceUnit.FEET -> toImperial(value.toDouble(), decimalsForLargeUnits = decimalsForLargeUnits)
+        DistanceUnit.Meters -> toMetric(value.toDouble(), decimalsForLargeUnits = decimalsForLargeUnits)
+        DistanceUnit.Feet -> toImperial(value.toDouble(), decimalsForLargeUnits = decimalsForLargeUnits)
     }
 }
 
@@ -42,7 +42,8 @@ private fun toImperial(feet: Double, decimalsForLargeUnits: Int): String {
 }
 
 public enum class DistanceUnit {
-    METERS, FEET
+    Meters,
+    Feet
 }
 
 private const val MILE_IN_FEET = 5280
