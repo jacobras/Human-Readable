@@ -95,7 +95,7 @@ class LocalizedTests {
 
         assertThat(HumanReadable.abbreviation(5_100_000, decimals = 1)).isEqualTo("5,1M")
 
-        assertThat(HumanReadable.distance(7234, unit = DistanceUnit.Meters)).isEqualTo("7,2 km")
+        assertThat(HumanReadable.distance(7234, unit = DistanceUnit.Meter)).isEqualTo("7,2 km")
     }
 
     @Test
@@ -110,7 +110,7 @@ class LocalizedTests {
 
         assertThat(HumanReadable.abbreviation(5_100_000, decimals = 1)).isEqualTo("5.1M")
 
-        assertThat(HumanReadable.distance(7234, unit = DistanceUnit.Meters)).isEqualTo("7.2 km")
+        assertThat(HumanReadable.distance(7234, unit = DistanceUnit.Meter)).isEqualTo("7.2 km")
     }
 
     @Test
@@ -217,7 +217,7 @@ class LocalizedTests {
 
         assertThat(HumanReadable.abbreviation(5_100_000, decimals = 1)).isEqualTo("5,1M")
 
-        assertThat(HumanReadable.distance(7234, unit = DistanceUnit.Meters)).isEqualTo("7,2 km")
+        assertThat(HumanReadable.distance(7234, unit = DistanceUnit.Meter)).isEqualTo("7,2 km")
     }
 
     @Test
