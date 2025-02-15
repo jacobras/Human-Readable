@@ -5,6 +5,7 @@ import assertk.assertions.isEqualTo
 import io.github.skeptick.libres.LibresSettings
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
+import nl.jacobras.humanreadable.DistanceUnit
 import nl.jacobras.humanreadable.HumanReadable
 import kotlin.test.Test
 import kotlin.time.Duration.Companion.days
@@ -91,6 +92,8 @@ class LocalizedTests {
         assertThat(HumanReadable.fileSize(2_000_000, decimals = 1)).isEqualTo("1.9 MB")
 
         assertThat(HumanReadable.abbreviation(5_100_000, decimals = 1)).isEqualTo("5.1M")
+
+        assertThat(HumanReadable.distance(7234, unit = DistanceUnit.METERS)).isEqualTo("7.2 km")
     }
 
     @Test
@@ -196,6 +199,8 @@ class LocalizedTests {
         assertThat(HumanReadable.fileSize(2_000_000, decimals = 1)).isEqualTo("1,9 MB")
 
         assertThat(HumanReadable.abbreviation(5_100_000, decimals = 1)).isEqualTo("5,1M")
+
+        assertThat(HumanReadable.distance(7234, unit = DistanceUnit.METERS)).isEqualTo("7,2 km")
     }
 
     @Test

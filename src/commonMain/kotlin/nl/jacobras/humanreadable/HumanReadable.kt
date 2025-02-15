@@ -4,6 +4,8 @@ package nl.jacobras.humanreadable
 
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
+import nl.jacobras.humanreadable.HumanReadable.duration
+import nl.jacobras.humanreadable.HumanReadable.number
 import kotlin.time.Duration
 
 /**
@@ -60,6 +62,10 @@ public object HumanReadable {
      * Supported abbreviations: K (1,000), M (1,000,000), B (1,000,000,000) and T (1,000,000,000,000).
      *
      * For example: 10394 returns "10K" and "4234321" returns "4M".
+     *
+     * @param number The number to abbreviate.
+     * @param decimals The number of decimals to use in formatting.
+     * @return a formatted string
      */
     public fun abbreviation(number: Number, decimals: Int = 0): String {
         return safelyTranslate { formatAbbreviation(number.toDouble(), decimals) }
@@ -72,8 +78,37 @@ public object HumanReadable {
      * - "1,000,000.34" for EN
      * - "1 000 000.34" for FR
      * - "1.000.000,34" for NL
+     *
+     * @param number The number to format.
+     * @param decimals The number of decimals to use in formatting.
+     * @return a formatted string
      */
     public fun number(number: Number, decimals: Int = 0): String {
         return safelyTranslate { number.toDouble().formatNumber(decimals) }
+    }
+
+    /**
+     * Formats the given [value] of the given [unit] to a readable distance.
+     *
+     * Metric examples:
+     * - 956 with DistanceUnit METERS returns "956 m" for EN.
+     * - 1534 with DistanceUnit METERS returns "1,5 km" for EN.
+     *
+     * Imperial examples:
+     * - 5200 with DistanceUnit FEET returns "5,200 ft" for EN.
+     * - 5350 returns with DistanceUnit FEET returns "1.0 mi" for EN.
+     *
+     * In other languages, the numbers are formatted accordingly, see [number].
+     *
+     * Note that meters and feet are always formatted with 0 decimals.
+     * Kilometers and miles are formatted according to [decimals].
+     *
+     * @param value The distance to format.
+     * @param unit The [DistanceUnit] the given [value] is in.
+     * @param decimals The number of decimals to use in formatting larger than meters/feet.
+     * @return a formatted string
+     */
+    public fun distance(value: Int, unit: DistanceUnit, decimals: Int = 1): String {
+        return safelyTranslate { formatDistance(value, unit, decimalsForLargeUnits = decimals) }
     }
 }
