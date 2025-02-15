@@ -15,6 +15,7 @@ internal actual fun extendLibresPlurals() {
     PluralRules["es"] = PluralRules["en"]
     PluralRules["it"] = PluralRules["en"]
     PluralRules["tr"] = PluralRules["en"]
+    PluralRules["el"] = PluralRules["en"]
 
     // TODO: Remove when https://github.com/Skeptick/libres/pull/56 is merged
     PluralRules["cs"] = PluralRule { number ->

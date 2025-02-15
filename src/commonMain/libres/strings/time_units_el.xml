@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+    Holds empty _future and _past plurals so they can be overridden
+    in languages that need it (like German).
+-->
+<resources>
+    <plurals name="seconds">
+        <item quantity="one">δευτερόλεπτο</item>
+        <item quantity="other">δευτερόλεπτα</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="one">λεπτό</item>
+        <item quantity="other">λεπτά</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="one">ώρα</item>
+        <item quantity="other">ώρες</item>
+    </plurals>
+    <plurals name="days">
+        <item quantity="one">μέρα</item>
+        <item quantity="other">μέρες</item>
+    </plurals>
+    <plurals name="weeks">
+        <item quantity="one">εβδομάδα</item>
+        <item quantity="other">εβδομάδες</item>
+    </plurals>
+    <plurals name="months">
+        <item quantity="one">μήνα</item>
+        <item quantity="other">μήνες</item>
+    </plurals>
+    <plurals name="years">
+        <item quantity="one">έτος</item>
+        <item quantity="other">έτη</item>
+    </plurals>
+    <string name="time_ago">${time} πριν</string>
+    <string name="time_in_future">σε ${time}</string>
+    <string name="now">τώρα</string>
+</resources>

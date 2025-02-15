@@ -40,7 +40,7 @@ class LocalizedTests {
     private val twoMonths = 60.days
     private val twoMonthsAgo = now - twoMonths
     private val twoMonthsFromNow = now + twoMonths
-    private val oneYear = 365.days
+    private val oneYear = 366.days
     private val oneYearAgo = now - oneYear
     private val oneYearFromNow = now + oneYear
 
@@ -79,6 +79,23 @@ class LocalizedTests {
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
         assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
+    }
+
+    @Test
+    fun el_greek() {
+        LibresSettings.languageCode = "el"
+        assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 δευτερόλεπτα")
+        assertThat(HumanReadable.timeAgo(oneWeekAgo)).isEqualTo("1 εβδομάδα πριν")
+        assertThat(HumanReadable.timeAgo(oneYearFromNow)).isEqualTo("σε 1 έτος")
+
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
+
+        assertThat(HumanReadable.fileSize(2_000_000, decimals = 1)).isEqualTo("1,9 MB")
+
+        assertThat(HumanReadable.abbreviation(5_100_000, decimals = 1)).isEqualTo("5,1M")
+
+        assertThat(HumanReadable.distance(7234, unit = DistanceUnit.METERS)).isEqualTo("7,2 km")
     }
 
     @Test
