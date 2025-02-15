@@ -11,7 +11,7 @@ import HumanReadableRes as Res
  * @return a formatted string
  */
 internal fun formatDistance(
-    value: Int,
+    value: Number,
     unit: DistanceUnit = DistanceUnit.Meter,
     decimalsForLargeUnits: Int
 ): String {

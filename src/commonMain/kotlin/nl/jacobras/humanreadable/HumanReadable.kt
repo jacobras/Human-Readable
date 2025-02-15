@@ -108,7 +108,7 @@ public object HumanReadable {
      * @param decimals The number of decimals to use in formatting larger than meters/feet.
      * @return a formatted string
      */
-    public fun distance(value: Int, unit: DistanceUnit, decimals: Int = 1): String {
+    public fun distance(value: Number, unit: DistanceUnit, decimals: Int = 1): String {
         return safelyTranslate { formatDistance(value, unit, decimalsForLargeUnits = decimals) }
     }
 }
