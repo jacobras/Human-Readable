@@ -40,7 +40,7 @@ class LocalizedTests {
     private val twoMonths = 60.days
     private val twoMonthsAgo = now - twoMonths
     private val twoMonthsFromNow = now + twoMonths
-    private val oneYear = 365.days
+    private val oneYear = 366.days
     private val oneYearAgo = now - oneYear
     private val oneYearFromNow = now + oneYear
 
