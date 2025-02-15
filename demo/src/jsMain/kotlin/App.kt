@@ -74,7 +74,8 @@ internal fun App() {
                         timeDemo = { TimeDemo(selectedLanguageCode, it) },
                         fileSizeDemo = { FileSizeDemo(selectedLanguageCode, it) },
                         abbreviationDemo = { AbbreviationDemo(selectedLanguageCode, it) },
-                        numberFormatDemo = { NumberFormatDemo(selectedLanguageCode, it) }
+                        numberFormatDemo = { NumberFormatDemo(selectedLanguageCode, it) },
+                        distanceDemo = { DistanceDemo(selectedLanguageCode, it) }
                     )
                 }
             }

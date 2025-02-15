@@ -13,6 +13,7 @@ internal fun FlexibleLayout(
     fileSizeDemo: @Composable (Modifier) -> Unit,
     abbreviationDemo: @Composable (Modifier) -> Unit,
     numberFormatDemo: @Composable (Modifier) -> Unit,
+    distanceDemo: @Composable (Modifier) -> Unit,
 ) {
     val colModifier = Modifier
         .widthIn(max = 500.dp)
@@ -27,5 +28,6 @@ internal fun FlexibleLayout(
         fileSizeDemo(colModifier)
         abbreviationDemo(colModifier)
         numberFormatDemo(colModifier)
+        distanceDemo(colModifier)
     }
 }
