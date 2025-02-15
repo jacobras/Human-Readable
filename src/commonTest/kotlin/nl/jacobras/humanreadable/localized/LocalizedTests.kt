@@ -45,7 +45,7 @@ class LocalizedTests {
     private val oneYearFromNow = now + oneYear
 
     @Test
-    fun cs() {
+    fun cs_czech() {
         LibresSettings.languageCode = "cs"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 sekundy")
 
@@ -69,7 +69,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun de() {
+    fun de_german() {
         LibresSettings.languageCode = "de"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 Sekunden")
 
@@ -82,7 +82,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun en() {
+    fun en_english() {
         LibresSettings.languageCode = "en"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 seconds")
 
@@ -97,7 +97,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun es() {
+    fun es_spanish() {
         LibresSettings.languageCode = "es"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 segundos")
 
@@ -106,7 +106,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun fi() {
+    fun fi_finnish() {
         LibresSettings.languageCode = "fi"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 sekuntia")
 
@@ -115,7 +115,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun fr() {
+    fun fr_french() {
         LibresSettings.languageCode = "fr"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 secondes")
 
@@ -126,7 +126,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun id() {
+    fun id_indonesian() {
         LibresSettings.languageCode = "id"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 detik")
 
@@ -135,7 +135,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun it() {
+    fun it_italian() {
         LibresSettings.languageCode = "it"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 secondi")
 
@@ -144,7 +144,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun ja() {
+    fun ja_japanese() {
         LibresSettings.languageCode = "ja"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 秒")
 
@@ -153,7 +153,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun kk() {
+    fun kk_kazakh() {
         LibresSettings.languageCode = "kk"
         assertThat(HumanReadable.timeAgo(now)).isEqualTo("қазір")
         assertThat(HumanReadable.duration(twoSeconds)).isEqualTo("2 секунд")
@@ -180,7 +180,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun ko() {
+    fun ko_korean() {
         LibresSettings.languageCode = "ko"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 초")
 
@@ -189,7 +189,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun nl() {
+    fun nl_dutch() {
         LibresSettings.languageCode = "nl"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 seconden")
 
@@ -204,7 +204,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun pl() {
+    fun pl_polish() {
         LibresSettings.languageCode = "pl"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 sekundy")
 
@@ -217,7 +217,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun pt() {
+    fun pt_portuguese() {
         LibresSettings.languageCode = "pt"
         assertThat(HumanReadable.duration(0.seconds)).isEqualTo("0 segundo")
         assertThat(HumanReadable.duration(1.seconds)).isEqualTo("1 segundo")
@@ -228,7 +228,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun ru() {
+    fun ru_russian() {
         LibresSettings.languageCode = "ru"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 секунды")
 
@@ -241,7 +241,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun tr() {
+    fun tr_turkish() {
         LibresSettings.languageCode = "tr"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 saniye")
 
@@ -250,7 +250,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun uk() {
+    fun uk_ukrainian() {
         LibresSettings.languageCode = "uk"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 секунди")
 
@@ -259,7 +259,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun uz() {
+    fun uz_uzbek() {
         LibresSettings.languageCode = "uz"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 soniya")
 
@@ -268,7 +268,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun vi() {
+    fun vi_vietnamese() {
         LibresSettings.languageCode = "vi"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 giây")
 
@@ -277,7 +277,7 @@ class LocalizedTests {
     }
 
     @Test
-    fun zh() {
+    fun zh_chinese() {
         LibresSettings.languageCode = "zh"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 秒")
 
