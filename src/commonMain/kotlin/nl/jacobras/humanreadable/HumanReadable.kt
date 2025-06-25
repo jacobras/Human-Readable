@@ -2,11 +2,12 @@
 
 package nl.jacobras.humanreadable
 
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
 import nl.jacobras.humanreadable.HumanReadable.duration
 import nl.jacobras.humanreadable.HumanReadable.number
+import kotlin.time.Clock
 import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 /**
  * A collection of data formatting utilities.
@@ -24,6 +25,7 @@ public object HumanReadable {
      * @param instant The [Instant] to format.
      * @return a formatted string
      */
+    @OptIn(ExperimentalTime::class)
     public fun timeAgo(
         instant: Instant,
         baseInstant: Instant = Clock.System.now()
