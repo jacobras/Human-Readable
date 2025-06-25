@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "nl.jacobras"
-version = "1.11.0"
+version = "1.12.0"
 
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.S01, true)
