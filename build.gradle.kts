@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.compose.compiler) apply false
     id("com.vanniktech.maven.publish") version "0.30.0"
-    id("io.github.skeptick.libres") version "1.2.3"
+    id("io.github.skeptick.libres") version "1.2.4"
 }
 
 group = "nl.jacobras"
