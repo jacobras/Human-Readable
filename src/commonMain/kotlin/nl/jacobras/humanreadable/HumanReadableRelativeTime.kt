@@ -1,7 +1,8 @@
 package nl.jacobras.humanreadable
 
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 import HumanReadableRes as Res
-import kotlinx.datetime.Instant
 
 /**
  * Returns the difference between [baseInstant] and [instant], in human-readable format.
@@ -10,6 +11,7 @@ import kotlinx.datetime.Instant
  * @param instant The [Instant] to compare with [baseInstant].
  * @param baseInstant The base/starting [Instant], usually "now".
  */
+@OptIn(ExperimentalTime::class)
 internal fun formatTimeAgo(
     instant: Instant,
     baseInstant: Instant

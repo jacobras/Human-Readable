@@ -3,18 +3,20 @@ package nl.jacobras.humanreadable.localized
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import io.github.skeptick.libres.LibresSettings
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
 import nl.jacobras.humanreadable.DistanceUnit
 import nl.jacobras.humanreadable.HumanReadable
 import kotlin.test.Test
+import kotlin.time.Clock
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 /**
  * Smoke test that verifies all supported languages have working plural formatting.
  */
+@OptIn(ExperimentalTime::class)
 class LocalizedTests {
 
     private val now: Instant = Clock.System.now()

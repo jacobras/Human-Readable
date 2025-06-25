@@ -3,13 +3,14 @@ package nl.jacobras.humanreadable
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import io.github.skeptick.libres.LibresSettings
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
 import kotlin.test.Test
+import kotlin.time.Clock
 import kotlin.time.Duration.Companion.days
-import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
+@OptIn(ExperimentalTime::class)
 class HumanReadableRelativeTimeTests {
 
     init {

@@ -16,10 +16,13 @@ import kotlinx.datetime.*
 import monoBodyOrange
 import monoBodyStringBold
 import nl.jacobras.humanreadable.HumanReadable
+import kotlin.time.Clock
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
-@OptIn(ExperimentalLayoutApi::class)
+@OptIn(ExperimentalLayoutApi::class, ExperimentalTime::class)
 @Composable
 internal fun TimeDemo(
     selectedLanguageCode: String,
@@ -113,6 +116,7 @@ internal fun TimeDemo(
     }
 }
 
+@OptIn(ExperimentalTime::class)
 @Composable
 private fun DateTimeField(instant: Instant, onUpdate: (Instant) -> Unit) {
     var error by remember { mutableStateOf(false) }
