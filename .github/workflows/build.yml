@@ -18,6 +18,7 @@ jobs:
             contents: read
             checks: write
             id-token: write
+            pull-requests: write
         steps:
             - uses: actions/checkout@v4
               with:
@@ -39,3 +40,21 @@ jobs:
                   check_name: Unit test report
                   require_tests: true
                   report_paths: "**/build/test-results/**/TEST-*.xml"
+
+                  # compileProductionExecutableKotlinJs
+
+            - name: Build production JS file for size comparison
+              run: ./gradlew compileProductionExecutableKotlinJs
+
+            - name: Calculate JS size difference
+              id: lib-size-diff
+              uses: jacobras/size-diff-action@v1
+              with:
+                  path: build/js/packages/composeApp/kotlin/Human-Readable.js
+                  diffSize: ${{ github.ref != 'refs/heads/main' }}
+
+            - name: Comment JS size difference
+              uses: marocchino/sticky-pull-request-comment@v2
+              with:
+                  header: lib-size-diff
+                  message: ${{ steps.lib-size-diff.outputs.summary }}
