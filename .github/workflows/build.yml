@@ -51,7 +51,6 @@ jobs:
               uses: jacobras/size-diff-action@v1
               with:
                   path: build/js/packages/composeApp/kotlin/Human-Readable.js
-                  diffSize: ${{ github.ref != 'refs/heads/main' }}
 
             - name: Comment JS size difference
               uses: marocchino/sticky-pull-request-comment@v2
