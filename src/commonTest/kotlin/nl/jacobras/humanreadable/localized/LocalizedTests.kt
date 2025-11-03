@@ -20,6 +20,7 @@ import kotlin.time.Instant
 class LocalizedTests {
 
     private val now: Instant = Clock.System.now()
+    private val oneSecondFromNow = now + 1.seconds
     private val twoSeconds = 2.seconds
     private val twoSecondsAgo = now - twoSeconds
     private val twoSecondsFromNow = now + twoSeconds
@@ -54,11 +55,14 @@ class LocalizedTests {
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1 000 000,34")
         assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
 
+        assertThat(HumanReadable.timeAgo(oneSecondFromNow, baseInstant = now)).isEqualTo("za 1 sekundu")
         assertThat(HumanReadable.timeAgo(twoSecondsAgo, baseInstant = now)).isEqualTo("před 2 sekundami")
         assertThat(HumanReadable.timeAgo(oneMinuteAgo, baseInstant = now)).isEqualTo("před 1 minutou")
+        assertThat(HumanReadable.timeAgo(oneMinuteFromNow, baseInstant = now)).isEqualTo("za 1 minutu")
         assertThat(HumanReadable.timeAgo(twoMinutesAgo, baseInstant = now)).isEqualTo("před 2 minutami")
         assertThat(HumanReadable.timeAgo(now - 20.minutes, baseInstant = now)).isEqualTo("před 20 minutami")
         assertThat(HumanReadable.timeAgo(oneHourAgo, baseInstant = now)).isEqualTo("před 1 hodinou")
+        assertThat(HumanReadable.timeAgo(oneHourFromNow, baseInstant = now)).isEqualTo("za 1 hodinu")
         assertThat(HumanReadable.duration(oneDay)).isEqualTo("1 den")
         assertThat(HumanReadable.duration(twoDays)).isEqualTo("2 dny")
         assertThat(HumanReadable.timeAgo(oneDayAgo, baseInstant = now)).isEqualTo("před 1 dnem")

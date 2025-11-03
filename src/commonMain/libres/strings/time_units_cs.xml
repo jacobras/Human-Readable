@@ -10,6 +10,11 @@
         <item quantity="few">sekundami</item>
         <item quantity="other">sekundami</item>
     </plurals>
+    <plurals name="seconds_future">
+        <item quantity="one">sekundu</item>
+        <item quantity="few">sekundy</item>
+        <item quantity="other">sekund</item>
+    </plurals>
     <plurals name="minutes">
         <item quantity="one">minuta</item>
         <item quantity="few">minuty</item>
@@ -20,6 +25,11 @@
         <item quantity="few">minutami</item>
         <item quantity="other">minutami</item>
     </plurals>
+    <plurals name="minutes_future">
+        <item quantity="one">minutu</item>
+        <item quantity="few">minuty</item>
+        <item quantity="other">minut</item>
+    </plurals>
     <plurals name="hours">
         <item quantity="one">hodina</item>
         <item quantity="few">hodiny</item>
@@ -29,6 +39,11 @@
         <item quantity="one">hodinou</item>
         <item quantity="few">hodinami</item>
         <item quantity="other">hodinami</item>
+    </plurals>
+    <plurals name="hours_future">
+        <item quantity="one">hodinu</item>
+        <item quantity="few">hodiny</item>
+        <item quantity="other">hodin</item>
     </plurals>
     <plurals name="days">
         <item quantity="one">den</item>
