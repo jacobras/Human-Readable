@@ -48,7 +48,7 @@ jobs:
 
             - name: Calculate JS size difference
               id: lib-size-diff
-              uses: jacobras/size-diff-action@v1
+              uses: jacobras/size-diff-action@v2
               with:
                   path: build/js/packages/composeApp/kotlin/Human-Readable.js
 
