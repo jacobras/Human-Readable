@@ -1,10 +1,10 @@
 [versions]
-kotlin = "2.2.0"
-compose-plugin = "1.7.3"
+kotlin = "2.2.21"
+compose-plugin = "1.9.2"
 
 [libraries]
 assertK = { module = "com.willowtreeapps.assertk:assertk", version = "0.28.1" }
-kotlinX-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.7.0" }
+kotlinX-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.7.1" }
 
 [plugins]
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
