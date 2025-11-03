@@ -9,11 +9,8 @@ jobs:
         steps:
             - uses: actions/checkout@v5
 
-            - name: Set up JDK 17
-              uses: actions/setup-java@v5
-              with:
-                  distribution: 'temurin'
-                  java-version: 17
+            - name: Build setup
+              uses: ./.github/actions/build-setup
 
             - name: Publish Library
               env:
