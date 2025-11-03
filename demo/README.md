@@ -4,6 +4,6 @@
 
 ## Publication
 
-1. `gradlew :demo:jsBrowserDistribution`
-2. Copy files from `/demo/build/dist/js/productionExecutable` into `/docs`
+1. `gradlew :demo:composeCompatibilityBrowserDistribution`
+2. Copy files from `/demo/build/dist/composeWebCompatibility/productionExecutable` into `/docs`
 3. Push files to repository

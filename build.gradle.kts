@@ -83,11 +83,9 @@ kotlin {
                 implementation(libs.kotlinX.datetime)
             }
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-                implementation(libs.assertK)
-            }
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+            implementation(libs.assertK)
         }
         val wasmJsMain by getting
         val appleAndJsMain by creating {
