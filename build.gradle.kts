@@ -1,18 +1,18 @@
-import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.compose.compiler) apply false
-    id("com.vanniktech.maven.publish") version "0.33.0"
+    id("com.vanniktech.maven.publish") version "0.34.0"
     id("io.github.skeptick.libres") version "1.2.4"
+    signing
 }
 
 group = "nl.jacobras"
 version = "1.12.0"
 
 mavenPublishing {
-    publishToMavenCentral(SonatypeHost.S01, true)
+    publishToMavenCentral()
     signAllPublications()
 
     pom {
@@ -105,4 +105,10 @@ tasks.withType<AbstractPublishToMaven>().configureEach {
 
 libres {
     generatedClassName = "HumanReadableRes"
+}
+
+signing {
+    setRequired {
+        !gradle.taskGraph.allTasks.any { it is PublishToMavenLocal }
+    }
 }
