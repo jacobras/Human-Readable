@@ -32,7 +32,7 @@ jobs:
 
             - name: Publish unit test report
               if: always()
-              uses: mikepenz/action-junit-report@v5
+              uses: mikepenz/action-junit-report@v6
               with:
                   check_name: Unit test report
                   require_tests: true
