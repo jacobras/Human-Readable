@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.compose.compiler) apply false
-    id("com.vanniktech.maven.publish") version "0.34.0"
+    id("com.vanniktech.maven.publish") version "0.35.0"
     id("io.github.skeptick.libres") version "1.2.4"
     signing
 }
