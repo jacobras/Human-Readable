@@ -12,12 +12,22 @@ internal fun Double.formatNumber(
     val rounded = formatWithDecimals(decimals)
     val parts = rounded.split('.')
 
+    val integerPart = parts[0]
+    // Check is Negative
+    val isNegative = integerPart.startsWith("-")
+
+    // If Negative Then drop first letter
+    val numberPart = if (isNegative) integerPart.substring(1) else integerPart
+
     // Format the integer part
-    val formattedIntegerPart = parts[0]
+    val formattedNumberPart = numberPart
         .reversed()
         .chunked(3)
         .joinToString(groupSeparator)
         .reversed()
+
+    val formattedIntegerPart = if (isNegative) "-$formattedNumberPart" else formattedNumberPart
+
 
     // Format the decimal part
     val decimalPart = if (parts.size > 1) parts[1] else ""
