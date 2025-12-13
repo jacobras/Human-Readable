@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -9,7 +10,7 @@ plugins {
 }
 
 group = "nl.jacobras"
-version = "1.12.1"
+version = "1.12.2"
 
 mavenPublishing {
     publishToMavenCentral()
@@ -73,6 +74,13 @@ kotlin {
         testRuns.named("test") {
             executionTask.configure {
                 useJUnitPlatform()
+            }
+        }
+        compilations.all {
+            compileTaskProvider.configure {
+                compilerOptions {
+                    jvmTarget = JvmTarget.JVM_17
+                }
             }
         }
     }
