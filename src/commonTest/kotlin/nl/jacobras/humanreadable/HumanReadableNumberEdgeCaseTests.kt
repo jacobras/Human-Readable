@@ -15,4 +15,10 @@ class HumanReadableNumberEdgeCaseTests {
         assertThat(HumanReadable.number(0.04, decimals = 2)).isEqualTo("0.04")
         assertThat(HumanReadable.number(00000.00004, decimals = 3)).isEqualTo("0.000")
     }
+
+    @Test
+    fun negativeNumber() {
+        assertThat(HumanReadable.number(-123456)).isEqualTo("-123,456")
+        assertThat(HumanReadable.number(-123)).isEqualTo("-123")
+    }
 }
