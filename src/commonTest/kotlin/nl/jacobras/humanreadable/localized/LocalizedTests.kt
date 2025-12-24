@@ -142,10 +142,10 @@ class LocalizedTests {
         LibresSettings.languageCode = "fr"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 secondes")
 
-        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1 000 000.34")
-        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4.34")
+        assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1 000 000,34")
+        assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
 
-        assertThat(HumanReadable.fileSize(2_000_000, decimals = 1)).isEqualTo("1.9 Mo")
+        assertThat(HumanReadable.fileSize(2_000_000, decimals = 1)).isEqualTo("1,9 Mo")
     }
 
     @Test
