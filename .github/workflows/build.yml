@@ -50,7 +50,7 @@ jobs:
                   path: build/js/packages/composeApp/kotlin/Human-Readable.js
 
             - name: Comment JS size difference
-              uses: marocchino/sticky-pull-request-comment@v2
+              uses: marocchino/sticky-pull-request-comment@v3
               with:
                   header: lib-size-diff
                   message: ${{ steps.lib-size-diff.outputs.summary }}
