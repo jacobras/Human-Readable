@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="seconds">
-        <item quantity="one">секунда</item>
+        <item quantity="one">секунду</item>
         <item quantity="few">секунди</item>
         <item quantity="many">секунд</item>
     </plurals>
     <plurals name="minutes">
-        <item quantity="one">хвилина</item>
+        <item quantity="one">хвилину</item>
         <item quantity="few">хвилини</item>
         <item quantity="many">хвилин</item>
     </plurals>
     <plurals name="hours">
-        <item quantity="one">година</item>
+        <item quantity="one">годину</item>
         <item quantity="few">години</item>
         <item quantity="many">годин</item>
     </plurals>
