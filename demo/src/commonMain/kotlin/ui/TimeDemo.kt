@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import kotlinx.datetime.*
@@ -85,7 +86,9 @@ internal fun TimeDemo(
                     appendLine("\"")
                 }
             },
-            style = monoBody
+            style = monoBody.copy(
+                textDirection = if (selectedLanguageCode == "ar") TextDirection.Rtl else TextDirection.Ltr
+            )
         )
         Text(
             text = buildAnnotatedString {
@@ -96,7 +99,9 @@ internal fun TimeDemo(
                     append("\"")
                 }
             },
-            style = monoBody
+            style = monoBody.copy(
+                textDirection = if (selectedLanguageCode == "ar") TextDirection.Rtl else TextDirection.Ltr
+            )
         )
         Spacer(Modifier.height(16.dp))
 
@@ -111,7 +116,9 @@ internal fun TimeDemo(
                     append("\"")
                 }
             },
-            style = monoBody
+            style = monoBody.copy(
+                textDirection = if (selectedLanguageCode == "ar") TextDirection.Rtl else TextDirection.Ltr
+            )
         )
     }
 }

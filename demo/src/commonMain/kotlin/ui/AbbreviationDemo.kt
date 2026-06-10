@@ -92,7 +92,9 @@ internal fun AbbreviationDemo(
                     append("\"")
                 }
             },
-            style = monoBody
+            style = monoBody.copy(
+                textDirection = if (selectedLanguageCode == "ar") TextDirection.Rtl else TextDirection.Ltr
+            )
         )
     }
 }
