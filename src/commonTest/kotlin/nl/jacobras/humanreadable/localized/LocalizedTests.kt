@@ -51,17 +51,17 @@ class LocalizedTests {
     fun ar_arabic() {
         LibresSettings.languageCode = "ar"
         assertThat(HumanReadable.duration(0.seconds)).isEqualTo("0 ثانية")
-        assertThat(HumanReadable.duration(1.seconds)).isEqualTo("1 ثانية")
-        assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 ثانية")
+        assertThat(HumanReadable.duration(1.seconds)).isEqualTo("ثانية")
+        assertThat(HumanReadable.duration(2.seconds)).isEqualTo("ثانيتان")
         assertThat(HumanReadable.duration(3.seconds)).isEqualTo("3 ثوان")
         assertThat(HumanReadable.duration(11.seconds)).isEqualTo("11 ثانية")
 
         assertThat(HumanReadable.timeAgo(now)).isEqualTo("الآن")
-        assertThat(HumanReadable.timeAgo(twoSecondsAgo, baseInstant = now)).isEqualTo("قبل 2 ثانية")
-        assertThat(HumanReadable.timeAgo(oneMinuteFromNow, baseInstant = now)).isEqualTo("بعد 1 دقيقة")
+        assertThat(HumanReadable.timeAgo(twoSecondsAgo, baseInstant = now)).isEqualTo("قبل ثانيتين")
+        assertThat(HumanReadable.timeAgo(oneMinuteFromNow, baseInstant = now)).isEqualTo("بعد دقيقة")
         assertThat(HumanReadable.duration(3.days)).isEqualTo("3 أيام")
-        assertThat(HumanReadable.duration(twoMonths)).isEqualTo("2 شهر")
-        assertThat(HumanReadable.duration(oneYear)).isEqualTo("1 سنة")
+        assertThat(HumanReadable.duration(twoMonths)).isEqualTo("شهران")
+        assertThat(HumanReadable.duration(oneYear)).isEqualTo("سنة")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1,000,000.34")
         assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4.34")

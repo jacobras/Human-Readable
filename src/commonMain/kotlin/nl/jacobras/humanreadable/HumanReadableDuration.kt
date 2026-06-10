@@ -1,5 +1,6 @@
 package nl.jacobras.humanreadable
 
+import io.github.skeptick.libres.LibresSettings
 import kotlin.math.roundToInt
 import kotlin.time.Duration
 
@@ -17,7 +18,7 @@ internal fun formatDuration(
     val monthsAgo = (duration.inWholeDays / 30.5f).roundToInt()
     val yearsAgo = (duration.inWholeDays / 365).toInt()
 
-    return when {
+    val result = when {
         secondsAgo < 60 -> {
             "$secondsAgo ${TimeUnit.Seconds.format(secondsAgo, relativeTime)}"
         }
@@ -40,5 +41,11 @@ internal fun formatDuration(
         else -> {
             "$yearsAgo ${TimeUnit.Years.format(yearsAgo, relativeTime)}"
         }
+    }
+
+    return if (LibresSettings.languageCode == "ar" && (result.startsWith("1 ") || result.startsWith("2 "))) {
+        result.substringAfter(" ")
+    } else {
+        result
     }
 }
