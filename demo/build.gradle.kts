@@ -20,6 +20,8 @@ kotlin {
         binaries.executable()
     }
 
+    jvm()
+
     sourceSets {
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -31,6 +33,9 @@ kotlin {
 
             implementation(libs.kotlinX.datetime)
             implementation(rootProject)
+        }
+        jvmMain.dependencies {
+            implementation(compose.desktop.currentOs)
         }
     }
 }
