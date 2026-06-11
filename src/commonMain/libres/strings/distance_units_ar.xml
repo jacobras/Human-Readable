@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="meter_abbreviation">م</string>
+    <string name="kilometer_abbreviation">كم</string>
+    <string name="feet_abbreviation">قدم</string>
+    <string name="mile_abbreviation">ميل</string>
+</resources>

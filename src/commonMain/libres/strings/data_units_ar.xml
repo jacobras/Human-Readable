@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="byte_symbol">ب</string>
+    <string name="kilobyte_symbol">ك.ب</string>
+    <string name="megabyte_symbol">م.ب</string>
+    <string name="gigabyte_symbol">ج.ب</string>
+    <string name="terabyte_symbol">ت.ب</string>
+</resources>

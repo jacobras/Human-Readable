@@ -130,6 +130,7 @@ HumanReadable.timeAgo(instant) // "il y a 3 jours"
 
 ### Supported languages
 
+* Arabic
 * Czech
 * Chinese (since 1.3.0)
 * Dutch

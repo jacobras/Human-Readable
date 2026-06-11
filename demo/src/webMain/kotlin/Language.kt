@@ -1,5 +1,6 @@
 internal enum class Language(val code: String) {
     English("en"),
+    Arabic("ar"),
     Czech("cs"),
     Chinese("zh"),
     Dutch("nl"),
