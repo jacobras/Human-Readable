@@ -1,4 +1,4 @@
-package nl.jacobras.humanreadable.strings
+package nl.jacobras.humanreadable.i18n
 
 /**
  * Returns the current platform language tag (e.g. "en", "nl"), used to pick the initial language so

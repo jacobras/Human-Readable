@@ -112,7 +112,7 @@ This behaviour may become configurable in future releases.
 
 ## Localisation
 
-The library uses [Lyricist](https://github.com/adrielcafe/lyricist) for its string resources. It detects the
+The library ships its string resources as plain Kotlin (no third-party i18n dependency). It detects the
 current locale by default, but it's changeable at runtime via `HumanReadable.languageTag`:
 
 ```kotlin
@@ -130,7 +130,7 @@ HumanReadable.timeAgo(instant) // "il y a 3 jours"
 
 ### Supported languages
 
-The library uses Lyricist for string resources, which automatically detects the current locale.
+The current locale is detected automatically and can be overridden via `HumanReadable.languageTag`.
 
 * Arabic (since 1.13.0)
 * Czech
@@ -159,7 +159,8 @@ The library uses Lyricist for string resources, which automatically detects the 
 
 Missing a language? Feel free to open an issue about it. Or, add it yourself:
 
-1. Fork the code and navigate to [src/commonMain/kotlin/nl/jacobras/humanreadable/strings/](https://github.com/jacobras/Human-Readable/tree/main/src/commonMain/kotlin/nl/jacobras/humanreadable/strings)
-2. In `Plurals.kt`, add your language's CLDR plural rule if it isn't already covered by an existing one (see [Unicode: CLDR chart](https://www.unicode.org/cldr/charts/45/supplemental/language_plural_rules.html) for the code & plural categories).
-3. In `Translations.kt`, add a `XxStrings` value (copy `EnStrings` and override the units/separators that differ, like French does for data units) and register it in the `translations` map.
-4. Open a PR.
+1. Fork the code. The generic i18n machinery lives in [src/commonMain/kotlin/nl/jacobras/humanreadable/i18n/](https://github.com/jacobras/Human-Readable/tree/main/src/commonMain/kotlin/nl/jacobras/humanreadable/i18n) and the per-language strings in [.../strings/](https://github.com/jacobras/Human-Readable/tree/main/src/commonMain/kotlin/nl/jacobras/humanreadable/strings).
+2. In `i18n/Plurals.kt`, add your language's CLDR plural rule if it isn't already covered by an existing one (see [Unicode: CLDR chart](https://www.unicode.org/cldr/charts/45/supplemental/language_plural_rules.html) for the code & plural categories).
+3. Add a `XxStrings.kt` file in `strings/` with a `HumanReadableStrings` value. The number/file-size/distance groups carry English defaults, so only override the per-type groups that differ (like French does for `fileSize`).
+4. Register your `XxStrings` in the `translations` map in `strings/Strings.kt`.
+5. Open a PR.

@@ -7,8 +7,8 @@ import kotlin.math.roundToLong
 internal fun Double.formatNumber(
     decimals: Int
 ): String {
-    val groupSeparator = strings.groupSeparator
-    val decimalSymbol = strings.decimalSymbol
+    val groupSeparator = strings.number.groupSeparator
+    val decimalSymbol = strings.number.decimalSymbol
     val rounded = formatWithDecimals(decimals)
     val parts = rounded.split('.')
 

@@ -1,4 +1,4 @@
-package nl.jacobras.humanreadable.strings
+package nl.jacobras.humanreadable.i18n
 
 private fun navigatorLanguage(): String = js("navigator.language")
 

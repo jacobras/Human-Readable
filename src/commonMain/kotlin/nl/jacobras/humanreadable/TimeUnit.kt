@@ -1,11 +1,11 @@
 package nl.jacobras.humanreadable
 
-import nl.jacobras.humanreadable.strings.HumanReadableStrings
-import nl.jacobras.humanreadable.strings.TenseForms
+import nl.jacobras.humanreadable.i18n.TenseForms
+import nl.jacobras.humanreadable.strings.DateTimeStrings
 import nl.jacobras.humanreadable.strings.strings
 
 internal enum class TimeUnit(
-    val forms: (HumanReadableStrings) -> TenseForms
+    val forms: (DateTimeStrings) -> TenseForms
 ) {
     Seconds({ it.seconds }),
     Minutes({ it.minutes }),
@@ -16,7 +16,7 @@ internal enum class TimeUnit(
     Years({ it.years });
 
     fun format(value: Int, relativeTime: RelativeTime): String {
-        val current = strings
-        return current.word(forms(current), value, relativeTime)
+        val dateTime = strings.dateTime
+        return dateTime.word(forms(dateTime), value, relativeTime)
     }
 }

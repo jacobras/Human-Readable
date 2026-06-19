@@ -1,6 +1,6 @@
 package nl.jacobras.humanreadable
 
-import nl.jacobras.humanreadable.strings.lyricist
+import nl.jacobras.humanreadable.strings.localization
 import kotlin.math.roundToInt
 import kotlin.time.Duration
 
@@ -54,7 +54,7 @@ private fun formatUnit(
     relativeTime: RelativeTime
 ): String {
     val unitText = unit.format(count, relativeTime)
-    return if (lyricist.languageTag == "ar" && (count == 1 || count == 2)) {
+    return if (localization.languageTag == "ar" && (count == 1 || count == 2)) {
         unitText
     } else {
         "$count $unitText"

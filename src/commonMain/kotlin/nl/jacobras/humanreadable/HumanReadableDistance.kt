@@ -24,20 +24,20 @@ internal fun formatDistance(
 private fun toMetric(meters: Double, decimalsForLargeUnits: Int): String {
     return if (meters < 1000) {
         // Use meters
-        meters.formatNumber(decimals = 0) + " " + strings.meterAbbreviation
+        meters.formatNumber(decimals = 0) + " " + strings.distance.meterAbbreviation
     } else {
         // Convert to kilometers
-        (meters / 1000).formatNumber(decimals = decimalsForLargeUnits) + " " + strings.kilometerAbbreviation
+        (meters / 1000).formatNumber(decimals = decimalsForLargeUnits) + " " + strings.distance.kilometerAbbreviation
     }
 }
 
 private fun toImperial(feet: Double, decimalsForLargeUnits: Int): String {
     return if (feet < MILE_IN_FEET) {
         // Less than a mile, use feet
-        feet.formatNumber(decimals = 0) + " " + strings.feetAbbreviation
+        feet.formatNumber(decimals = 0) + " " + strings.distance.feetAbbreviation
     } else {
         // Convert to miles
-        (feet / MILE_IN_FEET).formatNumber(decimals = decimalsForLargeUnits) + " " + strings.mileAbbreviation
+        (feet / MILE_IN_FEET).formatNumber(decimals = decimalsForLargeUnits) + " " + strings.distance.mileAbbreviation
     }
 }
 

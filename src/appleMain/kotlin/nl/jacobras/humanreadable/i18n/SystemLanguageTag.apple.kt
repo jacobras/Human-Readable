@@ -1,4 +1,4 @@
-package nl.jacobras.humanreadable.strings
+package nl.jacobras.humanreadable.i18n
 
 import platform.Foundation.NSLocale
 import platform.Foundation.currentLocale

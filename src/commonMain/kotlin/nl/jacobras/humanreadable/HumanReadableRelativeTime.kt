@@ -20,11 +20,11 @@ internal fun formatTimeAgo(
     val secondsAgo = diff.inWholeSeconds
 
     return when {
-        secondsAgo < 0 -> strings.timeInFuture(
+        secondsAgo < 0 -> strings.dateTime.timeInFuture(
             formatDuration(diff.absoluteValue, relativeTime = RelativeTime.Future)
         )
-        secondsAgo <= 1 -> strings.now
-        else -> strings.timeAgo(
+        secondsAgo <= 1 -> strings.dateTime.now
+        else -> strings.dateTime.timeAgo(
             formatDuration(diff.absoluteValue, relativeTime = RelativeTime.Past)
         )
     }

@@ -4,7 +4,7 @@ package nl.jacobras.humanreadable
 
 import nl.jacobras.humanreadable.HumanReadable.duration
 import nl.jacobras.humanreadable.HumanReadable.number
-import nl.jacobras.humanreadable.strings.lyricist
+import nl.jacobras.humanreadable.strings.localization
 import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
@@ -25,9 +25,9 @@ public object HumanReadable {
      * ```
      */
     public var languageTag: String
-        get() = lyricist.languageTag
+        get() = localization.languageTag
         set(value) {
-            lyricist.languageTag = value
+            localization.languageTag = value
         }
 
     /**

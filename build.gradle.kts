@@ -87,7 +87,6 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlinX.datetime)
-            implementation(libs.lyricist)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
