@@ -56,7 +56,7 @@ class LocalizedTests {
         assertThat(HumanReadable.duration(3.seconds)).isEqualTo("3 ثوان")
         assertThat(HumanReadable.duration(11.seconds)).isEqualTo("11 ثانية")
 
-        assertThat(HumanReadable.timeAgo(now)).isEqualTo("الآن")
+        assertThat(HumanReadable.timeAgo(now, baseInstant = now)).isEqualTo("الآن")
         assertThat(HumanReadable.timeAgo(twoSecondsAgo, baseInstant = now)).isEqualTo("قبل ثانيتين")
         assertThat(HumanReadable.timeAgo(oneMinuteFromNow, baseInstant = now)).isEqualTo("بعد دقيقة")
         assertThat(HumanReadable.duration(3.days)).isEqualTo("3 أيام")
