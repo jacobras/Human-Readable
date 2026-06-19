@@ -18,34 +18,45 @@ internal fun formatDuration(
     val monthsAgo = (duration.inWholeDays / 30.5f).roundToInt()
     val yearsAgo = (duration.inWholeDays / 365).toInt()
 
-    val result = when {
+    return when {
         secondsAgo < 60 -> {
-            "$secondsAgo ${TimeUnit.Seconds.format(secondsAgo, relativeTime)}"
+            formatUnit(secondsAgo, TimeUnit.Seconds, relativeTime)
         }
         secondsAgo < 3600 -> {
             val minutes = duration.inWholeMinutes.toInt()
-            "$minutes ${TimeUnit.Minutes.format(minutes, relativeTime)}"
+            formatUnit(minutes, TimeUnit.Minutes, relativeTime)
         }
         daysAgo < 1 -> {
-            "$hoursAgo ${TimeUnit.Hours.format(hoursAgo, relativeTime)}"
+            formatUnit(hoursAgo, TimeUnit.Hours, relativeTime)
         }
         daysAgo < 7 -> {
-            "$daysAgo ${TimeUnit.Days.format(daysAgo, relativeTime)}"
+            formatUnit(daysAgo, TimeUnit.Days, relativeTime)
         }
         daysAgo < 30 -> {
-            "$weeksAgo ${TimeUnit.Weeks.format(weeksAgo, relativeTime)}"
+            formatUnit(weeksAgo, TimeUnit.Weeks, relativeTime)
         }
         monthsAgo < 12 || yearsAgo == 0 -> {
-            "$monthsAgo ${TimeUnit.Months.format(monthsAgo, relativeTime)}"
+            formatUnit(monthsAgo, TimeUnit.Months, relativeTime)
         }
         else -> {
-            "$yearsAgo ${TimeUnit.Years.format(yearsAgo, relativeTime)}"
+            formatUnit(yearsAgo, TimeUnit.Years, relativeTime)
         }
     }
+}
 
-    return if (LibresSettings.languageCode == "ar" && (result.startsWith("1 ") || result.startsWith("2 "))) {
-        result.substringAfter(" ")
+/**
+ * Formats a [count] with its [unit]. Normally produces "$count $unit", but for Arabic the
+ * singular (1) and dual (2) forms are encoded in the unit word itself, so the numeral is omitted.
+ */
+private fun formatUnit(
+    count: Int,
+    unit: TimeUnit,
+    relativeTime: RelativeTime
+): String {
+    val unitText = unit.format(count, relativeTime)
+    return if (LibresSettings.languageCode == "ar" && (count == 1 || count == 2)) {
+        unitText
     } else {
-        result
+        "$count $unitText"
     }
 }
