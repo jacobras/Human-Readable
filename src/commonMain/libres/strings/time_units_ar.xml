@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="seconds">
+        <item quantity="zero">ثانية</item>
+        <item quantity="one">ثانية</item>
+        <item quantity="two">ثانيتان</item>
+        <item quantity="few">ثوان</item>
+        <item quantity="many">ثانية</item>
+        <item quantity="other">ثانية</item>
+    </plurals>
+    <plurals name="seconds_past">
+        <item quantity="two">ثانيتين</item>
+    </plurals>
+    <plurals name="seconds_future">
+        <item quantity="two">ثانيتين</item>
+    </plurals>
+
+    <plurals name="minutes">
+        <item quantity="zero">دقيقة</item>
+        <item quantity="one">دقيقة</item>
+        <item quantity="two">دقيقتان</item>
+        <item quantity="few">دقائق</item>
+        <item quantity="many">دقيقة</item>
+        <item quantity="other">دقيقة</item>
+    </plurals>
+    <plurals name="minutes_past">
+        <item quantity="two">دقيقتين</item>
+    </plurals>
+    <plurals name="minutes_future">
+        <item quantity="two">دقيقتين</item>
+    </plurals>
+
+    <plurals name="hours">
+        <item quantity="zero">ساعة</item>
+        <item quantity="one">ساعة</item>
+        <item quantity="two">ساعتان</item>
+        <item quantity="few">ساعات</item>
+        <item quantity="many">ساعة</item>
+        <item quantity="other">ساعة</item>
+    </plurals>
+    <plurals name="hours_past">
+        <item quantity="two">ساعتين</item>
+    </plurals>
+    <plurals name="hours_future">
+        <item quantity="two">ساعتين</item>
+    </plurals>
+
+    <plurals name="days">
+        <item quantity="zero">يوم</item>
+        <item quantity="one">يوم</item>
+        <item quantity="two">يومان</item>
+        <item quantity="few">أيام</item>
+        <item quantity="many">يوم</item>
+        <item quantity="other">يوم</item>
+    </plurals>
+    <plurals name="days_past">
+        <item quantity="two">يومين</item>
+    </plurals>
+    <plurals name="days_future">
+        <item quantity="two">يومين</item>
+    </plurals>
+
+    <plurals name="weeks">
+        <item quantity="zero">أسبوع</item>
+        <item quantity="one">أسبوع</item>
+        <item quantity="two">أسبوعان</item>
+        <item quantity="few">أسابيع</item>
+        <item quantity="many">أسبوع</item>
+        <item quantity="other">أسبوع</item>
+    </plurals>
+    <plurals name="weeks_past">
+        <item quantity="two">أسبوعين</item>
+    </plurals>
+    <plurals name="weeks_future">
+        <item quantity="two">أسبوعين</item>
+    </plurals>
+
+    <plurals name="months">
+        <item quantity="zero">شهر</item>
+        <item quantity="one">شهر</item>
+        <item quantity="two">شهران</item>
+        <item quantity="few">أشهر</item>
+        <item quantity="many">شهر</item>
+        <item quantity="other">شهر</item>
+    </plurals>
+    <plurals name="months_past">
+        <item quantity="two">شهرين</item>
+    </plurals>
+    <plurals name="months_future">
+        <item quantity="two">شهرين</item>
+    </plurals>
+
+    <plurals name="years">
+        <item quantity="zero">سنة</item>
+        <item quantity="one">سنة</item>
+        <item quantity="two">سنتان</item>
+        <item quantity="few">سنوات</item>
+        <item quantity="many">سنة</item>
+        <item quantity="other">سنة</item>
+    </plurals>
+    <plurals name="years_past">
+        <item quantity="two">سنتين</item>
+    </plurals>
+    <plurals name="years_future">
+        <item quantity="two">سنتين</item>
+    </plurals>
+
+    <string name="time_ago">قبل ${time}</string>
+    <string name="time_in_future">بعد ${time}</string>
+    <string name="now">الآن</string>
+</resources>
