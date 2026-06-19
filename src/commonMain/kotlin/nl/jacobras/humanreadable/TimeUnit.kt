@@ -1,5 +1,6 @@
 package nl.jacobras.humanreadable
 
+import io.github.skeptick.libres.LibresSettings
 import io.github.skeptick.libres.strings.VoidPluralString
 import HumanReadableRes as Res
 
@@ -44,11 +45,30 @@ internal enum class TimeUnit(
         future = { Res.string.years_future }
     );
 
-    fun format(value: Int, relativeTime: RelativeTime): String {
+    fun format(value: Long, relativeTime: RelativeTime): String {
+        val pluralSample = value.pluralSample()
         return when (relativeTime) {
-            RelativeTime.Past -> past().optionallyFormat(value) ?: present().format(value)
-            RelativeTime.Present -> present().format(value)
-            RelativeTime.Future -> future().optionallyFormat(value) ?: present().format(value)
+            RelativeTime.Past -> past().optionallyFormat(pluralSample) ?: present().format(pluralSample)
+            RelativeTime.Present -> present().format(pluralSample)
+            RelativeTime.Future -> future().optionallyFormat(pluralSample) ?: present().format(pluralSample)
         }
+    }
+}
+
+private fun Long.pluralSample(): Int {
+    val positiveValue = when {
+        this == Long.MIN_VALUE -> Long.MAX_VALUE
+        this < 0L -> -this
+        else -> this
+    }
+
+    if (positiveValue > Int.MAX_VALUE && LibresSettings.languageCode in setOf("ru", "uk")) {
+        val lastTwoDigits = (positiveValue % 100).toInt()
+        return 100 + lastTwoDigits
+    }
+
+    return when {
+        positiveValue > Int.MAX_VALUE -> Int.MAX_VALUE
+        else -> positiveValue.toInt()
     }
 }
