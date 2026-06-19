@@ -16,17 +16,20 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import io.github.skeptick.libres.LibresSettings
 import ui.AbbreviationDemo
@@ -41,65 +44,71 @@ import ui.TimeDemo
 @Composable
 internal fun App() {
     var selectedLanguageCode by remember { mutableStateOf(LibresSettings.languageCode ?: "en") }
+    val layoutDirection = if (selectedLanguageCode == "ar") {
+        LayoutDirection.Rtl
+    } else {
+        LayoutDirection.Ltr
+    }
 
     fun onSelectLanguage(code: String) {
         selectedLanguageCode = code
         LibresSettings.languageCode = code
     }
 
-    val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
-
     MaterialTheme {
-        Scaffold(
-            topBar = {
-                TopAppBar(title = { Text("Human-Readable web demo") })
-            }
-        ) { paddingValues ->
-            BoxWithConstraints(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(paddingValues)
-                    .padding(horizontal = 32.dp)
-            ) {
-                val smallDisplay = maxWidth < 800.dp
-                Column(
+        CompositionLocalProvider(LocalLayoutDirection provides layoutDirection) {
+            val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
+            Scaffold(
+                topBar = {
+                    TopAppBar(title = { Text("Human-Readable web demo") })
+                }
+            ) { paddingValues ->
+                BoxWithConstraints(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(paddingValues)
+                        .padding(horizontal = 32.dp)
                 ) {
-                    Text(
-                        text = buildAnnotatedString {
-                            append("LibresSettings.languageCode = \"")
-                            withStyle(monoBodyStringBold) {
-                                append(selectedLanguageCode)
+                    val smallDisplay = maxWidth < 800.dp
+                    Column(
+                    ) {
+                        Text(
+                            text = buildAnnotatedString {
+                                append("LibresSettings.languageCode = \"")
+                                withStyle(monoBodyStringBold) {
+                                    append(selectedLanguageCode)
+                                }
+                                append("\"")
+                            },
+                            style = monoBody
+                        )
+                        FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                            val sortedLanguages = Language.entries
+                                .sortedBy { it.code }
+                                .sortedByDescending { it == Language.English }
+                            for (language in sortedLanguages) {
+                                LanguageChip(
+                                    language = language,
+                                    selected = language.code == selectedLanguageCode,
+                                    onClick = { onSelectLanguage(language.code) },
+                                    smallDisplay = smallDisplay
+                                )
                             }
-                            append("\"")
-                        },
-                        style = monoBody
-                    )
-                    FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                        val sortedLanguages = Language.entries
-                            .sortedBy { it.code }
-                            .sortedByDescending { it == Language.English }
-                        for (language in sortedLanguages) {
-                            LanguageChip(
-                                language = language,
-                                selected = language.code == selectedLanguageCode,
-                                onClick = { onSelectLanguage(language.code) },
-                                smallDisplay = smallDisplay
-                            )
                         }
-                    }
-                    Spacer(modifier = Modifier.height(32.dp))
+                        Spacer(modifier = Modifier.height(32.dp))
 
-                    FlexibleLayout(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .verticalScroll(rememberScrollState())
-                            .padding(bottom = 32.dp),
-                        timeDemo = { TimeDemo(selectedLanguageCode, it) },
-                        fileSizeDemo = { FileSizeDemo(selectedLanguageCode, it) },
-                        abbreviationDemo = { AbbreviationDemo(selectedLanguageCode, it) },
-                        numberFormatDemo = { NumberFormatDemo(selectedLanguageCode, it) },
-                        distanceDemo = { DistanceDemo(selectedLanguageCode, it) }
-                    )
+                        FlexibleLayout(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .verticalScroll(rememberScrollState())
+                                .padding(bottom = 32.dp),
+                            timeDemo = { TimeDemo(selectedLanguageCode, it) },
+                            fileSizeDemo = { FileSizeDemo(selectedLanguageCode, it) },
+                            abbreviationDemo = { AbbreviationDemo(selectedLanguageCode, it) },
+                            numberFormatDemo = { NumberFormatDemo(selectedLanguageCode, it) },
+                            distanceDemo = { DistanceDemo(selectedLanguageCode, it) }
+                        )
+                    }
                 }
             }
         }
