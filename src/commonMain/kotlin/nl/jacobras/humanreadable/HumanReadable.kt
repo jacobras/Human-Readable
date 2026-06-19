@@ -4,6 +4,7 @@ package nl.jacobras.humanreadable
 
 import nl.jacobras.humanreadable.HumanReadable.duration
 import nl.jacobras.humanreadable.HumanReadable.number
+import nl.jacobras.humanreadable.strings.lyricist
 import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
@@ -14,9 +15,20 @@ import kotlin.time.Instant
  */
 public object HumanReadable {
 
-    init {
-        extendLibresPlurals()
-    }
+    /**
+     * The language tag (e.g. `"en"`, `"nl"`) used when formatting. Defaults to the detected system
+     * language when it is supported, otherwise English. Assign a different tag to switch languages
+     * at runtime:
+     *
+     * ```kotlin
+     * HumanReadable.languageTag = "nl"
+     * ```
+     */
+    public var languageTag: String
+        get() = lyricist.languageTag
+        set(value) {
+            lyricist.languageTag = value
+        }
 
     /**
      * Returns the difference between now and [instant], in human-readable format. Also supports

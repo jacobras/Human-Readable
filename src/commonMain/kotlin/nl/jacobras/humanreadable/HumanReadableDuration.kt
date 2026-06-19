@@ -1,6 +1,6 @@
 package nl.jacobras.humanreadable
 
-import io.github.skeptick.libres.LibresSettings
+import nl.jacobras.humanreadable.strings.lyricist
 import kotlin.math.roundToInt
 import kotlin.time.Duration
 
@@ -54,7 +54,7 @@ private fun formatUnit(
     relativeTime: RelativeTime
 ): String {
     val unitText = unit.format(count, relativeTime)
-    return if (LibresSettings.languageCode == "ar" && (count == 1 || count == 2)) {
+    return if (lyricist.languageTag == "ar" && (count == 1 || count == 2)) {
         unitText
     } else {
         "$count $unitText"

@@ -1,14 +1,14 @@
 package nl.jacobras.humanreadable
 
-import HumanReadableRes as Res
+import nl.jacobras.humanreadable.strings.strings
 import kotlin.math.pow
 import kotlin.math.roundToLong
 
 internal fun Double.formatNumber(
     decimals: Int
 ): String {
-    val groupSeparator = Res.string.groupSeparator.formatWithSpaceIfNeeded()
-    val decimalSymbol = Res.string.decimalSymbol
+    val groupSeparator = strings.groupSeparator
+    val decimalSymbol = strings.decimalSymbol
     val rounded = formatWithDecimals(decimals)
     val parts = rounded.split('.')
 
@@ -52,11 +52,4 @@ private fun Double.formatWithDecimals(decimals: Int): String {
     } else {
         "$mainRes.$fractionRes"
     }
-}
-
-/**
- * Workaround for Libres returning an empty string if it contains only a space.
- */
-private fun String.formatWithSpaceIfNeeded(): String {
-    return ifEmpty { " " }
 }

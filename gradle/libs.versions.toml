@@ -1,10 +1,12 @@
 [versions]
 kotlin = "2.4.0"
 compose-plugin = "1.12.0-alpha02"
+lyricist = "1.8.0"
 
 [libraries]
 assertK = { module = "com.willowtreeapps.assertk:assertk", version = "0.28.1" }
 kotlinX-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.8.0" }
+lyricist = { module = "cafe.adriel.lyricist:lyricist-core", version.ref = "lyricist" }
 
 [plugins]
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

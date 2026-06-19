@@ -17,7 +17,7 @@ The library is published to Maven Central.
 
 ```kotlin
 dependencies {
-    implementation("nl.jacobras:Human-Readable:1.12.3")
+    implementation("nl.jacobras:Human-Readable:2.0.0")
 }
 ```
 
@@ -112,23 +112,25 @@ This behaviour may become configurable in future releases.
 
 ## Localisation
 
-The library uses the small [Libres](https://github.com/Skeptick/libres) library for its string resources. It detects the
-current locale by default, but it's changeable on runtime.
-See [Libres: Changing Localization](https://github.com/Skeptick/libres/blob/master/docs/LOCALIZATION.md#changing-localization).
-
-You don't need to manually import Libres, as Gradle already pulls it in along with HumanReadable.
+The library uses [Lyricist](https://github.com/adrielcafe/lyricist) for its string resources. It detects the
+current locale by default, but it's changeable at runtime via `HumanReadable.languageTag`:
 
 ```kotlin
 HumanReadable.timeAgo(instant) // "3 days ago"
 
-LibresSettings.languageCode = "nl"
+HumanReadable.languageTag = "nl"
 HumanReadable.timeAgo(instant) // "3 dagen geleden"
 
-LibresSettings.languageCode = "fr"
+HumanReadable.languageTag = "fr"
 HumanReadable.timeAgo(instant) // "il y a 3 jours"
 ```
 
+> **Migrating from 1.x:** the runtime language is now set through `HumanReadable.languageTag = "nl"`
+> instead of the previous `LibresSettings.languageCode = "nl"`.
+
 ### Supported languages
+
+The library uses Lyricist for string resources, which automatically detects the current locale.
 
 * Arabic (since 1.13.0)
 * Czech
@@ -157,7 +159,7 @@ HumanReadable.timeAgo(instant) // "il y a 3 jours"
 
 Missing a language? Feel free to open an issue about it. Or, add it yourself:
 
-1. Fork the code and navigate to [src/commonMain/libres/strings/](https://github.com/jacobras/Human-Readable/tree/main/src/commonMain/libres/strings)
-2. Add a file named `time_units_[LANGUAGE CODE].xml` (see [Unicode: CLDR chart](https://www.unicode.org/cldr/charts/42/supplemental/language_plural_rules.html) for the code & plural categories).
-3. If the language deviates from English data units (like French does), also add `data_units_[LANGUAGE CODE].xml`.
+1. Fork the code and navigate to [src/commonMain/kotlin/nl/jacobras/humanreadable/strings/](https://github.com/jacobras/Human-Readable/tree/main/src/commonMain/kotlin/nl/jacobras/humanreadable/strings)
+2. In `Plurals.kt`, add your language's CLDR plural rule if it isn't already covered by an existing one (see [Unicode: CLDR chart](https://www.unicode.org/cldr/charts/45/supplemental/language_plural_rules.html) for the code & plural categories).
+3. In `Translations.kt`, add a `XxStrings` value (copy `EnStrings` and override the units/separators that differ, like French does for data units) and register it in the `translations` map.
 4. Open a PR.
