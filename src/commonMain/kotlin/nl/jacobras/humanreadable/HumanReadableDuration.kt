@@ -1,6 +1,5 @@
 package nl.jacobras.humanreadable
 
-import io.github.skeptick.libres.LibresSettings
 import kotlin.math.roundToInt
 import kotlin.time.Duration
 
@@ -45,8 +44,11 @@ internal fun formatDuration(
 }
 
 /**
- * Formats a [count] with its [unit]. Normally produces "$count $unit", but for Arabic the
- * singular (1) and dual (2) forms are encoded in the unit word itself, so the numeral is omitted.
+ * Formats a [count] with its [unit].
+ *
+ * Note about Arabic: normally this produces "$count $unit", but for Arabic the
+ * singular (1) and dual (2) forms are encoded in the unit word itself, so the
+ * numeral is omitted.
  */
 private fun formatUnit(
     count: Int,
@@ -54,7 +56,7 @@ private fun formatUnit(
     relativeTime: RelativeTime
 ): String {
     val unitText = unit.format(count, relativeTime)
-    return if (LibresSettings.languageCode == "ar" && (count == 1 || count == 2)) {
+    return if (HumanReadable.localisation.languageTag == "ar" && (count == 1 || count == 2)) {
         unitText
     } else {
         "$count $unitText"
