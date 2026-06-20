@@ -1,54 +1,32 @@
 package nl.jacobras.humanreadable
 
-import io.github.skeptick.libres.strings.VoidPluralString
-import HumanReadableRes as Res
+import nl.jacobras.humanreadable.HumanReadable.localisation
+import nl.jacobras.humanreadable.HumanReadable.strings
+import nl.jacobras.humanreadable.i18n.DateTimeStrings
+import nl.jacobras.humanreadable.i18n.TenseForms
 
 internal enum class TimeUnit(
-    val past: () -> VoidPluralString,
-    val present: () -> VoidPluralString,
-    val future: () -> VoidPluralString
+    val forms: (DateTimeStrings) -> TenseForms
 ) {
-    Seconds(
-        past = { Res.string.seconds_past },
-        present = { Res.string.seconds },
-        future = { Res.string.seconds_future }
-    ),
-    Minutes(
-        past = { Res.string.minutes_past },
-        present = { Res.string.minutes },
-        future = { Res.string.minutes_future }
-    ),
-    Hours(
-        past = { Res.string.hours_past },
-        present = { Res.string.hours },
-        future = { Res.string.hours_future }
-    ),
-    Days(
-        past = { Res.string.days_past },
-        present = { Res.string.days },
-        future = { Res.string.days_future }
-    ),
-    Weeks(
-        past = { Res.string.weeks_past },
-        present = { Res.string.weeks },
-        future = { Res.string.weeks_future }
-    ),
-    Months(
-        past = { Res.string.months_past },
-        present = { Res.string.months },
-        future = { Res.string.months_future }
-    ),
-    Years(
-        past = { Res.string.years_past },
-        present = { Res.string.years },
-        future = { Res.string.years_future }
-    );
+    Seconds({ it.seconds }),
+    Minutes({ it.minutes }),
+    Hours({ it.hours }),
+    Days({ it.days }),
+    Weeks({ it.weeks }),
+    Months({ it.months }),
+    Years({ it.years });
 
     fun format(value: Int, relativeTime: RelativeTime): String {
-        return when (relativeTime) {
-            RelativeTime.Past -> past().optionallyFormat(value) ?: present().format(value)
-            RelativeTime.Present -> present().format(value)
-            RelativeTime.Future -> future().optionallyFormat(value) ?: present().format(value)
+        val dateTimeStrings = strings.dateTime
+        val tenseForms = forms(dateTimeStrings)
+        val pluralCategory = dateTimeStrings.plural(value)
+        val correctTense = when (relativeTime) {
+            RelativeTime.Past -> tenseForms.past
+            RelativeTime.Future -> tenseForms.future
+            RelativeTime.Present -> tenseForms.present
         }
+        return correctTense[pluralCategory]
+            ?: tenseForms.present[pluralCategory]
+            ?: error("No translation for $value $this in '${localisation.languageTag}'")
     }
 }

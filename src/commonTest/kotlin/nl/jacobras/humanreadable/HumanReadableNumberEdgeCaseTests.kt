@@ -2,12 +2,11 @@ package nl.jacobras.humanreadable
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import io.github.skeptick.libres.LibresSettings
 import kotlin.test.Test
 
 class HumanReadableNumberEdgeCaseTests {
     init {
-        LibresSettings.languageCode = "en"
+        HumanReadable.languageTag = "en"
     }
 
     @Test

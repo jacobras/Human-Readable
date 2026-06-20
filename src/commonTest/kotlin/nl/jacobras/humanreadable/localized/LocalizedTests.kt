@@ -2,7 +2,6 @@ package nl.jacobras.humanreadable.localized
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import io.github.skeptick.libres.LibresSettings
 import nl.jacobras.humanreadable.DistanceUnit
 import nl.jacobras.humanreadable.HumanReadable
 import kotlin.test.Test
@@ -49,7 +48,7 @@ class LocalizedTests {
 
     @Test
     fun ar_arabic() {
-        LibresSettings.languageCode = "ar"
+        HumanReadable.languageTag = "ar"
         assertThat(HumanReadable.duration(0.seconds)).isEqualTo("0 ثانية")
         assertThat(HumanReadable.duration(1.seconds)).isEqualTo("ثانية")
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("ثانيتان")
@@ -75,7 +74,7 @@ class LocalizedTests {
 
     @Test
     fun cs_czech() {
-        LibresSettings.languageCode = "cs"
+        HumanReadable.languageTag = "cs"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 sekundy")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1 000 000,34")
@@ -102,7 +101,7 @@ class LocalizedTests {
 
     @Test
     fun de_german() {
-        LibresSettings.languageCode = "de"
+        HumanReadable.languageTag = "de"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 Sekunden")
 
         assertThat(HumanReadable.duration(twoMonths)).isEqualTo("2 Monate")
@@ -115,7 +114,7 @@ class LocalizedTests {
 
     @Test
     fun el_greek() {
-        LibresSettings.languageCode = "el"
+        HumanReadable.languageTag = "el"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 δευτερόλεπτα")
         assertThat(HumanReadable.timeAgo(oneWeekAgo)).isEqualTo("1 εβδομάδα πριν")
         assertThat(HumanReadable.timeAgo(oneYearFromNow)).isEqualTo("σε 1 έτος")
@@ -132,7 +131,7 @@ class LocalizedTests {
 
     @Test
     fun en_english() {
-        LibresSettings.languageCode = "en"
+        HumanReadable.languageTag = "en"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 seconds")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1,000,000.34")
@@ -147,7 +146,7 @@ class LocalizedTests {
 
     @Test
     fun es_spanish() {
-        LibresSettings.languageCode = "es"
+        HumanReadable.languageTag = "es"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 segundos")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
@@ -156,7 +155,7 @@ class LocalizedTests {
 
     @Test
     fun fi_finnish() {
-        LibresSettings.languageCode = "fi"
+        HumanReadable.languageTag = "fi"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 sekuntia")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1 000 000,34")
@@ -165,7 +164,7 @@ class LocalizedTests {
 
     @Test
     fun fr_french() {
-        LibresSettings.languageCode = "fr"
+        HumanReadable.languageTag = "fr"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 secondes")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1 000 000,34")
@@ -176,7 +175,7 @@ class LocalizedTests {
 
     @Test
     fun id_indonesian() {
-        LibresSettings.languageCode = "id"
+        HumanReadable.languageTag = "id"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 detik")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
@@ -185,7 +184,7 @@ class LocalizedTests {
 
     @Test
     fun it_italian() {
-        LibresSettings.languageCode = "it"
+        HumanReadable.languageTag = "it"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 secondi")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
@@ -194,7 +193,7 @@ class LocalizedTests {
 
     @Test
     fun ja_japanese() {
-        LibresSettings.languageCode = "ja"
+        HumanReadable.languageTag = "ja"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 秒")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1,000,000.34")
@@ -203,7 +202,7 @@ class LocalizedTests {
 
     @Test
     fun kk_kazakh() {
-        LibresSettings.languageCode = "kk"
+        HumanReadable.languageTag = "kk"
         assertThat(HumanReadable.timeAgo(now)).isEqualTo("қазір")
         assertThat(HumanReadable.duration(twoSeconds)).isEqualTo("2 секунд")
         assertThat(HumanReadable.timeAgo(twoSecondsAgo, baseInstant = now)).isEqualTo("2 секунд бұрын")
@@ -230,7 +229,7 @@ class LocalizedTests {
 
     @Test
     fun ko_korean() {
-        LibresSettings.languageCode = "ko"
+        HumanReadable.languageTag = "ko"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 초")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1,000,000.34")
@@ -239,7 +238,7 @@ class LocalizedTests {
 
     @Test
     fun nl_dutch() {
-        LibresSettings.languageCode = "nl"
+        HumanReadable.languageTag = "nl"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 seconden")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
@@ -254,7 +253,7 @@ class LocalizedTests {
 
     @Test
     fun pl_polish() {
-        LibresSettings.languageCode = "pl"
+        HumanReadable.languageTag = "pl"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 sekundy")
 
         assertThat(HumanReadable.duration(oneMinute)).isEqualTo("1 minuta")
@@ -267,7 +266,7 @@ class LocalizedTests {
 
     @Test
     fun pt_portuguese() {
-        LibresSettings.languageCode = "pt"
+        HumanReadable.languageTag = "pt"
         assertThat(HumanReadable.duration(0.seconds)).isEqualTo("0 segundo")
         assertThat(HumanReadable.duration(1.seconds)).isEqualTo("1 segundo")
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 segundos")
@@ -278,7 +277,7 @@ class LocalizedTests {
 
     @Test
     fun ru_russian() {
-        LibresSettings.languageCode = "ru"
+        HumanReadable.languageTag = "ru"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 секунды")
 
         assertThat(HumanReadable.duration(oneMinute)).isEqualTo("1 минута")
@@ -291,7 +290,7 @@ class LocalizedTests {
 
     @Test
     fun tr_turkish() {
-        LibresSettings.languageCode = "tr"
+        HumanReadable.languageTag = "tr"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 saniye")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
@@ -300,7 +299,7 @@ class LocalizedTests {
 
     @Test
     fun uk_ukrainian() {
-        LibresSettings.languageCode = "uk"
+        HumanReadable.languageTag = "uk"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 секунди")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1 000 000,34")
@@ -309,7 +308,7 @@ class LocalizedTests {
 
     @Test
     fun uz_uzbek() {
-        LibresSettings.languageCode = "uz"
+        HumanReadable.languageTag = "uz"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 soniya")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
@@ -318,7 +317,7 @@ class LocalizedTests {
 
     @Test
     fun vi_vietnamese() {
-        LibresSettings.languageCode = "vi"
+        HumanReadable.languageTag = "vi"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 giây")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
@@ -327,7 +326,7 @@ class LocalizedTests {
 
     @Test
     fun zh_chinese() {
-        LibresSettings.languageCode = "zh"
+        HumanReadable.languageTag = "zh"
         assertThat(HumanReadable.duration(2.seconds)).isEqualTo("2 秒")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1,000,000.34")

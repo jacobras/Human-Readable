@@ -1,8 +1,8 @@
 package nl.jacobras.humanreadable
 
+import nl.jacobras.humanreadable.HumanReadable.strings
 import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
-import HumanReadableRes as Res
 
 /**
  * Returns the difference between [baseInstant] and [instant], in human-readable format.
@@ -20,11 +20,11 @@ internal fun formatTimeAgo(
     val secondsAgo = diff.inWholeSeconds
 
     return when {
-        secondsAgo < 0 -> Res.string.time_in_future.format(
+        secondsAgo < 0 -> strings.dateTime.timeInFuture(
             formatDuration(diff.absoluteValue, relativeTime = RelativeTime.Future)
         )
-        secondsAgo <= 1 -> Res.string.now
-        else -> Res.string.time_ago.format(
+        secondsAgo <= 1 -> strings.dateTime.now
+        else -> strings.dateTime.timeAgo(
             formatDuration(diff.absoluteValue, relativeTime = RelativeTime.Past)
         )
     }
