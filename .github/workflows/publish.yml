@@ -9,7 +9,7 @@ jobs:
             contents: write
 
         steps:
-            - uses: actions/checkout@v6
+            - uses: actions/checkout@v7
 
             - name: Build setup
               uses: ./.github/actions/build-setup
