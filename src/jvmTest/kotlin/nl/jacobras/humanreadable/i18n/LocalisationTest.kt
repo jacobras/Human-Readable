@@ -36,6 +36,22 @@ class LocalisationTest {
     }
 
     @Test
+    fun `setting requested language tag`() {
+        val localisation = Localisation()
+        localisation.requestedLanguageTag = "de"
+
+        assertThat(localisation.languageTag).isEqualTo("de")
+    }
+
+    @Test
+    fun `setting requested language tag with region`() {
+        val localisation = Localisation()
+        localisation.requestedLanguageTag = "fr-FR"
+
+        assertThat(localisation.languageTag).isEqualTo("fr")
+    }
+
+    @Test
     fun `languageTag falls back to a custom fallback if system language is not supported`() {
         // Given a system language of a language that is not supported
         Locale.setDefault(Locale.forLanguageTag("xx-XX"))
