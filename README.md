@@ -2,6 +2,8 @@
 
 ![Android](http://img.shields.io/badge/-android-6EDB8D.svg?style=flat)
 ![iOS](http://img.shields.io/badge/-ios-CDCDCD.svg?style=flat)
+![tvOS](http://img.shields.io/badge/-tvos-808080.svg?style=flat)
+![watchOS](http://img.shields.io/badge/-watchos-D32D41.svg?style=flat)
 ![JS](http://img.shields.io/badge/-js-F8DB5D.svg?style=flat)
 ![wasm](https://img.shields.io/badge/-wasm-624DE9.svg?style=flat)
 
