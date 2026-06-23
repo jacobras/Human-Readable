@@ -15,7 +15,7 @@ internal class Localisation {
      */
     var requestedLanguageTag = systemLanguageTag()
         set(value) {
-            field = value.substringBefore("-")
+            field = value.lowercase().substringBefore("-")
             currentTagAndStrings = null
         }
 
