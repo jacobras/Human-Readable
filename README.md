@@ -13,11 +13,11 @@ This library only supports [kotlinx-datetime](https://github.com/Kotlin/kotlinx-
 
 The library is published to Maven Central.
 
-**Note:** HumanReadable 1.12.0 requires kotlinx-datetime 0.7+, see https://github.com/jacobras/Human-Readable/issues/148.
+**Note:** HumanReadable 1.12+ requires kotlinx-datetime 0.7+, see https://github.com/jacobras/Human-Readable/issues/148.
 
 ```kotlin
 dependencies {
-    implementation("nl.jacobras:Human-Readable:1.12.3")
+    implementation("nl.jacobras:Human-Readable:1.13.0")
 }
 ```
 

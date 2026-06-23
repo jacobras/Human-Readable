@@ -4,13 +4,13 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.compose.compiler) apply false
-    id("com.vanniktech.maven.publish") version "0.36.0"
+    id("com.vanniktech.maven.publish") version "0.37.0"
     id("io.github.skeptick.libres") version "1.2.4"
     signing
 }
 
 group = "nl.jacobras"
-version = "1.12.3"
+version = "1.13.0"
 
 mavenPublishing {
     publishToMavenCentral()
