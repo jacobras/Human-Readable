@@ -2,7 +2,6 @@ package nl.jacobras.humanreadable
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import io.github.skeptick.libres.LibresSettings
 import kotlin.test.Test
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
@@ -12,7 +11,7 @@ import kotlin.time.Duration.Companion.seconds
 class HumanReadableDurationTests {
 
     init {
-        LibresSettings.languageCode = "en"
+        HumanReadable.languageTag = "en"
     }
 
     @Test

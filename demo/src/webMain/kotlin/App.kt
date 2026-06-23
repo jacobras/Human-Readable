@@ -31,7 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import io.github.skeptick.libres.LibresSettings
+import nl.jacobras.humanreadable.HumanReadable
 import ui.AbbreviationDemo
 import ui.DistanceDemo
 import ui.FileSizeDemo
@@ -43,7 +43,7 @@ import ui.TimeDemo
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 internal fun App() {
-    var selectedLanguageCode by remember { mutableStateOf(LibresSettings.languageCode ?: "en") }
+    var selectedLanguageCode by remember { mutableStateOf(HumanReadable.languageTag) }
     val layoutDirection = if (selectedLanguageCode == "ar") {
         LayoutDirection.Rtl
     } else {
@@ -52,7 +52,7 @@ internal fun App() {
 
     fun onSelectLanguage(code: String) {
         selectedLanguageCode = code
-        LibresSettings.languageCode = code
+        HumanReadable.languageTag = code
     }
 
     MaterialTheme {
@@ -74,7 +74,7 @@ internal fun App() {
                     ) {
                         Text(
                             text = buildAnnotatedString {
-                                append("LibresSettings.languageCode = \"")
+                                append("HumanReadable.languageTag = \"")
                                 withStyle(monoBodyStringBold) {
                                     append(selectedLanguageCode)
                                 }

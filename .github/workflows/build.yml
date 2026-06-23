@@ -38,8 +38,6 @@ jobs:
                   require_tests: true
                   report_paths: "**/build/test-results/**/TEST-*.xml"
 
-                  # compileProductionExecutableKotlinJs
-
             - name: Build production JS file for size comparison
               run: ./gradlew compileProductionExecutableKotlinJs
 

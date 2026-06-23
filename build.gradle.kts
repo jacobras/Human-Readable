@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.compose.compiler) apply false
     id("com.vanniktech.maven.publish") version "0.37.0"
-    id("io.github.skeptick.libres") version "1.2.4"
     signing
 }
 
@@ -52,6 +51,11 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
+    tvosArm64()
+    tvosSimulatorArm64()
+    watchosArm32()
+    watchosArm64()
+    watchosSimulatorArm64()
     js {
         browser {
             testTask {
@@ -86,21 +90,15 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(libs.kotlinX.datetime)
-            }
+        commonMain.dependencies {
+            implementation(libs.kotlinX.datetime)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
             implementation(libs.assertK)
         }
-        val wasmJsMain by getting
-        val appleAndJsMain by creating {
-            dependsOn(commonMain)
-            appleMain.get().dependsOn(this)
-            jsMain.get().dependsOn(this)
-            wasmJsMain.dependsOn(this)
+        webMain.dependencies {
+            implementation(libs.kotlinX.browser)
         }
     }
 }
@@ -109,10 +107,6 @@ kotlin {
 tasks.withType<AbstractPublishToMaven>().configureEach {
     val signingTasks = tasks.withType<Sign>()
     mustRunAfter(signingTasks)
-}
-
-libres {
-    generatedClassName = "HumanReadableRes"
 }
 
 signing {

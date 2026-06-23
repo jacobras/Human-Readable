@@ -2,6 +2,8 @@
 
 ![Android](http://img.shields.io/badge/-android-6EDB8D.svg?style=flat)
 ![iOS](http://img.shields.io/badge/-ios-CDCDCD.svg?style=flat)
+![tvOS](http://img.shields.io/badge/-tvos-808080.svg?style=flat)
+![watchOS](http://img.shields.io/badge/-watchos-D32D41.svg?style=flat)
 ![JS](http://img.shields.io/badge/-js-F8DB5D.svg?style=flat)
 ![wasm](https://img.shields.io/badge/-wasm-624DE9.svg?style=flat)
 
@@ -40,7 +42,8 @@ HumanReadable.duration(7.days) // "1 week"
 HumanReadable.duration(544.hours) // "3 weeks"
 ```
 
-**Note**: The formatter switches to a bigger unit (minute, hour, day, ...) as soon as it can. See [Precision](#datetime-precision).
+**Note**: The formatter switches to a bigger unit (minute, hour, day, ...) as soon as it can.
+See [Precision](#datetime-precision).
 
 ### 📂 File size
 
@@ -54,7 +57,7 @@ HumanReadable.fileSize(21_947_282_882, decimals = 2) // "20.44 GB" in English / 
 
 ### 🔢 Number abbreviation
 
-Available since version 1.8, localized since 1.10.
+Available since version 1.8, localised since 1.10.
 
 ```kotlin
 HumanReadable.abbreviation(3_000) // "3K"
@@ -93,10 +96,11 @@ HumanReadable.distance(value = 5350, unit = DistanceUnit.Foot) // "1.0 mi"
 HumanReadable.distance(value = 28512, unit = DistanceUnit.Foot, decimals = 2) // "5.40 mi"
 ```
 
-**Note:** numbers in meters and feet are always formatted with 0 decimals. The passed in
+**Note:** numbers in meters and feet are always formatted with zero decimals. The passed in
 number of decimals is only used for the larger units kilometers and miles.
 
 ## Date/time precision
+
 The formatter switches to a bigger unit (minute, hour, day, ...) as soon as it can.
 For example:
 
@@ -112,21 +116,21 @@ This behaviour may become configurable in future releases.
 
 ## Localisation
 
-The library uses the small [Libres](https://github.com/Skeptick/libres) library for its string resources. It detects the
-current locale by default, but it's changeable on runtime.
-See [Libres: Changing Localization](https://github.com/Skeptick/libres/blob/master/docs/LOCALIZATION.md#changing-localization).
-
-You don't need to manually import Libres, as Gradle already pulls it in along with HumanReadable.
+The library uses an internal i18n mechanism. It detects the current locale by default, but it's changeable at
+runtime via `HumanReadable.languageTag`:
 
 ```kotlin
 HumanReadable.timeAgo(instant) // "3 days ago"
 
-LibresSettings.languageCode = "nl"
+HumanReadable.languageTag = "nl"
 HumanReadable.timeAgo(instant) // "3 dagen geleden"
 
-LibresSettings.languageCode = "fr"
+HumanReadable.languageTag = "fr"
 HumanReadable.timeAgo(instant) // "il y a 3 jours"
 ```
+
+If the requested locale is not supported, the library will fall back to `HumanReadable.fallbackLanguageTag`, which by
+default is set to English.
 
 ### Supported languages
 
@@ -134,7 +138,7 @@ HumanReadable.timeAgo(instant) // "il y a 3 jours"
 * Czech
 * Chinese (since 1.3.0)
 * Dutch
-* English (**default**)
+* **English**
 * Finnish (since 1.7.0)
 * French
 * German
@@ -157,7 +161,10 @@ HumanReadable.timeAgo(instant) // "il y a 3 jours"
 
 Missing a language? Feel free to open an issue about it. Or, add it yourself:
 
-1. Fork the code and navigate to [src/commonMain/libres/strings/](https://github.com/jacobras/Human-Readable/tree/main/src/commonMain/libres/strings)
-2. Add a file named `time_units_[LANGUAGE CODE].xml` (see [Unicode: CLDR chart](https://www.unicode.org/cldr/charts/42/supplemental/language_plural_rules.html) for the code & plural categories).
-3. If the language deviates from English data units (like French does), also add `data_units_[LANGUAGE CODE].xml`.
+1. Fork the code and navigate to `src/commonMain/kotlin/nl/jacobras/humanreadable/i18n/translations`
+2. Add a file named `XxStrings.kt` (where `Xx` is
+   the [language code](https://www.unicode.org/cldr/charts/48/supplemental/language_plural_rules.html)). Follow the
+   example of other translations.
+3. Add a new entry to the `translations` map in
+   `src/commonMain/kotlin/nl/jacobras/humanreadable/i18n/translations.kt`.
 4. Open a PR.
