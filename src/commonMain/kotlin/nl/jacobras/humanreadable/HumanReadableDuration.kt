@@ -49,6 +49,8 @@ internal fun formatDuration(
  * Note about Arabic: normally this produces "$count $unit", but for Arabic the
  * singular (1) and dual (2) forms are encoded in the unit word itself, so the
  * numeral is omitted.
+ *
+ * Note about Korean: the number and unit are written without a separating space, e.g. "2초".
  */
 private fun formatUnit(
     count: Int,
@@ -56,9 +58,10 @@ private fun formatUnit(
     relativeTime: RelativeTime
 ): String {
     val unitText = unit.format(count, relativeTime)
-    return if (HumanReadable.localisation.languageTag == "ar" && (count == 1 || count == 2)) {
-        unitText
-    } else {
-        "$count $unitText"
+    val languageTag = HumanReadable.localisation.languageTag
+    return when (languageTag) {
+        "ar" if (count == 1 || count == 2) -> unitText
+        "ko" -> "$count$unitText"
+        else -> "$count $unitText"
     }
 }

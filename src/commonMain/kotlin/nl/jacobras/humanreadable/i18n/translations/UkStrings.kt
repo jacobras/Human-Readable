@@ -2,6 +2,7 @@ package nl.jacobras.humanreadable.i18n.translations
 
 import nl.jacobras.humanreadable.i18n.Plural
 import nl.jacobras.humanreadable.i18n.presentTense
+import nl.jacobras.humanreadable.i18n.multipleTenses
 import nl.jacobras.humanreadable.i18n.DateTimeStrings
 import nl.jacobras.humanreadable.i18n.HumanReadableStrings
 import nl.jacobras.humanreadable.i18n.NumberStrings
@@ -15,9 +16,18 @@ internal val UkStrings = HumanReadableStrings(
                 else -> Plural.Many
             }
         },
-        seconds = presentTense(one = "секунду", few = "секунди", many = "секунд"),
-        minutes = presentTense(one = "хвилину", few = "хвилини", many = "хвилин"),
-        hours = presentTense(one = "годину", few = "години", many = "годин"),
+        seconds = multipleTenses {
+            present(one = "секунда", few = "секунди", many = "секунд")
+            pastOrFuture(one = "секунду")
+        },
+        minutes = multipleTenses {
+            present(one = "хвилина", few = "хвилини", many = "хвилин")
+            pastOrFuture(one = "хвилину")
+        },
+        hours = multipleTenses {
+            present(one = "година", few = "години", many = "годин")
+            pastOrFuture(one = "годину")
+        },
         days = presentTense(one = "день", few = "дні", many = "днів"),
         weeks = presentTense(one = "тиждень", few = "тижні", many = "тижнів"),
         months = presentTense(one = "місяць", few = "місяці", many = "місяців"),
