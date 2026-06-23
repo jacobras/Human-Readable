@@ -2,6 +2,7 @@ package nl.jacobras.humanreadable.i18n.translations
 
 import nl.jacobras.humanreadable.i18n.Plural
 import nl.jacobras.humanreadable.i18n.presentTense
+import nl.jacobras.humanreadable.i18n.multipleTenses
 import nl.jacobras.humanreadable.i18n.DateTimeStrings
 import nl.jacobras.humanreadable.i18n.HumanReadableStrings
 import nl.jacobras.humanreadable.i18n.NumberStrings
@@ -14,7 +15,10 @@ internal val ElStrings = HumanReadableStrings(
         hours = presentTense(one = "ώρα", other = "ώρες"),
         days = presentTense(one = "μέρα", other = "μέρες"),
         weeks = presentTense(one = "εβδομάδα", other = "εβδομάδες"),
-        months = presentTense(one = "μήνα", other = "μήνες"),
+        months = multipleTenses {
+            present(one = "μήνας", other = "μήνες")
+            pastOrFuture(one = "μήνα")
+        },
         years = presentTense(one = "έτος", other = "έτη"),
         timeAgo = { "$it πριν" },
         timeInFuture = { "σε $it" },
