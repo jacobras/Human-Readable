@@ -8,13 +8,14 @@ internal class Localisation {
     private var currentTagAndStrings: Pair<String, HumanReadableStrings>? = null
 
     /**
-     * The requested language tag (e.g. `"en"`, `"fr"`).
+     * The requested language tag (e.g. `"en"`, `"fr"`). A language tag with a region, e.g. `"en-US"`, may also
+     * be passed in. The region code is ignored.
      *
      * @see languageTag for the actual language tag used, which may differ if the requested one is not supported.
      */
     var requestedLanguageTag = systemLanguageTag()
         set(value) {
-            field = value
+            field = value.substringBefore("-")
             currentTagAndStrings = null
         }
 
