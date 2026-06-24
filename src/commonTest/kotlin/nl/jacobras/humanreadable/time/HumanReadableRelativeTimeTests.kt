@@ -1,7 +1,8 @@
-package nl.jacobras.humanreadable
+package nl.jacobras.humanreadable.time
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import nl.jacobras.humanreadable.HumanReadable
 import nl.jacobras.humanreadable.localized.LocalisedTests
 import kotlin.test.Test
 import kotlin.time.Clock
