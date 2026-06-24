@@ -1,4 +1,4 @@
-package nl.jacobras.humanreadable
+package nl.jacobras.humanreadable.time
 
 /**
  * Indicates in what time frame the requested time unit needs
