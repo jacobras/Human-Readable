@@ -9,6 +9,7 @@ import nl.jacobras.humanreadable.HumanReadable.number
 import nl.jacobras.humanreadable.i18n.HumanReadableStrings
 import nl.jacobras.humanreadable.i18n.Localisation
 import nl.jacobras.humanreadable.time.RelativeTime
+import nl.jacobras.humanreadable.time.Rounding
 import nl.jacobras.humanreadable.time.formatDuration
 import nl.jacobras.humanreadable.time.formatTimeAgo
 import kotlin.time.Clock
@@ -57,9 +58,14 @@ public object HumanReadable {
     @OptIn(ExperimentalTime::class)
     public fun timeAgo(
         instant: Instant,
-        baseInstant: Instant = Clock.System.now()
+        baseInstant: Instant = Clock.System.now(),
+        rounding: Rounding = Rounding.HalfUp
     ): String {
-        return formatTimeAgo(instant, baseInstant)
+        return formatTimeAgo(
+            instant = instant,
+            baseInstant = baseInstant,
+            rounding = rounding
+        )
     }
 
     /**
@@ -69,8 +75,15 @@ public object HumanReadable {
      * @param duration The [Duration] to format.
      * @return a formatted string
      */
-    public fun duration(duration: Duration): String {
-        return formatDuration(duration, RelativeTime.Present)
+    public fun duration(
+        duration: Duration,
+        rounding: Rounding = Rounding.HalfUp
+    ): String {
+        return formatDuration(
+            duration = duration,
+            relativeTime = RelativeTime.Present,
+            rounding = rounding
+        )
     }
 
     /**

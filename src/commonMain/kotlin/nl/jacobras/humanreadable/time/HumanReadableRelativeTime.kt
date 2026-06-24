@@ -14,18 +14,27 @@ import kotlin.time.Instant
 @OptIn(ExperimentalTime::class)
 internal fun formatTimeAgo(
     instant: Instant,
-    baseInstant: Instant
+    baseInstant: Instant,
+    rounding: Rounding
 ): String {
     val diff = baseInstant - instant
     val secondsAgo = diff.inWholeSeconds
 
     return when {
         secondsAgo < 0 -> strings.dateTime.timeInFuture(
-            formatDuration(diff.absoluteValue, relativeTime = RelativeTime.Future)
+            formatDuration(
+                duration = diff.absoluteValue,
+                relativeTime = RelativeTime.Future,
+                rounding = rounding
+            )
         )
         secondsAgo <= 1 -> strings.dateTime.now
         else -> strings.dateTime.timeAgo(
-            formatDuration(diff.absoluteValue, relativeTime = RelativeTime.Past)
+            formatDuration(
+                duration = diff.absoluteValue,
+                relativeTime = RelativeTime.Past,
+                rounding = rounding
+            )
         )
     }
 }

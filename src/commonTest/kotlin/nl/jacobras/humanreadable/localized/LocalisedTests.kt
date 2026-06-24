@@ -4,6 +4,7 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import nl.jacobras.humanreadable.DistanceUnit
 import nl.jacobras.humanreadable.HumanReadable
+import nl.jacobras.humanreadable.time.Rounding
 import kotlin.test.Test
 import kotlin.time.Clock
 import kotlin.time.Duration.Companion.days
@@ -91,7 +92,7 @@ class LocalisedTests {
         assertThat(HumanReadable.duration(twoSeconds)).isEqualTo("2 sekundy")
         assertThat(HumanReadable.duration(oneDay)).isEqualTo("1 den")
         assertThat(HumanReadable.duration(twoDays)).isEqualTo("2 dny")
-        assertThat(HumanReadable.duration(fiveDays)).isEqualTo("5 dní")
+        assertThat(HumanReadable.duration(fiveDays, rounding = Rounding.Floor)).isEqualTo("5 dní")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1 000 000,34")
         assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
@@ -106,7 +107,9 @@ class LocalisedTests {
         assertThat(HumanReadable.timeAgo(oneHourFromNow, baseInstant = now)).isEqualTo("za 1 hodinu")
         assertThat(HumanReadable.timeAgo(oneDayAgo, baseInstant = now)).isEqualTo("před 1 dnem")
         assertThat(HumanReadable.timeAgo(twoDaysAgo, baseInstant = now)).isEqualTo("před 2 dny")
-        assertThat(HumanReadable.timeAgo(now - fiveDays, baseInstant = now)).isEqualTo("před 5 dny")
+        assertThat(
+            HumanReadable.timeAgo(now - fiveDays, baseInstant = now, rounding = Rounding.Floor)
+        ).isEqualTo("před 5 dny")
         assertThat(HumanReadable.timeAgo(oneWeekAgo, baseInstant = now)).isEqualTo("před 1 týdnem")
         assertThat(HumanReadable.timeAgo(twoMonthsAgo, baseInstant = now)).isEqualTo("před 2 měsíci")
         assertThat(HumanReadable.timeAgo(oneYearAgo, baseInstant = now)).isEqualTo("před 1 rokem")
