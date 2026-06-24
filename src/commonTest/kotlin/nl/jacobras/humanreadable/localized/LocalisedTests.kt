@@ -16,7 +16,7 @@ import kotlin.time.Instant
  * Smoke test that verifies all supported languages have working plural formatting.
  */
 @OptIn(ExperimentalTime::class)
-class LocalizedTests {
+class LocalisedTests {
 
     private val now: Instant = Clock.System.now()
     private val oneSecondFromNow = now + 1.seconds
