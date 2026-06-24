@@ -8,10 +8,7 @@ import nl.jacobras.humanreadable.HumanReadable.languageTag
 import nl.jacobras.humanreadable.HumanReadable.number
 import nl.jacobras.humanreadable.i18n.HumanReadableStrings
 import nl.jacobras.humanreadable.i18n.Localisation
-import nl.jacobras.humanreadable.time.RelativeTime
-import nl.jacobras.humanreadable.time.Rounding
-import nl.jacobras.humanreadable.time.formatDuration
-import nl.jacobras.humanreadable.time.formatTimeAgo
+import nl.jacobras.humanreadable.time.*
 import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
@@ -53,18 +50,23 @@ public object HumanReadable {
      * instants in the future. For example, an instant that's 5 hours ago will return "5 hours ago".
      *
      * @param instant The [Instant] to format.
+     * @param baseInstant The base/starting [Instant], defaulting to "now".
+     * @param rounding The [Rounding] strategy to use.
+     * @param units The [TimeUnit]s to limit to during formatting.
      * @return a formatted string
      */
     @OptIn(ExperimentalTime::class)
     public fun timeAgo(
         instant: Instant,
         baseInstant: Instant = Clock.System.now(),
-        rounding: Rounding = Rounding.HalfUp
+        rounding: Rounding = Rounding.HalfUp,
+        units: Set<TimeUnit> = TimeUnit.all
     ): String {
         return formatTimeAgo(
             instant = instant,
             baseInstant = baseInstant,
-            rounding = rounding
+            rounding = rounding,
+            units = units
         )
     }
 
@@ -73,16 +75,20 @@ public object HumanReadable {
      * For example, a duration of 3 seconds returns "3 seconds".
      *
      * @param duration The [Duration] to format.
+     * @param rounding The [Rounding] strategy to use.
+     * @param units The [TimeUnit]s to limit to during formatting.
      * @return a formatted string
      */
     public fun duration(
         duration: Duration,
-        rounding: Rounding = Rounding.HalfUp
+        rounding: Rounding = Rounding.HalfUp,
+        units: Set<TimeUnit> = TimeUnit.all
     ): String {
         return formatDuration(
             duration = duration,
             relativeTime = RelativeTime.Present,
-            rounding = rounding
+            rounding = rounding,
+            units = units
         )
     }
 
