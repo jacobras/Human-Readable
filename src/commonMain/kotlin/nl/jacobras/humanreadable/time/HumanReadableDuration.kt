@@ -25,9 +25,27 @@ internal fun formatDuration(
         monthsAgo > 0 -> formatUnit(monthsAgo, TimeUnit.Months, relativeTime)
         weeksAgo > 0 -> formatUnit(weeksAgo, TimeUnit.Weeks, relativeTime)
         daysAgo > 0 -> formatUnit(daysAgo, TimeUnit.Days, relativeTime)
-        hoursAgo > 0 -> formatUnit(hoursAgo, TimeUnit.Hours, relativeTime)
-        minutesAgo > 0 -> formatUnit(minutesAgo, TimeUnit.Minutes, relativeTime)
-        else -> formatUnit(secondsAgo, TimeUnit.Seconds, relativeTime)
+        hoursAgo > 0 -> {
+            if (rounding == Rounding.UpIfClose && hoursAgo >= 23) {
+                formatUnit(1, TimeUnit.Days, relativeTime)
+            } else {
+                formatUnit(hoursAgo, TimeUnit.Hours, relativeTime)
+            }
+        }
+        minutesAgo > 0 -> {
+            if (rounding == Rounding.UpIfClose && minutesAgo >= 55) {
+                formatUnit(1, TimeUnit.Hours, relativeTime)
+            } else {
+                formatUnit(minutesAgo, TimeUnit.Minutes, relativeTime)
+            }
+        }
+        else -> {
+            if (rounding == Rounding.UpIfClose && secondsAgo >= 55) {
+                formatUnit(1, TimeUnit.Minutes, relativeTime)
+            } else {
+                formatUnit(secondsAgo, TimeUnit.Seconds, relativeTime)
+            }
+        }
     }
 }
 
@@ -57,6 +75,6 @@ private fun formatUnit(
 private fun Float.round(rounding: Rounding): Int {
     return when (rounding) {
         Rounding.Floor -> toInt()
-        Rounding.HalfUp -> roundToInt()
+        Rounding.HalfUp, Rounding.UpIfClose -> roundToInt()
     }
 }

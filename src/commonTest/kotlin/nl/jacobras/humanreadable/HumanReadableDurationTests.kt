@@ -25,9 +25,11 @@ class HumanReadableDurationTests {
     fun defaultRounding() {
         assertThat(HumanReadable.duration(1.seconds)).isEqualTo("1 second")
         assertThat(HumanReadable.duration(3.seconds)).isEqualTo("3 seconds")
+        assertThat(HumanReadable.duration(55.seconds)).isEqualTo("55 seconds")
 
         assertThat(HumanReadable.duration(1.minutes)).isEqualTo("1 minute")
         assertThat(HumanReadable.duration(3.minutes)).isEqualTo("3 minutes")
+        assertThat(HumanReadable.duration(55.minutes)).isEqualTo("55 minutes")
 
         assertThat(HumanReadable.duration(1.hours)).isEqualTo("1 hour")
         assertThat(HumanReadable.duration(3.hours)).isEqualTo("3 hours")
@@ -66,5 +68,38 @@ class HumanReadableDurationTests {
         assertThat(HumanReadable.duration(365.days, rounding = Rounding.Floor)).isEqualTo("1 year")
         assertThat(HumanReadable.duration(555.days, rounding = Rounding.Floor)).isEqualTo("1 year")
         assertThat(HumanReadable.duration(1095.days, rounding = Rounding.Floor)).isEqualTo("3 years")
+    }
+
+    @Test
+    fun upIfCloseRounding() {
+        assertThat(HumanReadable.duration(1.seconds, rounding = Rounding.UpIfClose)).isEqualTo("1 second")
+        assertThat(HumanReadable.duration(3.seconds, rounding = Rounding.UpIfClose)).isEqualTo("3 seconds")
+
+        assertThat(HumanReadable.duration(55.seconds, rounding = Rounding.UpIfClose)).isEqualTo("1 minute")
+        assertThat(HumanReadable.duration(1.minutes, rounding = Rounding.UpIfClose)).isEqualTo("1 minute")
+        assertThat(HumanReadable.duration(3.minutes, rounding = Rounding.UpIfClose)).isEqualTo("3 minutes")
+
+        assertThat(HumanReadable.duration(55.minutes, rounding = Rounding.UpIfClose)).isEqualTo("1 hour")
+        assertThat(HumanReadable.duration(1.hours, rounding = Rounding.UpIfClose)).isEqualTo("1 hour")
+        assertThat(HumanReadable.duration(3.hours, rounding = Rounding.UpIfClose)).isEqualTo("3 hours")
+
+        assertThat(HumanReadable.duration(23.hours, rounding = Rounding.UpIfClose)).isEqualTo("1 day")
+        assertThat(HumanReadable.duration(1.days, rounding = Rounding.UpIfClose)).isEqualTo("1 day")
+        assertThat(HumanReadable.duration(3.days, rounding = Rounding.UpIfClose)).isEqualTo("3 days")
+
+        assertThat(HumanReadable.duration(7.days, rounding = Rounding.UpIfClose)).isEqualTo("1 week")
+        assertThat(HumanReadable.duration(10.days, rounding = Rounding.UpIfClose)).isEqualTo("1 week")
+        assertThat(HumanReadable.duration(11.days, rounding = Rounding.UpIfClose)).isEqualTo("2 weeks")
+
+        assertThat(HumanReadable.duration(21.days, rounding = Rounding.UpIfClose)).isEqualTo("1 month")
+        assertThat(HumanReadable.duration(29.days, rounding = Rounding.UpIfClose)).isEqualTo("1 month")
+        assertThat(HumanReadable.duration(30.days, rounding = Rounding.UpIfClose)).isEqualTo("1 month")
+        assertThat(HumanReadable.duration(31.days, rounding = Rounding.UpIfClose)).isEqualTo("1 month")
+        assertThat(HumanReadable.duration(90.days, rounding = Rounding.UpIfClose)).isEqualTo("3 months")
+
+        assertThat(HumanReadable.duration(360.days, rounding = Rounding.UpIfClose)).isEqualTo("1 year")
+        assertThat(HumanReadable.duration(365.days, rounding = Rounding.UpIfClose)).isEqualTo("1 year")
+        assertThat(HumanReadable.duration(555.days, rounding = Rounding.UpIfClose)).isEqualTo("2 years")
+        assertThat(HumanReadable.duration(1095.days, rounding = Rounding.UpIfClose)).isEqualTo("3 years")
     }
 }
