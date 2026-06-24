@@ -9,38 +9,25 @@ import kotlin.time.Duration
  */
 internal fun formatDuration(
     duration: Duration,
-    relativeTime: RelativeTime
+    relativeTime: RelativeTime,
+    rounding: Rounding
 ): String {
     val secondsAgo = duration.inWholeSeconds.toInt()
+    val minutesAgo = duration.inWholeMinutes.toInt()
     val hoursAgo = duration.inWholeHours.toInt()
     val daysAgo = duration.inWholeDays.toInt()
-    val weeksAgo = (duration.inWholeDays / 7f).roundToInt()
-    val monthsAgo = (duration.inWholeDays / 30.5f).roundToInt()
-    val yearsAgo = (duration.inWholeDays / 365).toInt()
+    val weeksAgo = (duration.inWholeDays / 7f).round(rounding)
+    val monthsAgo = (duration.inWholeDays / 30.5f).round(rounding)
+    val yearsAgo = (duration.inWholeDays / 365f).round(rounding)
 
     return when {
-        secondsAgo < 60 -> {
-            formatUnit(secondsAgo, TimeUnit.Seconds, relativeTime)
-        }
-        secondsAgo < 3600 -> {
-            val minutes = duration.inWholeMinutes.toInt()
-            formatUnit(minutes, TimeUnit.Minutes, relativeTime)
-        }
-        daysAgo < 1 -> {
-            formatUnit(hoursAgo, TimeUnit.Hours, relativeTime)
-        }
-        daysAgo < 7 -> {
-            formatUnit(daysAgo, TimeUnit.Days, relativeTime)
-        }
-        daysAgo < 30 -> {
-            formatUnit(weeksAgo, TimeUnit.Weeks, relativeTime)
-        }
-        monthsAgo < 12 || yearsAgo == 0 -> {
-            formatUnit(monthsAgo, TimeUnit.Months, relativeTime)
-        }
-        else -> {
-            formatUnit(yearsAgo, TimeUnit.Years, relativeTime)
-        }
+        yearsAgo > 0 -> formatUnit(yearsAgo, TimeUnit.Years, relativeTime)
+        monthsAgo > 0 -> formatUnit(monthsAgo, TimeUnit.Months, relativeTime)
+        weeksAgo > 0 -> formatUnit(weeksAgo, TimeUnit.Weeks, relativeTime)
+        daysAgo > 0 -> formatUnit(daysAgo, TimeUnit.Days, relativeTime)
+        hoursAgo > 0 -> formatUnit(hoursAgo, TimeUnit.Hours, relativeTime)
+        minutesAgo > 0 -> formatUnit(minutesAgo, TimeUnit.Minutes, relativeTime)
+        else -> formatUnit(secondsAgo, TimeUnit.Seconds, relativeTime)
     }
 }
 
@@ -64,5 +51,12 @@ private fun formatUnit(
         "ar" if (count == 1 || count == 2) -> unitText
         "ko" -> "$count$unitText"
         else -> "$count $unitText"
+    }
+}
+
+private fun Float.round(rounding: Rounding): Int {
+    return when (rounding) {
+        Rounding.Floor -> toInt()
+        Rounding.HalfUp -> roundToInt()
     }
 }
