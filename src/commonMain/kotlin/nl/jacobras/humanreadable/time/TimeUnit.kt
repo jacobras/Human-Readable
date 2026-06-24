@@ -1,4 +1,4 @@
-package nl.jacobras.humanreadable
+package nl.jacobras.humanreadable.time
 
 import nl.jacobras.humanreadable.HumanReadable.localisation
 import nl.jacobras.humanreadable.HumanReadable.strings

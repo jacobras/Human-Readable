@@ -1,5 +1,6 @@
-package nl.jacobras.humanreadable
+package nl.jacobras.humanreadable.time
 
+import nl.jacobras.humanreadable.HumanReadable
 import kotlin.math.roundToInt
 import kotlin.time.Duration
 
