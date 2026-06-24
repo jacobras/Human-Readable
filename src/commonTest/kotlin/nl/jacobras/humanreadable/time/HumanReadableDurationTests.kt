@@ -102,4 +102,15 @@ class HumanReadableDurationTests {
         assertThat(HumanReadable.duration(555.days, rounding = Rounding.UpIfClose)).isEqualTo("2 years")
         assertThat(HumanReadable.duration(1095.days, rounding = Rounding.UpIfClose)).isEqualTo("3 years")
     }
+
+    @Test
+    fun limitedUnits() {
+        assertThat(HumanReadable.duration(400.days, units = setOf(TimeUnit.Years))).isEqualTo("1 year")
+        assertThat(HumanReadable.duration(400.days, units = setOf(TimeUnit.Months))).isEqualTo("13 months")
+        assertThat(HumanReadable.duration(400.days, units = setOf(TimeUnit.Weeks))).isEqualTo("57 weeks")
+        assertThat(HumanReadable.duration(400.days, units = setOf(TimeUnit.Days))).isEqualTo("400 days")
+        assertThat(HumanReadable.duration(400.days, units = setOf(TimeUnit.Hours))).isEqualTo("9,600 hours")
+        assertThat(HumanReadable.duration(400.days, units = setOf(TimeUnit.Minutes))).isEqualTo("576,000 minutes")
+        assertThat(HumanReadable.duration(400.days, units = setOf(TimeUnit.Seconds))).isEqualTo("34,560,000 seconds")
+    }
 }

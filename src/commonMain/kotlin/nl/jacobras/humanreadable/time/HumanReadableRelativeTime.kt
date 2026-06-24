@@ -15,7 +15,8 @@ import kotlin.time.Instant
 internal fun formatTimeAgo(
     instant: Instant,
     baseInstant: Instant,
-    rounding: Rounding
+    rounding: Rounding,
+    units: Set<TimeUnit>
 ): String {
     val diff = baseInstant - instant
     val secondsAgo = diff.inWholeSeconds
@@ -25,7 +26,8 @@ internal fun formatTimeAgo(
             formatDuration(
                 duration = diff.absoluteValue,
                 relativeTime = RelativeTime.Future,
-                rounding = rounding
+                rounding = rounding,
+                units = units
             )
         )
         secondsAgo <= 1 -> strings.dateTime.now
@@ -33,7 +35,8 @@ internal fun formatTimeAgo(
             formatDuration(
                 duration = diff.absoluteValue,
                 relativeTime = RelativeTime.Past,
-                rounding = rounding
+                rounding = rounding,
+                units = units
             )
         )
     }

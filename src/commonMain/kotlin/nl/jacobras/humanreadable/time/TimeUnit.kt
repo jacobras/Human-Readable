@@ -5,8 +5,8 @@ import nl.jacobras.humanreadable.HumanReadable.strings
 import nl.jacobras.humanreadable.i18n.DateTimeStrings
 import nl.jacobras.humanreadable.i18n.TenseForms
 
-internal enum class TimeUnit(
-    val forms: (DateTimeStrings) -> TenseForms
+public enum class TimeUnit(
+    internal val forms: (DateTimeStrings) -> TenseForms
 ) {
     Seconds({ it.seconds }),
     Minutes({ it.minutes }),
@@ -16,7 +16,7 @@ internal enum class TimeUnit(
     Months({ it.months }),
     Years({ it.years });
 
-    fun format(value: Int, relativeTime: RelativeTime): String {
+    internal fun format(value: Int, relativeTime: RelativeTime): String {
         val dateTimeStrings = strings.dateTime
         val tenseForms = forms(dateTimeStrings)
         val pluralCategory = dateTimeStrings.plural(value)
@@ -28,5 +28,9 @@ internal enum class TimeUnit(
         return correctTense[pluralCategory]
             ?: tenseForms.present[pluralCategory]
             ?: error("No translation for $value $this in '${localisation.languageTag}'")
+    }
+
+    internal companion object {
+        internal val all = entries.toSet()
     }
 }

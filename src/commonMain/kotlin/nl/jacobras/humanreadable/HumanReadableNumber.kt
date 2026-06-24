@@ -28,7 +28,6 @@ internal fun Double.formatNumber(
 
     val formattedIntegerPart = if (isNegative) "-$formattedNumberPart" else formattedNumberPart
 
-
     // Format the decimal part
     val decimalPart = if (parts.size > 1) parts[1] else ""
     val formattedDecimalPart = if (decimals > 0) {

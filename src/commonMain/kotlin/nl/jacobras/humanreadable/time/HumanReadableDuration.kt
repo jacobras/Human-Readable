@@ -1,6 +1,7 @@
 package nl.jacobras.humanreadable.time
 
 import nl.jacobras.humanreadable.HumanReadable
+import nl.jacobras.humanreadable.formatNumber
 import kotlin.math.roundToInt
 import kotlin.time.Duration
 
@@ -10,7 +11,8 @@ import kotlin.time.Duration
 internal fun formatDuration(
     duration: Duration,
     relativeTime: RelativeTime,
-    rounding: Rounding
+    rounding: Rounding,
+    units: Set<TimeUnit>
 ): String {
     val secondsAgo = duration.inWholeSeconds.toInt()
     val minutesAgo = duration.inWholeMinutes.toInt()
@@ -21,18 +23,26 @@ internal fun formatDuration(
     val yearsAgo = (duration.inWholeDays / 365f).round(rounding)
 
     return when {
-        yearsAgo > 0 -> formatUnit(yearsAgo, TimeUnit.Years, relativeTime)
-        monthsAgo > 0 -> formatUnit(monthsAgo, TimeUnit.Months, relativeTime)
-        weeksAgo > 0 -> formatUnit(weeksAgo, TimeUnit.Weeks, relativeTime)
-        daysAgo > 0 -> formatUnit(daysAgo, TimeUnit.Days, relativeTime)
-        hoursAgo > 0 -> {
+        units.contains(TimeUnit.Years) && yearsAgo > 0 -> {
+            formatUnit(yearsAgo, TimeUnit.Years, relativeTime)
+        }
+        units.contains(TimeUnit.Months) && monthsAgo > 0 -> {
+            formatUnit(monthsAgo, TimeUnit.Months, relativeTime)
+        }
+        units.contains(TimeUnit.Weeks) && weeksAgo > 0 -> {
+            formatUnit(weeksAgo, TimeUnit.Weeks, relativeTime)
+        }
+        units.contains(TimeUnit.Days) && daysAgo > 0 -> {
+            formatUnit(daysAgo, TimeUnit.Days, relativeTime)
+        }
+        units.contains(TimeUnit.Hours) && hoursAgo > 0 -> {
             if (rounding == Rounding.UpIfClose && hoursAgo >= 23) {
                 formatUnit(1, TimeUnit.Days, relativeTime)
             } else {
                 formatUnit(hoursAgo, TimeUnit.Hours, relativeTime)
             }
         }
-        minutesAgo > 0 -> {
+        units.contains(TimeUnit.Minutes) && minutesAgo > 0 -> {
             if (rounding == Rounding.UpIfClose && minutesAgo >= 55) {
                 formatUnit(1, TimeUnit.Hours, relativeTime)
             } else {
