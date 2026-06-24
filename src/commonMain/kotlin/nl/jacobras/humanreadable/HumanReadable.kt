@@ -45,7 +45,7 @@ public object HumanReadable {
         }
 
     /**
-     * Returns the difference between now and [instant], in human-readable format. Also supports
+     * Returns the difference between [baseInstant] and [instant], in human-readable format. Also supports
      * instants in the future. For example, an instant that's 5 hours ago will return "5 hours ago".
      *
      * @param instant The [Instant] to format.
