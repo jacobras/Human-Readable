@@ -73,12 +73,18 @@ private fun formatUnit(
     unit: TimeUnit,
     relativeTime: RelativeTime
 ): String {
+    val formattedCount = if (count > 1000) {
+        count.toDouble().formatNumber(decimals = 0)
+    } else {
+        count.toString()
+    }
+
     val unitText = unit.format(count, relativeTime)
     val languageTag = HumanReadable.localisation.languageTag
     return when (languageTag) {
         "ar" if (count == 1 || count == 2) -> unitText
-        "ko" -> "$count$unitText"
-        else -> "$count $unitText"
+        "ko" -> "$formattedCount$unitText"
+        else -> "$formattedCount $unitText"
     }
 }
 
