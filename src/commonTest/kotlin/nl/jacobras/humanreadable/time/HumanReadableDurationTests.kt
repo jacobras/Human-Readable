@@ -49,6 +49,7 @@ class HumanReadableDurationTests {
         assertThat(duration(29.days)).isEqualTo("1 month")
         assertThat(duration(30.days)).isEqualTo("1 month")
         assertThat(duration(31.days)).isEqualTo("1 month")
+        assertThat(duration(46.days)).isEqualTo("2 months")
         assertThat(duration(90.days)).isEqualTo("3 months")
 
         assertThat(duration(360.days)).isEqualTo("1 year")
@@ -66,6 +67,7 @@ class HumanReadableDurationTests {
         assertThat(duration(29.days, rounding = Floor)).isEqualTo("4 weeks")
         assertThat(duration(30.days, rounding = Floor)).isEqualTo("4 weeks")
         assertThat(duration(31.days, rounding = Floor)).isEqualTo("1 month")
+        assertThat(duration(46.days, rounding = Floor)).isEqualTo("1 month")
 
         assertThat(duration(360.days, rounding = Floor)).isEqualTo("11 months")
         assertThat(duration(365.days, rounding = Floor)).isEqualTo("1 year")

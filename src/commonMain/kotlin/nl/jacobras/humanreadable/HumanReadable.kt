@@ -2,6 +2,7 @@
 
 package nl.jacobras.humanreadable
 
+import kotlinx.datetime.TimeZone
 import nl.jacobras.humanreadable.HumanReadable.duration
 import nl.jacobras.humanreadable.HumanReadable.fallbackLanguageTag
 import nl.jacobras.humanreadable.HumanReadable.languageTag
@@ -51,22 +52,32 @@ public object HumanReadable {
      *
      * @param instant The [Instant] to format.
      * @param baseInstant The base/starting [Instant], defaulting to "now".
-     * @param rounding The [Rounding] strategy to use.
-     * @param units The [TimeUnit]s to limit to during formatting.
+     * @param formatStyle The [FormatStyle] to use, defaulting to [FormatStyle.Regular].
+     * @param timeZone If set, today/tomorrow/yesterday will be used.
+     * @param parts Configures the formatting of multiple parts, defaulting to 1 part.
+     * @param units The [TimeUnit]s to limit to during formatting, not limited by default.
+     * @param rounding The [Rounding] strategy to use, defaulting to [Rounding.HalfUp].
      * @return a formatted string
      */
     @OptIn(ExperimentalTime::class)
     public fun timeAgo(
         instant: Instant,
         baseInstant: Instant = Clock.System.now(),
-        rounding: Rounding = Rounding.HalfUp,
-        units: Set<TimeUnit> = TimeUnit.all
+        formatStyle: FormatStyle = FormatStyle.Regular,
+        timeZone: TimeZone? = null,
+        parts: Parts = Parts(),
+        units: Set<TimeUnit> = TimeUnit.all,
+        rounding: Rounding = Rounding.HalfUp
     ): String {
         return formatTimeAgo(
             instant = instant,
             baseInstant = baseInstant,
-            rounding = rounding,
-            units = units
+            formatStyle = formatStyle,
+            timeZone = timeZone,
+            parts = parts,
+            units = units,
+            rounding = rounding
+
         )
     }
 
@@ -75,20 +86,25 @@ public object HumanReadable {
      * For example, a duration of 3 seconds returns "3 seconds".
      *
      * @param duration The [Duration] to format.
-     * @param rounding The [Rounding] strategy to use.
-     * @param units The [TimeUnit]s to limit to during formatting.
-     * @return a formatted string
+     * @param formatStyle The [FormatStyle] to use, defaulting to [FormatStyle.Regular].
+     * @param parts Configures the formatting of multiple parts, defaulting to 1 part.
+     * @param units The [TimeUnit]s to limit to during formatting, not limited by default.
+     * @param rounding The [Rounding] strategy to use, defaulting to [Rounding.HalfUp].
      */
     public fun duration(
         duration: Duration,
-        rounding: Rounding = Rounding.HalfUp,
-        units: Set<TimeUnit> = TimeUnit.all
+        formatStyle: FormatStyle = FormatStyle.Regular,
+        parts: Parts = Parts(),
+        units: Set<TimeUnit> = TimeUnit.all,
+        rounding: Rounding = Rounding.HalfUp
     ): String {
         return formatDuration(
             duration = duration,
             relativeTime = RelativeTime.Present,
-            rounding = rounding,
-            units = units
+            formatStyle = formatStyle,
+            parts = parts,
+            units = units,
+            rounding = rounding
         )
     }
 

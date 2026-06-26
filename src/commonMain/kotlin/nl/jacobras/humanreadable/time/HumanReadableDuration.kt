@@ -7,12 +7,21 @@ import kotlin.time.Duration
 
 /**
  * Returns the given [duration] in human-readable format.
+ *
+ * @param duration The duration to format.
+ * @param relativeTime Whether this is in the past, current or future (for grammatical correctness).
+ * @param formatStyle The [FormatStyle] to use.
+ * @param parts Configures the formatting of multiple parts (defaults to 1 part).
+ * @param units The [TimeUnit]s to limit to during formatting.
+ * @param rounding The [Rounding] strategy to use.
  */
 internal fun formatDuration(
     duration: Duration,
     relativeTime: RelativeTime,
-    rounding: Rounding,
-    units: Set<TimeUnit>
+    formatStyle: FormatStyle,
+    parts: Parts,
+    units: Set<TimeUnit>,
+    rounding: Rounding
 ): String {
     val secondsAgo = duration.inWholeSeconds.toInt()
     val minutesAgo = duration.inWholeMinutes.toInt()
