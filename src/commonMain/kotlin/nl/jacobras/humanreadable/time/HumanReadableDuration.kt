@@ -36,21 +36,21 @@ internal fun formatDuration(
             formatUnit(daysAgo, TimeUnit.Days, relativeTime)
         }
         units.contains(TimeUnit.Hours) && hoursAgo > 0 -> {
-            if (rounding == Rounding.UpIfClose && hoursAgo >= 23) {
+            if (rounding == Rounding.UpIfClose && hoursAgo >= TimeUnit.Hours.upIfCloseRollover) {
                 formatUnit(1, TimeUnit.Days, relativeTime)
             } else {
                 formatUnit(hoursAgo, TimeUnit.Hours, relativeTime)
             }
         }
         units.contains(TimeUnit.Minutes) && minutesAgo > 0 -> {
-            if (rounding == Rounding.UpIfClose && minutesAgo >= 55) {
+            if (rounding == Rounding.UpIfClose && minutesAgo >= TimeUnit.Minutes.upIfCloseRollover) {
                 formatUnit(1, TimeUnit.Hours, relativeTime)
             } else {
                 formatUnit(minutesAgo, TimeUnit.Minutes, relativeTime)
             }
         }
         else -> {
-            if (rounding == Rounding.UpIfClose && secondsAgo >= 55) {
+            if (rounding == Rounding.UpIfClose && secondsAgo >= TimeUnit.Seconds.upIfCloseRollover) {
                 formatUnit(1, TimeUnit.Minutes, relativeTime)
             } else {
                 formatUnit(secondsAgo, TimeUnit.Seconds, relativeTime)
