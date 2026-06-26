@@ -2,6 +2,7 @@ package nl.jacobras.humanreadable.time
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import kotlinx.datetime.TimeZone
 import nl.jacobras.humanreadable.HumanReadable
 import nl.jacobras.humanreadable.localized.LocalisedTests
 import kotlin.test.Test
@@ -39,5 +40,30 @@ class HumanReadableRelativeTimeTests {
     @Test
     fun inPast() {
         assertThat(HumanReadable.timeAgo(now - 3.days, baseInstant = now)).isEqualTo("3 days ago")
+    }
+
+    @Test
+    fun todayTomorrowYesterday() {
+        assertThat(
+            HumanReadable.timeAgo(
+                instant = now - 1.days,
+                baseInstant = now,
+                timeZone = TimeZone.currentSystemDefault()
+            )
+        ).isEqualTo("yesterday")
+        assertThat(
+            HumanReadable.timeAgo(
+                instant = now,
+                baseInstant = now,
+                timeZone = TimeZone.currentSystemDefault()
+            )
+        ).isEqualTo("today")
+        assertThat(
+            HumanReadable.timeAgo(
+                instant = now + 1.days,
+                baseInstant = now,
+                timeZone = TimeZone.currentSystemDefault()
+            )
+        ).isEqualTo("tomorrow")
     }
 }
