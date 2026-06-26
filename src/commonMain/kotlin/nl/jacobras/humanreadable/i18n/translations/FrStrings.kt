@@ -19,7 +19,10 @@ internal val FrStrings = HumanReadableStrings(
         years = presentTense(one = "an", other = "ans"),
         timeAgo = { "il y a $it" },
         timeInFuture = { "dans $it" },
-        now = "maintenant"
+        now = "maintenant",
+        today = "aujourd'hui",
+        yesterday = "hier",
+        tomorrow = "demain"
     ),
     number = NumberStrings(groupSeparator = " ", decimalSymbol = ","),
     fileSize = FileSizeStrings(

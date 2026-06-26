@@ -34,7 +34,10 @@ internal val RuStrings = HumanReadableStrings(
         years = presentTense(one = "год", few = "года", many = "лет"),
         timeAgo = { "$it назад" },
         timeInFuture = { "через $it" },
-        now = "сейчас"
+        now = "сейчас",
+        today = "сегодня",
+        yesterday = "вчера",
+        tomorrow = "завтра"
     ),
     number = NumberStrings(groupSeparator = " ", decimalSymbol = ",")
 )

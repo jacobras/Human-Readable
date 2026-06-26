@@ -38,7 +38,10 @@ internal data class DateTimeStrings(
      */
     val timeInFuture: (String) -> String,
 
-    val now: String
+    val now: String,
+    val today: String,
+    val yesterday: String,
+    val tomorrow: String
 )
 
 /**

@@ -2,7 +2,12 @@
 
 package nl.jacobras.humanreadable
 
+import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.minus
+import kotlinx.datetime.plus
+import kotlinx.datetime.toLocalDateTime
+import kotlinx.datetime.todayIn
 import nl.jacobras.humanreadable.HumanReadable.duration
 import nl.jacobras.humanreadable.HumanReadable.fallbackLanguageTag
 import nl.jacobras.humanreadable.HumanReadable.languageTag
@@ -69,6 +74,17 @@ public object HumanReadable {
         units: Set<TimeUnit> = TimeUnit.all,
         rounding: Rounding = Rounding.HalfUp
     ): String {
+        if (timeZone != null) {
+            val localDate = instant.toLocalDateTime(timeZone).date
+            val today = Clock.System.todayIn(timeZone)
+
+            when (localDate) {
+                today.minus(1, DateTimeUnit.DAY) -> return strings.dateTime.yesterday
+                today -> return strings.dateTime.today
+                today.plus(1, DateTimeUnit.DAY) -> return strings.dateTime.tomorrow
+            }
+        }
+
         return formatTimeAgo(
             instant = instant,
             baseInstant = baseInstant,

@@ -48,7 +48,10 @@ internal val CsStrings = HumanReadableStrings(
         },
         timeAgo = { "před $it" },
         timeInFuture = { "za $it" },
-        now = "nyní"
+        now = "nyní",
+        today = "dnes",
+        yesterday = "včera",
+        tomorrow = "zítra"
     ),
     number = NumberStrings(groupSeparator = " ", decimalSymbol = ",")
 )

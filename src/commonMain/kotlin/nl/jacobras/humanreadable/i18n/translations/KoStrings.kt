@@ -17,6 +17,9 @@ internal val KoStrings = HumanReadableStrings(
         years = presentTense(other = "년"),
         timeAgo = { "$it 전" },
         timeInFuture = { "$it 후" },
-        now = "지금"
+        now = "지금",
+        today = "오늘",
+        yesterday = "어제",
+        tomorrow = "내일"
     )
 )

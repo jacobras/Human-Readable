@@ -18,7 +18,10 @@ internal val IdStrings = HumanReadableStrings(
         years = presentTense(other = "tahun"),
         timeAgo = { "$it yang lalu" },
         timeInFuture = { "dalam $it" },
-        now = "sekarang"
+        now = "sekarang",
+        today = "hari ini",
+        yesterday = "kemarin",
+        tomorrow = "besok"
     ),
     number = NumberStrings(groupSeparator = ".", decimalSymbol = ",")
 )

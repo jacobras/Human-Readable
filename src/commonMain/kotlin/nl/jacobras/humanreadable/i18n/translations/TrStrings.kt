@@ -18,7 +18,10 @@ internal val TrStrings = HumanReadableStrings(
         years = presentTense(other = "yıl"),
         timeAgo = { "$it önce" },
         timeInFuture = { "$it sonra" },
-        now = "şimdi"
+        now = "şimdi",
+        today = "bugün",
+        yesterday = "dün",
+        tomorrow = "yarın"
     ),
     number = NumberStrings(groupSeparator = ".", decimalSymbol = ",")
 )

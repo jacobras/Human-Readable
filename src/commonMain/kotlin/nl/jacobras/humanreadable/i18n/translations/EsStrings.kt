@@ -18,7 +18,10 @@ internal val EsStrings = HumanReadableStrings(
         years = presentTense(one = "año", other = "años"),
         timeAgo = { "hace $it" },
         timeInFuture = { "en $it" },
-        now = "ahora"
+        now = "ahora",
+        today = "hoy",
+        yesterday = "ayer",
+        tomorrow = "mañana"
     ),
     number = NumberStrings(groupSeparator = ".", decimalSymbol = ",")
 )

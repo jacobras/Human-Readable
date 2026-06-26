@@ -24,7 +24,10 @@ internal val PtStrings = HumanReadableStrings(
         years = presentTense(one = "ano", many = "de anos", other = "anos"),
         timeAgo = { "há $it" },
         timeInFuture = { "em $it" },
-        now = "agora"
+        now = "agora",
+        today = "hoje",
+        yesterday = "ontem",
+        tomorrow = "amanhã"
     ),
     number = NumberStrings(groupSeparator = " ", decimalSymbol = ",")
 )

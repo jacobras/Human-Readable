@@ -26,6 +26,9 @@ internal val KkStrings = HumanReadableStrings(
         years = multipleTenses { present(one = "жыл", other = "жыл"); future(one = "жылдан", other = "жылдан") },
         timeAgo = { "$it бұрын" },
         timeInFuture = { "$it кейін" },
-        now = "қазір"
+        now = "қазір",
+        today = "бүгін",
+        yesterday = "кеше",
+        tomorrow = "ертең"
     )
 )

@@ -18,7 +18,10 @@ internal val ViStrings = HumanReadableStrings(
         years = presentTense(other = "năm"),
         timeAgo = { "$it trước" },
         timeInFuture = { "sau $it" },
-        now = "bây giờ"
+        now = "bây giờ",
+        today = "hôm nay",
+        yesterday = "hôm qua",
+        tomorrow = "ngày mai"
     ),
     number = NumberStrings(groupSeparator = ".", decimalSymbol = ",")
 )

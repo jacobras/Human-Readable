@@ -17,6 +17,9 @@ internal val ZhStrings = HumanReadableStrings(
         years = presentTense(other = "年"),
         timeAgo = { "${it}之前" },
         timeInFuture = { "${it}之后" },
-        now = "现在"
+        now = "现在",
+        today = "今天",
+        yesterday = "昨天",
+        tomorrow = "明天"
     )
 )
