@@ -18,7 +18,10 @@ internal val NlStrings = HumanReadableStrings(
         years = presentTense(one = "jaar", other = "jaar"),
         timeAgo = { "$it geleden" },
         timeInFuture = { "over $it" },
-        now = "nu"
+        now = "nu",
+        today = "vandaag",
+        yesterday = "gisteren",
+        tomorrow = "morgen"
     ),
     number = NumberStrings(groupSeparator = ".", decimalSymbol = ",")
 )

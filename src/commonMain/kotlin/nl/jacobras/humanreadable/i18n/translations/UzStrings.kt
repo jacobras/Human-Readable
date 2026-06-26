@@ -39,7 +39,10 @@ internal val UzStrings = HumanReadableStrings(
         },
         timeAgo = { "$it oldin" },
         timeInFuture = { "$it keyin" },
-        now = "hozir"
+        now = "hozir",
+        today = "bugun",
+        yesterday = "kecha",
+        tomorrow = "ertaga"
     ),
     number = NumberStrings(groupSeparator = ".", decimalSymbol = ",")
 )

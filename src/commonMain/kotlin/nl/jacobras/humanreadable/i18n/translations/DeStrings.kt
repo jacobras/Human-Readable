@@ -28,7 +28,10 @@ internal val DeStrings = HumanReadableStrings(
         },
         timeAgo = { "vor $it" },
         timeInFuture = { "in $it" },
-        now = "jetzt"
+        now = "jetzt",
+        today = "heute",
+        yesterday = "gestern",
+        tomorrow = "morgen"
     ),
     number = NumberStrings(groupSeparator = ".", decimalSymbol = ",")
 )

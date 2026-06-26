@@ -34,7 +34,10 @@ internal val UkStrings = HumanReadableStrings(
         years = presentTense(one = "рік", few = "роки", many = "років"),
         timeAgo = { "$it тому" },
         timeInFuture = { "через $it" },
-        now = "зараз"
+        now = "зараз",
+        today = "сьогодні",
+        yesterday = "вчора",
+        tomorrow = "завтра"
     ),
     number = NumberStrings(groupSeparator = " ", decimalSymbol = ",")
 )

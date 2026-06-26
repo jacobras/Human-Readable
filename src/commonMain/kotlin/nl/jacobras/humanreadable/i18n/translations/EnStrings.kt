@@ -20,6 +20,9 @@ internal val EnStrings = HumanReadableStrings(
         years = presentTense(one = "year", other = "years"),
         timeAgo = { "$it ago" },
         timeInFuture = { "in $it" },
-        now = "now"
+        now = "now",
+        today = "today",
+        yesterday = "yesterday",
+        tomorrow = "tomorrow"
     )
 )

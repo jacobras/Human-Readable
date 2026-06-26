@@ -49,7 +49,10 @@ internal val ArStrings = HumanReadableStrings(
         },
         timeAgo = { "قبل $it" },
         timeInFuture = { "بعد $it" },
-        now = "الآن"
+        now = "الآن",
+        today = "اليوم",
+        tomorrow = "أمس",
+        yesterday = "غداً"
     ),
     fileSize = FileSizeStrings(
         byteSymbol = "ب",

@@ -34,7 +34,10 @@ internal val PlStrings = HumanReadableStrings(
         years = presentTense(one = "rok", few = "lata", many = "lat"),
         timeAgo = { "$it temu" },
         timeInFuture = { "za $it" },
-        now = "teraz"
+        now = "teraz",
+        today = "dzisiaj",
+        yesterday = "wczoraj",
+        tomorrow = "jutro"
     ),
     number = NumberStrings(groupSeparator = " ", decimalSymbol = ",")
 )

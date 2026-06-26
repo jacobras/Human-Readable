@@ -22,7 +22,10 @@ internal val ElStrings = HumanReadableStrings(
         years = presentTense(one = "έτος", other = "έτη"),
         timeAgo = { "$it πριν" },
         timeInFuture = { "σε $it" },
-        now = "τώρα"
+        now = "τώρα",
+        today = "σήμερα",
+        yesterday = "χθες",
+        tomorrow = "αύριο"
     ),
     number = NumberStrings(groupSeparator = ".", decimalSymbol = ",")
 )

@@ -40,7 +40,10 @@ internal val FiStrings = HumanReadableStrings(
         },
         timeAgo = { "$it sitten" },
         timeInFuture = { "$it kuluttua" },
-        now = "nyt"
+        now = "nyt",
+        today = "tänään",
+        yesterday = "eilen",
+        tomorrow = "huomenna"
     ),
     number = NumberStrings(groupSeparator = " ", decimalSymbol = ","),
     fileSize = FileSizeStrings(
