@@ -90,7 +90,7 @@ private fun formatUnit(
 
 private fun Float.round(rounding: Rounding): Int {
     return when (rounding) {
-        Rounding.Floor -> toInt()
-        Rounding.HalfUp, Rounding.UpIfClose -> roundToInt()
+        Rounding.Floor, Rounding.UpIfClose -> toInt()
+        Rounding.HalfUp -> roundToInt()
     }
 }
