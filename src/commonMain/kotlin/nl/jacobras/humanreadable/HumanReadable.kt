@@ -63,7 +63,7 @@ public object HumanReadable {
      *
      * @param instant The [Instant] to format.
      * @param baseInstant The base/starting [Instant], defaulting to "now".
-     * @param formatStyle The [FormatStyle] to use, defaulting to [FormatStyle.Regular].
+     * @param formatStyle The [FormatStyle] to use, defaulting to [FormatStyle.Long].
      * @param timeZone If set, today/tomorrow/yesterday will be used.
      * @param parts Configures the formatting of multiple parts, defaulting to 1 part.
      * @param units The [TimeUnit]s to limit to during formatting, not limited by default.
@@ -74,7 +74,7 @@ public object HumanReadable {
     public fun timeAgo(
         instant: Instant,
         baseInstant: Instant = Clock.System.now(),
-        formatStyle: FormatStyle = FormatStyle.Regular,
+        formatStyle: FormatStyle = FormatStyle.Long,
         timeZone: TimeZone? = null,
         parts: Parts = Parts(),
         units: Set<TimeUnit> = TimeUnit.all,
@@ -108,14 +108,14 @@ public object HumanReadable {
      * For example, a duration of 3 seconds returns "3 seconds".
      *
      * @param duration The [Duration] to format.
-     * @param formatStyle The [FormatStyle] to use, defaulting to [FormatStyle.Regular].
+     * @param formatStyle The [FormatStyle] to use, defaulting to [FormatStyle.Long].
      * @param parts Configures the formatting of multiple parts, defaulting to 1 part.
      * @param units The [TimeUnit]s to limit to during formatting, not limited by default.
      * @param rounding The [Rounding] strategy to use, defaulting to [Rounding.HalfUp].
      */
     public fun duration(
         duration: Duration,
-        formatStyle: FormatStyle = FormatStyle.Regular,
+        formatStyle: FormatStyle = FormatStyle.Long,
         parts: Parts = Parts(),
         units: Set<TimeUnit> = TimeUnit.all,
         rounding: Rounding = Rounding.HalfUp

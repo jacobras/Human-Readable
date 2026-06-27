@@ -5,13 +5,18 @@ import assertk.assertions.isEqualTo
 import nl.jacobras.humanreadable.HumanReadable
 import nl.jacobras.humanreadable.HumanReadable.duration
 import nl.jacobras.humanreadable.localized.LocalisedTests
-import nl.jacobras.humanreadable.time.FormatStyle.*
-import nl.jacobras.humanreadable.time.Rounding.*
+import nl.jacobras.humanreadable.time.Rounding.Floor
+import nl.jacobras.humanreadable.time.Rounding.HalfUp
+import nl.jacobras.humanreadable.time.Rounding.UpIfClose
 import kotlin.test.Test
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
+import nl.jacobras.humanreadable.time.FormatStyle.Long as FormatLong
+import nl.jacobras.humanreadable.time.FormatStyle.LongApproximate as FormatApproximate
+import nl.jacobras.humanreadable.time.FormatStyle.Narrow as FormatNarrow
+import nl.jacobras.humanreadable.time.FormatStyle.Short as FormatShort
 
 /**
  * Main test for the specific configuration options related to duration formatting.
@@ -144,13 +149,13 @@ class HumanReadableDurationTests {
     @Test
     fun smallestDuration() {
         assertThat(
-            duration(44.seconds, parts = Parts(smallestDuration = 45.seconds), formatStyle = Regular)
+            duration(44.seconds, parts = Parts(smallestDuration = 45.seconds), formatStyle = FormatLong)
         ).isEqualTo("less than 45 seconds")
         assertThat(
-            duration(44.seconds, parts = Parts(smallestDuration = 45.seconds), formatStyle = WithApproximation)
+            duration(44.seconds, parts = Parts(smallestDuration = 45.seconds), formatStyle = FormatApproximate)
         ).isEqualTo("less than 45 seconds")
         assertThat(
-            duration(44.seconds, parts = Parts(smallestDuration = 45.seconds), formatStyle = Abbreviated)
+            duration(44.seconds, parts = Parts(smallestDuration = 45.seconds), formatStyle = FormatNarrow)
         ).isEqualTo("<45s")
         assertThat(duration(45.seconds, parts = Parts(smallestDuration = 45.seconds))).isEqualTo("45 seconds")
     }
@@ -181,14 +186,30 @@ class HumanReadableDurationTests {
 
     @Test
     fun formatStyle() {
-        assertThat(duration(1.hours, formatStyle = WithApproximation)).isEqualTo("1 hour")
-        assertThat(duration(1.hours + 1.minutes, formatStyle = WithApproximation)).isEqualTo("about 1 hour")
+        assertThat(
+            duration(1.hours + 50.minutes, formatStyle = FormatLong, parts = Parts(max = 2))
+        ).isEqualTo("1 hour, 50 minutes")
+        assertThat(
+            duration(1.hours + 50.minutes, formatStyle = FormatShort, parts = Parts(max = 2))
+        ).isEqualTo("1 hr, 50 min")
+        assertThat(
+            duration(1.hours + 50.minutes, formatStyle = FormatNarrow, parts = Parts(max = 2))
+        ).isEqualTo("1h 50m")
 
-        assertThat(duration(1.hours, formatStyle = Regular)).isEqualTo("1 hour")
-        assertThat(duration(1.hours, formatStyle = Abbreviated)).isEqualTo("1h")
-        assertThat(duration(14.days, formatStyle = Regular)).isEqualTo("2 weeks")
-        assertThat(duration(14.days, formatStyle = Abbreviated)).isEqualTo("2w")
-        assertThat(duration(180.days, formatStyle = Regular)).isEqualTo("5 months")
-        assertThat(duration(180.days, formatStyle = Abbreviated)).isEqualTo("5mo")
+        assertThat(duration(1.hours, formatStyle = FormatLong)).isEqualTo("1 hour")
+        assertThat(duration(1.hours, formatStyle = FormatShort)).isEqualTo("1 hr")
+        assertThat(duration(1.hours, formatStyle = FormatNarrow)).isEqualTo("1h")
+        assertThat(duration(14.days, formatStyle = FormatLong)).isEqualTo("2 weeks")
+        assertThat(duration(14.days, formatStyle = FormatShort)).isEqualTo("2 wks")
+        assertThat(duration(14.days, formatStyle = FormatNarrow)).isEqualTo("2w")
+        assertThat(duration(180.days, formatStyle = FormatLong)).isEqualTo("5 months")
+        assertThat(duration(180.days, formatStyle = FormatShort)).isEqualTo("5 mths")
+        assertThat(duration(180.days, formatStyle = FormatNarrow)).isEqualTo("5m")
+    }
+
+    @Test
+    fun formatStyleApproximation() {
+        assertThat(duration(1.hours, formatStyle = FormatApproximate)).isEqualTo("1 hour")
+        assertThat(duration(1.hours + 1.minutes, formatStyle = FormatApproximate)).isEqualTo("about 1 hour")
     }
 }
