@@ -70,7 +70,7 @@ HumanReadable.abbreviation(2_500_000, decimals = 1) // "2.5M"
 Available since version 1.10.
 
 ```kotlin
-// English/default
+// English
 HumanReadable.number(1_000_000.34) // "1,000,000.34"
 
 // French
@@ -168,3 +168,7 @@ Missing a language? Feel free to open an issue about it. Or, add it yourself:
 3. Add a new entry to the `translations` map in
    `src/commonMain/kotlin/nl/jacobras/humanreadable/i18n/translations.kt`.
 4. Open a PR.
+
+Follow the Unicode spec at <https://st.unicode.org/cldr-apps/v#/en/Duration/>
+or <https://github.com/unicode-org/cldr-json/blob/main/cldr-json/cldr-units-full/main/en/units.json>, if you prefer the
+JSON format.
