@@ -16,22 +16,22 @@ internal val PlStrings = HumanReadableStrings(
                 else -> Plural.Many
             }
         },
-        seconds = multipleTenses {
+        secondsLong = multipleTenses {
             present(one = "sekunda", few = "sekundy", many = "sekund")
             pastOrFuture(one = "sekundę")
         },
-        minutes = multipleTenses {
+        minutesLong = multipleTenses {
             present(one = "minuta", few = "minuty", many = "minut")
             pastOrFuture(one = "minutę")
         },
-        hours = multipleTenses {
+        hoursLong = multipleTenses {
             present(one = "godzina", few = "godziny", many = "godzin")
             pastOrFuture(one = "godzinę")
         },
-        days = presentTense(one = "dzień", few = "dni", many = "dni"),
-        weeks = presentTense(one = "tydzień", few = "tygodnie", many = "tygodni"),
-        months = presentTense(one = "miesiąc", few = "miesiące", many = "miesięcy"),
-        years = presentTense(one = "rok", few = "lata", many = "lat"),
+        daysLong = presentTense(one = "dzień", few = "dni", many = "dni"),
+        weeksLong = presentTense(one = "tydzień", few = "tygodnie", many = "tygodni"),
+        monthsLong = presentTense(one = "miesiąc", few = "miesiące", many = "miesięcy"),
+        yearsLong = presentTense(one = "rok", few = "lata", many = "lat"),
         timeAgo = { "$it temu" },
         timeInFuture = { "za $it" },
         now = "teraz",

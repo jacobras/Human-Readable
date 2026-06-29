@@ -9,31 +9,31 @@ import nl.jacobras.humanreadable.i18n.multipleTenses
 internal val UzStrings = HumanReadableStrings(
     dateTime = DateTimeStrings(
         plural = { count -> if (count == 1) Plural.One else Plural.Other },
-        seconds = multipleTenses {
+        secondsLong = multipleTenses {
             present(one = "soniya", other = "soniya")
             future(one = "soniyadan", other = "soniyadan")
         },
-        minutes = multipleTenses {
+        minutesLong = multipleTenses {
             present(one = "daqiqa", other = "daqiqa")
             future(one = "daqiqadan", other = "daqiqadan")
         },
-        hours = multipleTenses {
+        hoursLong = multipleTenses {
             present(one = "soat", other = "soat")
             future(one = "soatdan", other = "soatdan")
         },
-        days = multipleTenses {
+        daysLong = multipleTenses {
             present(one = "kun", other = "kun")
             future(one = "kundan", other = "kundan")
         },
-        weeks = multipleTenses {
+        weeksLong = multipleTenses {
             present(one = "hafta", other = "hafta")
             future(one = "haftadan", other = "haftadan")
         },
-        months = multipleTenses {
+        monthsLong = multipleTenses {
             present(one = "oy", other = "oy")
             future(one = "oydan", other = "oydan")
         },
-        years = multipleTenses {
+        yearsLong = multipleTenses {
             present(one = "yil", other = "yil")
             future(one = "yildan", other = "yildan")
         },

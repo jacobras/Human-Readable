@@ -16,22 +16,22 @@ internal val UkStrings = HumanReadableStrings(
                 else -> Plural.Many
             }
         },
-        seconds = multipleTenses {
+        secondsLong = multipleTenses {
             present(one = "секунда", few = "секунди", many = "секунд")
             pastOrFuture(one = "секунду")
         },
-        minutes = multipleTenses {
+        minutesLong = multipleTenses {
             present(one = "хвилина", few = "хвилини", many = "хвилин")
             pastOrFuture(one = "хвилину")
         },
-        hours = multipleTenses {
+        hoursLong = multipleTenses {
             present(one = "година", few = "години", many = "годин")
             pastOrFuture(one = "годину")
         },
-        days = presentTense(one = "день", few = "дні", many = "днів"),
-        weeks = presentTense(one = "тиждень", few = "тижні", many = "тижнів"),
-        months = presentTense(one = "місяць", few = "місяці", many = "місяців"),
-        years = presentTense(one = "рік", few = "роки", many = "років"),
+        daysLong = presentTense(one = "день", few = "дні", many = "днів"),
+        weeksLong = presentTense(one = "тиждень", few = "тижні", many = "тижнів"),
+        monthsLong = presentTense(one = "місяць", few = "місяці", many = "місяців"),
+        yearsLong = presentTense(one = "рік", few = "роки", many = "років"),
         timeAgo = { "$it тому" },
         timeInFuture = { "через $it" },
         now = "зараз",

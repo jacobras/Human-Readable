@@ -19,31 +19,31 @@ internal val ArStrings = HumanReadableStrings(
                 else -> Plural.Other
             }
         },
-        seconds = multipleTenses {
+        secondsLong = multipleTenses {
             present(zero = "ثانية", one = "ثانية", two = "ثانيتان", few = "ثوان", many = "ثانية", other = "ثانية")
             pastOrFuture(two = "ثانيتين")
         },
-        minutes = multipleTenses {
+        minutesLong = multipleTenses {
             present(zero = "دقيقة", one = "دقيقة", two = "دقيقتان", few = "دقائق", many = "دقيقة", other = "دقيقة")
             pastOrFuture(two = "دقيقتين")
         },
-        hours = multipleTenses {
+        hoursLong = multipleTenses {
             present(zero = "ساعة", one = "ساعة", two = "ساعتان", few = "ساعات", many = "ساعة", other = "ساعة")
             pastOrFuture(two = "ساعتين")
         },
-        days = multipleTenses {
+        daysLong = multipleTenses {
             present(zero = "يوم", one = "يوم", two = "يومان", few = "أيام", many = "يوم", other = "يوم")
             pastOrFuture(two = "يومين")
         },
-        weeks = multipleTenses {
+        weeksLong = multipleTenses {
             present(zero = "أسبوع", one = "أسبوع", two = "أسبوعان", few = "أسابيع", many = "أسبوع", other = "أسبوع")
             pastOrFuture(two = "أسبوعين")
         },
-        months = multipleTenses {
+        monthsLong = multipleTenses {
             present(zero = "شهر", one = "شهر", two = "شهران", few = "أشهر", many = "شهر", other = "شهر")
             pastOrFuture(two = "شهرين")
         },
-        years = multipleTenses {
+        yearsLong = multipleTenses {
             present(zero = "سنة", one = "سنة", two = "سنتان", few = "سنوات", many = "سنة", other = "سنة")
             pastOrFuture(two = "سنتين")
         },

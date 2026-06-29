@@ -10,19 +10,19 @@ import nl.jacobras.humanreadable.i18n.NumberStrings
 internal val DeStrings = HumanReadableStrings(
     dateTime = DateTimeStrings(
         plural = { count -> if (count == 1) Plural.One else Plural.Other },
-        seconds = presentTense(one = "Sekunde", other = "Sekunden"),
-        minutes = presentTense(one = "Minute", other = "Minuten"),
-        hours = presentTense(one = "Stunde", other = "Stunden"),
-        days = multipleTenses {
+        secondsLong = presentTense(one = "Sekunde", other = "Sekunden"),
+        minutesLong = presentTense(one = "Minute", other = "Minuten"),
+        hoursLong = presentTense(one = "Stunde", other = "Stunden"),
+        daysLong = multipleTenses {
             present(one = "Tag", other = "Tage")
             pastOrFuture(other = "Tagen")
         },
-        weeks = presentTense(one = "Woche", other = "Wochen"),
-        months = multipleTenses {
+        weeksLong = presentTense(one = "Woche", other = "Wochen"),
+        monthsLong = multipleTenses {
             present(one = "Monat", other = "Monate")
             pastOrFuture(other = "Monaten")
         },
-        years = multipleTenses {
+        yearsLong = multipleTenses {
             present(one = "Jahr", other = "Jahre")
             pastOrFuture(other = "Jahren")
         },

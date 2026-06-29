@@ -10,31 +10,31 @@ import nl.jacobras.humanreadable.i18n.NumberStrings
 internal val FiStrings = HumanReadableStrings(
     dateTime = DateTimeStrings(
         plural = { count -> if (count == 1) Plural.One else Plural.Other },
-        seconds = multipleTenses {
+        secondsLong = multipleTenses {
             present(one = "sekunti", other = "sekuntia")
             future(one = "sekunnin", other = "sekunnin")
         },
-        minutes = multipleTenses {
+        minutesLong = multipleTenses {
             present(one = "minuutti", other = "minuuttia")
             future(one = "minuutin", other = "minuutin")
         },
-        hours = multipleTenses {
+        hoursLong = multipleTenses {
             present(one = "tunti", other = "tuntia")
             future(one = "tunnin", other = "tunnin")
         },
-        days = multipleTenses {
+        daysLong = multipleTenses {
             present(one = "päivä", other = "päivää")
             future(one = "päivän", other = "päivän")
         },
-        weeks = multipleTenses {
+        weeksLong = multipleTenses {
             present(one = "viikko", other = "viikkoa")
             future(one = "viikon", other = "viikon")
         },
-        months = multipleTenses {
+        monthsLong = multipleTenses {
             present(one = "kuukausi", other = "kuukautta")
             future(one = "kuukauden", other = "kuukauden")
         },
-        years = multipleTenses {
+        yearsLong = multipleTenses {
             present(one = "vuosi", other = "vuotta")
             future(one = "vuoden", other = "vuoden")
         },

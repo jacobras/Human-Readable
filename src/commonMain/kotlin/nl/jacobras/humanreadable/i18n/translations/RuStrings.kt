@@ -16,22 +16,22 @@ internal val RuStrings = HumanReadableStrings(
                 else -> Plural.Many
             }
         },
-        seconds = multipleTenses {
+        secondsLong = multipleTenses {
             present(one = "секунда", few = "секунды", many = "секунд")
             pastOrFuture(one = "секунду")
         },
-        minutes = multipleTenses {
+        minutesLong = multipleTenses {
             present(one = "минута", few = "минуты", many = "минут")
             pastOrFuture(one = "минуту")
         },
-        hours = presentTense(one = "час", few = "часа", many = "часов"),
-        days = presentTense(one = "день", few = "дня", many = "дней"),
-        weeks = multipleTenses {
+        hoursLong = presentTense(one = "час", few = "часа", many = "часов"),
+        daysLong = presentTense(one = "день", few = "дня", many = "дней"),
+        weeksLong = multipleTenses {
             present(one = "неделя", few = "недели", many = "недель")
             pastOrFuture(one = "неделю")
         },
-        months = presentTense(one = "месяц", few = "месяца", many = "месяцев"),
-        years = presentTense(one = "год", few = "года", many = "лет"),
+        monthsLong = presentTense(one = "месяц", few = "месяца", many = "месяцев"),
+        yearsLong = presentTense(one = "год", few = "года", many = "лет"),
         timeAgo = { "$it назад" },
         timeInFuture = { "через $it" },
         now = "сейчас",
