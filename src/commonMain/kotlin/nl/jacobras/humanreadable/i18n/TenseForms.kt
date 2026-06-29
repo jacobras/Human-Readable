@@ -38,7 +38,8 @@ private fun buildMap(
 /**
  * Shortcut for languages that don't need past/future grammatical-case overrides.
  *
- * Use [multipleTenses] when past/future grammatical-case overrides are needed.
+ * - If there's no difference between the different categories, just fill [one].
+ * - Use [multipleTenses] when past/future grammatical-case overrides are needed.
  */
 internal fun presentTense(
     zero: String = "",
@@ -97,7 +98,7 @@ internal class TenseFormsBuilder {
     }
 
     /**
-     * Sets both [past] and [future] to the same forms, for languages where they are identical.\
+     * Sets both [past] and [future] to the same forms, for languages where they are identical.
      */
     fun pastOrFuture(
         zero: String = "", one: String = "", two: String = "",

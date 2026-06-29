@@ -10,16 +10,16 @@ import nl.jacobras.humanreadable.i18n.NumberStrings
 internal val ElStrings = HumanReadableStrings(
     dateTime = DateTimeStrings(
         plural = { count -> if (count == 1) Plural.One else Plural.Other },
-        seconds = presentTense(one = "δευτερόλεπτο", other = "δευτερόλεπτα"),
-        minutes = presentTense(one = "λεπτό", other = "λεπτά"),
-        hours = presentTense(one = "ώρα", other = "ώρες"),
-        days = presentTense(one = "μέρα", other = "μέρες"),
-        weeks = presentTense(one = "εβδομάδα", other = "εβδομάδες"),
-        months = multipleTenses {
+        secondsLong = presentTense(one = "δευτερόλεπτο", other = "δευτερόλεπτα"),
+        minutesLong = presentTense(one = "λεπτό", other = "λεπτά"),
+        hoursLong = presentTense(one = "ώρα", other = "ώρες"),
+        daysLong = presentTense(one = "μέρα", other = "μέρες"),
+        weeksLong = presentTense(one = "εβδομάδα", other = "εβδομάδες"),
+        monthsLong = multipleTenses {
             present(one = "μήνας", other = "μήνες")
             pastOrFuture(one = "μήνα")
         },
-        years = presentTense(one = "έτος", other = "έτη"),
+        yearsLong = presentTense(one = "έτος", other = "έτη"),
         timeAgo = { "$it πριν" },
         timeInFuture = { "σε $it" },
         now = "τώρα",

@@ -1,8 +1,8 @@
 package nl.jacobras.humanreadable.time
 
 import nl.jacobras.humanreadable.HumanReadable
+import nl.jacobras.humanreadable.HumanReadable.strings
 import nl.jacobras.humanreadable.formatNumber
-import kotlin.math.roundToInt
 import kotlin.time.Duration
 
 /**
@@ -23,50 +23,106 @@ internal fun formatDuration(
     units: Set<TimeUnit>,
     rounding: Rounding
 ): String {
-    val secondsAgo = duration.inWholeSeconds.toInt()
-    val minutesAgo = duration.inWholeMinutes.toInt()
-    val hoursAgo = duration.inWholeHours.toInt()
-    val daysAgo = duration.inWholeDays.toInt()
-    val weeksAgo = (duration.inWholeDays / 7f).round(rounding)
-    val monthsAgo = (duration.inWholeDays / 30.5f).round(rounding)
-    val yearsAgo = (duration.inWholeDays / 365f).round(rounding)
+    val tooSmall = parts.smallestDuration > Duration.ZERO && duration < parts.smallestDuration
 
-    return when {
-        units.contains(TimeUnit.Years) && yearsAgo > 0 -> {
-            formatUnit(yearsAgo, TimeUnit.Years, relativeTime)
-        }
-        units.contains(TimeUnit.Months) && monthsAgo > 0 -> {
-            formatUnit(monthsAgo, TimeUnit.Months, relativeTime)
-        }
-        units.contains(TimeUnit.Weeks) && weeksAgo > 0 -> {
-            formatUnit(weeksAgo, TimeUnit.Weeks, relativeTime)
-        }
-        units.contains(TimeUnit.Days) && daysAgo > 0 -> {
-            formatUnit(daysAgo, TimeUnit.Days, relativeTime)
-        }
-        units.contains(TimeUnit.Hours) && hoursAgo > 0 -> {
-            if (rounding == Rounding.UpIfClose && hoursAgo >= TimeUnit.Hours.upIfCloseRollover) {
-                formatUnit(1, TimeUnit.Days, relativeTime)
-            } else {
-                formatUnit(hoursAgo, TimeUnit.Hours, relativeTime)
+    val parts = getNeededParts(
+        units = units,
+        duration = if (tooSmall) parts.smallestDuration else duration,
+        rounding = rounding,
+        parts = parts
+    )
+
+    return buildString {
+        if (tooSmall) {
+            // Too small? Add "less than ..."
+            when (formatStyle.dateTimeUnits) {
+                FormatStyle.DateTimeUnits.Long -> {
+                    append(strings.dateTime.lessThan)
+                    append(' ')
+                }
+                FormatStyle.DateTimeUnits.Short -> append('<')
+                FormatStyle.DateTimeUnits.Narrow -> append('<')
             }
+        } else if (formatStyle.approximation && duration != parts.totalDuration) {
+            // Large enough, somewhere rounding occurred? Add "about ..."
+            append(strings.dateTime.about)
+            append(' ')
         }
-        units.contains(TimeUnit.Minutes) && minutesAgo > 0 -> {
-            if (rounding == Rounding.UpIfClose && minutesAgo >= TimeUnit.Minutes.upIfCloseRollover) {
-                formatUnit(1, TimeUnit.Hours, relativeTime)
-            } else {
-                formatUnit(minutesAgo, TimeUnit.Minutes, relativeTime)
+
+        // Format all parts
+        for ((unit, value) in parts) {
+            if (unit != parts.keys.first()) {
+                when (formatStyle.dateTimeUnits) {
+                    FormatStyle.DateTimeUnits.Long -> append(", ")
+                    FormatStyle.DateTimeUnits.Short -> append(", ")
+                    FormatStyle.DateTimeUnits.Narrow -> append(" ")
+                }
             }
+            append(formatUnit(value, unit, relativeTime, formatStyle.dateTimeUnits))
         }
-        else -> {
-            if (rounding == Rounding.UpIfClose && secondsAgo >= TimeUnit.Seconds.upIfCloseRollover) {
-                formatUnit(1, TimeUnit.Minutes, relativeTime)
-            } else {
-                formatUnit(secondsAgo, TimeUnit.Seconds, relativeTime)
-            }
+
+        // Nothing to format? Add "0 ..."
+        if (isEmpty() && units.isNotEmpty()) {
+            append(formatUnit(0, units.first(), relativeTime, formatStyle.dateTimeUnits))
         }
     }
 }
+
+private fun getNeededParts(
+    units: Set<TimeUnit>,
+    duration: Duration,
+    rounding: Rounding,
+    parts: Parts
+): Map<TimeUnit, Int> {
+    val unitsDescending = units.sorted().reversed()
+    val res = mutableMapOf<TimeUnit, Int>()
+    var remainingDuration = duration
+
+    // Initial parts division
+    for (unit in unitsDescending) {
+        if (res.size == parts.max) {
+            break
+        }
+
+        val value = unit.calculateValue(remainingDuration, rounding)
+        if (value > 0) {
+            res[unit] = value
+            remainingDuration -= unit.valueToDuration(value)
+        }
+    }
+
+    // Roll-overs
+    if (rounding == Rounding.UpIfClose) {
+        val unitsAscending = res.keys.sorted()
+
+        for (unit in unitsAscending) {
+            val value = res[unit] ?: continue
+            if (value >= unit.upIfCloseRollover) {
+                val largerUnit = TimeUnit.entries.getOrNull(unit.ordinal + 1)
+                if (largerUnit != null) {
+                    res[largerUnit] = (res[largerUnit] ?: 0) + 1
+                    res.remove(unit)
+                }
+            }
+        }
+    }
+
+    // Sub-part cut-offs
+    if (parts.subpartCutOffs.isNotEmpty()) {
+        for ((cutoffUnit, cutoffValue) in parts.subpartCutOffs) {
+            val value = res[cutoffUnit]
+            if (value != null && value >= cutoffValue) {
+                res.keys.removeAll { it < cutoffUnit }
+            }
+        }
+    }
+    return res
+}
+
+private val Map<TimeUnit, Int>.totalDuration: Duration
+    get() = entries.maxOf { (unit, value) ->
+        unit.valueToDuration(value)
+    }
 
 /**
  * Formats a [count] with its [unit].
@@ -80,26 +136,26 @@ internal fun formatDuration(
 private fun formatUnit(
     count: Int,
     unit: TimeUnit,
-    relativeTime: RelativeTime
+    relativeTime: RelativeTime,
+    formatStyle: FormatStyle.DateTimeUnits
 ): String {
-    val formattedCount = if (count > 1000) {
+    val formattedCount = if (count > 1_000) {
         count.toDouble().formatNumber(decimals = 0)
     } else {
         count.toString()
     }
 
-    val unitText = unit.format(count, relativeTime)
+    val unitText = unit.format(count, relativeTime, formatStyle)
     val languageTag = HumanReadable.localisation.languageTag
     return when (languageTag) {
         "ar" if (count == 1 || count == 2) -> unitText
         "ko" -> "$formattedCount$unitText"
-        else -> "$formattedCount $unitText"
-    }
-}
-
-private fun Float.round(rounding: Rounding): Int {
-    return when (rounding) {
-        Rounding.Floor, Rounding.UpIfClose -> toInt()
-        Rounding.HalfUp -> roundToInt()
+        else -> {
+            if (formatStyle == FormatStyle.DateTimeUnits.Narrow) {
+                "$formattedCount$unitText"
+            } else {
+                "$formattedCount $unitText"
+            }
+        }
     }
 }

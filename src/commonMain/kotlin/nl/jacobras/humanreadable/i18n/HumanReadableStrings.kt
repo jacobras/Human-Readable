@@ -20,13 +20,32 @@ internal data class DateTimeStrings(
      * See [Unicode Plural Rules](https://www.unicode.org/cldr/charts/48/supplemental/language_plural_rules.html).
      */
     val plural: (Int) -> Plural,
-    val seconds: TenseForms,
-    val minutes: TenseForms,
-    val hours: TenseForms,
-    val days: TenseForms,
-    val weeks: TenseForms,
-    val months: TenseForms,
-    val years: TenseForms,
+
+    val secondsLong: TenseForms,
+    val minutesLong: TenseForms,
+    val hoursLong: TenseForms,
+    val daysLong: TenseForms,
+    val weeksLong: TenseForms,
+    val monthsLong: TenseForms,
+    val yearsLong: TenseForms,
+
+    // TODO: remove defaults
+    val secondsShort: TenseForms = presentTense(one = "hr"),
+    val minutesShort: TenseForms = presentTense(one = "h"),
+    val hoursShort: TenseForms = presentTense(one = "day", other = "days"),
+    val daysShort: TenseForms = presentTense(one = "day", other = "days"),
+    val weeksShort: TenseForms = presentTense(one = "d"),
+    val monthsShort: TenseForms = presentTense(one = "week", other = "weeks"),
+    val yearsShort: TenseForms = presentTense(one = "wk", other = "wks"),
+
+    // TODO: remove defaults
+    val secondsNarrow: TenseForms = presentTense(one = "w"),
+    val minutesNarrow: TenseForms = presentTense(one = "month", other = "months"),
+    val hoursNarrow: TenseForms = presentTense(one = "mth", other = "mths"),
+    val daysNarrow: TenseForms = presentTense(one = "m"),
+    val weeksNarrow: TenseForms = presentTense(one = "year", other = "years"),
+    val monthsNarrow: TenseForms = presentTense(one = "yr", other = "yrs"),
+    val yearsNarrow: TenseForms = presentTense(one = "y"),
 
     /**
      * Wraps a formatted duration as past relative time, e.g. "3 days ago".
@@ -41,7 +60,9 @@ internal data class DateTimeStrings(
     val now: String,
     val today: String,
     val yesterday: String,
-    val tomorrow: String
+    val tomorrow: String,
+    val lessThan: String = "!!TODO",
+    val about: String = "!!TODO"
 )
 
 /**
