@@ -101,6 +101,8 @@ number of decimals is only used for the larger units kilometers and miles.
 
 ## Date/time precision
 
+// TODO global config options
+
 The formatter switches to a bigger unit (minute, hour, day, ...) as soon as it can.
 For example:
 
