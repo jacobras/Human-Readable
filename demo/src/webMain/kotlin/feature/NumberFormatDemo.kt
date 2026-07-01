@@ -1,10 +1,20 @@
-package ui
+package feature
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.buildAnnotatedString
@@ -12,9 +22,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import monoBodyOrange
-import monoBodyString
-import monoBodyStringBold
 import nl.jacobras.humanreadable.HumanReadable
+import ui.CodeExample
+import ui.DecimalsInput
 
 @Composable
 internal fun NumberFormatDemo(
@@ -29,7 +39,7 @@ internal fun NumberFormatDemo(
             style = MaterialTheme.typography.headlineLarge
         )
         Spacer(Modifier.height(16.dp))
-        var myNumber by remember { mutableStateOf("1000000.34") }
+        var myNumber by remember { mutableStateOf("105122.34") }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = buildAnnotatedString {
@@ -55,44 +65,31 @@ internal fun NumberFormatDemo(
             )
         }
         Spacer(Modifier.height(8.dp))
-        var decimals by remember { mutableStateOf("2") }
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(
-                text = buildAnnotatedString {
-                    withStyle(monoBodyOrange) { append("val ") }
-                    append("decimals = ")
-                },
-                style = monoBody
-            )
-            TextField(
-                modifier = Modifier.sizeIn(minWidth = 20.dp),
-                value = decimals,
-                onValueChange = { decimals = it },
-                isError = decimals.toIntOrNull() == null,
-                supportingText = if (decimals.toIntOrNull() == null) {
-                    { Text("Invalid number") }
-                } else {
-                    null
-                }
-            )
-        }
+        var decimals by remember { mutableIntStateOf(1) }
+        DecimalsInput(
+            decimals = decimals,
+            onChange = { decimals = it }
+        )
+        Spacer(Modifier.height(16.dp))
+
+        CodeExample(
+            code = "HumanReadable.number(myNumber, decimals)",
+            res = remember(selectedLanguageCode, myNumber, decimals) {
+                HumanReadable.number(
+                    number = myNumber.toDoubleOrNull() ?: 0L,
+                    decimals = decimals
+                )
+            }
+        )
         Spacer(Modifier.height(8.dp))
-        Text(
-            text = buildAnnotatedString {
-                appendLine("HumanReadable.number(myNumber, decimals)")
-                withStyle(monoBodyStringBold) {
-                    append("// \"")
-                    append(
-                        remember(selectedLanguageCode, myNumber, decimals) {
-                            HumanReadable.number(
-                                number = myNumber.toDoubleOrNull() ?: 0L,
-                                decimals = decimals.toIntOrNull() ?: 0
-                            )
-                        })
-                    append("\"")
-                }
-            },
-            style = monoBody
+        CodeExample(
+            code = "HumanReadable.abbreviation(myNumber, decimals)",
+            res = remember(selectedLanguageCode, myNumber, decimals) {
+                HumanReadable.abbreviation(
+                    number = myNumber.toDoubleOrNull() ?: 0L,
+                    decimals = decimals
+                )
+            }
         )
     }
 }
