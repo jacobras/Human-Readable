@@ -28,6 +28,9 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(libs.compose.adaptive)
+            implementation(libs.compose.adaptive.layout)
+            implementation(libs.compose.adaptive.navigation)
 
             implementation(libs.kotlinX.datetime)
             implementation(rootProject)
