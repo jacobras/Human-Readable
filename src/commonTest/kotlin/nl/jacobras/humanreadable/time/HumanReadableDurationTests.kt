@@ -235,19 +235,31 @@ class HumanReadableDurationTests {
         assertThat(
             duration(
                 duration = 1.hours,
-                formatStyle = FormatStyle(indicateApproximation = true)
+                formatStyle = longStyle.copy(indicateApproximation = true)
             )
         ).isEqualTo("1 hour")
         assertThat(
             duration(
                 duration = 1.hours + 1.minutes,
-                formatStyle = FormatStyle(indicateApproximation = true)
+                formatStyle = longStyle.copy(indicateApproximation = true)
             )
         ).isEqualTo("about 1 hour")
         assertThat(
             duration(
                 duration = 1.hours + 1.minutes,
-                formatStyle = FormatStyle(indicateApproximation = true),
+                formatStyle = shortStyle.copy(indicateApproximation = true)
+            )
+        ).isEqualTo("~1 hr")
+        assertThat(
+            duration(
+                duration = 1.hours + 1.minutes,
+                formatStyle = narrowStyle.copy(indicateApproximation = true)
+            )
+        ).isEqualTo("~1h")
+        assertThat(
+            duration(
+                duration = 1.hours + 1.minutes,
+                formatStyle = longStyle.copy(indicateApproximation = true),
                 parts = Parts(smallestDuration = 1.days)
             )
         ).isEqualTo("less than 1 day")
