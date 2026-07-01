@@ -1,4 +1,4 @@
-package ui
+package feature
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -13,11 +13,10 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import monoBodyOrange
 import monoBodyStringBold
-import nl.jacobras.humanreadable.DistanceUnit
 import nl.jacobras.humanreadable.HumanReadable
 
 @Composable
-internal fun DistanceDemo(
+internal fun FileSizeDemo(
     selectedLanguageCode: String,
     modifier: Modifier = Modifier
 ) {
@@ -25,33 +24,38 @@ internal fun DistanceDemo(
 
     Column(modifier.fillMaxWidth()) {
         Text(
-            text = "Distance",
+            text = "File size",
             style = MaterialTheme.typography.headlineLarge
         )
+        Text("File size formatting uses base 1024.")
         Spacer(Modifier.height(16.dp))
-        var myNumber by remember { mutableStateOf("3000") }
+        var myFile by remember { mutableStateOf("21947") }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = buildAnnotatedString {
                     withStyle(monoBodyOrange) { append("val ") }
-                    append("myDistance = ")
+                    append("myFile = ")
                 },
                 style = monoBody
             )
             TextField(
                 modifier = Modifier.sizeIn(minWidth = 20.dp),
-                value = myNumber,
+                value = myFile,
                 onValueChange = {
                     if (it.length < 16) {
-                        myNumber = it
+                        myFile = it
                     }
                 },
-                isError = myNumber.toLongOrNull() == null,
-                supportingText = if (myNumber.toLongOrNull() == null) {
+                isError = myFile.toLongOrNull() == null,
+                supportingText = if (myFile.toLongOrNull() == null) {
                     { Text("Invalid number") }
                 } else {
                     null
                 }
+            )
+            Text(
+                text = " bytes",
+                style = monoBody
             )
         }
         Spacer(Modifier.height(8.dp))
@@ -79,29 +83,13 @@ internal fun DistanceDemo(
         Spacer(Modifier.height(8.dp))
         Text(
             text = buildAnnotatedString {
-                appendLine("HumanReadable.distance(myDistance, DistanceUnit.Meter, decimals)")
+                appendLine("HumanReadable.fileSize(myFile, decimals)")
                 withStyle(monoBodyStringBold) {
                     append("// \"")
                     append(
-                        remember(selectedLanguageCode, myNumber, decimals) {
-                            HumanReadable.distance(
-                                value = myNumber.toLongOrNull() ?: 0L,
-                                unit = DistanceUnit.Meter,
-                                decimals = decimals.toIntOrNull() ?: 0
-                            )
-                        })
-                    append("\"")
-                }
-                appendLine()
-
-                appendLine("HumanReadable.distance(myDistance, DistanceUnit.Foot, decimals)")
-                withStyle(monoBodyStringBold) {
-                    append("// \"")
-                    append(
-                        remember(selectedLanguageCode, myNumber, decimals) {
-                            HumanReadable.distance(
-                                value = myNumber.toLongOrNull() ?: 0L,
-                                unit = DistanceUnit.Foot,
+                        remember(selectedLanguageCode, myFile, decimals) {
+                            HumanReadable.fileSize(
+                                bytes = myFile.toLongOrNull() ?: 0L,
                                 decimals = decimals.toIntOrNull() ?: 0
                             )
                         })

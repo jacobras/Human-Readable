@@ -1,13 +1,17 @@
 [versions]
 kotlin = "2.4.0"
-compose-plugin = "1.12.0-alpha02"
+compose = "1.12.0-alpha02"
+compose-adaptive = "1.3.0-beta02"
 
 [libraries]
 assertK = { module = "com.willowtreeapps.assertk:assertk", version = "0.28.1" }
+compose-adaptive = { module = "org.jetbrains.compose.material3.adaptive:adaptive", version.ref = "compose-adaptive" }
+compose-adaptive-layout = { module = "org.jetbrains.compose.material3.adaptive:adaptive-layout", version.ref = "compose-adaptive" }
+compose-adaptive-navigation = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation", version.ref = "compose-adaptive" }
 kotlinX-browser = { module = "org.jetbrains.kotlinx:kotlinx-browser", version = "0.5.0" }
 kotlinX-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.8.0" }
 
 [plugins]
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }

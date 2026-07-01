@@ -1,4 +1,4 @@
-package ui
+package feature
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -12,12 +12,11 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import monoBodyOrange
-import monoBodyString
 import monoBodyStringBold
 import nl.jacobras.humanreadable.HumanReadable
 
 @Composable
-internal fun FileSizeDemo(
+internal fun AbbreviationDemo(
     selectedLanguageCode: String,
     modifier: Modifier = Modifier
 ) {
@@ -25,38 +24,33 @@ internal fun FileSizeDemo(
 
     Column(modifier.fillMaxWidth()) {
         Text(
-            text = "File size",
+            text = "Abbreviation",
             style = MaterialTheme.typography.headlineLarge
         )
-        Text("File size formatting uses base 1024.")
         Spacer(Modifier.height(16.dp))
-        var myFile by remember { mutableStateOf("21947") }
+        var myNumber by remember { mutableStateOf("3000") }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = buildAnnotatedString {
                     withStyle(monoBodyOrange) { append("val ") }
-                    append("myFile = ")
+                    append("myNumber = ")
                 },
                 style = monoBody
             )
             TextField(
                 modifier = Modifier.sizeIn(minWidth = 20.dp),
-                value = myFile,
+                value = myNumber,
                 onValueChange = {
                     if (it.length < 16) {
-                        myFile = it
+                        myNumber = it
                     }
                 },
-                isError = myFile.toLongOrNull() == null,
-                supportingText = if (myFile.toLongOrNull() == null) {
+                isError = myNumber.toLongOrNull() == null,
+                supportingText = if (myNumber.toLongOrNull() == null) {
                     { Text("Invalid number") }
                 } else {
                     null
                 }
-            )
-            Text(
-                text = " bytes",
-                style = monoBody
             )
         }
         Spacer(Modifier.height(8.dp))
@@ -84,13 +78,13 @@ internal fun FileSizeDemo(
         Spacer(Modifier.height(8.dp))
         Text(
             text = buildAnnotatedString {
-                appendLine("HumanReadable.fileSize(myFile, decimals)")
+                appendLine("HumanReadable.abbreviation(myNumber, decimals)")
                 withStyle(monoBodyStringBold) {
                     append("// \"")
                     append(
-                        remember(selectedLanguageCode, myFile, decimals) {
-                            HumanReadable.fileSize(
-                                bytes = myFile.toLongOrNull() ?: 0L,
+                        remember(selectedLanguageCode, myNumber, decimals) {
+                            HumanReadable.abbreviation(
+                                number = myNumber.toLongOrNull() ?: 0L,
                                 decimals = decimals.toIntOrNull() ?: 0
                             )
                         })

@@ -1,4 +1,4 @@
-package ui
+package feature
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -12,7 +12,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import monoBodyOrange
-import monoBodyString
 import monoBodyStringBold
 import nl.jacobras.humanreadable.HumanReadable
 
