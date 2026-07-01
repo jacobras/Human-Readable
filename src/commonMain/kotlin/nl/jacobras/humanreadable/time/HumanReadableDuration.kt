@@ -49,8 +49,13 @@ internal fun formatDuration(
             }
         } else if (format.indicateApproximation && duration != parts.totalDuration) {
             // Large enough, somewhere rounding occurred? Add "about ..."
-            append(strings.dateTime.about)
-            append(' ')
+            when (format.date) {
+                FormatStyle.Date.Long -> {
+                    append(strings.dateTime.about)
+                    append(' ')
+                }
+                FormatStyle.Date.Short, FormatStyle.Date.Narrow -> append('~')
+            }
         }
 
         // Format all parts
