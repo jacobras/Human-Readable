@@ -21,28 +21,28 @@ public enum class TimeUnit(
     internal val narrowForms: (DateTimeStrings) -> TenseForms,
 ) {
     Seconds(
-        calculateValue = { duration, _ -> duration.inWholeSeconds.toInt() },
+        calculateValue = { duration, rounding -> duration.inWholeSeconds.toFloat().round(rounding) },
         valueToDuration = { it.seconds },
         longForms = { it.secondsLong },
         shortForms = { it.secondsShort },
         narrowForms = { it.secondsNarrow }
     ),
     Minutes(
-        calculateValue = { duration, _ -> duration.inWholeMinutes.toInt() },
+        calculateValue = { duration, rounding -> (duration.inWholeSeconds / 60f).round(rounding) },
         valueToDuration = { it.minutes },
         longForms = { it.minutesLong },
         shortForms = { it.minutesShort },
         narrowForms = { it.minutesNarrow }
     ),
     Hours(
-        calculateValue = { duration, _ -> duration.inWholeHours.toInt() },
+        calculateValue = { duration, rounding -> (duration.inWholeMinutes / 60f).round(rounding) },
         valueToDuration = { it.hours },
         longForms = { it.hoursLong },
         shortForms = { it.hoursShort },
         narrowForms = { it.hoursNarrow }
     ),
     Days(
-        calculateValue = { duration, _ -> duration.inWholeDays.toInt() },
+        calculateValue = { duration, rounding -> duration.inWholeDays.toFloat().round(rounding) },
         valueToDuration = { it.days },
         longForms = { it.daysLong },
         shortForms = { it.daysShort },
@@ -82,7 +82,7 @@ public enum class TimeUnit(
 
     internal fun format(value: Int, relativeTime: RelativeTime, formatStyle: FormatStyle.DateTimeUnits): String {
         val dateTimeStrings = strings.dateTime
-        val tenseForms = when(formatStyle) {
+        val tenseForms = when (formatStyle) {
             FormatStyle.DateTimeUnits.Long -> longForms(dateTimeStrings)
             FormatStyle.DateTimeUnits.Short -> shortForms(dateTimeStrings)
             FormatStyle.DateTimeUnits.Narrow -> narrowForms(dateTimeStrings)

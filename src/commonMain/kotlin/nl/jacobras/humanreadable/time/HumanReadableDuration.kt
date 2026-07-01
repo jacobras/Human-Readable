@@ -77,18 +77,29 @@ private fun getNeededParts(
     val unitsDescending = units.sorted().reversed()
     val res = mutableMapOf<TimeUnit, Int>()
     var remainingDuration = duration
+    var lastUnit: TimeUnit? = null
+    var remainingBeforeLast = remainingDuration
 
-    // Initial parts division
+    // Main division into parts
     for (unit in unitsDescending) {
         if (res.size == parts.max) {
             break
         }
 
-        val value = unit.calculateValue(remainingDuration, rounding)
+        // Initial division using Floor rounding, because actual rounding happens only in the last part.
+        val value = unit.calculateValue(remainingDuration, Rounding.Floor)
         if (value > 0) {
+            lastUnit = unit
+            remainingBeforeLast = remainingDuration
             res[unit] = value
             remainingDuration -= unit.valueToDuration(value)
         }
+    }
+
+    // Round the last part. Only needed for HalfUp, because Floor is already done above
+    // and UpIfClose is done below in the roll-overs section.
+    if (lastUnit != null && rounding == Rounding.HalfUp) {
+        res[lastUnit] = lastUnit.calculateValue(remainingBeforeLast, rounding)
     }
 
     // Roll-overs
