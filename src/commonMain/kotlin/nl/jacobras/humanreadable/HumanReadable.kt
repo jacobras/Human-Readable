@@ -70,7 +70,7 @@ public object HumanReadable {
     public fun timeAgo(
         instant: Instant,
         baseInstant: Instant = Clock.System.now(),
-        formatStyle: FormatStyle = FormatStyle.Long,
+        formatStyle: FormatStyle = FormatStyle(),
         parts: Parts = Parts(),
         units: Set<TimeUnit> = TimeUnit.all,
         rounding: Rounding = Rounding.HalfUp
@@ -91,7 +91,7 @@ public object HumanReadable {
      *
      * @param date The [LocalDate] to format.
      * @param baseDate The base/starting [LocalDate], defaulting to "today".
-     * @param formatStyle The [FormatStyle] to use, defaulting to [FormatStyle.Long].
+     * @param formatStyle The [FormatStyle] to use, defaulting to "long".
      * @param parts Configures the formatting of multiple parts, defaulting to 1 part.
      * @param units The [TimeUnit]s to limit to during formatting, not limited by default.
      * @param rounding The [Rounding] strategy to use, defaulting to [Rounding.HalfUp].
@@ -101,7 +101,7 @@ public object HumanReadable {
     public fun timeAgo(
         date: LocalDate,
         baseDate: LocalDate = Clock.System.todayIn(TimeZone.currentSystemDefault()),
-        formatStyle: FormatStyle = FormatStyle.Long,
+        formatStyle: FormatStyle = FormatStyle(),
         parts: Parts = Parts(),
         units: Set<TimeUnit> = TimeUnit.all,
         rounding: Rounding = Rounding.HalfUp
@@ -121,14 +121,14 @@ public object HumanReadable {
      * For example, a duration of 3 seconds returns "3 seconds".
      *
      * @param duration The [Duration] to format.
-     * @param formatStyle The [FormatStyle] to use, defaulting to [FormatStyle.Long].
+     * @param formatStyle The [FormatStyle] to use, defaulting to "long".
      * @param parts Configures the formatting of multiple parts, defaulting to 1 part.
      * @param units The [TimeUnit]s to limit to during formatting, not limited by default.
      * @param rounding The [Rounding] strategy to use, defaulting to [Rounding.HalfUp].
      */
     public fun duration(
         duration: Duration,
-        formatStyle: FormatStyle = FormatStyle.Long,
+        formatStyle: FormatStyle = FormatStyle(),
         parts: Parts = Parts(),
         units: Set<TimeUnit> = TimeUnit.all,
         rounding: Rounding = Rounding.HalfUp
@@ -136,7 +136,7 @@ public object HumanReadable {
         return formatDuration(
             duration = duration,
             relativeTime = RelativeTime.Present,
-            formatStyle = formatStyle,
+            format = formatStyle,
             parts = parts,
             units = units,
             rounding = rounding

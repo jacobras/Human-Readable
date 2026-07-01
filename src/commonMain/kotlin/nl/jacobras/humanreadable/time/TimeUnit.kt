@@ -80,12 +80,12 @@ public enum class TimeUnit(
             else -> Int.MAX_VALUE
         }
 
-    internal fun format(value: Int, relativeTime: RelativeTime, formatStyle: FormatStyle.DateTimeUnits): String {
+    internal fun format(value: Int, relativeTime: RelativeTime, formatStyle: FormatStyle.Date): String {
         val dateTimeStrings = strings.dateTime
         val tenseForms = when (formatStyle) {
-            FormatStyle.DateTimeUnits.Long -> longForms(dateTimeStrings)
-            FormatStyle.DateTimeUnits.Short -> shortForms(dateTimeStrings)
-            FormatStyle.DateTimeUnits.Narrow -> narrowForms(dateTimeStrings)
+            FormatStyle.Date.Long -> longForms(dateTimeStrings)
+            FormatStyle.Date.Short -> shortForms(dateTimeStrings)
+            FormatStyle.Date.Narrow -> narrowForms(dateTimeStrings)
         }
         val pluralCategory = dateTimeStrings.plural(value)
         val correctTense = when (relativeTime) {

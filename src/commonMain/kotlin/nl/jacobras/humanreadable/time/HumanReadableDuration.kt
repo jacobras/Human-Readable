@@ -10,7 +10,7 @@ import kotlin.time.Duration
  *
  * @param duration The duration to format.
  * @param relativeTime Whether this is in the past, current or future (for grammatical correctness).
- * @param formatStyle The [FormatStyle] to use.
+ * @param format The [FormatStyle] to use.
  * @param parts Configures the formatting of multiple parts (defaults to 1 part).
  * @param units The [TimeUnit]s to limit to during formatting.
  * @param rounding The [Rounding] strategy to use.
@@ -18,7 +18,7 @@ import kotlin.time.Duration
 internal fun formatDuration(
     duration: Duration,
     relativeTime: RelativeTime,
-    formatStyle: FormatStyle,
+    format: FormatStyle,
     parts: Parts,
     units: Set<TimeUnit>,
     rounding: Rounding
@@ -26,7 +26,11 @@ internal fun formatDuration(
     val tooSmall = parts.smallestDuration > Duration.ZERO && duration < parts.smallestDuration
 
     val parts = getNeededParts(
-        units = units,
+        units = if (format.time == FormatStyle.Time.Digital) {
+            units.minus(setOf(TimeUnit.Hours, TimeUnit.Minutes, TimeUnit.Seconds))
+        } else {
+            units
+        },
         duration = if (tooSmall) parts.smallestDuration else duration,
         rounding = rounding,
         parts = parts
@@ -35,15 +39,15 @@ internal fun formatDuration(
     return buildString {
         if (tooSmall) {
             // Too small? Add "less than ..."
-            when (formatStyle.dateTimeUnits) {
-                FormatStyle.DateTimeUnits.Long -> {
+            when (format.date) {
+                FormatStyle.Date.Long -> {
                     append(strings.dateTime.lessThan)
                     append(' ')
                 }
-                FormatStyle.DateTimeUnits.Short -> append('<')
-                FormatStyle.DateTimeUnits.Narrow -> append('<')
+                FormatStyle.Date.Short -> append('<')
+                FormatStyle.Date.Narrow -> append('<')
             }
-        } else if (formatStyle.approximation && duration != parts.totalDuration) {
+        } else if (format.indicateApproximation && duration != parts.totalDuration) {
             // Large enough, somewhere rounding occurred? Add "about ..."
             append(strings.dateTime.about)
             append(' ')
@@ -52,18 +56,28 @@ internal fun formatDuration(
         // Format all parts
         for ((unit, value) in parts) {
             if (unit != parts.keys.first()) {
-                when (formatStyle.dateTimeUnits) {
-                    FormatStyle.DateTimeUnits.Long -> append(", ")
-                    FormatStyle.DateTimeUnits.Short -> append(", ")
-                    FormatStyle.DateTimeUnits.Narrow -> append(" ")
+                when (format.date) {
+                    FormatStyle.Date.Long -> append(", ")
+                    FormatStyle.Date.Short -> append(", ")
+                    FormatStyle.Date.Narrow -> append(" ")
                 }
             }
-            append(formatUnit(value, unit, relativeTime, formatStyle.dateTimeUnits))
+            append(formatUnit(value, unit, relativeTime, format.date))
+        }
+
+        // Digital time?
+        if (format.time == FormatStyle.Time.Digital) {
+            if (!isEmpty()) append(", ")
+
+            val hours = (duration.inWholeHours % 24).toString().padStart(2, '0')
+            val minutes = (duration.inWholeMinutes % 60).toString().padStart(2, '0')
+            val seconds = (duration.inWholeSeconds % 60).toString().padStart(2, '0')
+            append("$hours:$minutes:$seconds")
         }
 
         // Nothing to format? Add "0 ..."
         if (isEmpty() && units.isNotEmpty()) {
-            append(formatUnit(0, units.first(), relativeTime, formatStyle.dateTimeUnits))
+            append(formatUnit(0, units.first(), relativeTime, format.date))
         }
     }
 }
@@ -148,7 +162,7 @@ private fun formatUnit(
     count: Int,
     unit: TimeUnit,
     relativeTime: RelativeTime,
-    formatStyle: FormatStyle.DateTimeUnits
+    formatStyle: FormatStyle.Date
 ): String {
     val formattedCount = if (count > 1_000) {
         count.toDouble().formatNumber(decimals = 0)
@@ -162,7 +176,7 @@ private fun formatUnit(
         "ar" if (count == 1 || count == 2) -> unitText
         "ko" -> "$formattedCount$unitText"
         else -> {
-            if (formatStyle == FormatStyle.DateTimeUnits.Narrow) {
+            if (formatStyle == FormatStyle.Date.Narrow) {
                 "$formattedCount$unitText"
             } else {
                 "$formattedCount $unitText"

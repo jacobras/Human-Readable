@@ -38,7 +38,7 @@ internal fun formatTimeAgo(
             formatDuration(
                 duration = diff.absoluteValue,
                 relativeTime = RelativeTime.Future,
-                formatStyle = formatStyle,
+                format = formatStyle,
                 parts = parts,
                 units = units,
                 rounding = rounding
@@ -49,7 +49,7 @@ internal fun formatTimeAgo(
             formatDuration(
                 duration = diff.absoluteValue,
                 relativeTime = RelativeTime.Past,
-                formatStyle = formatStyle,
+                format = formatStyle,
                 parts = parts,
                 units = units,
                 rounding = rounding
@@ -91,7 +91,7 @@ internal fun formatTimeAgo(
             formatDuration(
                 duration = secondsAgo.absoluteValue.seconds,
                 relativeTime = RelativeTime.Future,
-                formatStyle = formatStyle,
+                format = formatStyle,
                 parts = parts,
                 units = units,
                 rounding = rounding
@@ -102,7 +102,7 @@ internal fun formatTimeAgo(
             formatDuration(
                 duration = secondsAgo.absoluteValue.seconds,
                 relativeTime = RelativeTime.Past,
-                formatStyle = formatStyle,
+                format = formatStyle,
                 parts = parts,
                 units = units,
                 rounding = rounding
