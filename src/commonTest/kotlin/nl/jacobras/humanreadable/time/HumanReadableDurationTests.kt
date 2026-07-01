@@ -31,43 +31,46 @@ class HumanReadableDurationTests {
     }
 
     @Test
-    fun defaultRounding() {
-        assertThat(duration(1.seconds)).isEqualTo("1 second")
-        assertThat(duration(3.seconds)).isEqualTo("3 seconds")
-        assertThat(duration(55.seconds)).isEqualTo("55 seconds")
+    fun halfUpRounding() {
+        assertThat(duration(1.seconds, rounding = HalfUp)).isEqualTo("1 second")
+        assertThat(duration(3.seconds, rounding = HalfUp)).isEqualTo("3 seconds")
+        assertThat(duration(55.seconds, rounding = HalfUp)).isEqualTo("55 seconds")
 
-        assertThat(duration(1.minutes)).isEqualTo("1 minute")
-        assertThat(duration(3.minutes)).isEqualTo("3 minutes")
-        assertThat(duration(55.minutes)).isEqualTo("55 minutes")
+        assertThat(duration(1.minutes, rounding = HalfUp)).isEqualTo("1 minute")
+        assertThat(duration(1.minutes + 55.seconds, rounding = HalfUp)).isEqualTo("2 minutes")
+        assertThat(duration(3.minutes, rounding = HalfUp)).isEqualTo("3 minutes")
+        assertThat(duration(55.minutes, rounding = HalfUp)).isEqualTo("55 minutes")
 
-        assertThat(duration(1.hours)).isEqualTo("1 hour")
-        assertThat(duration(3.hours)).isEqualTo("3 hours")
-        assertThat(duration(23.hours)).isEqualTo("23 hours")
+        assertThat(duration(1.hours, rounding = HalfUp)).isEqualTo("1 hour")
+        assertThat(duration(3.hours, rounding = HalfUp)).isEqualTo("3 hours")
+        assertThat(duration(23.hours, rounding = HalfUp)).isEqualTo("23 hours")
 
-        assertThat(duration(1.days)).isEqualTo("1 day")
-        assertThat(duration(3.days)).isEqualTo("3 days")
+        assertThat(duration(1.days, rounding = HalfUp)).isEqualTo("1 day")
+        assertThat(duration(3.days, rounding = HalfUp)).isEqualTo("3 days")
 
-        assertThat(duration(7.days)).isEqualTo("1 week")
-        assertThat(duration(10.days)).isEqualTo("1 week")
-        assertThat(duration(11.days)).isEqualTo("2 weeks")
+        assertThat(duration(7.days, rounding = HalfUp)).isEqualTo("1 week")
+        assertThat(duration(10.days, rounding = HalfUp)).isEqualTo("1 week")
+        assertThat(duration(11.days, rounding = HalfUp)).isEqualTo("2 weeks")
+        assertThat(duration(12.days, rounding = HalfUp)).isEqualTo("2 weeks")
 
-        assertThat(duration(21.days)).isEqualTo("1 month")
-        assertThat(duration(29.days)).isEqualTo("1 month")
-        assertThat(duration(30.days)).isEqualTo("1 month")
-        assertThat(duration(31.days)).isEqualTo("1 month")
-        assertThat(duration(46.days)).isEqualTo("2 months")
-        assertThat(duration(90.days)).isEqualTo("3 months")
+        assertThat(duration(21.days, rounding = HalfUp)).isEqualTo("3 weeks")
+        assertThat(duration(29.days, rounding = HalfUp)).isEqualTo("4 weeks")
+        assertThat(duration(30.days, rounding = HalfUp)).isEqualTo("4 weeks")
+        assertThat(duration(31.days, rounding = HalfUp)).isEqualTo("1 month")
+        assertThat(duration(46.days, rounding = HalfUp)).isEqualTo("2 months")
+        assertThat(duration(90.days, rounding = HalfUp)).isEqualTo("3 months")
 
-        assertThat(duration(360.days)).isEqualTo("1 year")
-        assertThat(duration(365.days)).isEqualTo("1 year")
-        assertThat(duration(555.days)).isEqualTo("2 years")
-        assertThat(duration(1095.days)).isEqualTo("3 years")
+        assertThat(duration(360.days, rounding = HalfUp)).isEqualTo("12 months")
+        assertThat(duration(365.days, rounding = HalfUp)).isEqualTo("1 year")
+        assertThat(duration(555.days, rounding = HalfUp)).isEqualTo("2 years")
+        assertThat(duration(1095.days, rounding = HalfUp)).isEqualTo("3 years")
     }
 
     @Test
     fun floorRounding() {
         assertThat(duration(10.days, rounding = Floor)).isEqualTo("1 week")
         assertThat(duration(11.days, rounding = Floor)).isEqualTo("1 week")
+        assertThat(duration(12.days, rounding = Floor)).isEqualTo("1 week")
 
         assertThat(duration(21.days, rounding = Floor)).isEqualTo("3 weeks")
         assertThat(duration(29.days, rounding = Floor)).isEqualTo("4 weeks")
@@ -101,6 +104,7 @@ class HumanReadableDurationTests {
         assertThat(duration(7.days, rounding = UpIfClose)).isEqualTo("1 week")
         assertThat(duration(10.days, rounding = UpIfClose)).isEqualTo("1 week")
         assertThat(duration(11.days, rounding = UpIfClose)).isEqualTo("1 week")
+        assertThat(duration(12.days, rounding = UpIfClose)).isEqualTo("1 week")
 
         assertThat(duration(21.days, rounding = UpIfClose)).isEqualTo("3 weeks")
         assertThat(duration(29.days, rounding = UpIfClose)).isEqualTo("4 weeks")
