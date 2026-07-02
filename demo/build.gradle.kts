@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.buildconfig)
 }
 
 kotlin {
@@ -40,4 +41,8 @@ kotlin {
 
 rootProject.plugins.withType<YarnPlugin> {
     rootProject.the<YarnRootExtension>().yarnLockMismatchReport = YarnLockMismatchReport.NONE
+}
+
+buildConfig {
+    buildConfigField("VERSION", project.property("nl.jacobras.humanreadable.version") as String)
 }
