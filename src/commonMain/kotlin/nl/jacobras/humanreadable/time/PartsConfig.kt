@@ -45,5 +45,14 @@ public data class PartsConfig(
         TimeUnit.Minutes to 2,
         TimeUnit.Hours to 2,
         TimeUnit.Days to 2
-    )
+    ),
+
+    /**
+     * If `true`, only consecutive [TimeUnit]s will be formatted.
+     *
+     * For example:
+     * - "1 hour, 5 minutes" will be possible (because minutes are the next unit after hours)
+     * - "1 hour, 5 seconds" will not be returned (because seconds are not the next unit after hours)
+     */
+    val onlyConsecutiveParts: Boolean = true
 )

@@ -10,6 +10,7 @@ import nl.jacobras.humanreadable.time.Rounding.Floor
 import nl.jacobras.humanreadable.time.Rounding.HalfUp
 import nl.jacobras.humanreadable.time.Rounding.UpIfClose
 import kotlin.test.Test
+import kotlin.time.Duration
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
@@ -143,9 +144,6 @@ class HumanReadableDurationTests {
             duration(3.seconds, parts = PartsConfig(max = 2))
         ).isEqualTo("3 seconds")
         assertThat(
-            duration(1.hours + 10.seconds, parts = PartsConfig(max = 2))
-        ).isEqualTo("1 hour, 10 seconds")
-        assertThat(
             duration(1.minutes + 55.seconds, rounding = HalfUp, parts = PartsConfig(max = 2))
         ).isEqualTo("1 minute, 55 seconds")
         assertThat(
@@ -162,6 +160,22 @@ class HumanReadableDurationTests {
         assertThat(
             duration(6.days + 23.hours, rounding = UpIfClose, parts = PartsConfig(max = 2))
         ).isEqualTo("7 days")
+    }
+
+    @Test
+    fun onlyConnectedSubparts() {
+        assertThat(
+            duration(1.hours + 10.seconds, parts = PartsConfig(max = 2, onlyConsecutiveParts = false))
+        ).isEqualTo("1 hour, 10 seconds")
+        assertThat(
+            duration(1.hours + 10.seconds, parts = PartsConfig(max = 2, onlyConsecutiveParts = true))
+        ).isEqualTo("1 hour")
+        assertThat(
+            duration(23.hours + 5.minutes, parts = PartsConfig(max = 2, subpartCutOffs = mapOf()))
+        ).isEqualTo("23 hours, 5 minutes")
+        assertThat(
+            duration(24.hours + 5.minutes, parts = PartsConfig(max = 2, subpartCutOffs = mapOf()))
+        ).isEqualTo("1 day")
     }
 
     @Test

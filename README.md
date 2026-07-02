@@ -59,7 +59,8 @@ HumanReadable.timeAgo(
     parts = PartsConfig(
         max = 2, // "1 hour, 50 minutes"
         smallestDuration = 10.minutes, // anything smaller will return "less than 10 minutes"
-        subpartCutOffs = mapOf(TimeUnit.Hours to 12.hours) // drops subparts, e.g. "11 hours, 40 minutes" and then "12 hours"
+        subpartCutOffs = mapOf(TimeUnit.Hours to 12.hours), // drops subparts, e.g. "11 hours, 40 minutes" and then "12 hours"
+        onlyConsecutiveParts = true // whether "1 hour, 5 seconds" can be returned (as seconds are not the next unit after hours)
     ),
     units = setOf(TimeUnit.Hours), // limits the output to these units, e.g. "391 days"
     rounding = Rounding.HalfUp // or Floor to round down, or UpIfClose to round up on 55 seconds/55 minutes/23 hours/13 days
