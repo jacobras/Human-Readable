@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "nl.jacobras"
-version = "2.0.0"
+version = project.property("nl.jacobras.humanreadable.version") as String
 
 mavenPublishing {
     publishToMavenCentral()

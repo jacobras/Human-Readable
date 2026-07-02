@@ -1,3 +1,4 @@
+import Human_Readable.demo.BuildConfig
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -68,7 +69,7 @@ internal fun App() {
 
             Scaffold(
                 topBar = {
-                    TopAppBar(title = { Text("Human-Readable web demo") })
+                    TopAppBar(title = { Text("Human-Readable ${BuildConfig.VERSION} web demo") })
                 }
             ) { paddingValues ->
 
