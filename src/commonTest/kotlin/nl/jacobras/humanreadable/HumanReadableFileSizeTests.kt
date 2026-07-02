@@ -7,7 +7,7 @@ import kotlin.test.Test
 class HumanReadableFileSizeTests {
 
     init {
-        HumanReadable.languageTag = "en"
+        HumanReadable.config.languageTag = "en"
     }
 
     @Test

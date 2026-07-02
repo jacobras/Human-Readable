@@ -28,7 +28,7 @@ class HumanReadableDurationTests {
     private val narrowStyle = FormatStyle(date = FormatStyle.Date.Narrow)
 
     init {
-        HumanReadable.languageTag = "en"
+        HumanReadable.config.languageTag = "en"
     }
 
     @Test
@@ -281,6 +281,16 @@ class HumanReadableDurationTests {
 
     @Test
     fun formatStyleDigitalTime() {
+        assertThat(
+            duration(
+                duration = 5.minutes,
+                formatting = FormatStyle(
+                    time = FormatStyle.Time.Digital,
+                    indicateApproximation = true
+                )
+            )
+        ).isEqualTo("00:05:00")
+
         assertThat(
             duration(
                 duration = 1.hours,
