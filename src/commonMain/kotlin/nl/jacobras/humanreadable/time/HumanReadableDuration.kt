@@ -19,7 +19,7 @@ internal fun formatDuration(
     duration: Duration,
     relativeTime: RelativeTime,
     format: FormatStyle,
-    parts: Parts,
+    parts: PartsConfig,
     units: Set<TimeUnit>,
     rounding: Rounding
 ): String {
@@ -91,7 +91,7 @@ private fun getNeededParts(
     units: Set<TimeUnit>,
     duration: Duration,
     rounding: Rounding,
-    parts: Parts
+    parts: PartsConfig
 ): Map<TimeUnit, Int> {
     val unitsDescending = units.sorted().reversed()
     val res = mutableMapOf<TimeUnit, Int>()

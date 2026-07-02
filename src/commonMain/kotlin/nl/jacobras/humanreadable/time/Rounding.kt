@@ -3,7 +3,7 @@ package nl.jacobras.humanreadable.time
 /**
  * Rounding method.
  *
- * Note about multi-parts (when [Parts.max] > 1): rounding is done on the smallest included unit.
+ * Note about multi-parts (when [PartsConfig.max] > 1): rounding is done on the smallest included unit.
  */
 public sealed interface Rounding {
 
@@ -23,7 +23,7 @@ public sealed interface Rounding {
      * - `12.days` results in "2 weeks".
      * - `46.days` results in "2 months".
      *
-     * Note that when [Parts.max] is larger than 1, the rounding is done on the smallest unit.
+     * Note that when [PartsConfig.max] is larger than 1, the rounding is done on the smallest unit.
      */
     public data object HalfUp : Rounding
 

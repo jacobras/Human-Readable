@@ -9,7 +9,7 @@ import kotlin.time.Duration
  * - "1 day, 20 hours" could be output;
  * - "1 day, 20 minutes" will never be output (because minutes are not next to days).
  */
-public data class Parts(
+public data class PartsConfig(
 
     /**
      * Maximum number of parts to show.
