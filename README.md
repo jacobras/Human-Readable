@@ -42,8 +42,33 @@ HumanReadable.duration(7.days) // "1 week"
 HumanReadable.duration(544.hours) // "3 weeks"
 ```
 
-**Note**: The formatter switches to a bigger unit (minute, hour, day, ...) as soon as it can.
-See [Precision](#datetime-precision).
+### ✍️ Formatting options
+
+The formatter switches to a bigger unit (minute, hour, day, ...) as soon as it can.
+
+There are a number of configuration options available for both `timeAgo()` and `duration()`.
+
+```kotlin
+HumanReadable.timeAgo(
+    instant = now - 134.minutes,
+    formatting = FormatStyle(
+        date = FormatStyle.Date.Long, // or Short: "1 hr, 50 min" or Narrow: "1h 50m"
+        time = FormatStyle.Time.Regular, // or Digital: "01:50:00"
+        indicateApproximation = true // will prefix "about" if the formatted time is not exact (i.e. a part was dropped or rounded)
+    ),
+    parts = PartsConfig(
+        max = 2, // "1 hour, 50 minutes"
+        smallestDuration = 10.minutes, // anything smaller will return "less than 10 minutes"
+        subpartCutOffs = mapOf(TimeUnit.Hours to 12.hours) // drops subparts, e.g. "11 hours, 40 minutes" and then "12 hours"
+    ),
+    units = setOf(TimeUnit.Hours), // limits the output to these units, e.g. "391 days"
+    rounding = Rounding.HalfUp // or Floor to round down, or UpIfClose to round up on 55 seconds/55 minutes/23 hours/13 days
+)
+```
+
+// TODO: global configuration
+
+Visit the [interactive demo](#features) to see more examples in action.
 
 ### 📂 File size
 
@@ -98,23 +123,6 @@ HumanReadable.distance(value = 28512, unit = DistanceUnit.Foot, decimals = 2) //
 
 **Note:** numbers in meters and feet are always formatted with zero decimals. The passed in
 number of decimals is only used for the larger units kilometers and miles.
-
-## Date/time precision
-
-// TODO global config options
-
-The formatter switches to a bigger unit (minute, hour, day, ...) as soon as it can.
-For example:
-
-* `59.seconds` is "59 seconds" but `60.seconds` becomes "1 minute"
-* `6.days` is "6 days" but `7.days` becomes "1 week"
-* `29.days` is "29 days" but `30.days` becomes "1 month"
-
-There's also some rounding involved:
-
-* `8.days` and `10.days` are "1 week", but `11.days` already becomes "2 weeks"
-
-This behaviour may become configurable in future releases.
 
 ## Localisation
 
