@@ -33,7 +33,7 @@ import kotlinx.datetime.toLocalDateTime
 import monoBodyOrange
 import nl.jacobras.humanreadable.HumanReadable
 import nl.jacobras.humanreadable.time.FormatStyle
-import nl.jacobras.humanreadable.time.Parts
+import nl.jacobras.humanreadable.time.PartsConfig
 import nl.jacobras.humanreadable.time.Rounding
 import nl.jacobras.humanreadable.time.TimeUnit
 import ui.CodeExample
@@ -144,44 +144,44 @@ internal fun TimeDemo(
         Spacer(Modifier.height(16.dp))
 
         CodeExample(
-            code = "formatStyle = FormatStyle(date = Date.Short)",
+            code = "formatting = FormatStyle(date = Date.Short)",
             res = remember(selectedLanguageCode, baseInstant, myInstant) {
                 HumanReadable.timeAgo(
                     myInstant, baseInstant,
-                    formatStyle = FormatStyle(date = FormatStyle.Date.Short)
+                    formatting = FormatStyle(date = FormatStyle.Date.Short)
                 )
             },
             inline = true
         )
         Spacer(Modifier.height(8.dp))
         CodeExample(
-            code = "formatStyle = FormatStyle(date = Date.Narrow)",
+            code = "formatting = FormatStyle(date = Date.Narrow)",
             res = remember(selectedLanguageCode, baseInstant, myInstant) {
                 HumanReadable.timeAgo(
                     myInstant, baseInstant,
-                    formatStyle = FormatStyle(date = FormatStyle.Date.Narrow)
+                    formatting = FormatStyle(date = FormatStyle.Date.Narrow)
                 )
             },
             inline = true
         )
         Spacer(Modifier.height(8.dp))
         CodeExample(
-            code = "formatStyle = FormatStyle(time = FormatStyle.Time.Digital)",
+            code = "formatting = FormatStyle(time = FormatStyle.Time.Digital)",
             res = remember(selectedLanguageCode, baseInstant, myInstant) {
                 HumanReadable.timeAgo(
                     myInstant, baseInstant,
-                    formatStyle = FormatStyle(time = FormatStyle.Time.Digital)
+                    formatting = FormatStyle(time = FormatStyle.Time.Digital)
                 )
             },
             inline = true
         )
         Spacer(Modifier.height(8.dp))
         CodeExample(
-            code = "formatStyle = FormatStyle(indicateApproximation = true)",
+            code = "formatting = FormatStyle(indicateApproximation = true)",
             res = remember(selectedLanguageCode, baseInstant, myInstant) {
                 HumanReadable.timeAgo(
                     myInstant, baseInstant,
-                    formatStyle = FormatStyle(indicateApproximation = true)
+                    formatting = FormatStyle(indicateApproximation = true)
                 )
             },
             inline = true
@@ -212,22 +212,22 @@ internal fun TimeDemo(
         Spacer(Modifier.height(16.dp))
 
         CodeExample(
-            code = "parts = Parts(max = 3)",
+            code = "parts = PartsConfig(max = 3)",
             res = remember(selectedLanguageCode, baseInstant, myInstant) {
                 HumanReadable.timeAgo(
                     myInstant, baseInstant,
-                    parts = Parts(max = 3)
+                    parts = PartsConfig(max = 3)
                 )
             },
             inline = true
         )
         Spacer(Modifier.height(8.dp))
         CodeExample(
-            code = "parts = Parts(max = 3, subpartCutOffs = mapOf(TimeUnit.Minutes to 10, TimeUnit.Hours to 12))",
+            code = "parts = PartsConfig(max = 3, subpartCutOffs = mapOf(TimeUnit.Minutes to 10, TimeUnit.Hours to 12))",
             res = remember(selectedLanguageCode, baseInstant, myInstant) {
                 HumanReadable.timeAgo(
                     myInstant, baseInstant,
-                    parts = Parts(
+                    parts = PartsConfig(
                         max = 3,
                         subpartCutOffs = mapOf(TimeUnit.Minutes to 10, TimeUnit.Hours to 12)
                     )
@@ -237,11 +237,11 @@ internal fun TimeDemo(
         )
         Spacer(Modifier.height(8.dp))
         CodeExample(
-            code = "parts = Parts(smallestDuration = 10.minutes)",
+            code = "parts = PartsConfig(smallestDuration = 10.minutes)",
             res = remember(selectedLanguageCode, baseInstant, myInstant) {
                 HumanReadable.timeAgo(
                     myInstant, baseInstant,
-                    parts = Parts(smallestDuration = 10.minutes)
+                    parts = PartsConfig(smallestDuration = 10.minutes)
                 )
             },
             inline = true

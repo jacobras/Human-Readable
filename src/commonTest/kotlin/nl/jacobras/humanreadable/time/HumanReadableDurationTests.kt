@@ -134,100 +134,100 @@ class HumanReadableDurationTests {
     @Test
     fun multipleParts() {
         assertThat(
-            duration(70.seconds, parts = Parts(max = 2))
+            duration(70.seconds, parts = PartsConfig(max = 2))
         ).isEqualTo("1 minute, 10 seconds")
         assertThat(
-            duration(90.minutes + 10.seconds, parts = Parts(max = 3, subpartCutOffs = emptyMap()))
+            duration(90.minutes + 10.seconds, parts = PartsConfig(max = 3, subpartCutOffs = emptyMap()))
         ).isEqualTo("1 hour, 30 minutes, 10 seconds")
         assertThat(
-            duration(3.seconds, parts = Parts(max = 2))
+            duration(3.seconds, parts = PartsConfig(max = 2))
         ).isEqualTo("3 seconds")
         assertThat(
-            duration(1.hours + 10.seconds, parts = Parts(max = 2))
+            duration(1.hours + 10.seconds, parts = PartsConfig(max = 2))
         ).isEqualTo("1 hour, 10 seconds")
         assertThat(
-            duration(1.minutes + 55.seconds, rounding = HalfUp, parts = Parts(max = 2))
+            duration(1.minutes + 55.seconds, rounding = HalfUp, parts = PartsConfig(max = 2))
         ).isEqualTo("1 minute, 55 seconds")
         assertThat(
-            duration(1.minutes + 55.seconds, rounding = UpIfClose, parts = Parts(max = 2))
+            duration(1.minutes + 55.seconds, rounding = UpIfClose, parts = PartsConfig(max = 2))
         ).isEqualTo("2 minutes")
 
         // Edge cases
         assertThat(
-            duration(59.minutes + 55.seconds, rounding = UpIfClose, parts = Parts(max = 2))
+            duration(59.minutes + 55.seconds, rounding = UpIfClose, parts = PartsConfig(max = 2))
         ).isEqualTo("1 hour")
         assertThat(
-            duration(23.hours + 55.minutes, rounding = UpIfClose, parts = Parts(max = 2))
+            duration(23.hours + 55.minutes, rounding = UpIfClose, parts = PartsConfig(max = 2))
         ).isEqualTo("1 day")
         assertThat(
-            duration(6.days + 23.hours, rounding = UpIfClose, parts = Parts(max = 2))
+            duration(6.days + 23.hours, rounding = UpIfClose, parts = PartsConfig(max = 2))
         ).isEqualTo("7 days")
     }
 
     @Test
     fun smallestDuration() {
         assertThat(
-            duration(44.seconds, parts = Parts(smallestDuration = 45.seconds), formatStyle = longStyle)
+            duration(44.seconds, parts = PartsConfig(smallestDuration = 45.seconds), formatting = longStyle)
         ).isEqualTo("less than 45 seconds")
         assertThat(
-            duration(10.minutes, parts = Parts(smallestDuration = 15.minutes), formatStyle = longStyle)
+            duration(10.minutes, parts = PartsConfig(smallestDuration = 15.minutes), formatting = longStyle)
         ).isEqualTo("less than 15 minutes")
 
         assertThat(
-            duration(44.seconds, parts = Parts(smallestDuration = 45.seconds), formatStyle = shortStyle)
+            duration(44.seconds, parts = PartsConfig(smallestDuration = 45.seconds), formatting = shortStyle)
         ).isEqualTo("<45 sec")
         assertThat(
-            duration(44.seconds, parts = Parts(smallestDuration = 45.seconds), formatStyle = narrowStyle)
+            duration(44.seconds, parts = PartsConfig(smallestDuration = 45.seconds), formatting = narrowStyle)
         ).isEqualTo("<45s")
 
-        assertThat(duration(45.seconds, parts = Parts(smallestDuration = 45.seconds))).isEqualTo("45 seconds")
+        assertThat(duration(45.seconds, parts = PartsConfig(smallestDuration = 45.seconds))).isEqualTo("45 seconds")
     }
 
     @Test
     fun subpartsCutOffs() {
         assertThat(
-            duration(1.minutes + 4.seconds, parts = Parts(max = 2, subpartCutOffs = mapOf(TimeUnit.Minutes to 2)))
+            duration(1.minutes + 4.seconds, parts = PartsConfig(max = 2, subpartCutOffs = mapOf(TimeUnit.Minutes to 2)))
         ).isEqualTo("1 minute, 4 seconds")
         assertThat(
-            duration(2.minutes + 4.seconds, parts = Parts(max = 2, subpartCutOffs = mapOf(TimeUnit.Minutes to 2)))
+            duration(2.minutes + 4.seconds, parts = PartsConfig(max = 2, subpartCutOffs = mapOf(TimeUnit.Minutes to 2)))
         ).isEqualTo("2 minutes")
 
         assertThat(
-            duration(19.hours + 4.minutes, parts = Parts(max = 2, subpartCutOffs = mapOf(TimeUnit.Hours to 2)))
+            duration(19.hours + 4.minutes, parts = PartsConfig(max = 2, subpartCutOffs = mapOf(TimeUnit.Hours to 2)))
         ).isEqualTo("19 hours")
         assertThat(
-            duration(20.hours + 4.minutes, parts = Parts(max = 2, subpartCutOffs = mapOf(TimeUnit.Hours to 2)))
+            duration(20.hours + 4.minutes, parts = PartsConfig(max = 2, subpartCutOffs = mapOf(TimeUnit.Hours to 2)))
         ).isEqualTo("20 hours")
 
         assertThat(
-            duration(1.days + 5.hours, parts = Parts(max = 2, subpartCutOffs = mapOf(TimeUnit.Days to 2)))
+            duration(1.days + 5.hours, parts = PartsConfig(max = 2, subpartCutOffs = mapOf(TimeUnit.Days to 2)))
         ).isEqualTo("1 day, 5 hours")
         assertThat(
-            duration(2.days + 5.hours, parts = Parts(max = 2, subpartCutOffs = mapOf(TimeUnit.Days to 2)))
+            duration(2.days + 5.hours, parts = PartsConfig(max = 2, subpartCutOffs = mapOf(TimeUnit.Days to 2)))
         ).isEqualTo("2 days")
     }
 
     @Test
     fun formatStyle() {
         assertThat(
-            duration(1.hours + 50.minutes, formatStyle = longStyle, parts = Parts(max = 2))
+            duration(1.hours + 50.minutes, formatting = longStyle, parts = PartsConfig(max = 2))
         ).isEqualTo("1 hour, 50 minutes")
         assertThat(
-            duration(1.hours + 50.minutes, formatStyle = shortStyle, parts = Parts(max = 2))
+            duration(1.hours + 50.minutes, formatting = shortStyle, parts = PartsConfig(max = 2))
         ).isEqualTo("1 hr, 50 min")
         assertThat(
-            duration(1.hours + 50.minutes, formatStyle = narrowStyle, parts = Parts(max = 2))
+            duration(1.hours + 50.minutes, formatting = narrowStyle, parts = PartsConfig(max = 2))
         ).isEqualTo("1h 50m")
 
-        assertThat(duration(1.hours, formatStyle = longStyle)).isEqualTo("1 hour")
-        assertThat(duration(1.hours, formatStyle = shortStyle)).isEqualTo("1 hr")
-        assertThat(duration(1.hours, formatStyle = narrowStyle)).isEqualTo("1h")
-        assertThat(duration(14.days, formatStyle = longStyle)).isEqualTo("2 weeks")
-        assertThat(duration(14.days, formatStyle = shortStyle)).isEqualTo("2 wks")
-        assertThat(duration(14.days, formatStyle = narrowStyle)).isEqualTo("2w")
-        assertThat(duration(180.days, formatStyle = longStyle)).isEqualTo("6 months")
-        assertThat(duration(180.days, formatStyle = shortStyle)).isEqualTo("6 mths")
-        assertThat(duration(180.days, formatStyle = narrowStyle)).isEqualTo("6m")
+        assertThat(duration(1.hours, formatting = longStyle)).isEqualTo("1 hour")
+        assertThat(duration(1.hours, formatting = shortStyle)).isEqualTo("1 hr")
+        assertThat(duration(1.hours, formatting = narrowStyle)).isEqualTo("1h")
+        assertThat(duration(14.days, formatting = longStyle)).isEqualTo("2 weeks")
+        assertThat(duration(14.days, formatting = shortStyle)).isEqualTo("2 wks")
+        assertThat(duration(14.days, formatting = narrowStyle)).isEqualTo("2w")
+        assertThat(duration(180.days, formatting = longStyle)).isEqualTo("6 months")
+        assertThat(duration(180.days, formatting = shortStyle)).isEqualTo("6 mths")
+        assertThat(duration(180.days, formatting = narrowStyle)).isEqualTo("6m")
     }
 
     @Test
@@ -235,32 +235,32 @@ class HumanReadableDurationTests {
         assertThat(
             duration(
                 duration = 1.hours,
-                formatStyle = longStyle.copy(indicateApproximation = true)
+                formatting = longStyle.copy(indicateApproximation = true)
             )
         ).isEqualTo("1 hour")
         assertThat(
             duration(
                 duration = 1.hours + 1.minutes,
-                formatStyle = longStyle.copy(indicateApproximation = true)
+                formatting = longStyle.copy(indicateApproximation = true)
             )
         ).isEqualTo("about 1 hour")
         assertThat(
             duration(
                 duration = 1.hours + 1.minutes,
-                formatStyle = shortStyle.copy(indicateApproximation = true)
+                formatting = shortStyle.copy(indicateApproximation = true)
             )
         ).isEqualTo("~1 hr")
         assertThat(
             duration(
                 duration = 1.hours + 1.minutes,
-                formatStyle = narrowStyle.copy(indicateApproximation = true)
+                formatting = narrowStyle.copy(indicateApproximation = true)
             )
         ).isEqualTo("~1h")
         assertThat(
             duration(
                 duration = 1.hours + 1.minutes,
-                formatStyle = longStyle.copy(indicateApproximation = true),
-                parts = Parts(smallestDuration = 1.days)
+                formatting = longStyle.copy(indicateApproximation = true),
+                parts = PartsConfig(smallestDuration = 1.days)
             )
         ).isEqualTo("less than 1 day")
     }
@@ -270,32 +270,32 @@ class HumanReadableDurationTests {
         assertThat(
             duration(
                 duration = 1.hours,
-                formatStyle = FormatStyle(time = FormatStyle.Time.Digital),
-                parts = Parts(max = 5)
+                formatting = FormatStyle(time = FormatStyle.Time.Digital),
+                parts = PartsConfig(max = 5)
             )
         ).isEqualTo("01:00:00")
 
         assertThat(
             duration(
                 duration = 1.hours + 10.minutes + 5.seconds,
-                formatStyle = FormatStyle(time = FormatStyle.Time.Digital),
-                parts = Parts(max = 5)
+                formatting = FormatStyle(time = FormatStyle.Time.Digital),
+                parts = PartsConfig(max = 5)
             )
         ).isEqualTo("01:10:05")
 
         assertThat(
             duration(
                 duration = 5.days + 1.hours,
-                formatStyle = FormatStyle(time = FormatStyle.Time.Digital),
-                parts = Parts(max = 5)
+                formatting = FormatStyle(time = FormatStyle.Time.Digital),
+                parts = PartsConfig(max = 5)
             )
         ).isEqualTo("5 days, 01:00:00")
 
         assertThat(
             duration(
                 duration = 21.days + 2.days + 1.hours,
-                formatStyle = FormatStyle(time = FormatStyle.Time.Digital),
-                parts = Parts(max = 5)
+                formatting = FormatStyle(time = FormatStyle.Time.Digital),
+                parts = PartsConfig(max = 5)
             )
         ).isEqualTo("3 weeks, 2 days, 01:00:00")
     }

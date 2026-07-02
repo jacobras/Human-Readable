@@ -17,7 +17,7 @@ import kotlin.time.Instant
  *
  * @param instant The [Instant] to compare with [baseInstant].
  * @param baseInstant The base/starting [Instant], usually "now".
- * @param formatStyle The [FormatStyle] to use.
+ * @param formatting The [FormatStyle] to use.
  * @param parts Configures the formatting of multiple parts (defaults to 1 part).
  * @param units The [TimeUnit]s to limit to during formatting.
  * @param rounding The [Rounding] strategy to use.
@@ -26,8 +26,8 @@ import kotlin.time.Instant
 internal fun formatTimeAgo(
     instant: Instant,
     baseInstant: Instant,
-    formatStyle: FormatStyle,
-    parts: Parts,
+    formatting: FormatStyle,
+    parts: PartsConfig,
     units: Set<TimeUnit>,
     rounding: Rounding
 ): String {
@@ -39,7 +39,7 @@ internal fun formatTimeAgo(
             formatDuration(
                 duration = diff.absoluteValue,
                 relativeTime = RelativeTime.Future,
-                format = formatStyle,
+                format = formatting,
                 parts = parts,
                 units = units,
                 rounding = rounding
@@ -50,7 +50,7 @@ internal fun formatTimeAgo(
             formatDuration(
                 duration = diff.absoluteValue,
                 relativeTime = RelativeTime.Past,
-                format = formatStyle,
+                format = formatting,
                 parts = parts,
                 units = units,
                 rounding = rounding
@@ -67,7 +67,7 @@ internal fun formatTimeAgo(
  *
  * @param date The [LocalDate] to compare with [baseDate].
  * @param baseDate The base/starting [LocalDate], usually "today".
- * @param formatStyle The [FormatStyle] to use.
+ * @param formatting The [FormatStyle] to use.
  * @param parts Configures the formatting of multiple parts (defaults to 1 part).
  * @param units The [TimeUnit]s to limit to during formatting.
  * @param rounding The [Rounding] strategy to use.
@@ -75,8 +75,8 @@ internal fun formatTimeAgo(
 internal fun formatTimeAgo(
     date: LocalDate,
     baseDate: LocalDate,
-    formatStyle: FormatStyle,
-    parts: Parts,
+    formatting: FormatStyle,
+    parts: PartsConfig,
     units: Set<TimeUnit>,
     rounding: Rounding
 ): String {
@@ -92,7 +92,7 @@ internal fun formatTimeAgo(
             formatDuration(
                 duration = secondsAgo.absoluteValue.seconds,
                 relativeTime = RelativeTime.Future,
-                format = formatStyle,
+                format = formatting,
                 parts = parts,
                 units = units,
                 rounding = rounding
@@ -102,7 +102,7 @@ internal fun formatTimeAgo(
             formatDuration(
                 duration = secondsAgo.absoluteValue.seconds,
                 relativeTime = RelativeTime.Past,
-                format = formatStyle,
+                format = formatting,
                 parts = parts,
                 units = units,
                 rounding = rounding

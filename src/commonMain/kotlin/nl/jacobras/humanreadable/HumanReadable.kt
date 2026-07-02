@@ -12,7 +12,7 @@ import nl.jacobras.humanreadable.HumanReadable.number
 import nl.jacobras.humanreadable.i18n.HumanReadableStrings
 import nl.jacobras.humanreadable.i18n.Localisation
 import nl.jacobras.humanreadable.time.FormatStyle
-import nl.jacobras.humanreadable.time.Parts
+import nl.jacobras.humanreadable.time.PartsConfig
 import nl.jacobras.humanreadable.time.RelativeTime
 import nl.jacobras.humanreadable.time.Rounding
 import nl.jacobras.humanreadable.time.TimeUnit
@@ -60,7 +60,7 @@ public object HumanReadable {
      *
      * @param instant The [Instant] to format.
      * @param baseInstant The base/starting [Instant], defaulting to "now".
-     * @param formatStyle The [FormatStyle] to use, defaulting to [FormatStyle.Long].
+     * @param formatting The [FormatStyle] to use, defaulting to [FormatStyle.Long].
      * @param parts Configures the formatting of multiple parts, defaulting to 1 part.
      * @param units The [TimeUnit]s to limit to during formatting, not limited by default.
      * @param rounding The [Rounding] strategy to use, defaulting to [Rounding.HalfUp].
@@ -70,15 +70,15 @@ public object HumanReadable {
     public fun timeAgo(
         instant: Instant,
         baseInstant: Instant = Clock.System.now(),
-        formatStyle: FormatStyle = FormatStyle(),
-        parts: Parts = Parts(),
+        formatting: FormatStyle = FormatStyle(),
+        parts: PartsConfig = PartsConfig(),
         units: Set<TimeUnit> = TimeUnit.all,
         rounding: Rounding = Rounding.HalfUp
     ): String {
         return formatTimeAgo(
             instant = instant,
             baseInstant = baseInstant,
-            formatStyle = formatStyle,
+            formatting = formatting,
             parts = parts,
             units = units,
             rounding = rounding
@@ -91,7 +91,7 @@ public object HumanReadable {
      *
      * @param date The [LocalDate] to format.
      * @param baseDate The base/starting [LocalDate], defaulting to "today".
-     * @param formatStyle The [FormatStyle] to use, defaulting to "long".
+     * @param formatting The [FormatStyle] to use, defaulting to "long".
      * @param parts Configures the formatting of multiple parts, defaulting to 1 part.
      * @param units The [TimeUnit]s to limit to during formatting, not limited by default.
      * @param rounding The [Rounding] strategy to use, defaulting to [Rounding.HalfUp].
@@ -101,15 +101,15 @@ public object HumanReadable {
     public fun timeAgo(
         date: LocalDate,
         baseDate: LocalDate = Clock.System.todayIn(TimeZone.currentSystemDefault()),
-        formatStyle: FormatStyle = FormatStyle(),
-        parts: Parts = Parts(),
+        formatting: FormatStyle = FormatStyle(),
+        parts: PartsConfig = PartsConfig(),
         units: Set<TimeUnit> = TimeUnit.all,
         rounding: Rounding = Rounding.HalfUp
     ): String {
         return formatTimeAgo(
             date = date,
             baseDate = baseDate,
-            formatStyle = formatStyle,
+            formatting = formatting,
             parts = parts,
             units = units,
             rounding = rounding
@@ -121,22 +121,22 @@ public object HumanReadable {
      * For example, a duration of 3 seconds returns "3 seconds".
      *
      * @param duration The [Duration] to format.
-     * @param formatStyle The [FormatStyle] to use, defaulting to "long".
+     * @param formatting The [FormatStyle] to use, defaulting to "long".
      * @param parts Configures the formatting of multiple parts, defaulting to 1 part.
      * @param units The [TimeUnit]s to limit to during formatting, not limited by default.
      * @param rounding The [Rounding] strategy to use, defaulting to [Rounding.HalfUp].
      */
     public fun duration(
         duration: Duration,
-        formatStyle: FormatStyle = FormatStyle(),
-        parts: Parts = Parts(),
+        formatting: FormatStyle = FormatStyle(),
+        parts: PartsConfig = PartsConfig(),
         units: Set<TimeUnit> = TimeUnit.all,
         rounding: Rounding = Rounding.HalfUp
     ): String {
         return formatDuration(
             duration = duration,
             relativeTime = RelativeTime.Present,
-            format = formatStyle,
+            format = formatting,
             parts = parts,
             units = units,
             rounding = rounding
