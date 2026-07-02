@@ -112,6 +112,10 @@ private fun getNeededParts(
             remainingBeforeLast = remainingDuration
             res[unit] = value
             remainingDuration -= unit.valueToDuration(value)
+        } else if (res.isNotEmpty() && parts.onlyConsecutiveParts) {
+            // Started formatting, but the next part is zero, so we're done because
+            // anything after this would be non-consecutive.
+            break
         }
     }
 
