@@ -46,7 +46,7 @@ import ui.LanguageChip
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class, ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 internal fun App() {
-    var selectedLanguageCode by remember { mutableStateOf(HumanReadable.languageTag) }
+    var selectedLanguageCode by remember { mutableStateOf(HumanReadable.config.languageTag) }
     var selectedFeature by remember { mutableStateOf(Feature.Time) }
     val layoutDirection = if (selectedLanguageCode == "ar") {
         LayoutDirection.Rtl
@@ -56,7 +56,7 @@ internal fun App() {
 
     fun onSelectLanguage(code: String) {
         selectedLanguageCode = code
-        HumanReadable.languageTag = code
+        HumanReadable.config.languageTag = code
     }
 
     val navigator = rememberListDetailPaneScaffoldNavigator()
@@ -83,7 +83,7 @@ internal fun App() {
                     ) {
                         Text(
                             text = buildAnnotatedString {
-                                append("HumanReadable.languageTag = \"")
+                                append("HumanReadable.config.languageTag = \"")
                                 withStyle(monoBodyStringBold) {
                                     append(selectedLanguageCode)
                                 }

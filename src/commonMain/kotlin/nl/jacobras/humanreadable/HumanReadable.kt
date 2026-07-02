@@ -6,8 +6,6 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.todayIn
 import nl.jacobras.humanreadable.HumanReadable.duration
-import nl.jacobras.humanreadable.HumanReadable.fallbackLanguageTag
-import nl.jacobras.humanreadable.HumanReadable.languageTag
 import nl.jacobras.humanreadable.HumanReadable.number
 import nl.jacobras.humanreadable.i18n.HumanReadableStrings
 import nl.jacobras.humanreadable.i18n.Localisation
@@ -31,28 +29,7 @@ public object HumanReadable {
     internal val localisation = Localisation()
     internal val strings: HumanReadableStrings
         get() = localisation.currentStrings
-
-    /**
-     * The language tag (e.g. `"en"`, `"fr"`) to use when formatting. Defaults to the detected system
-     * language when it is supported, otherwise [fallbackLanguageTag].
-     */
-    public var languageTag: String
-        get() = localisation.languageTag
-        set(value) {
-            localisation.requestedLanguageTag = value
-        }
-
-    /**
-     * The fallback language tag (e.g. `"en"`, `"fr"`) to use when [languageTag] is not supported.
-     * If an unsupported language is passed in, nothing changes.
-     *
-     * Defaults to English.
-     */
-    public var fallbackLanguageTag: String
-        get() = localisation.fallbackLanguageTag
-        set(value) {
-            localisation.fallbackLanguageTag = value
-        }
+    public val config: Config = Config()
 
     /**
      * Returns the difference between [baseInstant] and [instant], in human-readable format. Also supports
@@ -60,7 +37,7 @@ public object HumanReadable {
      *
      * @param instant The [Instant] to format.
      * @param baseInstant The base/starting [Instant], defaulting to "now".
-     * @param formatting The [FormatStyle] to use, defaulting to [FormatStyle.Long].
+     * @param formatting The [FormatStyle] to use, defaulting to "long".
      * @param parts Configures the formatting of multiple parts, defaulting to 1 part.
      * @param units The [TimeUnit]s to limit to during formatting, not limited by default.
      * @param rounding The [Rounding] strategy to use, defaulting to [Rounding.HalfUp].
@@ -70,10 +47,10 @@ public object HumanReadable {
     public fun timeAgo(
         instant: Instant,
         baseInstant: Instant = Clock.System.now(),
-        formatting: FormatStyle = FormatStyle(),
-        parts: PartsConfig = PartsConfig(),
-        units: Set<TimeUnit> = TimeUnit.all,
-        rounding: Rounding = Rounding.HalfUp
+        formatting: FormatStyle = config.time.formatting,
+        parts: PartsConfig = config.time.parts,
+        units: Set<TimeUnit> = config.time.units,
+        rounding: Rounding = config.time.rounding
     ): String {
         return formatTimeAgo(
             instant = instant,
@@ -101,10 +78,10 @@ public object HumanReadable {
     public fun timeAgo(
         date: LocalDate,
         baseDate: LocalDate = Clock.System.todayIn(TimeZone.currentSystemDefault()),
-        formatting: FormatStyle = FormatStyle(),
-        parts: PartsConfig = PartsConfig(),
-        units: Set<TimeUnit> = TimeUnit.all,
-        rounding: Rounding = Rounding.HalfUp
+        formatting: FormatStyle = config.time.formatting,
+        parts: PartsConfig = config.time.parts,
+        units: Set<TimeUnit> = config.time.units,
+        rounding: Rounding = config.time.rounding
     ): String {
         return formatTimeAgo(
             date = date,
@@ -128,10 +105,10 @@ public object HumanReadable {
      */
     public fun duration(
         duration: Duration,
-        formatting: FormatStyle = FormatStyle(),
-        parts: PartsConfig = PartsConfig(),
-        units: Set<TimeUnit> = TimeUnit.all,
-        rounding: Rounding = Rounding.HalfUp
+        formatting: FormatStyle = config.time.formatting,
+        parts: PartsConfig = config.time.parts,
+        units: Set<TimeUnit> = config.time.units,
+        rounding: Rounding = config.time.rounding
     ): String {
         return formatDuration(
             duration = duration,

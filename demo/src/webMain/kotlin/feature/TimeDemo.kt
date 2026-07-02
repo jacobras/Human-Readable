@@ -136,7 +136,7 @@ internal fun TimeDemo(
         )
         Text(buildAnnotatedString {
             append("The examples below call ")
-            appendKotlinCode("HumanReadable.timeAgo( parameter1, parameter2, ... )")
+            appendKotlinCode("HumanReadable.timeAgo(option1, option2, ...)")
             append(". All parameters are optional and also work with ")
             appendKotlinCode("HumanReadable.duration()")
             append(".")

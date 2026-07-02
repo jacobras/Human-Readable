@@ -47,7 +47,10 @@ internal fun formatDuration(
                 FormatStyle.Date.Short -> append('<')
                 FormatStyle.Date.Narrow -> append('<')
             }
-        } else if (format.indicateApproximation && duration != parts.totalDuration) {
+        } else if (format.indicateApproximation
+            && duration != parts.totalDuration
+            && format.time != FormatStyle.Time.Digital
+        ) {
             // Large enough, somewhere rounding occurred? Add "about ..."
             when (format.date) {
                 FormatStyle.Date.Long -> {
@@ -154,9 +157,9 @@ private fun getNeededParts(
 }
 
 private val Map<TimeUnit, Int>.totalDuration: Duration
-    get() = entries.maxOf { (unit, value) ->
+    get() = entries.maxOfOrNull { (unit, value) ->
         unit.valueToDuration(value)
-    }
+    } ?: Duration.ZERO
 
 /**
  * Formats a [count] with its [unit].

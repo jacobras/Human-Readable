@@ -24,7 +24,7 @@ import kotlin.time.Instant
 class HumanReadableRelativeTimeTests {
 
     init {
-        HumanReadable.languageTag = "en"
+        HumanReadable.config.languageTag = "en"
     }
 
     private val now: Instant

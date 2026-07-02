@@ -67,7 +67,12 @@ HumanReadable.timeAgo(
 )
 ```
 
-// TODO: global configuration
+The above parameters can be set globally via `HumanReadable.config.time`.
+
+```kotlin
+HumanReadable.config.time.units = setOf(TimeUnit.Hours)
+HumanReadable.timeAgo(now - 2.days) // "48 hours ago"
+```
 
 Visit the [interactive demo](#features) to see more examples in action.
 
@@ -128,15 +133,15 @@ number of decimals is only used for the larger units kilometers and miles.
 ## Localisation
 
 The library uses an internal i18n mechanism. It detects the current locale by default, but it's changeable at
-runtime via `HumanReadable.languageTag`:
+runtime via `HumanReadable.config.languageTag`:
 
 ```kotlin
 HumanReadable.timeAgo(instant) // "3 days ago"
 
-HumanReadable.languageTag = "nl"
+HumanReadable.config.languageTag = "nl"
 HumanReadable.timeAgo(instant) // "3 dagen geleden"
 
-HumanReadable.languageTag = "fr"
+HumanReadable.config.languageTag = "fr"
 HumanReadable.timeAgo(instant) // "il y a 3 jours"
 ```
 

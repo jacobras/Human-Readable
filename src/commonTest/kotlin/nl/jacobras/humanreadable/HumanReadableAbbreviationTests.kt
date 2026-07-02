@@ -7,7 +7,7 @@ import kotlin.test.Test
 class HumanReadableAbbreviationTests {
 
     init {
-        HumanReadable.languageTag = "en"
+        HumanReadable.config.languageTag = "en"
     }
 
     @Test
