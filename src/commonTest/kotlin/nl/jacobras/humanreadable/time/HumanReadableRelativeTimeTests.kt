@@ -67,5 +67,18 @@ class HumanReadableRelativeTimeTests {
                 baseDate = today
             )
         ).isEqualTo("tomorrow")
+
+        assertThat(
+            HumanReadable.timeAgo(
+                date = today.minus(2, DateTimeUnit.DAY),
+                baseDate = today
+            )
+        ).isEqualTo("2 days ago")
+        assertThat(
+            HumanReadable.timeAgo(
+                date = today.plus(2, DateTimeUnit.DAY),
+                baseDate = today
+            )
+        ).isEqualTo("in 2 days")
     }
 }

@@ -2,6 +2,7 @@ package nl.jacobras.humanreadable.time
 
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.daysUntil
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import nl.jacobras.humanreadable.HumanReadable.strings
@@ -84,7 +85,7 @@ internal fun formatTimeAgo(
         baseDate -> return strings.dateTime.today
         baseDate.plus(1, DateTimeUnit.DAY) -> return strings.dateTime.tomorrow
     }
-    val secondsAgo = (baseDate - date).seconds
+    val secondsAgo = date.daysUntil(baseDate) * 86_400
 
     return when {
         secondsAgo < 0 -> strings.dateTime.timeInFuture(
@@ -97,7 +98,6 @@ internal fun formatTimeAgo(
                 rounding = rounding
             )
         )
-        secondsAgo <= 1 -> strings.dateTime.now
         else -> strings.dateTime.timeAgo(
             formatDuration(
                 duration = secondsAgo.absoluteValue.seconds,
