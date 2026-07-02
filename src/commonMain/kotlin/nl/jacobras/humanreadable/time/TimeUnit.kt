@@ -12,7 +12,6 @@ import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 
-// TODO: extensions instead of parameters? Cleaner public API
 public enum class TimeUnit(
     internal val calculateValue: (Duration, Rounding) -> Int,
     internal val valueToDuration: (Int) -> Duration,
