@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.4.0"
-compose = "1.12.0-alpha02"
+compose = "1.12.0-beta01"
 compose-adaptive = "1.3.0-beta02"
 
 [libraries]
