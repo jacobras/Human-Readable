@@ -157,9 +157,9 @@ private fun getNeededParts(
 }
 
 private val Map<TimeUnit, Int>.totalDuration: Duration
-    get() = entries.maxOfOrNull { (unit, value) ->
-        unit.valueToDuration(value)
-    } ?: Duration.ZERO
+    get() = entries.fold(Duration.ZERO) { acc, (unit, value) ->
+        acc + unit.valueToDuration(value)
+    }
 
 /**
  * Formats a [count] with its [unit].

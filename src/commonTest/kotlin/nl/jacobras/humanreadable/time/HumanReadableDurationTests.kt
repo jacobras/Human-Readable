@@ -277,6 +277,13 @@ class HumanReadableDurationTests {
                 parts = PartsConfig(smallestDuration = 1.days)
             )
         ).isEqualTo("less than 1 day")
+        assertThat(
+            duration(
+                duration = 1.days + 1.hours + 4.minutes,
+                formatting = longStyle.copy(indicateApproximation = true),
+                parts = PartsConfig(max = 5)
+            )
+        ).isEqualTo("1 day, 1 hour, 4 minutes")
     }
 
     @Test
