@@ -48,24 +48,11 @@ kotlin {
     explicitApi()
     applyDefaultHierarchyTemplate()
 
+    // Targets, alphabetically sorted
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-    tvosArm64()
-    tvosSimulatorArm64()
-    watchosArm32()
-    watchosArm64()
-    watchosSimulatorArm64()
     js {
-        browser {
-            testTask {
-                useKarma {
-                    useChromeHeadless()
-                }
-            }
-        }
-    }
-    wasmJs {
         browser {
             testTask {
                 useKarma {
@@ -88,6 +75,20 @@ kotlin {
             }
         }
     }
+    tvosArm64()
+    tvosSimulatorArm64()
+    wasmJs {
+        browser {
+            testTask {
+                useKarma {
+                    useChromeHeadless()
+                }
+            }
+        }
+    }
+    watchosArm32()
+    watchosArm64()
+    watchosSimulatorArm64()
 
     sourceSets {
         commonMain.dependencies {
