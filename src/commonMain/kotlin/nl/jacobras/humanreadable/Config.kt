@@ -32,7 +32,8 @@ public class Config {
     /**
      * Holds default parameters for time formatting of `duration()` and `timeAgo()`.
      */
-    public val time: Time = Time()
+    public var time: Time = Time()
+        internal set
 }
 
 /**

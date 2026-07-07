@@ -4,7 +4,7 @@ import nl.jacobras.humanreadable.HumanReadable.localisation
 import nl.jacobras.humanreadable.HumanReadable.strings
 import nl.jacobras.humanreadable.i18n.DateTimeStrings
 import nl.jacobras.humanreadable.i18n.TenseForms
-import nl.jacobras.humanreadable.time.Rounding.UpIfClose
+import nl.jacobras.humanreadable.time.Rounding.IfClose
 import kotlin.math.roundToInt
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.days
@@ -69,15 +69,8 @@ public enum class TimeUnit(
         narrowForms = { it.yearsNarrow }
     );
 
-    /**
-     * When to roll over to the next larger unit for [UpIfClose] rounding.
-     */
-    internal val upIfCloseRollover: Int
-        get() = when (this) {
-            Seconds, Minutes -> 55
-            Hours -> 23
-            else -> Int.MAX_VALUE
-        }
+    internal val largerUnit: TimeUnit?
+        get() = entries.getOrNull(ordinal + 1)
 
     internal fun format(value: Int, relativeTime: RelativeTime, formatStyle: FormatStyle.Date): String {
         val dateTimeStrings = strings.dateTime
@@ -105,7 +98,8 @@ public enum class TimeUnit(
 
 private fun Float.round(rounding: Rounding): Int {
     return when (rounding) {
-        Rounding.Floor, UpIfClose -> toInt()
+        is IfClose -> toInt()
+        Rounding.Floor -> toInt()
         Rounding.HalfUp -> roundToInt()
     }
 }

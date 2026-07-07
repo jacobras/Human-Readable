@@ -53,8 +53,8 @@ internal fun TimeDemo(
     modifier: Modifier = Modifier
 ) {
     val monoBody = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily.Monospace)
-    val baseInstant = remember { Clock.System.now() }
-    var myInstant by remember { mutableStateOf(baseInstant.minus(90, DateTimeUnit.SECOND)) }
+    val now = remember { Clock.System.now() }
+    var myInstant by remember { mutableStateOf(now.minus(90, DateTimeUnit.SECOND)) }
 
     Column(modifier.fillMaxWidth().verticalScroll(rememberScrollState())) {
         Text(
@@ -69,11 +69,11 @@ internal fun TimeDemo(
             Text(
                 text = buildAnnotatedString {
                     withStyle(monoBodyOrange) { append("val ") }
-                    append("baseInstant =")
+                    append("now =")
                 },
                 style = monoBody
             )
-            DateTimeField(baseInstant) {}
+            DateTimeField(now) {}
         }
         Spacer(Modifier.height(8.dp))
         Row(
@@ -92,12 +92,12 @@ internal fun TimeDemo(
         Spacer(Modifier.height(4.dp))
 
         FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-            Button(onClick = { myInstant = baseInstant }) { Text("[NOW]") }
+            Button(onClick = { myInstant = now }) { Text("[NOW]") }
             Button(onClick = { myInstant = myInstant.minus(10.seconds) }) { Text("-10 sec") }
             Button(onClick = { myInstant = myInstant.minus(1.minutes) }) { Text("-1 min") }
             Button(onClick = { myInstant = myInstant.minus(1.hours) }) { Text("-1 hr") }
             Button(onClick = { myInstant = myInstant.minus(1.days) }) { Text("-1 day") }
-            Button(onClick = { myInstant = myInstant.minus(1.days) }) { Text("-7 days") }
+            Button(onClick = { myInstant = myInstant.minus(7.days) }) { Text("-7 days") }
             Button(onClick = { myInstant = myInstant.minus(30.days) }) { Text("-30 days") }
             Button(onClick = { myInstant = myInstant.minus(365.days) }) { Text("-365 days") }
         }
@@ -105,26 +105,26 @@ internal fun TimeDemo(
 
         CodeExample(
             code = "HumanReadable.duration(now - myInstant)",
-            res = remember(selectedLanguageCode, baseInstant, myInstant) {
-                HumanReadable.duration(baseInstant - myInstant)
+            res = remember(selectedLanguageCode, now, myInstant) {
+                HumanReadable.duration(now - myInstant)
             }
         )
         Spacer(Modifier.height(12.dp))
 
         CodeExample(
-            code = "HumanReadable.timeAgo(myInstant)",
-            res = remember(selectedLanguageCode, baseInstant, myInstant) {
-                HumanReadable.timeAgo(myInstant)
+            code = "HumanReadable.timeAgo(myInstant) // compared to now",
+            res = remember(selectedLanguageCode, now, myInstant) {
+                HumanReadable.timeAgo(myInstant, now)
             }
         )
         Spacer(Modifier.height(12.dp))
 
         CodeExample(
             code = "HumanReadable.timeAgo(myLocalDate) // overloaded method that takes a LocalDate",
-            res = remember(selectedLanguageCode, baseInstant, myInstant) {
+            res = remember(selectedLanguageCode, now, myInstant) {
                 HumanReadable.timeAgo(
                     date = myInstant.toLocalDateTime(TimeZone.currentSystemDefault()).date,
-                    baseDate = baseInstant.toLocalDateTime(TimeZone.currentSystemDefault()).date
+                    baseDate = now.toLocalDateTime(TimeZone.currentSystemDefault()).date
                 )
             }
         )
@@ -136,8 +136,8 @@ internal fun TimeDemo(
         )
         Text(buildAnnotatedString {
             append("The examples below call ")
-            appendKotlinCode("HumanReadable.timeAgo(option1, option2, ...)")
-            append(". All parameters are optional and also work with ")
+            appendKotlinCode("HumanReadable.timeAgo(myInstant, option1, option2, ...)")
+            append(". All configuration parameters are optional and also work with ")
             appendKotlinCode("HumanReadable.duration()")
             append(".")
         })
@@ -145,9 +145,9 @@ internal fun TimeDemo(
 
         CodeExample(
             code = "formatting = FormatStyle(date = Date.Short)",
-            res = remember(selectedLanguageCode, baseInstant, myInstant) {
+            res = remember(selectedLanguageCode, now, myInstant) {
                 HumanReadable.timeAgo(
-                    myInstant, baseInstant,
+                    myInstant, now,
                     formatting = FormatStyle(date = FormatStyle.Date.Short)
                 )
             },
@@ -156,9 +156,9 @@ internal fun TimeDemo(
         Spacer(Modifier.height(8.dp))
         CodeExample(
             code = "formatting = FormatStyle(date = Date.Narrow)",
-            res = remember(selectedLanguageCode, baseInstant, myInstant) {
+            res = remember(selectedLanguageCode, now, myInstant) {
                 HumanReadable.timeAgo(
-                    myInstant, baseInstant,
+                    myInstant, now,
                     formatting = FormatStyle(date = FormatStyle.Date.Narrow)
                 )
             },
@@ -167,9 +167,9 @@ internal fun TimeDemo(
         Spacer(Modifier.height(8.dp))
         CodeExample(
             code = "formatting = FormatStyle(time = FormatStyle.Time.Digital)",
-            res = remember(selectedLanguageCode, baseInstant, myInstant) {
+            res = remember(selectedLanguageCode, now, myInstant) {
                 HumanReadable.timeAgo(
-                    myInstant, baseInstant,
+                    myInstant, now,
                     formatting = FormatStyle(time = FormatStyle.Time.Digital)
                 )
             },
@@ -178,9 +178,9 @@ internal fun TimeDemo(
         Spacer(Modifier.height(8.dp))
         CodeExample(
             code = "formatting = FormatStyle(indicateApproximation = true)",
-            res = remember(selectedLanguageCode, baseInstant, myInstant) {
+            res = remember(selectedLanguageCode, now, myInstant) {
                 HumanReadable.timeAgo(
-                    myInstant, baseInstant,
+                    myInstant, now,
                     formatting = FormatStyle(indicateApproximation = true)
                 )
             },
@@ -190,9 +190,9 @@ internal fun TimeDemo(
 
         CodeExample(
             code = "rounding = Rounding.Floor",
-            res = remember(selectedLanguageCode, baseInstant, myInstant) {
+            res = remember(selectedLanguageCode, now, myInstant) {
                 HumanReadable.timeAgo(
-                    myInstant, baseInstant,
+                    myInstant, now,
                     rounding = Rounding.Floor
                 )
             },
@@ -201,10 +201,10 @@ internal fun TimeDemo(
         Spacer(Modifier.height(8.dp))
         CodeExample(
             code = "rounding = Rounding.UpIfClose",
-            res = remember(selectedLanguageCode, baseInstant, myInstant) {
+            res = remember(selectedLanguageCode, now, myInstant) {
                 HumanReadable.timeAgo(
-                    myInstant, baseInstant,
-                    rounding = Rounding.UpIfClose
+                    myInstant, now,
+                    rounding = Rounding.IfClose()
                 )
             },
             inline = true
@@ -213,9 +213,9 @@ internal fun TimeDemo(
 
         CodeExample(
             code = "parts = PartsConfig(max = 3)",
-            res = remember(selectedLanguageCode, baseInstant, myInstant) {
+            res = remember(selectedLanguageCode, now, myInstant) {
                 HumanReadable.timeAgo(
-                    myInstant, baseInstant,
+                    myInstant, now,
                     parts = PartsConfig(max = 3)
                 )
             },
@@ -224,9 +224,9 @@ internal fun TimeDemo(
         Spacer(Modifier.height(8.dp))
         CodeExample(
             code = "parts = PartsConfig(max = 3, subpartCutOffs = mapOf(TimeUnit.Minutes to 10, TimeUnit.Hours to 12))",
-            res = remember(selectedLanguageCode, baseInstant, myInstant) {
+            res = remember(selectedLanguageCode, now, myInstant) {
                 HumanReadable.timeAgo(
-                    myInstant, baseInstant,
+                    myInstant, now,
                     parts = PartsConfig(
                         max = 3,
                         subpartCutOffs = mapOf(TimeUnit.Minutes to 10, TimeUnit.Hours to 12)
@@ -238,9 +238,9 @@ internal fun TimeDemo(
         Spacer(Modifier.height(8.dp))
         CodeExample(
             code = "parts = PartsConfig(smallestDuration = 10.minutes)",
-            res = remember(selectedLanguageCode, baseInstant, myInstant) {
+            res = remember(selectedLanguageCode, now, myInstant) {
                 HumanReadable.timeAgo(
-                    myInstant, baseInstant,
+                    myInstant, now,
                     parts = PartsConfig(smallestDuration = 10.minutes)
                 )
             },
@@ -250,9 +250,9 @@ internal fun TimeDemo(
 
         CodeExample(
             code = "units = setOf(TimeUnit.Hours, TimeUnit.Days)",
-            res = remember(selectedLanguageCode, baseInstant, myInstant) {
+            res = remember(selectedLanguageCode, now, myInstant) {
                 HumanReadable.timeAgo(
-                    myInstant, baseInstant,
+                    myInstant, now,
                     units = setOf(TimeUnit.Hours, TimeUnit.Days)
                 )
             },
