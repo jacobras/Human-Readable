@@ -5,12 +5,13 @@ import assertk.assertions.isEmpty
 import assertk.assertions.isEqualTo
 import nl.jacobras.humanreadable.HumanReadable
 import nl.jacobras.humanreadable.HumanReadable.duration
+import nl.jacobras.humanreadable.Time
 import nl.jacobras.humanreadable.localized.LocalisedTests
 import nl.jacobras.humanreadable.time.Rounding.Floor
 import nl.jacobras.humanreadable.time.Rounding.HalfUp
-import nl.jacobras.humanreadable.time.Rounding.UpIfClose
+import nl.jacobras.humanreadable.time.Rounding.IfClose
+import kotlin.test.BeforeTest
 import kotlin.test.Test
-import kotlin.time.Duration
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
@@ -29,6 +30,11 @@ class HumanReadableDurationTests {
 
     init {
         HumanReadable.config.languageTag = "en"
+    }
+
+    @BeforeTest
+    fun resetConfig() {
+        HumanReadable.config.time = Time()
     }
 
     @Test
@@ -86,37 +92,43 @@ class HumanReadableDurationTests {
     }
 
     @Test
-    fun upIfCloseRounding() {
-        assertThat(duration(1.seconds, rounding = UpIfClose)).isEqualTo("1 second")
-        assertThat(duration(3.seconds, rounding = UpIfClose)).isEqualTo("3 seconds")
+    fun ifCloseRounding() {
+        assertThat(duration(1.seconds, rounding = IfClose())).isEqualTo("1 second")
+        assertThat(duration(3.seconds, rounding = IfClose())).isEqualTo("3 seconds")
 
-        assertThat(duration(55.seconds, rounding = UpIfClose)).isEqualTo("1 minute")
-        assertThat(duration(1.minutes, rounding = UpIfClose)).isEqualTo("1 minute")
-        assertThat(duration(3.minutes, rounding = UpIfClose)).isEqualTo("3 minutes")
+        assertThat(duration(55.seconds, rounding = IfClose())).isEqualTo("1 minute")
+        assertThat(duration(1.minutes, rounding = IfClose())).isEqualTo("1 minute")
+        assertThat(duration(3.minutes, rounding = IfClose())).isEqualTo("3 minutes")
 
-        assertThat(duration(55.minutes, rounding = UpIfClose)).isEqualTo("1 hour")
-        assertThat(duration(1.hours, rounding = UpIfClose)).isEqualTo("1 hour")
-        assertThat(duration(3.hours, rounding = UpIfClose)).isEqualTo("3 hours")
+        assertThat(duration(55.minutes, rounding = IfClose())).isEqualTo("1 hour")
+        assertThat(duration(1.hours, rounding = IfClose())).isEqualTo("1 hour")
+        assertThat(duration(3.hours, rounding = IfClose())).isEqualTo("3 hours")
 
-        assertThat(duration(23.hours, rounding = UpIfClose)).isEqualTo("1 day")
-        assertThat(duration(1.days, rounding = UpIfClose)).isEqualTo("1 day")
-        assertThat(duration(3.days, rounding = UpIfClose)).isEqualTo("3 days")
+        assertThat(duration(23.hours, rounding = IfClose())).isEqualTo("1 day")
+        assertThat(duration(1.days, rounding = IfClose())).isEqualTo("1 day")
+        assertThat(duration(3.days, rounding = IfClose())).isEqualTo("3 days")
 
-        assertThat(duration(7.days, rounding = UpIfClose)).isEqualTo("1 week")
-        assertThat(duration(10.days, rounding = UpIfClose)).isEqualTo("1 week")
-        assertThat(duration(11.days, rounding = UpIfClose)).isEqualTo("1 week")
-        assertThat(duration(12.days, rounding = UpIfClose)).isEqualTo("1 week")
+        assertThat(duration(7.days, rounding = IfClose())).isEqualTo("1 week")
+        assertThat(duration(10.days, rounding = IfClose())).isEqualTo("1 week")
+        assertThat(duration(11.days, rounding = IfClose())).isEqualTo("1 week")
+        assertThat(duration(12.days, rounding = IfClose())).isEqualTo("1 week")
 
-        assertThat(duration(21.days, rounding = UpIfClose)).isEqualTo("3 weeks")
-        assertThat(duration(29.days, rounding = UpIfClose)).isEqualTo("4 weeks")
-        assertThat(duration(30.days, rounding = UpIfClose)).isEqualTo("4 weeks")
-        assertThat(duration(31.days, rounding = UpIfClose)).isEqualTo("1 month")
-        assertThat(duration(90.days, rounding = UpIfClose)).isEqualTo("2 months")
+        assertThat(duration(21.days, rounding = IfClose())).isEqualTo("3 weeks")
+        assertThat(duration(29.days, rounding = IfClose())).isEqualTo("4 weeks")
+        assertThat(duration(30.days, rounding = IfClose())).isEqualTo("4 weeks")
+        assertThat(duration(31.days, rounding = IfClose())).isEqualTo("1 month")
+        assertThat(duration(90.days, rounding = IfClose())).isEqualTo("2 months")
 
-        assertThat(duration(360.days, rounding = UpIfClose)).isEqualTo("11 months")
-        assertThat(duration(365.days, rounding = UpIfClose)).isEqualTo("1 year")
-        assertThat(duration(555.days, rounding = UpIfClose)).isEqualTo("1 year")
-        assertThat(duration(1095.days, rounding = UpIfClose)).isEqualTo("3 years")
+        assertThat(duration(360.days, rounding = IfClose())).isEqualTo("11 months")
+        assertThat(duration(365.days, rounding = IfClose())).isEqualTo("1 year")
+        assertThat(duration(555.days, rounding = IfClose())).isEqualTo("1 year")
+        assertThat(duration(1095.days, rounding = IfClose())).isEqualTo("3 years")
+    }
+
+    @Test
+    fun ifCloseDefault() {
+        assertThat(duration(1.minutes + 30.seconds, rounding = IfClose(default = Floor))).isEqualTo("1 minute")
+        assertThat(duration(1.minutes + 30.seconds, rounding = IfClose(default = HalfUp))).isEqualTo("2 minutes")
     }
 
     @Test
@@ -147,19 +159,19 @@ class HumanReadableDurationTests {
             duration(1.minutes + 55.seconds, rounding = HalfUp, parts = PartsConfig(max = 2))
         ).isEqualTo("1 minute, 55 seconds")
         assertThat(
-            duration(1.minutes + 55.seconds, rounding = UpIfClose, parts = PartsConfig(max = 2))
+            duration(1.minutes + 55.seconds, rounding = IfClose(), parts = PartsConfig(max = 2))
         ).isEqualTo("2 minutes")
 
         // Edge cases
         assertThat(
-            duration(59.minutes + 55.seconds, rounding = UpIfClose, parts = PartsConfig(max = 2))
+            duration(59.minutes + 55.seconds, rounding = IfClose(), parts = PartsConfig(max = 2))
         ).isEqualTo("1 hour")
         assertThat(
-            duration(23.hours + 55.minutes, rounding = UpIfClose, parts = PartsConfig(max = 2))
+            duration(23.hours + 55.minutes, rounding = IfClose(), parts = PartsConfig(max = 2))
         ).isEqualTo("1 day")
         assertThat(
-            duration(6.days + 23.hours, rounding = UpIfClose, parts = PartsConfig(max = 2))
-        ).isEqualTo("7 days")
+            duration(6.days + 23.hours, rounding = IfClose(), parts = PartsConfig(max = 2))
+        ).isEqualTo("1 week")
     }
 
     @Test
@@ -329,5 +341,61 @@ class HumanReadableDurationTests {
                 parts = PartsConfig(max = 5)
             )
         ).isEqualTo("3 weeks, 2 days, 01:00:00")
+    }
+
+    @Test
+    fun globalConfig() {
+        HumanReadable.config.time.formatting = FormatStyle(
+            time = FormatStyle.Time.Digital,
+            indicateApproximation = true
+        )
+        assertThat(duration(5.minutes)).isEqualTo("00:05:00")
+    }
+
+    @Test
+    fun advancedConfig() {
+        HumanReadable.config.time.formatting = FormatStyle(indicateApproximation = true)
+        HumanReadable.config.time.parts = PartsConfig(
+            max = 2,
+            smallestDuration = 30.seconds,
+            subpartCutOffs = mapOf(
+                TimeUnit.Minutes to 1,
+                TimeUnit.Hours to 3
+            )
+        )
+        HumanReadable.config.time.rounding = IfClose(
+            thresholds = mapOf(TimeUnit.Minutes to 5),
+            default = Floor
+        )
+
+        assertThat(duration(15.seconds)).isEqualTo("less than 30 seconds")
+        assertThat(duration(45.seconds)).isEqualTo("45 seconds")
+        assertThat(duration(1.minutes + 45.seconds)).isEqualTo("about 1 minute")
+        assertThat(duration(2.minutes + 15.seconds)).isEqualTo("about 2 minutes")
+        assertThat(duration(1.hours + 4.minutes)).isEqualTo("about 1 hour")
+        assertThat(duration(1.hours + 5.minutes)).isEqualTo("1 hour, 5 minutes")
+        assertThat(duration(1.hours + 55.minutes)).isEqualTo("about 2 hours")
+        assertThat(duration(2.hours + 4.minutes)).isEqualTo("about 2 hours")
+        assertThat(duration(2.hours + 5.minutes)).isEqualTo("2 hours, 5 minutes")
+        assertThat(duration(2.hours + 54.minutes)).isEqualTo("2 hours, 54 minutes")
+        assertThat(duration(2.hours + 55.minutes)).isEqualTo("about 3 hours")
+        assertThat(duration(24.hours + 4.minutes)).isEqualTo("about 1 day")
+        assertThat(duration(24.hours + 5.minutes)).isEqualTo("about 1 day")
+        assertThat(duration(32.hours + 55.minutes)).isEqualTo("about 1 day, 8 hours")
+        assertThat(duration(2.days)).isEqualTo("2 days")
+        assertThat(duration(2.days + 4.minutes)).isEqualTo("about 2 days")
+        assertThat(duration(2.days + 5.minutes)).isEqualTo("about 2 days")
+        assertThat(duration(2.days + 1.hours + 4.minutes)).isEqualTo("about 2 days, 1 hour")
+        assertThat(duration(2.days + 2.hours + 4.minutes)).isEqualTo("about 2 days, 2 hours")
+        assertThat(duration(3.days)).isEqualTo("3 days")
+        assertThat(duration(3.days + 4.minutes)).isEqualTo("about 3 days")
+        assertThat(duration(3.days + 5.minutes)).isEqualTo("about 3 days")
+        assertThat(duration(3.days + 1.hours + 4.minutes)).isEqualTo("about 3 days, 1 hour")
+        assertThat(duration(3.days + 2.hours + 4.minutes)).isEqualTo("about 3 days, 2 hours")
+        assertThat(duration(4.days)).isEqualTo("4 days")
+        assertThat(duration(4.days + 4.minutes)).isEqualTo("about 4 days")
+        assertThat(duration(4.days + 5.minutes)).isEqualTo("about 4 days")
+        assertThat(duration(4.days + 1.hours + 4.minutes)).isEqualTo("about 4 days, 1 hour")
+        assertThat(duration(4.days + 2.hours + 4.minutes)).isEqualTo("about 4 days, 2 hours")
     }
 }

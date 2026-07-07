@@ -31,7 +31,7 @@ public data class PartsConfig(
     val smallestDuration: Duration = Duration.ZERO,
 
     /**
-     * Controls up to how many of [TimeUnit] smaller subparts should be shown.
+     * Controls how large a [TimeUnit] may be at most to still get subparts after it.
      *
      * For example, if this is set to `[TimeUnit.Minutes = 2]`:
      * - `1.minutes + 4.seconds` will be "1 minute, 4 seconds"

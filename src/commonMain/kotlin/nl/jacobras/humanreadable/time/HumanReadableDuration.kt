@@ -124,22 +124,33 @@ private fun getNeededParts(
 
     // Round the last part. Only needed for HalfUp, because Floor is already done above
     // and UpIfClose is done below in the roll-overs section.
-    if (lastUnit != null && rounding == Rounding.HalfUp) {
-        res[lastUnit] = lastUnit.calculateValue(remainingBeforeLast, rounding)
+    val roundMethod = if (rounding is Rounding.IfClose) rounding.default else rounding
+    if (lastUnit != null && roundMethod == Rounding.HalfUp) {
+        res[lastUnit] = lastUnit.calculateValue(remainingBeforeLast, Rounding.HalfUp)
     }
 
     // Roll-overs
-    if (rounding == Rounding.UpIfClose) {
-        val unitsAscending = res.keys.sorted()
+    if (rounding is Rounding.IfClose) {
+        val thresholdsAscending = rounding.thresholds.entries.sortedBy { it.key }
 
-        for (unit in unitsAscending) {
+        for ((unit, threshold) in thresholdsAscending) {
             val value = res[unit] ?: continue
-            if (value >= unit.upIfCloseRollover) {
-                val largerUnit = TimeUnit.entries.getOrNull(unit.ordinal + 1)
-                if (largerUnit != null) {
+            val largerUnit = unit.largerUnit
+
+            // Round up if the next unit is nearer than the threshold
+            if (largerUnit != null) {
+                val largerUnitSmallestDuration = largerUnit.valueToDuration(1)
+                val currentUnitSmallestDuration = unit.valueToDuration(1)
+                val maxValueForThisUnit = (largerUnitSmallestDuration / currentUnitSmallestDuration).toInt()
+                if (value >= (maxValueForThisUnit - threshold)) {
                     res[largerUnit] = (res[largerUnit] ?: 0) + 1
                     res.remove(unit)
                 }
+            }
+
+            // Round down if the unit is closer than the threshold to 0
+            if (res.size > 1 && unit == res.keys.min() && value < threshold) {
+                res.remove(unit)
             }
         }
     }
