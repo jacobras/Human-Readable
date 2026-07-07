@@ -75,6 +75,10 @@ kotlin {
             }
         }
     }
+    linuxArm64()
+    linuxX64()
+    macosArm64()
+    mingwX64()
     tvosArm64()
     tvosSimulatorArm64()
     wasmJs {
