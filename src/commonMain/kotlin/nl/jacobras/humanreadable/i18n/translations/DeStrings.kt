@@ -26,12 +26,28 @@ internal val DeStrings = HumanReadableStrings(
             present(one = "Jahr", other = "Jahre")
             pastOrFuture(other = "Jahren")
         },
+        secondsShort = presentTense(one = "Sek."),
+        minutesShort = presentTense(one = "Min."),
+        hoursShort = presentTense(one = "Std."),
+        daysShort = presentTense(one = "Tg."),
+        weeksShort = presentTense(one = "Wo."),
+        monthsShort = presentTense(one = "Mon."),
+        yearsShort = presentTense(one = "J."),
+        secondsNarrow = presentTense(one = "Sek."),
+        minutesNarrow = presentTense(one = "Min."),
+        hoursNarrow = presentTense(one = "Std."),
+        daysNarrow = presentTense(one = "T"),
+        weeksNarrow = presentTense(one = "Wo."),
+        monthsNarrow = presentTense(one = "M"),
+        yearsNarrow = presentTense(one = "J"),
         timeAgo = { "vor $it" },
         timeInFuture = { "in $it" },
         now = "jetzt",
         today = "heute",
         yesterday = "gestern",
-        tomorrow = "morgen"
+        tomorrow = "morgen",
+        lessThan = "weniger als",
+        about = "etwa"
     ),
     number = NumberStrings(groupSeparator = ".", decimalSymbol = ",")
 )

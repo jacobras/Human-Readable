@@ -29,23 +29,21 @@ internal data class DateTimeStrings(
     val monthsLong: TenseForms,
     val yearsLong: TenseForms,
 
-    // TODO: remove defaults
-    val secondsShort: TenseForms = presentTense(one = "hr"),
-    val minutesShort: TenseForms = presentTense(one = "h"),
-    val hoursShort: TenseForms = presentTense(one = "day", other = "days"),
-    val daysShort: TenseForms = presentTense(one = "day", other = "days"),
-    val weeksShort: TenseForms = presentTense(one = "d"),
-    val monthsShort: TenseForms = presentTense(one = "week", other = "weeks"),
-    val yearsShort: TenseForms = presentTense(one = "wk", other = "wks"),
+    val secondsShort: TenseForms,
+    val minutesShort: TenseForms,
+    val hoursShort: TenseForms,
+    val daysShort: TenseForms,
+    val weeksShort: TenseForms,
+    val monthsShort: TenseForms,
+    val yearsShort: TenseForms,
 
-    // TODO: remove defaults
-    val secondsNarrow: TenseForms = presentTense(one = "w"),
-    val minutesNarrow: TenseForms = presentTense(one = "month", other = "months"),
-    val hoursNarrow: TenseForms = presentTense(one = "mth", other = "mths"),
-    val daysNarrow: TenseForms = presentTense(one = "m"),
-    val weeksNarrow: TenseForms = presentTense(one = "year", other = "years"),
-    val monthsNarrow: TenseForms = presentTense(one = "yr", other = "yrs"),
-    val yearsNarrow: TenseForms = presentTense(one = "y"),
+    val secondsNarrow: TenseForms,
+    val minutesNarrow: TenseForms,
+    val hoursNarrow: TenseForms,
+    val daysNarrow: TenseForms,
+    val weeksNarrow: TenseForms,
+    val monthsNarrow: TenseForms,
+    val yearsNarrow: TenseForms,
 
     /**
      * Wraps a formatted duration as past relative time, e.g. "3 days ago".
@@ -61,8 +59,8 @@ internal data class DateTimeStrings(
     val today: String,
     val yesterday: String,
     val tomorrow: String,
-    val lessThan: String = "!!TODO",
-    val about: String = "!!TODO"
+    val lessThan: String,
+    val about: String
 )
 
 /**

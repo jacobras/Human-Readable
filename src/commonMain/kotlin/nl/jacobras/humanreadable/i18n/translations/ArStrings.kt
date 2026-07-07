@@ -1,6 +1,7 @@
 package nl.jacobras.humanreadable.i18n.translations
 
 import nl.jacobras.humanreadable.i18n.Plural
+import nl.jacobras.humanreadable.i18n.presentTense
 import nl.jacobras.humanreadable.i18n.multipleTenses
 import nl.jacobras.humanreadable.i18n.DateTimeStrings
 import nl.jacobras.humanreadable.i18n.DistanceStrings
@@ -47,12 +48,28 @@ internal val ArStrings = HumanReadableStrings(
             present(zero = "سنة", one = "سنة", two = "سنتان", few = "سنوات", many = "سنة", other = "سنة")
             pastOrFuture(two = "سنتين")
         },
+        secondsShort = presentTense(one = "ثانية"),
+        minutesShort = presentTense(one = "دقيقة"),
+        hoursShort = presentTense(one = "ساعة"),
+        daysShort = presentTense(one = "يوم"),
+        weeksShort = presentTense(one = "أسبوع"),
+        monthsShort = presentTense(one = "شهر"),
+        yearsShort = presentTense(one = "سنة"),
+        secondsNarrow = presentTense(one = "ث"),
+        minutesNarrow = presentTense(one = "د"),
+        hoursNarrow = presentTense(one = "س"),
+        daysNarrow = presentTense(one = "ي"),
+        weeksNarrow = presentTense(one = "أ"),
+        monthsNarrow = presentTense(one = "شهر"),
+        yearsNarrow = presentTense(one = "سنة"),
         timeAgo = { "قبل $it" },
         timeInFuture = { "بعد $it" },
         now = "الآن",
         today = "اليوم",
         tomorrow = "أمس",
-        yesterday = "غداً"
+        yesterday = "غداً",
+        lessThan = "أقل من",
+        about = "حوالي"
     ),
     fileSize = FileSizeStrings(
         byteSymbol = "ب",

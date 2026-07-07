@@ -1,6 +1,7 @@
 package nl.jacobras.humanreadable.i18n.translations
 
 import nl.jacobras.humanreadable.i18n.Plural
+import nl.jacobras.humanreadable.i18n.presentTense
 import nl.jacobras.humanreadable.i18n.multipleTenses
 import nl.jacobras.humanreadable.i18n.DateTimeStrings
 import nl.jacobras.humanreadable.i18n.FileSizeStrings
@@ -38,12 +39,28 @@ internal val FiStrings = HumanReadableStrings(
             present(one = "vuosi", other = "vuotta")
             future(one = "vuoden", other = "vuoden")
         },
+        secondsShort = presentTense(one = "s"),
+        minutesShort = presentTense(one = "min"),
+        hoursShort = presentTense(one = "t"),
+        daysShort = presentTense(one = "pv"),
+        weeksShort = presentTense(one = "vk"),
+        monthsShort = presentTense(one = "kk"),
+        yearsShort = presentTense(one = "v"),
+        secondsNarrow = presentTense(one = "s"),
+        minutesNarrow = presentTense(one = "min"),
+        hoursNarrow = presentTense(one = "t"),
+        daysNarrow = presentTense(one = "pv"),
+        weeksNarrow = presentTense(one = "vk"),
+        monthsNarrow = presentTense(one = "kk"),
+        yearsNarrow = presentTense(one = "v"),
         timeAgo = { "$it sitten" },
         timeInFuture = { "$it kuluttua" },
         now = "nyt",
         today = "tänään",
         yesterday = "eilen",
-        tomorrow = "huomenna"
+        tomorrow = "huomenna",
+        lessThan = "alle",
+        about = "noin"
     ),
     number = NumberStrings(groupSeparator = " ", decimalSymbol = ","),
     fileSize = FileSizeStrings(
