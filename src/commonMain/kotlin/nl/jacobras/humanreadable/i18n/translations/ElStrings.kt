@@ -20,12 +20,28 @@ internal val ElStrings = HumanReadableStrings(
             pastOrFuture(one = "μήνα")
         },
         yearsLong = presentTense(one = "έτος", other = "έτη"),
+        secondsShort = presentTense(one = "δευτ."),
+        minutesShort = presentTense(one = "λεπ."),
+        hoursShort = presentTense(one = "ώ."),
+        daysShort = presentTense(one = "ημ."),
+        weeksShort = presentTense(one = "εβδ."),
+        monthsShort = presentTense(one = "μήν."),
+        yearsShort = presentTense(one = "έτ."),
+        secondsNarrow = presentTense(one = "δ"),
+        minutesNarrow = presentTense(one = "λ"),
+        hoursNarrow = presentTense(one = "ώ"),
+        daysNarrow = presentTense(one = "η"),
+        weeksNarrow = presentTense(one = "ε"),
+        monthsNarrow = presentTense(one = "μ"),
+        yearsNarrow = presentTense(one = "έ"),
         timeAgo = { "$it πριν" },
         timeInFuture = { "σε $it" },
         now = "τώρα",
         today = "σήμερα",
         yesterday = "χθες",
-        tomorrow = "αύριο"
+        tomorrow = "αύριο",
+        lessThan = "λιγότερο από",
+        about = "περίπου"
     ),
     number = NumberStrings(groupSeparator = ".", decimalSymbol = ",")
 )

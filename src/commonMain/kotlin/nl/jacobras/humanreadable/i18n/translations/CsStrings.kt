@@ -1,6 +1,7 @@
 package nl.jacobras.humanreadable.i18n.translations
 
 import nl.jacobras.humanreadable.i18n.Plural
+import nl.jacobras.humanreadable.i18n.presentTense
 import nl.jacobras.humanreadable.i18n.multipleTenses
 import nl.jacobras.humanreadable.i18n.DateTimeStrings
 import nl.jacobras.humanreadable.i18n.HumanReadableStrings
@@ -46,12 +47,28 @@ internal val CsStrings = HumanReadableStrings(
             present(one = "rok", few = "roky", other = "let")
             past(one = "rokem", few = "roky", other = "lety")
         },
+        secondsShort = presentTense(one = "s"),
+        minutesShort = presentTense(one = "min"),
+        hoursShort = presentTense(one = "h"),
+        daysShort = presentTense(one = "d"),
+        weeksShort = presentTense(one = "týd."),
+        monthsShort = presentTense(one = "měs."),
+        yearsShort = presentTense(one = "r."),
+        secondsNarrow = presentTense(one = "s"),
+        minutesNarrow = presentTense(one = "min"),
+        hoursNarrow = presentTense(one = "h"),
+        daysNarrow = presentTense(one = "d"),
+        weeksNarrow = presentTense(one = "t"),
+        monthsNarrow = presentTense(one = "m"),
+        yearsNarrow = presentTense(one = "r"),
         timeAgo = { "před $it" },
         timeInFuture = { "za $it" },
         now = "nyní",
         today = "dnes",
         yesterday = "včera",
-        tomorrow = "zítra"
+        tomorrow = "zítra",
+        lessThan = "méně než",
+        about = "přibližně"
     ),
     number = NumberStrings(groupSeparator = " ", decimalSymbol = ",")
 )

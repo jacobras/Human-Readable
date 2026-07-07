@@ -15,11 +15,27 @@ internal val KoStrings = HumanReadableStrings(
         weeksLong = presentTense(other = "주"),
         monthsLong = presentTense(other = "개월"),
         yearsLong = presentTense(other = "년"),
+        secondsShort = presentTense(other = "초"),
+        minutesShort = presentTense(other = "분"),
+        hoursShort = presentTense(other = "시간"),
+        daysShort = presentTense(other = "일"),
+        weeksShort = presentTense(other = "주"),
+        monthsShort = presentTense(other = "개월"),
+        yearsShort = presentTense(other = "년"),
+        secondsNarrow = presentTense(other = "초"),
+        minutesNarrow = presentTense(other = "분"),
+        hoursNarrow = presentTense(other = "시"),
+        daysNarrow = presentTense(other = "일"),
+        weeksNarrow = presentTense(other = "주"),
+        monthsNarrow = presentTense(other = "개월"),
+        yearsNarrow = presentTense(other = "년"),
         timeAgo = { "$it 전" },
         timeInFuture = { "$it 후" },
         now = "지금",
         today = "오늘",
         yesterday = "어제",
-        tomorrow = "내일"
+        tomorrow = "내일",
+        lessThan = "미만",
+        about = "약"
     )
 )

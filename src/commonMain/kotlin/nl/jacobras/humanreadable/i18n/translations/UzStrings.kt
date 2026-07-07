@@ -4,6 +4,7 @@ import nl.jacobras.humanreadable.i18n.Plural
 import nl.jacobras.humanreadable.i18n.DateTimeStrings
 import nl.jacobras.humanreadable.i18n.HumanReadableStrings
 import nl.jacobras.humanreadable.i18n.NumberStrings
+import nl.jacobras.humanreadable.i18n.presentTense
 import nl.jacobras.humanreadable.i18n.multipleTenses
 
 internal val UzStrings = HumanReadableStrings(
@@ -37,12 +38,28 @@ internal val UzStrings = HumanReadableStrings(
             present(one = "yil", other = "yil")
             future(one = "yildan", other = "yildan")
         },
+        secondsShort = presentTense(one = "son."),
+        minutesShort = presentTense(one = "daq."),
+        hoursShort = presentTense(one = "soat"),
+        daysShort = presentTense(one = "kun"),
+        weeksShort = presentTense(one = "hafta"),
+        monthsShort = presentTense(one = "oy"),
+        yearsShort = presentTense(one = "yil"),
+        secondsNarrow = presentTense(one = "s"),
+        minutesNarrow = presentTense(one = "d"),
+        hoursNarrow = presentTense(one = "soat"),
+        daysNarrow = presentTense(one = "k"),
+        weeksNarrow = presentTense(one = "h"),
+        monthsNarrow = presentTense(one = "oy"),
+        yearsNarrow = presentTense(one = "y"),
         timeAgo = { "$it oldin" },
         timeInFuture = { "$it keyin" },
         now = "hozir",
         today = "bugun",
         yesterday = "kecha",
-        tomorrow = "ertaga"
+        tomorrow = "ertaga",
+        lessThan = "kamroq",
+        about = "taxminan"
     ),
     number = NumberStrings(groupSeparator = ".", decimalSymbol = ",")
 )
