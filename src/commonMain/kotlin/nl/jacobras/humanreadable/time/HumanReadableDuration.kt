@@ -123,7 +123,7 @@ private fun getNeededParts(
     }
 
     // Round the last part. Only needed for HalfUp, because Floor is already done above
-    // and UpIfClose is done below in the roll-overs section.
+    // and IfClose is done below in the roll-overs section.
     val roundMethod = if (rounding is Rounding.IfClose) rounding.default else rounding
     if (lastUnit != null && roundMethod == Rounding.HalfUp) {
         res[lastUnit] = lastUnit.calculateValue(remainingBeforeLast, Rounding.HalfUp)
