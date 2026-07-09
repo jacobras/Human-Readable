@@ -13,9 +13,9 @@ internal class Localisation {
      *
      * @see languageTag for the actual language tag used, which may differ if the requested one is not supported.
      */
-    var requestedLanguageTag = systemLanguageTag()
+    var requestedLanguageTag = systemLanguageTag().filterLanguagePart()
         set(value) {
-            field = value.lowercase().substringBefore("-")
+            field = value.filterLanguagePart()
             currentTagAndStrings = null
         }
 
