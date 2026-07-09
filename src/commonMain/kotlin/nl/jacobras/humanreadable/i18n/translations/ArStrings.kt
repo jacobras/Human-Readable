@@ -66,8 +66,8 @@ internal val ArStrings = HumanReadableStrings(
         timeInFuture = { "بعد $it" },
         now = "الآن",
         today = "اليوم",
-        tomorrow = "أمس",
-        yesterday = "غداً",
+        tomorrow = "غداً",
+        yesterday = "أمس",
         lessThan = "أقل من",
         about = "حوالي"
     ),
