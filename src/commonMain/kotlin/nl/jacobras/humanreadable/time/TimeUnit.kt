@@ -12,12 +12,15 @@ import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 
+/**
+ * All time units the library can format, from [Seconds] to [Years].
+ */
 public enum class TimeUnit(
     internal val calculateValue: (Duration, Rounding) -> Int,
     internal val valueToDuration: (Int) -> Duration,
     internal val longForms: (DateTimeStrings) -> TenseForms,
     internal val shortForms: (DateTimeStrings) -> TenseForms,
-    internal val narrowForms: (DateTimeStrings) -> TenseForms,
+    internal val narrowForms: (DateTimeStrings) -> TenseForms
 ) {
     Seconds(
         calculateValue = { duration, rounding -> duration.inWholeSeconds.toFloat().round(rounding) },
