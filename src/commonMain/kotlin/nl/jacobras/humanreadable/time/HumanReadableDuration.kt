@@ -9,7 +9,7 @@ import kotlin.time.Duration
  * Returns the given [duration] in human-readable format.
  *
  * @param duration The duration to format.
- * @param relativeTime Whether this is in the past, current or future (for grammatical correctness).
+ * @param relativeTime Whether this is in the past, current, or future (for grammatical correctness).
  * @param format The [FormatStyle] to use.
  * @param parts Configures the formatting of multiple parts (defaults to 1 part).
  * @param units The [TimeUnit]s to limit to during formatting.

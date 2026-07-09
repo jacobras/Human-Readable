@@ -40,6 +40,8 @@ public data class FormatStyle(
 
         /**
          * Digital format style, e.g. "1:50:00".
+         *
+         * Note that [PartsConfig.smallestDuration] is ignored when using this time style.
          */
         Digital
     }
