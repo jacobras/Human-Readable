@@ -398,4 +398,9 @@ class HumanReadableDurationTests {
         assertThat(duration(4.days + 1.hours + 4.minutes)).isEqualTo("about 4 days, 1 hour")
         assertThat(duration(4.days + 2.hours + 4.minutes)).isEqualTo("about 4 days, 2 hours")
     }
+
+    @Test
+    fun longDuration() {
+        assertThat(duration((4000 * 365).days)).isEqualTo("4,000 years")
+    }
 }

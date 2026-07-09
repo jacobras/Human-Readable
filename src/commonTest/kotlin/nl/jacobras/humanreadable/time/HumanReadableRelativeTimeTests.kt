@@ -46,6 +46,12 @@ class HumanReadableRelativeTimeTests {
     }
 
     @Test
+    fun longTime() {
+        assertThat(HumanReadable.timeAgo(now - (4000 * 365).days, baseInstant = now)).isEqualTo("4,000 years ago")
+        assertThat(HumanReadable.timeAgo(now + (4000 * 365).days, baseInstant = now)).isEqualTo("in 4,000 years")
+    }
+
+    @Test
     fun todayTomorrowYesterday() {
         val today = LocalDate.parse("2026-07-01")
 
