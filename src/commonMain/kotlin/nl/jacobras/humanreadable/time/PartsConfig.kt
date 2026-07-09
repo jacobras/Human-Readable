@@ -4,10 +4,6 @@ import kotlin.time.Duration
 
 /**
  * Configures the formatting of multiple parts when formatting a duration.
- *
- * Note that only adjacent subparts are used:
- * - "1 day, 20 hours" could be output;
- * - "1 day, 20 minutes" will never be output (because minutes are not next to days).
  */
 public data class PartsConfig(
 
