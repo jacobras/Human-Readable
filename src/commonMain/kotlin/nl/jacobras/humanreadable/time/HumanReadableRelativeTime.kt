@@ -85,7 +85,7 @@ internal fun formatTimeAgo(
         baseDate -> return strings.dateTime.today
         baseDate.plus(1, DateTimeUnit.DAY) -> return strings.dateTime.tomorrow
     }
-    val secondsAgo = date.daysUntil(baseDate) * 86_400
+    val secondsAgo = date.daysUntil(baseDate) * 86_400L
 
     return when {
         secondsAgo < 0 -> strings.dateTime.timeInFuture(
