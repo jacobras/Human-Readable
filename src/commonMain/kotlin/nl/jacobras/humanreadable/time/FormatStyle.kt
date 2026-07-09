@@ -16,17 +16,17 @@ public data class FormatStyle(
     public enum class Date {
 
         /**
-         * Long format style, e.g. "1 hour, 50 minutes".
+         * Long format style, e.g. "3 weeks, 2 days".
          */
         Long,
 
         /**
-         * Shorter format style, e.g. "1 hr, 50 min".
+         * Shorter format style, e.g. "3 wks, 2 days".
          */
         Short,
 
         /**
-         * Shortest format style, e.g. "1h 50m".
+         * Shortest format style, e.g. "3w 2d".
          */
         Narrow
     }
