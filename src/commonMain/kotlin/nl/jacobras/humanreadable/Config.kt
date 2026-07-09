@@ -8,7 +8,7 @@ import nl.jacobras.humanreadable.time.TimeUnit
 
 public class Config {
     /**
-     * The language tag (e.g. `"en"`, `"fr"`) to use when formatting. Defaults to the detected system
+     * The language tag (e.g. `en`, `fr`) to use when formatting. Defaults to the detected system
      * language when it is supported, otherwise [fallbackLanguageTag].
      */
     public var languageTag: String
@@ -18,7 +18,7 @@ public class Config {
         }
 
     /**
-     * The fallback language tag (e.g. `"en"`, `"fr"`) to use when [languageTag] is not supported.
+     * The fallback language tag (e.g. `en`, `fr`) to use when [languageTag] is not supported.
      * If an unsupported language is passed in, nothing changes.
      *
      * Defaults to English.

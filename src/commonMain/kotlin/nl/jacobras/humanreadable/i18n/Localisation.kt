@@ -8,7 +8,7 @@ internal class Localisation {
     private var currentTagAndStrings: Pair<String, HumanReadableStrings>? = null
 
     /**
-     * The requested language tag (e.g. `"en"`, `"fr"`). A language tag with a region, e.g. `"en-US"`, may also
+     * The requested language tag (e.g. `en`, `fr`). A language tag with a region, e.g. `en-US`, may also
      * be passed in. The region code is ignored.
      *
      * @see languageTag for the actual language tag used, which may differ if the requested one is not supported.
@@ -33,7 +33,7 @@ internal class Localisation {
         }
 
     /**
-     * The currently used language tag (e.g. `"en"`, `"fr"`).
+     * The currently used language tag (e.g. `en`, `fr`).
      */
     val languageTag: String
         get() {
