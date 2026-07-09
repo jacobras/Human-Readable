@@ -8,11 +8,6 @@ package nl.jacobras.humanreadable.time
 public sealed interface Rounding {
 
     /**
-     * Either [Floor] or [HalfUp]. Marker interface to use with [IfClose].
-     */
-    public sealed interface Simple : Rounding
-
-    /**
      * Rounds down.
      *
      * Some examples:
@@ -31,6 +26,11 @@ public sealed interface Rounding {
      * Note that when [PartsConfig.max] is larger than 1, the rounding is done on the smallest unit.
      */
     public data object HalfUp : Simple
+
+    /**
+     * Either [Floor] or [HalfUp]. Marker interface to use with [IfClose].
+     */
+    public sealed interface Simple : Rounding
 
     /**
      * Eagerly rounds up to the next unit, or down to the previous, if within [thresholds].
