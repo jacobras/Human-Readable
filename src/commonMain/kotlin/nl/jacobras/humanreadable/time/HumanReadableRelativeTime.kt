@@ -13,7 +13,7 @@ import kotlin.time.Instant
 
 /**
  * Returns the difference between [baseInstant] and [instant], in human-readable format.
- * Also supports instants in the future or past.
+ * Supports instants in both the future and past.
  *
  * @param instant The [Instant] to compare with [baseInstant].
  * @param baseInstant The base/starting [Instant], usually "now".
@@ -61,7 +61,7 @@ internal fun formatTimeAgo(
 
 /**
  * Returns the difference between [date] and [baseDate], in human-readable format.
- * Also supports dates in the future or past.
+ * Supports dates in both the future and past.
  *
  * Will return "today", "tomorrow" or "yesterday" if the date is today, tomorrow, or yesterday.
  *
