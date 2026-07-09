@@ -38,8 +38,8 @@ public sealed interface Rounding {
      * For example, with [PartsConfig.max] set to 2 and [thresholds] set to [Seconds = 5]:
      * - `1.minutes + 5.seconds` remains "1 minute, 5 seconds";
      * - `1.minutes + 4.seconds` gets rounded to "1 minute";
-     * - `1.minutes + 54 seconds` remains "1 minute, 54 seconds";
-     * - `1.minutes + 55 seconds` gets rounded to "2 minutes".
+     * - `1.minutes + 54.seconds` remains "1 minute, 54 seconds";
+     * - `1.minutes + 55.seconds` gets rounded to "2 minutes".
      *
      * Anything else is rounded according to [default], which defaults to [Floor].
      */

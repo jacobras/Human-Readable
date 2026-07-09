@@ -200,7 +200,7 @@ internal fun TimeDemo(
         )
         Spacer(Modifier.height(8.dp))
         CodeExample(
-            code = "rounding = Rounding.UpIfClose",
+            code = "rounding = Rounding.IfClose()",
             res = remember(selectedLanguageCode, now, myInstant) {
                 HumanReadable.timeAgo(
                     myInstant, now,
