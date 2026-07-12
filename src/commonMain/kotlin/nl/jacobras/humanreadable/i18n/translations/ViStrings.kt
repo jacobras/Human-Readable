@@ -31,7 +31,7 @@ internal val ViStrings = HumanReadableStrings(
         monthsNarrow = presentTense(other = "tháng"),
         yearsNarrow = presentTense(other = "năm"),
         timeAgo = { "$it trước" },
-        timeInFuture = { "sau $it" },
+        timeInFuture = { "$it nữa" },
         now = "bây giờ",
         today = "hôm nay",
         yesterday = "hôm qua",
