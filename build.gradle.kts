@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "nl.jacobras"
-version = "1.13.0"
+version = "1.13.1"
 
 mavenPublishing {
     publishToMavenCentral()
