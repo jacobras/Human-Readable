@@ -23,6 +23,6 @@
     </plurals>
 
     <string name="time_ago">${time} trước</string>
-    <string name="time_in_future">vào ${time}</string>
+    <string name="time_in_future">${time} nữa</string>
     <string name="now">bây giờ</string>
 </resources>
