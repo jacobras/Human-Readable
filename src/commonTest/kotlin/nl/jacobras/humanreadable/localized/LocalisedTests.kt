@@ -363,7 +363,7 @@ class LocalisedTests {
         assertThat(HumanReadable.duration(twoSeconds)).isEqualTo("2 giây")
 
         assertThat(HumanReadable.timeAgo(twoSecondsAgo, baseInstant = now)).isEqualTo("2 giây trước")
-        assertThat(HumanReadable.timeAgo(oneMinuteFromNow, baseInstant = now)).isEqualTo("sau 1 phút")
+        assertThat(HumanReadable.timeAgo(oneMinuteFromNow, baseInstant = now)).isEqualTo("1 phút nữa")
 
         assertThat(HumanReadable.number(1_000_000.34, decimals = 2)).isEqualTo("1.000.000,34")
         assertThat(HumanReadable.number(-4.34, decimals = 2)).isEqualTo("-4,34")
