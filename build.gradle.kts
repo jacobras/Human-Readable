@@ -5,12 +5,11 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.compose.compiler) apply false
     id("com.vanniktech.maven.publish") version "0.37.0"
-    id("io.github.skeptick.libres") version "1.2.4"
     signing
 }
 
 group = "nl.jacobras"
-version = "1.13.1"
+version = project.property("nl.jacobras.humanreadable.version") as String
 
 mavenPublishing {
     publishToMavenCentral()
@@ -49,19 +48,11 @@ kotlin {
     explicitApi()
     applyDefaultHierarchyTemplate()
 
+    // Targets, alphabetically sorted
     iosX64()
     iosArm64()
     iosSimulatorArm64()
     js {
-        browser {
-            testTask {
-                useKarma {
-                    useChromeHeadless()
-                }
-            }
-        }
-    }
-    wasmJs {
         browser {
             testTask {
                 useKarma {
@@ -84,23 +75,35 @@ kotlin {
             }
         }
     }
+    linuxArm64()
+    linuxX64()
+    macosArm64()
+    mingwX64()
+    tvosArm64()
+    tvosSimulatorArm64()
+    wasmJs {
+        browser {
+            testTask {
+                useKarma {
+                    useChromeHeadless()
+                }
+            }
+        }
+    }
+    watchosArm32()
+    watchosArm64()
+    watchosSimulatorArm64()
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(libs.kotlinX.datetime)
-            }
+        commonMain.dependencies {
+            implementation(libs.kotlinX.datetime)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
             implementation(libs.assertK)
         }
-        val wasmJsMain by getting
-        val appleAndJsMain by creating {
-            dependsOn(commonMain)
-            appleMain.get().dependsOn(this)
-            jsMain.get().dependsOn(this)
-            wasmJsMain.dependsOn(this)
+        webMain.dependencies {
+            implementation(libs.kotlinX.browser)
         }
     }
 }
@@ -109,10 +112,6 @@ kotlin {
 tasks.withType<AbstractPublishToMaven>().configureEach {
     val signingTasks = tasks.withType<Sign>()
     mustRunAfter(signingTasks)
-}
-
-libres {
-    generatedClassName = "HumanReadableRes"
 }
 
 signing {

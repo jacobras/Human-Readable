@@ -2,12 +2,14 @@
 
 ![Android](http://img.shields.io/badge/-android-6EDB8D.svg?style=flat)
 ![iOS](http://img.shields.io/badge/-ios-CDCDCD.svg?style=flat)
+![tvOS](http://img.shields.io/badge/-tvos-808080.svg?style=flat)
+![watchOS](http://img.shields.io/badge/-watchos-D32D41.svg?style=flat)
 ![JS](http://img.shields.io/badge/-js-F8DB5D.svg?style=flat)
 ![wasm](https://img.shields.io/badge/-wasm-624DE9.svg?style=flat)
 
 A small set of data formatting utilities for Kotlin Multiplatform (KMP).
 
-This library only supports [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime).
+The library depends on [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime).
 
 ## Installation
 
@@ -17,7 +19,7 @@ The library is published to Maven Central.
 
 ```kotlin
 dependencies {
-    implementation("nl.jacobras:Human-Readable:1.13.1")
+    implementation("nl.jacobras:Human-Readable:2.0.0-alpha02")
 }
 ```
 
@@ -40,7 +42,39 @@ HumanReadable.duration(7.days) // "1 week"
 HumanReadable.duration(544.hours) // "3 weeks"
 ```
 
-**Note**: The formatter switches to a bigger unit (minute, hour, day, ...) as soon as it can. See [Precision](#datetime-precision).
+### ✍️ Formatting options
+
+The formatter switches to a bigger unit (minute, hour, day, ...) as soon as it can.
+
+There are a number of configuration options available for both `timeAgo()` and `duration()`.
+
+```kotlin
+HumanReadable.timeAgo(
+    instant = now - 134.minutes,
+    formatting = FormatStyle(
+        date = FormatStyle.Date.Long, // or Short: "1 hr, 50 min" or Narrow: "1h 50m"
+        time = FormatStyle.Time.Regular, // or Digital: "01:50:00"
+        indicateApproximation = true // will prefix "about" if the formatted time is not exact (i.e. a part was dropped or rounded)
+    ),
+    parts = PartsConfig(
+        max = 2, // "1 hour, 50 minutes"
+        smallestDuration = 10.minutes, // anything smaller will return "less than 10 minutes"
+        subpartCutOffs = mapOf(TimeUnit.Hours to 12), // drops subparts, e.g. "11 hours, 40 minutes" and then "12 hours"
+        onlyConsecutiveParts = true // whether "1 hour, 5 seconds" can be returned (as seconds are not the next unit after hours)
+    ),
+    units = setOf(TimeUnit.Days), // limits the output to these units, e.g. "391 days"
+    rounding = Rounding.HalfUp // or Floor to round down, or IfClose to round up or down when close enough (5s/5m/23h/6d, configurable) to the larger unit
+)
+```
+
+The above parameters can be set globally via `HumanReadable.config.time`.
+
+```kotlin
+HumanReadable.config.time.units = setOf(TimeUnit.Hours)
+HumanReadable.timeAgo(now - 2.days) // "48 hours ago"
+```
+
+Visit the [interactive demo](#features) to see more examples in action.
 
 ### 📂 File size
 
@@ -54,7 +88,7 @@ HumanReadable.fileSize(21_947_282_882, decimals = 2) // "20.44 GB" in English / 
 
 ### 🔢 Number abbreviation
 
-Available since version 1.8, localized since 1.10.
+Available since version 1.8, localised since 1.10.
 
 ```kotlin
 HumanReadable.abbreviation(3_000) // "3K"
@@ -67,7 +101,7 @@ HumanReadable.abbreviation(2_500_000, decimals = 1) // "2.5M"
 Available since version 1.10.
 
 ```kotlin
-// English/default
+// English
 HumanReadable.number(1_000_000.34) // "1,000,000.34"
 
 // French
@@ -93,40 +127,26 @@ HumanReadable.distance(value = 5350, unit = DistanceUnit.Foot) // "1.0 mi"
 HumanReadable.distance(value = 28512, unit = DistanceUnit.Foot, decimals = 2) // "5.40 mi"
 ```
 
-**Note:** numbers in meters and feet are always formatted with 0 decimals. The passed in
+**Note:** numbers in meters and feet are always formatted with zero decimals. The passed in
 number of decimals is only used for the larger units kilometers and miles.
-
-## Date/time precision
-The formatter switches to a bigger unit (minute, hour, day, ...) as soon as it can.
-For example:
-
-* `59.seconds` is "59 seconds" but `60.seconds` becomes "1 minute"
-* `6.days` is "6 days" but `7.days` becomes "1 week"
-* `29.days` is "29 days" but `30.days` becomes "1 month"
-
-There's also some rounding involved:
-
-* `8.days` and `10.days` are "1 week", but `11.days` already becomes "2 weeks"
-
-This behaviour may become configurable in future releases.
 
 ## Localisation
 
-The library uses the small [Libres](https://github.com/Skeptick/libres) library for its string resources. It detects the
-current locale by default, but it's changeable on runtime.
-See [Libres: Changing Localization](https://github.com/Skeptick/libres/blob/master/docs/LOCALIZATION.md#changing-localization).
-
-You don't need to manually import Libres, as Gradle already pulls it in along with HumanReadable.
+The library uses an internal i18n mechanism. It detects the current locale by default, but it's changeable at
+runtime via `HumanReadable.config.languageTag`:
 
 ```kotlin
 HumanReadable.timeAgo(instant) // "3 days ago"
 
-LibresSettings.languageCode = "nl"
+HumanReadable.config.languageTag = "nl"
 HumanReadable.timeAgo(instant) // "3 dagen geleden"
 
-LibresSettings.languageCode = "fr"
+HumanReadable.config.languageTag = "fr"
 HumanReadable.timeAgo(instant) // "il y a 3 jours"
 ```
+
+If the requested locale is not supported, the library will fall back to `HumanReadable.fallbackLanguageTag`, which by
+default is set to English.
 
 ### Supported languages
 
@@ -134,7 +154,7 @@ HumanReadable.timeAgo(instant) // "il y a 3 jours"
 * Czech
 * Chinese (since 1.3.0)
 * Dutch
-* English (**default**)
+* **English**
 * Finnish (since 1.7.0)
 * French
 * German
@@ -157,7 +177,14 @@ HumanReadable.timeAgo(instant) // "il y a 3 jours"
 
 Missing a language? Feel free to open an issue about it. Or, add it yourself:
 
-1. Fork the code and navigate to [src/commonMain/libres/strings/](https://github.com/jacobras/Human-Readable/tree/main/src/commonMain/libres/strings)
-2. Add a file named `time_units_[LANGUAGE CODE].xml` (see [Unicode: CLDR chart](https://www.unicode.org/cldr/charts/42/supplemental/language_plural_rules.html) for the code & plural categories).
-3. If the language deviates from English data units (like French does), also add `data_units_[LANGUAGE CODE].xml`.
+1. Fork the code and navigate to `src/commonMain/kotlin/nl/jacobras/humanreadable/i18n/translations`
+2. Add a file named `XxStrings.kt` (where `Xx` is
+   the [language code](https://www.unicode.org/cldr/charts/48/supplemental/language_plural_rules.html)). Follow the
+   example of other translations.
+3. Add a new entry to the `translations` map in
+   `src/commonMain/kotlin/nl/jacobras/humanreadable/i18n/translations.kt`.
 4. Open a PR.
+
+Follow the Unicode spec at <https://st.unicode.org/cldr-apps/v#/en/Duration/>
+or <https://github.com/unicode-org/cldr-json/blob/main/cldr-json/cldr-units-full/main/en/units.json>, if you prefer the
+JSON format.
