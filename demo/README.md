@@ -1,9 +1,7 @@
 # Human-Readable web demo
 
-`gradlew :demo:jsBrowserDevelopmentRun`
+`gradlew :demo:wasmJsBrowserDevelopmentRun`
 
 ## Publication
 
-1. `gradlew :demo:composeCompatibilityBrowserDistribution`
-2. Copy files from `/demo/build/dist/composeWebCompatibility/productionExecutable` into `/docs`
-3. Push files to repository
+The demo is published on every push to the [main] branch, see `publish-demo.yml`.

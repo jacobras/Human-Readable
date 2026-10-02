@@ -1,0 +1,27 @@
+name: Publish demo
+
+on:
+  push:
+    branches: [ main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: gradle/actions/setup-gradle@v6
+
+      - name: Build demo
+        run: ./gradlew :demo:composeCompatibilityBrowserDistribution
+
+      - name: Publish demo
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: demo/build/dist/composeWebCompatibility/productionExecutable
