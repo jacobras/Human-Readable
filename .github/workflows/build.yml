@@ -1,56 +1,54 @@
 name: Build
 
 on:
-    push:
-        branches: [ main ]
-    pull_request:
-    workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
 
 concurrency:
-    group: ${{ github.workflow }}-${{ github.ref }}
-    cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-    build:
-        timeout-minutes: 15
-        runs-on: ubuntu-latest
-        permissions:
-            contents: read
-            checks: write
-            id-token: write
-            pull-requests: write
-        steps:
-            - uses: actions/checkout@v7
-              with:
-                  clean: ${{ github.ref == 'refs/heads/develop' }}
+  build:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+      id-token: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          clean: ${{ github.ref == 'refs/heads/develop' }}
 
-            - name: Build setup
-              uses: ./.github/actions/build-setup
+      - name: Build setup
+        uses: ./.github/actions/build-setup
 
-            - name: Compile & run tests
-              run: ./gradlew kotlinUpgradeYarnLock check
+      - name: Check build
+        run: ./gradlew kotlinUpgradeYarnLock check
 
-            - name: Publish unit test report
-              if: always()
-              uses: mikepenz/action-junit-report@v6
-              with:
-                  check_name: Unit test report
-                  require_tests: true
-                  report_paths: "**/build/test-results/**/TEST-*.xml"
+      - name: Publish unit test report
+        if: always()
+        uses: mikepenz/action-junit-report@v6
+        with:
+          check_name: Unit test report
+          require_tests: true
+          report_paths: "**/build/test-results/**/TEST-*.xml"
 
-                  # compileProductionExecutableKotlinJs
+      - name: Build production JS file for size comparison
+        run: ./gradlew compileProductionExecutableKotlinJs
 
-            - name: Build production JS file for size comparison
-              run: ./gradlew compileProductionExecutableKotlinJs
+      - name: Calculate JS size difference
+        id: lib-size-diff
+        uses: jacobras/size-diff-action@v2
+        with:
+          path: build/js/packages/composeApp/kotlin/Human-Readable.js
 
-            - name: Calculate JS size difference
-              id: lib-size-diff
-              uses: jacobras/size-diff-action@v2
-              with:
-                  path: build/js/packages/composeApp/kotlin/Human-Readable.js
-
-            - name: Comment JS size difference
-              uses: marocchino/sticky-pull-request-comment@v3
-              with:
-                  header: lib-size-diff
-                  message: ${{ steps.lib-size-diff.outputs.summary }}
+      - name: Comment JS size difference
+        uses: marocchino/sticky-pull-request-comment@v3
+        with:
+          header: lib-size-diff
+          message: ${{ steps.lib-size-diff.outputs.summary }}

@@ -2,8 +2,20 @@
 
 package nl.jacobras.humanreadable
 
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.todayIn
 import nl.jacobras.humanreadable.HumanReadable.duration
 import nl.jacobras.humanreadable.HumanReadable.number
+import nl.jacobras.humanreadable.i18n.HumanReadableStrings
+import nl.jacobras.humanreadable.i18n.Localisation
+import nl.jacobras.humanreadable.time.FormatStyle
+import nl.jacobras.humanreadable.time.PartsConfig
+import nl.jacobras.humanreadable.time.RelativeTime
+import nl.jacobras.humanreadable.time.Rounding
+import nl.jacobras.humanreadable.time.TimeUnit
+import nl.jacobras.humanreadable.time.formatDuration
+import nl.jacobras.humanreadable.time.formatTimeAgo
 import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
@@ -14,48 +26,112 @@ import kotlin.time.Instant
  */
 public object HumanReadable {
 
-    init {
-        extendLibresPlurals()
-    }
+    internal val localisation = Localisation()
+    internal val strings: HumanReadableStrings
+        get() = localisation.currentStrings
+    public val config: Config = Config()
 
     /**
-     * Returns the difference between now and [instant], in human-readable format. Also supports
-     * instants in the future. For example: an instant that's 5 hours ago will return "5 hours ago".
+     * Returns the difference between [baseInstant] and [instant], in human-readable format. Also supports
+     * instants in the future. For example, an instant that's 5 hours ago will return "5 hours ago".
      *
      * @param instant The [Instant] to format.
+     * @param baseInstant The base/starting [Instant], defaulting to "now".
+     * @param formatting The [FormatStyle] to use, defaulting to "long".
+     * @param parts Configures the formatting of multiple parts, defaulting to 1 part.
+     * @param units The [TimeUnit]s to limit to during formatting, not limited by default.
+     * @param rounding The [Rounding] strategy to use, defaulting to [Rounding.HalfUp].
      * @return a formatted string
      */
     @OptIn(ExperimentalTime::class)
     public fun timeAgo(
         instant: Instant,
-        baseInstant: Instant = Clock.System.now()
+        baseInstant: Instant = Clock.System.now(),
+        formatting: FormatStyle = config.time.formatting,
+        parts: PartsConfig = config.time.parts,
+        units: Set<TimeUnit> = config.time.units,
+        rounding: Rounding = config.time.rounding
     ): String {
-        return safelyTranslate { formatTimeAgo(instant, baseInstant) }
+        return formatTimeAgo(
+            instant = instant,
+            baseInstant = baseInstant,
+            formatting = formatting,
+            parts = parts,
+            units = units,
+            rounding = rounding
+        )
+    }
+
+    /**
+     * Returns the difference between [baseDate] and [date], in human-readable format. Also supports
+     * dates in the future or past. For example, a date that's 2 days ago will return "2 days ago".
+     *
+     * @param date The [LocalDate] to format.
+     * @param baseDate The base/starting [LocalDate], defaulting to "today".
+     * @param formatting The [FormatStyle] to use, defaulting to "long".
+     * @param parts Configures the formatting of multiple parts, defaulting to 1 part.
+     * @param units The [TimeUnit]s to limit to during formatting, not limited by default.
+     * @param rounding The [Rounding] strategy to use, defaulting to [Rounding.HalfUp].
+     * @return a formatted string
+     */
+    @OptIn(ExperimentalTime::class)
+    public fun timeAgo(
+        date: LocalDate,
+        baseDate: LocalDate = Clock.System.todayIn(TimeZone.currentSystemDefault()),
+        formatting: FormatStyle = config.time.formatting,
+        parts: PartsConfig = config.time.parts,
+        units: Set<TimeUnit> = config.time.units,
+        rounding: Rounding = config.time.rounding
+    ): String {
+        return formatTimeAgo(
+            date = date,
+            baseDate = baseDate,
+            formatting = formatting,
+            parts = parts,
+            units = units,
+            rounding = rounding
+        )
     }
 
     /**
      * Returns the given [duration] in human-readable format.
-     * For example: a duration of 3 seconds returns "3 seconds".
+     * For example, a duration of 3 seconds returns "3 seconds".
      *
      * @param duration The [Duration] to format.
-     * @return a formatted string
+     * @param formatting The [FormatStyle] to use, defaulting to "long".
+     * @param parts Configures the formatting of multiple parts, defaulting to 1 part.
+     * @param units The [TimeUnit]s to limit to during formatting, not limited by default.
+     * @param rounding The [Rounding] strategy to use, defaulting to [Rounding.HalfUp].
      */
-    public fun duration(duration: Duration): String {
-        return safelyTranslate { formatDuration(duration, RelativeTime.Present) }
+    public fun duration(
+        duration: Duration,
+        formatting: FormatStyle = config.time.formatting,
+        parts: PartsConfig = config.time.parts,
+        units: Set<TimeUnit> = config.time.units,
+        rounding: Rounding = config.time.rounding
+    ): String {
+        return formatDuration(
+            duration = duration,
+            relativeTime = RelativeTime.Present,
+            format = formatting,
+            parts = parts,
+            units = units,
+            rounding = rounding
+        )
     }
 
     /**
-     * Returns the given [bytes] size in human-readable format. For example:
+     * Returns the given [bytes] size in human-readable format. For example,
      * a size of 3_500_000 bytes returns "3.5 MB". Assumes base 1024.
      *
-     * For example, 3_5000_000 bytes returns: "3.5 MB" for EN or "3.5 Mo" for FR.
+     * For example, `3_5000_000` returns: "3.5 MB" for EN or "3.5 Mo" for FR.
      *
      * @param bytes The size in bytes to format.
      * @param decimals The number of decimals to use in formatting.
      * @return a formatted string
      */
     public fun fileSize(bytes: Long, decimals: Int = 1): String {
-        return safelyTranslate { formatFileSize(bytes, decimals) }
+        return formatFileSize(bytes, decimals)
     }
 
     /**
@@ -63,20 +139,20 @@ public object HumanReadable {
      *
      * Supported abbreviations: K (1,000), M (1,000,000), B (1,000,000,000) and T (1,000,000,000,000).
      *
-     * For example: 10394 returns "10K" and "4234321" returns "4M".
+     * For example, `10394` returns "10K" and `4234321` returns "4M".
      *
      * @param number The number to abbreviate.
      * @param decimals The number of decimals to use in formatting.
      * @return a formatted string
      */
     public fun abbreviation(number: Number, decimals: Int = 0): String {
-        return safelyTranslate { formatAbbreviation(number.toDouble(), decimals) }
+        return formatAbbreviation(number.toDouble(), decimals)
     }
 
     /**
      * Formats the given [number].
      *
-     * For example: 1_000_000.34 returns:
+     * For example, `1_000_000.34` returns:
      * - "1,000,000.34" for EN
      * - "1 000 000.34" for FR
      * - "1.000.000,34" for NL
@@ -86,19 +162,19 @@ public object HumanReadable {
      * @return a formatted string
      */
     public fun number(number: Number, decimals: Int = 0): String {
-        return safelyTranslate { number.toDouble().formatNumber(decimals) }
+        return number.toDouble().formatNumber(decimals)
     }
 
     /**
      * Formats the given [value] of the given [unit] to a readable distance.
      *
      * Metric examples:
-     * - 956 with DistanceUnit METERS returns "956 m" for EN.
-     * - 1534 with DistanceUnit METERS returns "1,5 km" for EN.
+     * - `956` with DistanceUnit METERS returns "956 m" for EN.
+     * - `1534` with DistanceUnit METERS returns "1,5 km" for EN.
      *
      * Imperial examples:
-     * - 5200 with DistanceUnit FEET returns "5,200 ft" for EN.
-     * - 5350 returns with DistanceUnit FEET returns "1.0 mi" for EN.
+     * - `5200` with DistanceUnit FEET returns "5,200 ft" for EN.
+     * - `5350` returns with DistanceUnit FEET returns "1.0 mi" for EN.
      *
      * In other languages, the numbers are formatted accordingly, see [number].
      *
@@ -111,6 +187,6 @@ public object HumanReadable {
      * @return a formatted string
      */
     public fun distance(value: Number, unit: DistanceUnit, decimals: Int = 1): String {
-        return safelyTranslate { formatDistance(value, unit, decimalsForLargeUnits = decimals) }
+        return formatDistance(value, unit, decimalsForLargeUnits = decimals)
     }
 }
