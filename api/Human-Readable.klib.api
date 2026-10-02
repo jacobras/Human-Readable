@@ -1,0 +1,173 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, iosX64, js, linuxArm64, linuxX64, macosArm64, mingwX64, tvosArm64, tvosSimulatorArm64, wasmJs, watchosArm32, watchosArm64, watchosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <nl.jacobras:Human-Readable>
+final enum class nl.jacobras.humanreadable.time/TimeUnit : kotlin/Enum<nl.jacobras.humanreadable.time/TimeUnit> { // nl.jacobras.humanreadable.time/TimeUnit|null[0]
+    enum entry Days // nl.jacobras.humanreadable.time/TimeUnit.Days|null[0]
+    enum entry Hours // nl.jacobras.humanreadable.time/TimeUnit.Hours|null[0]
+    enum entry Minutes // nl.jacobras.humanreadable.time/TimeUnit.Minutes|null[0]
+    enum entry Months // nl.jacobras.humanreadable.time/TimeUnit.Months|null[0]
+    enum entry Seconds // nl.jacobras.humanreadable.time/TimeUnit.Seconds|null[0]
+    enum entry Weeks // nl.jacobras.humanreadable.time/TimeUnit.Weeks|null[0]
+    enum entry Years // nl.jacobras.humanreadable.time/TimeUnit.Years|null[0]
+
+    final val entries // nl.jacobras.humanreadable.time/TimeUnit.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<nl.jacobras.humanreadable.time/TimeUnit> // nl.jacobras.humanreadable.time/TimeUnit.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): nl.jacobras.humanreadable.time/TimeUnit // nl.jacobras.humanreadable.time/TimeUnit.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<nl.jacobras.humanreadable.time/TimeUnit> // nl.jacobras.humanreadable.time/TimeUnit.values|values#static(){}[0]
+}
+
+final enum class nl.jacobras.humanreadable/DistanceUnit : kotlin/Enum<nl.jacobras.humanreadable/DistanceUnit> { // nl.jacobras.humanreadable/DistanceUnit|null[0]
+    enum entry Foot // nl.jacobras.humanreadable/DistanceUnit.Foot|null[0]
+    enum entry Meter // nl.jacobras.humanreadable/DistanceUnit.Meter|null[0]
+
+    final val entries // nl.jacobras.humanreadable/DistanceUnit.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<nl.jacobras.humanreadable/DistanceUnit> // nl.jacobras.humanreadable/DistanceUnit.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): nl.jacobras.humanreadable/DistanceUnit // nl.jacobras.humanreadable/DistanceUnit.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<nl.jacobras.humanreadable/DistanceUnit> // nl.jacobras.humanreadable/DistanceUnit.values|values#static(){}[0]
+}
+
+sealed interface nl.jacobras.humanreadable.time/Rounding { // nl.jacobras.humanreadable.time/Rounding|null[0]
+    sealed interface Simple : nl.jacobras.humanreadable.time/Rounding // nl.jacobras.humanreadable.time/Rounding.Simple|null[0]
+
+    final class IfClose : nl.jacobras.humanreadable.time/Rounding { // nl.jacobras.humanreadable.time/Rounding.IfClose|null[0]
+        constructor <init>(kotlin.collections/Map<nl.jacobras.humanreadable.time/TimeUnit, kotlin/Int> = ..., nl.jacobras.humanreadable.time/Rounding.Simple = ...) // nl.jacobras.humanreadable.time/Rounding.IfClose.<init>|<init>(kotlin.collections.Map<nl.jacobras.humanreadable.time.TimeUnit,kotlin.Int>;nl.jacobras.humanreadable.time.Rounding.Simple){}[0]
+
+        final val default // nl.jacobras.humanreadable.time/Rounding.IfClose.default|{}default[0]
+            final fun <get-default>(): nl.jacobras.humanreadable.time/Rounding.Simple // nl.jacobras.humanreadable.time/Rounding.IfClose.default.<get-default>|<get-default>(){}[0]
+        final val thresholds // nl.jacobras.humanreadable.time/Rounding.IfClose.thresholds|{}thresholds[0]
+            final fun <get-thresholds>(): kotlin.collections/Map<nl.jacobras.humanreadable.time/TimeUnit, kotlin/Int> // nl.jacobras.humanreadable.time/Rounding.IfClose.thresholds.<get-thresholds>|<get-thresholds>(){}[0]
+
+        final fun component1(): kotlin.collections/Map<nl.jacobras.humanreadable.time/TimeUnit, kotlin/Int> // nl.jacobras.humanreadable.time/Rounding.IfClose.component1|component1(){}[0]
+        final fun component2(): nl.jacobras.humanreadable.time/Rounding.Simple // nl.jacobras.humanreadable.time/Rounding.IfClose.component2|component2(){}[0]
+        final fun copy(kotlin.collections/Map<nl.jacobras.humanreadable.time/TimeUnit, kotlin/Int> = ..., nl.jacobras.humanreadable.time/Rounding.Simple = ...): nl.jacobras.humanreadable.time/Rounding.IfClose // nl.jacobras.humanreadable.time/Rounding.IfClose.copy|copy(kotlin.collections.Map<nl.jacobras.humanreadable.time.TimeUnit,kotlin.Int>;nl.jacobras.humanreadable.time.Rounding.Simple){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // nl.jacobras.humanreadable.time/Rounding.IfClose.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // nl.jacobras.humanreadable.time/Rounding.IfClose.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // nl.jacobras.humanreadable.time/Rounding.IfClose.toString|toString(){}[0]
+    }
+
+    final object Floor : nl.jacobras.humanreadable.time/Rounding.Simple { // nl.jacobras.humanreadable.time/Rounding.Floor|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // nl.jacobras.humanreadable.time/Rounding.Floor.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // nl.jacobras.humanreadable.time/Rounding.Floor.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // nl.jacobras.humanreadable.time/Rounding.Floor.toString|toString(){}[0]
+    }
+
+    final object HalfUp : nl.jacobras.humanreadable.time/Rounding.Simple { // nl.jacobras.humanreadable.time/Rounding.HalfUp|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // nl.jacobras.humanreadable.time/Rounding.HalfUp.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // nl.jacobras.humanreadable.time/Rounding.HalfUp.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // nl.jacobras.humanreadable.time/Rounding.HalfUp.toString|toString(){}[0]
+    }
+}
+
+final class nl.jacobras.humanreadable.time/FormatStyle { // nl.jacobras.humanreadable.time/FormatStyle|null[0]
+    constructor <init>(nl.jacobras.humanreadable.time/FormatStyle.Date = ..., nl.jacobras.humanreadable.time/FormatStyle.Time = ..., kotlin/Boolean = ...) // nl.jacobras.humanreadable.time/FormatStyle.<init>|<init>(nl.jacobras.humanreadable.time.FormatStyle.Date;nl.jacobras.humanreadable.time.FormatStyle.Time;kotlin.Boolean){}[0]
+
+    final val date // nl.jacobras.humanreadable.time/FormatStyle.date|{}date[0]
+        final fun <get-date>(): nl.jacobras.humanreadable.time/FormatStyle.Date // nl.jacobras.humanreadable.time/FormatStyle.date.<get-date>|<get-date>(){}[0]
+    final val indicateApproximation // nl.jacobras.humanreadable.time/FormatStyle.indicateApproximation|{}indicateApproximation[0]
+        final fun <get-indicateApproximation>(): kotlin/Boolean // nl.jacobras.humanreadable.time/FormatStyle.indicateApproximation.<get-indicateApproximation>|<get-indicateApproximation>(){}[0]
+    final val time // nl.jacobras.humanreadable.time/FormatStyle.time|{}time[0]
+        final fun <get-time>(): nl.jacobras.humanreadable.time/FormatStyle.Time // nl.jacobras.humanreadable.time/FormatStyle.time.<get-time>|<get-time>(){}[0]
+
+    final fun component1(): nl.jacobras.humanreadable.time/FormatStyle.Date // nl.jacobras.humanreadable.time/FormatStyle.component1|component1(){}[0]
+    final fun component2(): nl.jacobras.humanreadable.time/FormatStyle.Time // nl.jacobras.humanreadable.time/FormatStyle.component2|component2(){}[0]
+    final fun component3(): kotlin/Boolean // nl.jacobras.humanreadable.time/FormatStyle.component3|component3(){}[0]
+    final fun copy(nl.jacobras.humanreadable.time/FormatStyle.Date = ..., nl.jacobras.humanreadable.time/FormatStyle.Time = ..., kotlin/Boolean = ...): nl.jacobras.humanreadable.time/FormatStyle // nl.jacobras.humanreadable.time/FormatStyle.copy|copy(nl.jacobras.humanreadable.time.FormatStyle.Date;nl.jacobras.humanreadable.time.FormatStyle.Time;kotlin.Boolean){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // nl.jacobras.humanreadable.time/FormatStyle.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // nl.jacobras.humanreadable.time/FormatStyle.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // nl.jacobras.humanreadable.time/FormatStyle.toString|toString(){}[0]
+
+    final enum class Date : kotlin/Enum<nl.jacobras.humanreadable.time/FormatStyle.Date> { // nl.jacobras.humanreadable.time/FormatStyle.Date|null[0]
+        enum entry Long // nl.jacobras.humanreadable.time/FormatStyle.Date.Long|null[0]
+        enum entry Narrow // nl.jacobras.humanreadable.time/FormatStyle.Date.Narrow|null[0]
+        enum entry Short // nl.jacobras.humanreadable.time/FormatStyle.Date.Short|null[0]
+
+        final val entries // nl.jacobras.humanreadable.time/FormatStyle.Date.entries|#static{}entries[0]
+            final fun <get-entries>(): kotlin.enums/EnumEntries<nl.jacobras.humanreadable.time/FormatStyle.Date> // nl.jacobras.humanreadable.time/FormatStyle.Date.entries.<get-entries>|<get-entries>#static(){}[0]
+
+        final fun valueOf(kotlin/String): nl.jacobras.humanreadable.time/FormatStyle.Date // nl.jacobras.humanreadable.time/FormatStyle.Date.valueOf|valueOf#static(kotlin.String){}[0]
+        final fun values(): kotlin/Array<nl.jacobras.humanreadable.time/FormatStyle.Date> // nl.jacobras.humanreadable.time/FormatStyle.Date.values|values#static(){}[0]
+    }
+
+    final enum class Time : kotlin/Enum<nl.jacobras.humanreadable.time/FormatStyle.Time> { // nl.jacobras.humanreadable.time/FormatStyle.Time|null[0]
+        enum entry Digital // nl.jacobras.humanreadable.time/FormatStyle.Time.Digital|null[0]
+        enum entry Regular // nl.jacobras.humanreadable.time/FormatStyle.Time.Regular|null[0]
+
+        final val entries // nl.jacobras.humanreadable.time/FormatStyle.Time.entries|#static{}entries[0]
+            final fun <get-entries>(): kotlin.enums/EnumEntries<nl.jacobras.humanreadable.time/FormatStyle.Time> // nl.jacobras.humanreadable.time/FormatStyle.Time.entries.<get-entries>|<get-entries>#static(){}[0]
+
+        final fun valueOf(kotlin/String): nl.jacobras.humanreadable.time/FormatStyle.Time // nl.jacobras.humanreadable.time/FormatStyle.Time.valueOf|valueOf#static(kotlin.String){}[0]
+        final fun values(): kotlin/Array<nl.jacobras.humanreadable.time/FormatStyle.Time> // nl.jacobras.humanreadable.time/FormatStyle.Time.values|values#static(){}[0]
+    }
+}
+
+final class nl.jacobras.humanreadable.time/PartsConfig { // nl.jacobras.humanreadable.time/PartsConfig|null[0]
+    constructor <init>(kotlin/Int = ..., kotlin.time/Duration = ..., kotlin.collections/Map<nl.jacobras.humanreadable.time/TimeUnit, kotlin/Int> = ..., kotlin/Boolean = ...) // nl.jacobras.humanreadable.time/PartsConfig.<init>|<init>(kotlin.Int;kotlin.time.Duration;kotlin.collections.Map<nl.jacobras.humanreadable.time.TimeUnit,kotlin.Int>;kotlin.Boolean){}[0]
+
+    final val max // nl.jacobras.humanreadable.time/PartsConfig.max|{}max[0]
+        final fun <get-max>(): kotlin/Int // nl.jacobras.humanreadable.time/PartsConfig.max.<get-max>|<get-max>(){}[0]
+    final val onlyConsecutiveParts // nl.jacobras.humanreadable.time/PartsConfig.onlyConsecutiveParts|{}onlyConsecutiveParts[0]
+        final fun <get-onlyConsecutiveParts>(): kotlin/Boolean // nl.jacobras.humanreadable.time/PartsConfig.onlyConsecutiveParts.<get-onlyConsecutiveParts>|<get-onlyConsecutiveParts>(){}[0]
+    final val smallestDuration // nl.jacobras.humanreadable.time/PartsConfig.smallestDuration|{}smallestDuration[0]
+        final fun <get-smallestDuration>(): kotlin.time/Duration // nl.jacobras.humanreadable.time/PartsConfig.smallestDuration.<get-smallestDuration>|<get-smallestDuration>(){}[0]
+    final val subpartCutOffs // nl.jacobras.humanreadable.time/PartsConfig.subpartCutOffs|{}subpartCutOffs[0]
+        final fun <get-subpartCutOffs>(): kotlin.collections/Map<nl.jacobras.humanreadable.time/TimeUnit, kotlin/Int> // nl.jacobras.humanreadable.time/PartsConfig.subpartCutOffs.<get-subpartCutOffs>|<get-subpartCutOffs>(){}[0]
+
+    final fun component1(): kotlin/Int // nl.jacobras.humanreadable.time/PartsConfig.component1|component1(){}[0]
+    final fun component2(): kotlin.time/Duration // nl.jacobras.humanreadable.time/PartsConfig.component2|component2(){}[0]
+    final fun component3(): kotlin.collections/Map<nl.jacobras.humanreadable.time/TimeUnit, kotlin/Int> // nl.jacobras.humanreadable.time/PartsConfig.component3|component3(){}[0]
+    final fun component4(): kotlin/Boolean // nl.jacobras.humanreadable.time/PartsConfig.component4|component4(){}[0]
+    final fun copy(kotlin/Int = ..., kotlin.time/Duration = ..., kotlin.collections/Map<nl.jacobras.humanreadable.time/TimeUnit, kotlin/Int> = ..., kotlin/Boolean = ...): nl.jacobras.humanreadable.time/PartsConfig // nl.jacobras.humanreadable.time/PartsConfig.copy|copy(kotlin.Int;kotlin.time.Duration;kotlin.collections.Map<nl.jacobras.humanreadable.time.TimeUnit,kotlin.Int>;kotlin.Boolean){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // nl.jacobras.humanreadable.time/PartsConfig.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // nl.jacobras.humanreadable.time/PartsConfig.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // nl.jacobras.humanreadable.time/PartsConfig.toString|toString(){}[0]
+}
+
+final class nl.jacobras.humanreadable/Config { // nl.jacobras.humanreadable/Config|null[0]
+    constructor <init>() // nl.jacobras.humanreadable/Config.<init>|<init>(){}[0]
+
+    final var fallbackLanguageTag // nl.jacobras.humanreadable/Config.fallbackLanguageTag|{}fallbackLanguageTag[0]
+        final fun <get-fallbackLanguageTag>(): kotlin/String // nl.jacobras.humanreadable/Config.fallbackLanguageTag.<get-fallbackLanguageTag>|<get-fallbackLanguageTag>(){}[0]
+        final fun <set-fallbackLanguageTag>(kotlin/String) // nl.jacobras.humanreadable/Config.fallbackLanguageTag.<set-fallbackLanguageTag>|<set-fallbackLanguageTag>(kotlin.String){}[0]
+    final var languageTag // nl.jacobras.humanreadable/Config.languageTag|{}languageTag[0]
+        final fun <get-languageTag>(): kotlin/String // nl.jacobras.humanreadable/Config.languageTag.<get-languageTag>|<get-languageTag>(){}[0]
+        final fun <set-languageTag>(kotlin/String) // nl.jacobras.humanreadable/Config.languageTag.<set-languageTag>|<set-languageTag>(kotlin.String){}[0]
+    final var time // nl.jacobras.humanreadable/Config.time|{}time[0]
+        final fun <get-time>(): nl.jacobras.humanreadable/Time // nl.jacobras.humanreadable/Config.time.<get-time>|<get-time>(){}[0]
+}
+
+final class nl.jacobras.humanreadable/Time { // nl.jacobras.humanreadable/Time|null[0]
+    constructor <init>() // nl.jacobras.humanreadable/Time.<init>|<init>(){}[0]
+
+    final var formatting // nl.jacobras.humanreadable/Time.formatting|{}formatting[0]
+        final fun <get-formatting>(): nl.jacobras.humanreadable.time/FormatStyle // nl.jacobras.humanreadable/Time.formatting.<get-formatting>|<get-formatting>(){}[0]
+        final fun <set-formatting>(nl.jacobras.humanreadable.time/FormatStyle) // nl.jacobras.humanreadable/Time.formatting.<set-formatting>|<set-formatting>(nl.jacobras.humanreadable.time.FormatStyle){}[0]
+    final var parts // nl.jacobras.humanreadable/Time.parts|{}parts[0]
+        final fun <get-parts>(): nl.jacobras.humanreadable.time/PartsConfig // nl.jacobras.humanreadable/Time.parts.<get-parts>|<get-parts>(){}[0]
+        final fun <set-parts>(nl.jacobras.humanreadable.time/PartsConfig) // nl.jacobras.humanreadable/Time.parts.<set-parts>|<set-parts>(nl.jacobras.humanreadable.time.PartsConfig){}[0]
+    final var rounding // nl.jacobras.humanreadable/Time.rounding|{}rounding[0]
+        final fun <get-rounding>(): nl.jacobras.humanreadable.time/Rounding // nl.jacobras.humanreadable/Time.rounding.<get-rounding>|<get-rounding>(){}[0]
+        final fun <set-rounding>(nl.jacobras.humanreadable.time/Rounding) // nl.jacobras.humanreadable/Time.rounding.<set-rounding>|<set-rounding>(nl.jacobras.humanreadable.time.Rounding){}[0]
+    final var units // nl.jacobras.humanreadable/Time.units|{}units[0]
+        final fun <get-units>(): kotlin.collections/Set<nl.jacobras.humanreadable.time/TimeUnit> // nl.jacobras.humanreadable/Time.units.<get-units>|<get-units>(){}[0]
+        final fun <set-units>(kotlin.collections/Set<nl.jacobras.humanreadable.time/TimeUnit>) // nl.jacobras.humanreadable/Time.units.<set-units>|<set-units>(kotlin.collections.Set<nl.jacobras.humanreadable.time.TimeUnit>){}[0]
+}
+
+final object nl.jacobras.humanreadable/HumanReadable { // nl.jacobras.humanreadable/HumanReadable|null[0]
+    final val config // nl.jacobras.humanreadable/HumanReadable.config|{}config[0]
+        final fun <get-config>(): nl.jacobras.humanreadable/Config // nl.jacobras.humanreadable/HumanReadable.config.<get-config>|<get-config>(){}[0]
+
+    final fun abbreviation(kotlin/Number, kotlin/Int = ...): kotlin/String // nl.jacobras.humanreadable/HumanReadable.abbreviation|abbreviation(kotlin.Number;kotlin.Int){}[0]
+    final fun distance(kotlin/Number, nl.jacobras.humanreadable/DistanceUnit, kotlin/Int = ...): kotlin/String // nl.jacobras.humanreadable/HumanReadable.distance|distance(kotlin.Number;nl.jacobras.humanreadable.DistanceUnit;kotlin.Int){}[0]
+    final fun duration(kotlin.time/Duration, nl.jacobras.humanreadable.time/FormatStyle = ..., nl.jacobras.humanreadable.time/PartsConfig = ..., kotlin.collections/Set<nl.jacobras.humanreadable.time/TimeUnit> = ..., nl.jacobras.humanreadable.time/Rounding = ...): kotlin/String // nl.jacobras.humanreadable/HumanReadable.duration|duration(kotlin.time.Duration;nl.jacobras.humanreadable.time.FormatStyle;nl.jacobras.humanreadable.time.PartsConfig;kotlin.collections.Set<nl.jacobras.humanreadable.time.TimeUnit>;nl.jacobras.humanreadable.time.Rounding){}[0]
+    final fun fileSize(kotlin/Long, kotlin/Int = ...): kotlin/String // nl.jacobras.humanreadable/HumanReadable.fileSize|fileSize(kotlin.Long;kotlin.Int){}[0]
+    final fun number(kotlin/Number, kotlin/Int = ...): kotlin/String // nl.jacobras.humanreadable/HumanReadable.number|number(kotlin.Number;kotlin.Int){}[0]
+    final fun timeAgo(kotlin.time/Instant, kotlin.time/Instant = ..., nl.jacobras.humanreadable.time/FormatStyle = ..., nl.jacobras.humanreadable.time/PartsConfig = ..., kotlin.collections/Set<nl.jacobras.humanreadable.time/TimeUnit> = ..., nl.jacobras.humanreadable.time/Rounding = ...): kotlin/String // nl.jacobras.humanreadable/HumanReadable.timeAgo|timeAgo(kotlin.time.Instant;kotlin.time.Instant;nl.jacobras.humanreadable.time.FormatStyle;nl.jacobras.humanreadable.time.PartsConfig;kotlin.collections.Set<nl.jacobras.humanreadable.time.TimeUnit>;nl.jacobras.humanreadable.time.Rounding){}[0]
+    final fun timeAgo(kotlinx.datetime/LocalDate, kotlinx.datetime/LocalDate = ..., nl.jacobras.humanreadable.time/FormatStyle = ..., nl.jacobras.humanreadable.time/PartsConfig = ..., kotlin.collections/Set<nl.jacobras.humanreadable.time/TimeUnit> = ..., nl.jacobras.humanreadable.time/Rounding = ...): kotlin/String // nl.jacobras.humanreadable/HumanReadable.timeAgo|timeAgo(kotlinx.datetime.LocalDate;kotlinx.datetime.LocalDate;nl.jacobras.humanreadable.time.FormatStyle;nl.jacobras.humanreadable.time.PartsConfig;kotlin.collections.Set<nl.jacobras.humanreadable.time.TimeUnit>;nl.jacobras.humanreadable.time.Rounding){}[0]
+}

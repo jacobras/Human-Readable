@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -43,10 +44,10 @@ repositories {
     mavenCentral()
 }
 
-@OptIn(ExperimentalWasmDsl::class)
+@OptIn(ExperimentalWasmDsl::class, ExperimentalAbiValidation::class)
 kotlin {
     explicitApi()
-    applyDefaultHierarchyTemplate()
+    abiValidation()
 
     // Targets, alphabetically sorted
     iosX64()

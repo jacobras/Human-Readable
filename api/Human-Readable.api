@@ -1,0 +1,149 @@
+public final class nl/jacobras/humanreadable/Config {
+	public fun <init> ()V
+	public final fun getFallbackLanguageTag ()Ljava/lang/String;
+	public final fun getLanguageTag ()Ljava/lang/String;
+	public final fun getTime ()Lnl/jacobras/humanreadable/Time;
+	public final fun setFallbackLanguageTag (Ljava/lang/String;)V
+	public final fun setLanguageTag (Ljava/lang/String;)V
+}
+
+public final class nl/jacobras/humanreadable/DistanceUnit : java/lang/Enum {
+	public static final field Foot Lnl/jacobras/humanreadable/DistanceUnit;
+	public static final field Meter Lnl/jacobras/humanreadable/DistanceUnit;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lnl/jacobras/humanreadable/DistanceUnit;
+	public static fun values ()[Lnl/jacobras/humanreadable/DistanceUnit;
+}
+
+public final class nl/jacobras/humanreadable/HumanReadable {
+	public static final field INSTANCE Lnl/jacobras/humanreadable/HumanReadable;
+	public final fun abbreviation (Ljava/lang/Number;I)Ljava/lang/String;
+	public static synthetic fun abbreviation$default (Lnl/jacobras/humanreadable/HumanReadable;Ljava/lang/Number;IILjava/lang/Object;)Ljava/lang/String;
+	public final fun distance (Ljava/lang/Number;Lnl/jacobras/humanreadable/DistanceUnit;I)Ljava/lang/String;
+	public static synthetic fun distance$default (Lnl/jacobras/humanreadable/HumanReadable;Ljava/lang/Number;Lnl/jacobras/humanreadable/DistanceUnit;IILjava/lang/Object;)Ljava/lang/String;
+	public final fun duration-gRj5Bb8 (JLnl/jacobras/humanreadable/time/FormatStyle;Lnl/jacobras/humanreadable/time/PartsConfig;Ljava/util/Set;Lnl/jacobras/humanreadable/time/Rounding;)Ljava/lang/String;
+	public static synthetic fun duration-gRj5Bb8$default (Lnl/jacobras/humanreadable/HumanReadable;JLnl/jacobras/humanreadable/time/FormatStyle;Lnl/jacobras/humanreadable/time/PartsConfig;Ljava/util/Set;Lnl/jacobras/humanreadable/time/Rounding;ILjava/lang/Object;)Ljava/lang/String;
+	public final fun fileSize (JI)Ljava/lang/String;
+	public static synthetic fun fileSize$default (Lnl/jacobras/humanreadable/HumanReadable;JIILjava/lang/Object;)Ljava/lang/String;
+	public final fun getConfig ()Lnl/jacobras/humanreadable/Config;
+	public final fun number (Ljava/lang/Number;I)Ljava/lang/String;
+	public static synthetic fun number$default (Lnl/jacobras/humanreadable/HumanReadable;Ljava/lang/Number;IILjava/lang/Object;)Ljava/lang/String;
+	public final fun timeAgo (Lkotlin/time/Instant;Lkotlin/time/Instant;Lnl/jacobras/humanreadable/time/FormatStyle;Lnl/jacobras/humanreadable/time/PartsConfig;Ljava/util/Set;Lnl/jacobras/humanreadable/time/Rounding;)Ljava/lang/String;
+	public final fun timeAgo (Lkotlinx/datetime/LocalDate;Lkotlinx/datetime/LocalDate;Lnl/jacobras/humanreadable/time/FormatStyle;Lnl/jacobras/humanreadable/time/PartsConfig;Ljava/util/Set;Lnl/jacobras/humanreadable/time/Rounding;)Ljava/lang/String;
+	public static synthetic fun timeAgo$default (Lnl/jacobras/humanreadable/HumanReadable;Lkotlin/time/Instant;Lkotlin/time/Instant;Lnl/jacobras/humanreadable/time/FormatStyle;Lnl/jacobras/humanreadable/time/PartsConfig;Ljava/util/Set;Lnl/jacobras/humanreadable/time/Rounding;ILjava/lang/Object;)Ljava/lang/String;
+	public static synthetic fun timeAgo$default (Lnl/jacobras/humanreadable/HumanReadable;Lkotlinx/datetime/LocalDate;Lkotlinx/datetime/LocalDate;Lnl/jacobras/humanreadable/time/FormatStyle;Lnl/jacobras/humanreadable/time/PartsConfig;Ljava/util/Set;Lnl/jacobras/humanreadable/time/Rounding;ILjava/lang/Object;)Ljava/lang/String;
+}
+
+public final class nl/jacobras/humanreadable/Time {
+	public fun <init> ()V
+	public final fun getFormatting ()Lnl/jacobras/humanreadable/time/FormatStyle;
+	public final fun getParts ()Lnl/jacobras/humanreadable/time/PartsConfig;
+	public final fun getRounding ()Lnl/jacobras/humanreadable/time/Rounding;
+	public final fun getUnits ()Ljava/util/Set;
+	public final fun setFormatting (Lnl/jacobras/humanreadable/time/FormatStyle;)V
+	public final fun setParts (Lnl/jacobras/humanreadable/time/PartsConfig;)V
+	public final fun setRounding (Lnl/jacobras/humanreadable/time/Rounding;)V
+	public final fun setUnits (Ljava/util/Set;)V
+}
+
+public final class nl/jacobras/humanreadable/time/FormatStyle {
+	public fun <init> ()V
+	public fun <init> (Lnl/jacobras/humanreadable/time/FormatStyle$Date;Lnl/jacobras/humanreadable/time/FormatStyle$Time;Z)V
+	public synthetic fun <init> (Lnl/jacobras/humanreadable/time/FormatStyle$Date;Lnl/jacobras/humanreadable/time/FormatStyle$Time;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lnl/jacobras/humanreadable/time/FormatStyle$Date;
+	public final fun component2 ()Lnl/jacobras/humanreadable/time/FormatStyle$Time;
+	public final fun component3 ()Z
+	public final fun copy (Lnl/jacobras/humanreadable/time/FormatStyle$Date;Lnl/jacobras/humanreadable/time/FormatStyle$Time;Z)Lnl/jacobras/humanreadable/time/FormatStyle;
+	public static synthetic fun copy$default (Lnl/jacobras/humanreadable/time/FormatStyle;Lnl/jacobras/humanreadable/time/FormatStyle$Date;Lnl/jacobras/humanreadable/time/FormatStyle$Time;ZILjava/lang/Object;)Lnl/jacobras/humanreadable/time/FormatStyle;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDate ()Lnl/jacobras/humanreadable/time/FormatStyle$Date;
+	public final fun getIndicateApproximation ()Z
+	public final fun getTime ()Lnl/jacobras/humanreadable/time/FormatStyle$Time;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class nl/jacobras/humanreadable/time/FormatStyle$Date : java/lang/Enum {
+	public static final field Long Lnl/jacobras/humanreadable/time/FormatStyle$Date;
+	public static final field Narrow Lnl/jacobras/humanreadable/time/FormatStyle$Date;
+	public static final field Short Lnl/jacobras/humanreadable/time/FormatStyle$Date;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lnl/jacobras/humanreadable/time/FormatStyle$Date;
+	public static fun values ()[Lnl/jacobras/humanreadable/time/FormatStyle$Date;
+}
+
+public final class nl/jacobras/humanreadable/time/FormatStyle$Time : java/lang/Enum {
+	public static final field Digital Lnl/jacobras/humanreadable/time/FormatStyle$Time;
+	public static final field Regular Lnl/jacobras/humanreadable/time/FormatStyle$Time;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lnl/jacobras/humanreadable/time/FormatStyle$Time;
+	public static fun values ()[Lnl/jacobras/humanreadable/time/FormatStyle$Time;
+}
+
+public final class nl/jacobras/humanreadable/time/PartsConfig {
+	public fun <init> ()V
+	public synthetic fun <init> (IJLjava/util/Map;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (IJLjava/util/Map;ZLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()I
+	public final fun component2-UwyO8pc ()J
+	public final fun component3 ()Ljava/util/Map;
+	public final fun component4 ()Z
+	public final fun copy-dWUq8MI (IJLjava/util/Map;Z)Lnl/jacobras/humanreadable/time/PartsConfig;
+	public static synthetic fun copy-dWUq8MI$default (Lnl/jacobras/humanreadable/time/PartsConfig;IJLjava/util/Map;ZILjava/lang/Object;)Lnl/jacobras/humanreadable/time/PartsConfig;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMax ()I
+	public final fun getOnlyConsecutiveParts ()Z
+	public final fun getSmallestDuration-UwyO8pc ()J
+	public final fun getSubpartCutOffs ()Ljava/util/Map;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class nl/jacobras/humanreadable/time/Rounding {
+}
+
+public final class nl/jacobras/humanreadable/time/Rounding$Floor : nl/jacobras/humanreadable/time/Rounding$Simple {
+	public static final field INSTANCE Lnl/jacobras/humanreadable/time/Rounding$Floor;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class nl/jacobras/humanreadable/time/Rounding$HalfUp : nl/jacobras/humanreadable/time/Rounding$Simple {
+	public static final field INSTANCE Lnl/jacobras/humanreadable/time/Rounding$HalfUp;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class nl/jacobras/humanreadable/time/Rounding$IfClose : nl/jacobras/humanreadable/time/Rounding {
+	public fun <init> ()V
+	public fun <init> (Ljava/util/Map;Lnl/jacobras/humanreadable/time/Rounding$Simple;)V
+	public synthetic fun <init> (Ljava/util/Map;Lnl/jacobras/humanreadable/time/Rounding$Simple;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/util/Map;
+	public final fun component2 ()Lnl/jacobras/humanreadable/time/Rounding$Simple;
+	public final fun copy (Ljava/util/Map;Lnl/jacobras/humanreadable/time/Rounding$Simple;)Lnl/jacobras/humanreadable/time/Rounding$IfClose;
+	public static synthetic fun copy$default (Lnl/jacobras/humanreadable/time/Rounding$IfClose;Ljava/util/Map;Lnl/jacobras/humanreadable/time/Rounding$Simple;ILjava/lang/Object;)Lnl/jacobras/humanreadable/time/Rounding$IfClose;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDefault ()Lnl/jacobras/humanreadable/time/Rounding$Simple;
+	public final fun getThresholds ()Ljava/util/Map;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class nl/jacobras/humanreadable/time/Rounding$Simple : nl/jacobras/humanreadable/time/Rounding {
+}
+
+public final class nl/jacobras/humanreadable/time/TimeUnit : java/lang/Enum {
+	public static final field Days Lnl/jacobras/humanreadable/time/TimeUnit;
+	public static final field Hours Lnl/jacobras/humanreadable/time/TimeUnit;
+	public static final field Minutes Lnl/jacobras/humanreadable/time/TimeUnit;
+	public static final field Months Lnl/jacobras/humanreadable/time/TimeUnit;
+	public static final field Seconds Lnl/jacobras/humanreadable/time/TimeUnit;
+	public static final field Weeks Lnl/jacobras/humanreadable/time/TimeUnit;
+	public static final field Years Lnl/jacobras/humanreadable/time/TimeUnit;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lnl/jacobras/humanreadable/time/TimeUnit;
+	public static fun values ()[Lnl/jacobras/humanreadable/time/TimeUnit;
+}
+
