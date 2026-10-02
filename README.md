@@ -19,7 +19,7 @@ The library is published to Maven Central.
 
 ```kotlin
 dependencies {
-    implementation("nl.jacobras:Human-Readable:2.0.0-alpha02")
+    implementation("nl.jacobras:Human-Readable:2.0.0")
 }
 ```
 
@@ -67,7 +67,8 @@ HumanReadable.timeAgo(
 )
 ```
 
-The above parameters can be set globally via `HumanReadable.config.time`.
+The above parameters can be set globally via `HumanReadable.config.time`. Passed-in parameters take preference over the
+global configuration.
 
 ```kotlin
 HumanReadable.config.time.units = setOf(TimeUnit.Hours)
