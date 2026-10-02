@@ -112,7 +112,7 @@ internal fun TimeDemo(
         Spacer(Modifier.height(12.dp))
 
         CodeExample(
-            code = "HumanReadable.timeAgo(myInstant) // compared to now",
+            code = "HumanReadable.timeAgo(myInstant) // compared to Instant (with time)",
             res = remember(selectedLanguageCode, now, myInstant) {
                 HumanReadable.timeAgo(myInstant, now)
             }
@@ -120,7 +120,7 @@ internal fun TimeDemo(
         Spacer(Modifier.height(12.dp))
 
         CodeExample(
-            code = "HumanReadable.timeAgo(myLocalDate) // overloaded method that takes a LocalDate",
+            code = "HumanReadable.timeAgo(myLocalDate) // compared to LocalDate (without time)",
             res = remember(selectedLanguageCode, now, myInstant) {
                 HumanReadable.timeAgo(
                     date = myInstant.toLocalDateTime(TimeZone.currentSystemDefault()).date,
