@@ -106,7 +106,7 @@ Available since version 1.10.
 HumanReadable.number(1_000_000.34) // "1,000,000.34"
 
 // French
-HumanReadable.number(1_000_000.34) // "1 000 000.34"
+HumanReadable.number(1_000_000.34) // "1 000 000,34"
 
 // Dutch
 HumanReadable.number(1_000_000.34) // "1.000.000,34"
