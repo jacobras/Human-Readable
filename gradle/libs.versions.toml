@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.4.20"
 compose = "1.12.1"
-compose-adaptive = "1.3.0-rc01"
+compose-adaptive = "1.3.0"
 
 [libraries]
 assertK = { module = "com.willowtreeapps.assertk:assertk", version = "0.28.1" }
