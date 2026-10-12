@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.4.20"
+kotlin = "2.4.21"
 compose = "1.12.1"
 compose-adaptive = "1.3.0-rc01"
 
